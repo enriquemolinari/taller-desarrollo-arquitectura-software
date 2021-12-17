@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css">
+	<link rel="stylesheet" href="plugin/simplemenu/simplemenu.css">
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<style>
+		div.line {
+			border-bottom: 1px solid;
+			border-color: lightgray;
+		}
+
+		span.mycolor {
+			background-color: white;
+			color: black;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="menubar line">
+			<span class="mycolor">
+				<div class="slide-number"></div>
+			</span>
+			<ul class="menu">
+				<li><a href="#/abc">First 1</a></li>
+				<li><a href="#/def">Second chapter</a></li>
+				<li><a href="#/ghi">Third chapter</a></li>
+				<li><a href="#/ghi1">Third chapter</a></li>
+			</ul>
+			<div class="placeholder"></div>
+		</div>
+		<div class="slides">
+			<section class="center" data-transition="fade" data-state="hide-menubar">
+				<h1>Arquitectura de Software</h1>
+			</section>
+			<section id="abc">Slide 2</section>
+			<section id="def">Slide 2</section>
+			<section id="ghi">Slide 2</section>
+			<section id="ghi1">Slide 2</section>
+			<section id="ghi1">Slide 2</section>
+			<section id="ghi1">Slide 2</section>
+
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/simplemenu/simplemenu.js"></script>
+	<script src="plugin/relativenumber/relativenumber.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			slideNumber: "c/t",
+			//slideNumber: true,
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RelativeNumber, Simplemenu]
+		});
+	</script>
+</body>
+
+</html>
