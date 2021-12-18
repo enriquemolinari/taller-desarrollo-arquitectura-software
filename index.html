@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>reveal.js</title>
+    <title>Arquitectura de Software - Conceptos Fundamentales</title>
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
 
     <style>
       div.line {
@@ -39,25 +40,34 @@
       }
 
       .autor {
-        font-family: "Times New Roman", Times, serif;
+        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
         font-size: 15pt;
       }
 
-      .reveal h1,
-      .reveal h2,
-      .reveal h3 {
-        color: white;
+      .fechahoy {
+        color: gray;
       }
 
       .reveal .slide-number {
         background-color: white;
         color: black;
       }
+
+      .reveal .footer {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+        color: gray;
+      }
     </style>
   </head>
 
   <body>
     <div class="reveal">
+      <div class="footer">
+        Arquitectura de Software - Conceptos Fundamentales
+      </div>
       <div class="menubar line">
         <div class="slide-number"></div>
         <ul class="menu">
@@ -72,15 +82,19 @@
         <section
           style="text-align: left"
           data-transition="fade"
-          data-state="hide-menubar"
+          data-state="hide-menubar no-title-footer"
         >
           <div class="box">
             <span>Arquitectura de Software</span>
           </div>
           <div class="smallbox">Conceptos Fundamentales</div>
           <p class="autor">ENRIQUE MOLINARI</p>
+          <p id="hoy" class="autor fechahoy"></p>
         </section>
-        <section id="abc">Slide 2</section>
+        <section id="abc">
+          <h2>asdfasd</h2>
+          Slide 2
+        </section>
         <section id="def">Slide 2</section>
         <section id="ghi">Slide 2</section>
         <section id="ghi1">Slide 2</section>
@@ -96,14 +110,41 @@
     <script src="plugin/simplemenu/simplemenu.js"></script>
     <script src="plugin/relativenumber/relativenumber.js"></script>
     <script>
-      // More info about initialization & config:
-      // - https://revealjs.com/initialization/
-      // - https://revealjs.com/config/
+      window.onload = function () {
+        let today = new Date().toLocaleDateString();
+        let obj = document.getElementById("hoy");
+        document.getElementById("hoy").innerText = today;
+      };
+
+      Reveal.addEventListener("slidechanged", function (event) {
+        if (event.indexh > 0) {
+          document.querySelector(".reveal .footer").style.display = "block";
+        } else {
+          document.querySelector(".reveal .footer").style.display = "none";
+        }
+      });
+
+      Reveal.addEventListener("ready", function (event) {
+        if (event.indexh === 0)
+          document.querySelector(".reveal .footer").style.display = "none";
+      });
+
       Reveal.initialize({
         hash: true,
         slideNumber: "c/t",
         //slideNumber: true,
         // Learn about plugins: https://revealjs.com/plugins/
+        /*dependencies: [
+          {
+            src: "plugin/title-footer/title-footer.js",
+            async: true,
+            callback: function () {
+              console.log(document.title);
+              title_footer.initialize(document.title);
+            },
+          },
+        ],*/
+
         plugins: [
           RevealMarkdown,
           RevealHighlight,
