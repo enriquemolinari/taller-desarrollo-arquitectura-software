@@ -23,12 +23,24 @@
         border-color: lightgray;
       }
 
-      div.box {
+      .box2 {
+        width: 720px;
+        /*border: 15px solid green;*/
+        padding: 15px;
+        /*margin: 2px;*/
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+        /*font-family: 'Times New Roman', Times, serif;*/
+      }
+
+      .box {
         width: 720px;
         /*border: 15px solid green;*/
         padding: 15px;
         margin: 2px;
-        background-color: #9900e3;
+        background-color: #4a4e69;
         color: white;
         font-size: 50pt;
         font-weight: bold;
@@ -46,6 +58,19 @@
 
       .fechahoy {
         color: gray;
+      }
+
+      .titulo {
+        font-size: 50pt;
+      }
+
+      .resaltar {
+        color: #4a4e69
+      }
+
+      p {
+        color: #403d39;
+
       }
 
       .reveal .slide-number {
@@ -71,10 +96,10 @@
       <div class="menubar line">
         <div class="slide-number"></div>
         <ul class="menu">
-          <li><a href="#/abc">First 1</a></li>
-          <li><a href="#/def">Second chapter</a></li>
-          <li><a href="#/ghi">Third chapter</a></li>
-          <li><a href="#/ghi1">Third chapter</a></li>
+          <li><a href="#/abc">Definición</a></li>
+          <li><a href="#/def">Visualización</a></li>
+          <li><a href="#/ghi">Atributos de Calidad</a></li>
+          <li><a href="#/ghi1">Estilos</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -95,6 +120,21 @@
           <h2><img src="/imgs/the-matrix-the-architect.jpg"></h2>
           "I'm the Architect, I created The Matrix" 
         </section>
+        <section id="abc">
+          <p class="titulo" >¿Qué entendemos por <br/> <span class="titulo resaltar">Arquitectura de Sofware</span>?</p>
+
+          <p class="fragment">Veamos algunas definiciones...</p>
+        </section>
+
+        <section id="abc" data-auto-animate>
+          <p>The software architecture of a system is the set of <span class="fragment highlight-red">structure</span> needed to reason about the system, which comprises <span class="fragment highlight-red">software elements</span>, relations among them, and properties of both.</p>
+        </section>
+
+      <section id="abc" data-auto-animate>
+        <p>The software architecture of a system is the set of <span class="highlight-red">structure</span> needed to reason about the system, which comprises <span class="highlight-red">software elements</span>, relations among them, and properties of both.</p>
+        <img src="imgs/software-arch-in-practice.png" width="269" height="362">
+      </section>
+
         <section id="def">
           <!-- <p>Software architecture is the art of drawing lines that I call boundaries. Those boundaries separate software elements from one another, and restrict those on one side from knowing about those on the other. Some of those lines are drawn very early in a project’s life—even before any code is written. Others are drawn much later. Those that are drawn early are drawn for the purposes of deferring decisions for as long as possible, and of keeping those decisions from polluting the core business logic.</p> -->
           <p>Recall that the goal of an architect is to minimize the human resources required to build and maintain the required system.</p> 
