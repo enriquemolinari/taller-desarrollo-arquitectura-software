@@ -25,14 +25,12 @@
 
       .box2 {
         width: 720px;
-        /*border: 15px solid green;*/
         padding: 15px;
-        /*margin: 2px;*/
+        margin-left: 100px; 
         background-color: #4a4e69;
         color: white;
         font-size: 50pt;
         font-weight: bold;
-        /*font-family: 'Times New Roman', Times, serif;*/
       }
 
       .box {
@@ -68,9 +66,8 @@
         color: #4a4e69
       }
 
-      p {
-        color: #403d39;
-
+      p.chico {
+        font-size: 24pt;
       }
 
       .reveal .slide-number {
@@ -96,10 +93,11 @@
       <div class="menubar line">
         <div class="slide-number"></div>
         <ul class="menu">
-          <li><a href="#/abc">Definición</a></li>
-          <li><a href="#/def">Visualización</a></li>
-          <li><a href="#/ghi">Atributos de Calidad</a></li>
-          <li><a href="#/ghi1">Estilos</a></li>
+          <li><a href="#/def">Definición</a></li>
+          <li><a href="#/arqvsde">Diseño vs Arquitectura</a></li>
+          <li><a href="#/vis">Visualización</a></li>
+          <li><a href="#/atri">Atributos de Calidad</a></li>
+          <li><a href="#/estilo">Estilos</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -116,83 +114,110 @@
           <p class="autor">ENRIQUE MOLINARI</p>
           <p id="hoy" class="autor fechahoy"></p>
         </section>
-        <section id="abc">
+        <section id="def">
           <h2><img src="/imgs/the-matrix-the-architect.jpg"></h2>
           "I'm the Architect, I created The Matrix" 
         </section>
-        <section id="abc">
+        <section id="def">
           <p class="titulo" >¿Qué entendemos por <br/> <span class="titulo resaltar">Arquitectura de Sofware</span>?</p>
 
           <p class="fragment">Veamos algunas definiciones...</p>
         </section>
 
-        <section id="abc" data-auto-animate>
+        <section id="def" data-auto-animate>
           <p>Architecture represents the <span class="fragment highlight-red">significant design decisions</span> that <span class="fragment highlight-red">shape</span> a system, where significant is measured by <span class="fragment highlight-red"> cost of change</span>. - Grady Booch (2006).</p>
         </section>
 
-        <section id="abc" data-auto-animate>
+        <section id="def" data-auto-animate>
           <p>Architecture represents the <span class="fragment highlight-red" data-fragment-index="0">significant design decisions</span> that <span class="fragment highlight-red" data-fragment-index="0">shape</span> a system, where significant is measured by <span class="fragment highlight-red" data-fragment-index="0"> cost of change</span>. - Grady Booch (2006).</p>
           <img src="imgs/grady.png" width="190" height="264">
         </section>
 
-        <section id="abc" data-auto-animate>
+        <section id="def" data-auto-animate>
           <p>The software architecture of a system is the set of <span class="fragment highlight-red">structure</span> needed to reason about the system, which comprises <span class="fragment highlight-red">software elements</span>, relations among them, and properties of both.</p>
         </section>
 
-      <section id="abc" data-auto-animate>
+      <section id="def" data-auto-animate>
         <p>The software architecture of a system is the set of <span class="fragment highlight-red" data-fragment-index="0">structure</span> needed to reason about the system, which comprises <span class="fragment highlight-red" data-fragment-index="0">software elements</span>, relations among them, and properties of both.</p>
         <img src="imgs/software-arch-in-practice.png" width="269" height="362">
       </section>
 
-      <section id="abc" data-auto-animate>
-        <p>Software architecture is the set of <span class="fragment highlight-red">design decisions</span> which, if made incorrectly, may cause your project to be <span class="fragment highlight-red">cancelled</span>. - Eoin Woods (2010).</p>
-      </section>
-
-      <section id="abc" data-auto-animate>
-        <p>Software architecture is the set of <span class="fragment highlight-red" data-fragment-index="0">design decisions</span> which, if made incorrectly, may cause your project to be <span class="fragment highlight-red" data-fragment-index="0">cancelled</span>. - Eoin Woods (2010).</p>
-        <img src="imgs/eoin.png">
-      </section>
-
-      <section id="abc" data-auto-animate>
-        <p>Architecture is about the important stuff. Whatever that is. - Ralph Johnson.</p>
-      </section>     
-
-      <section id="abc" data-auto-animate>
+      <section id="def" data-auto-animate>
         <p>Software architecture is the art of drawing lines that I call <span class="fragment highlight-red">boundaries</span>. Those boundaries separate <span class="fragment highlight-red">software elements</span> from one another, and restrict those on one side from knowing about those on the other.</p>
       </section>
 
-      <section id="abc" data-auto-animate>
+      <section id="def" data-auto-animate>
         <p>Software architecture is the art of drawing lines that I call <span class="fragment highlight-red" data-fragment-index="0">boundaries</span>. Those boundaries separate <span class="fragment highlight-red" data-fragment-index="0">software elements</span> from one another, and restrict those on one side from knowing about those on the other.</p>
         <img src="imgs/clean-arch-book.png" width="262" height="364">
       </section>
 
-      <section id="abc" data-auto-animate>
+      <section id="def" data-auto-animate>
+        <p>Software architecture is the set of <span class="fragment highlight-red">design decisions</span> which, if made incorrectly, may cause your project to be <span class="fragment highlight-red">cancelled</span>. - Eoin Woods (2010).</p>
+      </section>
+
+      <section id="def" data-auto-animate>
+        <p>Software architecture is the set of <span class="fragment highlight-red" data-fragment-index="0">design decisions</span> which, if made incorrectly, may cause your project to be <span class="fragment highlight-red" data-fragment-index="0">cancelled</span>. - Eoin Woods (2010).</p>
+        <img src="imgs/eoin.png">
+      </section>
+
+      <section id="def" data-auto-animate>
         <p>Architecture is about the <span class="fragment highlight-red" data-fragment-index="0">important stuff</span>. Whatever that is. - Ralph Johnson.</p>
       </section>     
 
-      <section id="abc" data-auto-animate>
+      <section id="def" data-auto-animate>
         <p>Architecture is about the <span class="fragment highlight-red" data-fragment-index="0">important stuff</span>. Whatever that is. - Ralph Johnson.</p>
         <img src="imgs/ralph.png">
       </section>     
 
-      <section id="abc">
+      <section id="def">
         <p>La arquitectura de software establece de qué manera un producto de software o sistema
         está <span class="fragment highlight-red" data-fragment-index="0">estructurado</span>. La <span class="fragment highlight-blue" data-fragment-index="1">estructura</span> comprende <span class="fragment highlight-red" data-fragment-index="1">elementos de software</span>, sus <span class="fragment highlight-red" data-fragment-index="1">propiedades</span> y las <span class="fragment highlight-red" data-fragment-index="1">relaciones</span> entre ellos. </p>
       </section>
 
-      <section id="abc">
-        <p>Llamamos <span class="fragment highlight-red" data-fragment-index="0">elemento de software</span> a cualquier pieza de software que podría ir desde una función, procedimiento, clase, módulo, capa y paquete hasta aplicaciones, repositorios de datos, ambientes de ejecución (web servers, contenedores, etc), API gateways, colas de mensajes, etc. </p>
+      <section id="def">
+        <div class="box2">Elemento de software</div>
+        <p>Cualquier pieza de software que podría ir desde una función, procedimiento, clase, módulo, capa y paquete hasta aplicaciones, repositorios de datos, ambientes de ejecución (web servers, contenedores, etc), API gateways, colas de mensajes, entre otros. </p>
       </section>
-      <!--
-        <section id="def">
-          <p>Recall that the goal of an architect is to minimize the human resources required to build and maintain the required system.</p> 
-          <p>Clean Architecture, Uncle Bob.</p></section>
--->
 
+      <!-- Diseño vs Arquitectura -->
+
+      <section id="arqvsde">
+        <div class="box2">Diseño vs Arquitectura</div>
+        <p class="fragment">¿Existe la línea donde termina el diseño y comienza la arquitectura?</p>
+      </section>
+
+      <section id="arqvsde">
+        <img src="imgs/codigo-diseno-arch.svg">
+      </section>     
+
+      <section id="arqvsde">
+        <p class="titulo resaltar">¿Qué dice la bibliografía sobre esto?</p>
+      </section>
+
+      <section id="arqvsde">
+        <p class="fragment chico">As the size and complexity of software systems increases, the design problem goes beyond the algorithms and data structures of the computation: <span class="fragment highlight-red">designing and specifying the overall system structure emerges as a new kind of problem</span>. </p>
+        <p class="fragment chico">System Structural issues includes: protocols for communication, synchronization, and data access; assignment of functionality to design elements; physical distribution; composition of design elements; scaling and performance; and selection among design alternatives. - David Garlan y Mary Shaw (1994)</p>
+      </section>
+
+      <section id="arqvsde">
+        <img src="imgs/grady-arch-vs-des.png">
+        <p class="fragment chico">Si arquitectura es medida en funcion del costo del cambio entonces el lenguaje de programación elegido más las herramientas (frameworks, tool set en general) son decisiones de arquitectura. - <a href="https://simonbrown.je/">Simon Brown</a> (Autor de Software Architecture for Developers)</p>
+      </section>     
+
+      <section id="arqvsde">
+        <p>Si tomamos desiciones técnicas que impactan sobre algún <span class="fragment highlight-red" data-fragment-index="0">atributo de calidad</span> del sistema entonces son desiciones de arquitectura.</p>        
+        <p class="fragment">Atributos de Calidad: Modificabilidad, Escalabilidad, Disponibilidad, Monitoriabilidad, Performance, etc.</p>        
+        <p class="fragment">También conocidos como requerimientos no-funcionales o características de arquitectura.</p>        
+      </section>
+
+      <!--
+        Modificabilidad: Utilizar un layeres ayuda a nivel codigo. Utilizar un API Gateway tambien, proque podria cambiar el backend final, sin afectar la aplicacion cliente.
+      -->
+<!--
         <section id="ghi">Slide 2</section>
         <section id="ghi1">Slide 2</section>
         <section id="ghi1">Slide 2</section>
-        <section id="ghi1">Slide 2</section>
+        <section id="ghi1">Slide 2</section>-->
       </div>
     </div>
 
