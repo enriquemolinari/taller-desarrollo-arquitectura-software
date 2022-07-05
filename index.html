@@ -210,6 +210,57 @@
         <p class="fragment">También conocidos como requerimientos no-funcionales o características de arquitectura.</p>        
       </section>
 
+      <!-- Visualización de la Arquitectura -->
+
+      <section id="vis">
+        <div class="box2">Visualización de la Arquitectura de Software</div>
+        <p class="fragment">¿Cómo describimos la arquiectura de un sistema de software?</p>
+      </section>
+
+      <section id="vis">
+        <p class="fragment">Existen diferentes Estructuras o Vistas</p>
+        <p class="fragment">Dependiendo qué <u>atributo de calidad</u> queremos analizar y a quienes nos dirigimos utilizaremos uno u otro.</p> 
+        <p class="fragment">Veamos cuales estructuras/vistas sugieren éstos dos autores</p>
+      </section>
+
+      <section id="vis">
+        <p class="fragment" data-fragment-index="0">Software Engineering Institute (Carnegie Mellon University)</p> 
+        <p class="fragment" data-fragment-index="1">Simon Brown (Consultor Independiente)</p> 
+        <img class="fragment" data-fragment-index="0" src="imgs/software-arch-in-practice.png" width="249" height="342"/>
+        <img class="fragment" data-fragment-index="1" src="imgs/c4-book.png" width="249" height="342"/>
+      </section>
+
+      <section id="vis">
+        <p class="fragment">Segun SEI, existen 3 categorías de estructuras:</p>
+        <ul>
+          <li class="fragment"><u>Módulos</u>: ¿Cómo estructuramos los fuentes?</li>
+          <li class="fragment"><u>Componentes y Conectores</u>: Elementos de Software en ejecución.</li>
+          <li class="fragment"><u>Deployment Físico</u>: Elementos de software deployados en equipos de HW.</li>
+        </ul>
+      </section>
+
+      <section id="vis">
+        <p class="fragment">El Modelo C4</p>
+        <ul>
+          <li class="fragment"><u>Context</u>: ¿Con que otros sistemas interfaceo? </li>
+          <li class="fragment"><u>Container</u>: Web Apps, Client-Side Web Apps, Aplicaciones de consola, bases de datos, file systems, etc.</li>
+          <li class="fragment"><u>Component</u>: ¿Cómo estructuramos los fuentes? </li>
+          <li class="fragment"><u>Code</u></li>
+        </ul>
+      </section>
+
+      <section id="vis">
+        <img  src="imgs/c4-model-1.png"/>
+      </section>
+
+
+      <!-- Existen diferentes estructuras y las vistas son la forma de visualizarlas-->
+
+      <!-- goglear diagramas de arquitectura en google para mostrar la diversidad de cosas, con colores y formas que no dicen nada -->
+      <!-- Common sense of abstracionts is more important than a common notation -->
+      <!-- cuando abro los fuentes, espero ver BIEN claro esta definicion en el codigo. Model-code gap, no quiero -->
+
+      <!-- Screaming the architecture !!!! -->
       <!--
         Modificabilidad: Utilizar un layeres ayuda a nivel codigo. Utilizar un API Gateway tambien, proque podria cambiar el backend final, sin afectar la aplicacion cliente.
       -->
