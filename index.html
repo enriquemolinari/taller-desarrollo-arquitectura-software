@@ -70,6 +70,11 @@
         font-size: 24pt;
       }
 
+      p.chicoYalineadoIzq {
+        font-size: 24pt;
+        text-align: left;
+      }
+
       .reveal .slide-number {
         background-color: white;
         color: black;
@@ -277,11 +282,72 @@
       <!-- Estilos -->
 
       <section id="styles">
-        <h1>Estilos de Arquitectura</h1>
+        <div class="box2">Estilos de Arquitectura</div>
         <p>"Just as good programmers recognized useful data structures in the late 1960s, good
           software system designers now recognize useful system organizations". - David Garlan and Mary Shaw </p>
       </section>
-      
+
+      <section id="styles">
+        <h3>¿Qué estilos de arquitectura identificaron Garlan and Shaw por 1994?</h3>
+      </section>
+
+      <section id="styles">
+        <h3>Pipes & Filters</h3>
+        <img src="imgs/pipe-filter.png" />
+        <p class="chicoYalineadoIzq">Cada componente (filtro) tiene un conjunto de entrada de datos, realiza una transformación y produce una de salida.</p>
+        <p class="chicoYalineadoIzq">Los conectores pueden ser archivos, comunicaciones vía puertos, etc.</p>
+      </section>
+
+      <section id="styles">
+        <h3>Pipes & Filters</h3>
+        <img src="imgs/pipe-filter.png" />
+        <p class="chicoYalineadoIzq">Los filtros deben ser independientes: no comparten estado.</p>
+        <p class="chicoYalineadoIzq">Los filtros no estan acoplados entre si, no conocen quien genera su entrada o a quien va dirigida su salida.</p>
+      </section>
+
+      <section id="styles">
+        <h3>Event Based: invocación implícita</h3>
+        <img src="imgs/event-based-arch.png" />
+        <p class="chicoYalineadoIzq">En lugar de invocar servicios en forma explícita, un componente, ante ciertos casos de uso, publica un evento que otros componentes pueden o no estar interesados.</p>
+        <p class="chicoYalineadoIzq">Como parte de esa publicación podrían compartirse datos (payload).</p>
+      </section>
+
+      <section id="styles">
+        <h3>Event Based: invocación implícita</h3>
+        <img src="imgs/event-based-arch.png" />
+        <p class="chicoYalineadoIzq">Los componentes que publican eventos no conocen qué componentes estan interesados en esos eventos. Tampoco conocen que procesamiento se realiza en otros componentes como resultado de consumir un evento. <u>Alto desacoplamiento</u>.</p>
+      </section>
+
+      <section id="styles">
+        <h3>Layered Systems</h3>
+        <img src="imgs/layered-system.png" />
+        <p class="chicoYalineadoIzq">Cada capa (layer) consume servicios de la capa inmediatamente inferior. Los componentes pueden ser módulos o elementos en ejecución.</p>
+      </section>
+
+      <section id="styles">
+        <h3>Layered Systems</h3>
+        <img src="imgs/layered-system.png" />
+        <p class="chicoYalineadoIzq">Los conectores pueden ser invocación de métodos (in-process) o vía port communication (inter-process). No se permite invocar servicios de otras capas que no sean la inmediatamente inferior.</p>
+      </section>
+
+      <section id="styles">
+        <h3>¿Qué tienen en comun éstos estilos?</h3>
+        <p class="fragment">Definen un conjunto de <span class="fragment highlight-red">reglas de arquitectura</span> que como equipo debemos respetar, <span class="fragment highlight-red"><u>sin excepciones</u></span>.</p>
+      </section>
+
+      <section id="styles">
+        <h3>Toda definición de arquitectura impone <u>restricciones</u> o <u>reglas de diseño</u> que debemos respetar para garantizar disciplina y no terminar con un producto de software del tipo <u>big ball of mud</u>. </h3>
+      </section>
+
+      <section id="styles">
+        <p>Otros</p>
+        <ul>
+          <li>Client - Server: DBMS</li>
+          <li>Monoliticos: Microkernel, Modular</li>
+          <li>Distributed: SOA, Distributed Monolith, Microservices</li>
+        </ul>
+      </section>
+
       <!-- Atributos de Calidad -->
 
       <section id="atri">
@@ -298,7 +364,10 @@
       <!--
         Modificabilidad: Utilizar un layeres ayuda a nivel codigo. Utilizar un API Gateway tambien, proque podria cambiar el backend final, sin afectar la aplicacion cliente.
       -->
-<!--
+
+      <!-- News Feed System de Alex Xu -->
+
+      <!--
         <section id="ghi">Slide 2</section>
         <section id="ghi1">Slide 2</section>
         <section id="ghi1">Slide 2</section>
