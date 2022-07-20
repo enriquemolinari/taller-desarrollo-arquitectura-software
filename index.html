@@ -17,11 +17,11 @@
     <link rel="stylesheet" href="plugin/highlight/monokai.css" />
     <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
 
-    <style>
-      div.line {
-        border-bottom: 1px solid;
-        border-color: lightgray;
-      }
+		<style>
+        div.line {
+          border-bottom: 1px solid;
+          border-color: lightgray;
+        }
 
       .box2 {
         width: 720px;
@@ -211,8 +211,8 @@
 
       <section id="arqvsde">
         <p>Si tomamos desiciones técnicas que impactan sobre algún <span class="fragment highlight-red" data-fragment-index="0">atributo de calidad</span> del sistema entonces son desiciones de arquitectura.</p>        
-        <p class="fragment">Atributos de Calidad: Modificabilidad, Escalabilidad, Disponibilidad, Monitoriabilidad, Performance, etc.</p>        
-        <p class="fragment">También conocidos como requerimientos no-funcionales o características de arquitectura.</p>        
+        <p class="fragment chicoYalineadoIzq">Atributos de Calidad: Modificabilidad, Escalabilidad, Disponibilidad, Monitoriabilidad, Performance, etc.</p>        
+        <p class="fragment chicoYalineadoIzq">También conocidos como requerimientos no-funcionales o características de arquitectura.</p>        
       </section>
 
       <!-- Visualización de la Arquitectura -->
@@ -315,7 +315,7 @@
       <section id="styles">
         <h3>Event Based: invocación implícita</h3>
         <img src="imgs/event-based-arch.png" />
-        <p class="chicoYalineadoIzq">Los componentes que publican eventos no conocen qué componentes estan interesados en esos eventos. Tampoco conocen que procesamiento se realiza en otros componentes como resultado de consumir un evento. <u>Alto desacoplamiento</u>.</p>
+        <p class="chicoYalineadoIzq">Los componentes que publican eventos no conocen qué componentes estan interesados en esos eventos. Tampoco conocen que procesamiento se realiza en otros componentes como resultado de consumir un evento. <u>Bajo acoplamiento</u>.</p>
       </section>
 
       <section id="styles">
@@ -332,7 +332,7 @@
 
       <section id="styles">
         <h3>¿Qué tienen en comun éstos estilos?</h3>
-        <p class="fragment">Definen un conjunto de <span class="fragment highlight-red">reglas de arquitectura</span> que como equipo debemos respetar, <span class="fragment highlight-red"><u>sin excepciones</u></span>.</p>
+        <p class="fragment">Definen un conjunto de <span class="fragment highlight-red">reglas de arquitectura</span> que como equipo de desarrollo debemos respetar, <span class="fragment highlight-red"><u>sin excepciones</u></span>.</p>
       </section>
 
       <section id="styles">
@@ -340,13 +340,26 @@
       </section>
 
       <section id="styles">
-        <p>Otros</p>
-        <ul>
-          <li>Client - Server: DBMS</li>
-          <li>Monoliticos: Microkernel, Modular</li>
-          <li>Distributed: SOA, Distributed Monolith, Microservices</li>
-        </ul>
+        <p>En definiciones más modernas, Richards y Ford (2021), proponen agrupar los estilos en dos categorías: <span class="fragment highlight-red">Monolíticas</span> y <span class="fragment highlight-red">Distribuídas</span>.</p>
+        <img src="imgs/soft-arch-fund-book.png" width="308" height="415"/>
       </section>
+
+      <section id="styles">
+        <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
+        <p class="chicoYalineadoIzq">Arquitecturas Monolíticas: Único artefacto de software para deployar. Sus módulos  o capas se comunican de la forma in-process.</p>
+        <p class="chicoYalineadoIzq">Arquitecturas Distribuídas: Múltiples artefactos de software para deployar. Sus elementos se comunican de la forma inter-process.</p>
+      </section>
+
+      <section id="styles">
+          <img src="imgs/mono-soa-mocro.png"> <!-- width="300" -->
+<!--           <img width="333" height="441" src="imgs/soa.png">
+          <img width="331" height="510" src="imgs/microservices.png"> -->
+      </section>
+
+
+      <!-- Sistemas Homogeneos (monoliticos principalmente)-->
+      <!-- Sistemas Heterogeneos (SOA o Microservicios principalmente, diferentes lenguajes, BDs, etc)-->
+
 
       <!-- Atributos de Calidad -->
 
@@ -404,6 +417,8 @@
       Reveal.initialize({
         hash: true,
         slideNumber: "c/t",
+/*         width: 1920,
+        height: 1080, */
         //slideNumber: true,
         // Learn about plugins: https://revealjs.com/plugins/
         /*dependencies: [
