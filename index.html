@@ -102,7 +102,8 @@
           <li><a href="#/arqvsde">Diseño vs Arquitectura</a></li>
           <li><a href="#/vis">Visualización</a></li>
           <li><a href="#/styles">Estilos de Arquitectura</a></li>
-          <li><a href="#/codingarch">Coding the Architecture</a></li>
+          <li><a href="#/mod">Estructura de Módulos</a></li>
+          <li><a href="#/dist">Arq. Distribuídas</a></li>
           <li><a href="#/atri">Atributos de Calidad</a></li>
         </ul>
         <div class="placeholder"></div>
@@ -240,7 +241,7 @@
       <section id="vis">
         <p class="fragment">Segun SEI, existen 3 categorías de estructuras:</p>
         <ul>
-          <li class="fragment"><u>Módulos</u>: ¿Cómo estructuramos los fuentes?</li>
+          <li class="fragment"><u>Módulos</u>: ¿Cómo estructuramos los fuentes? Ésta estructura mapea a los fuentes.</li>
           <li class="fragment"><u>Componentes y Conectores</u>: Elementos de Software en ejecución.</li>
           <li class="fragment"><u>Deployment Físico</u>: Elementos de software deployados en equipos de HW.</li>
         </ul>
@@ -251,7 +252,7 @@
         <ul>
           <li class="fragment"><u>Context</u>: ¿Con que otros sistemas interfaceo? </li>
           <li class="fragment"><u>Container</u>: Web Apps, Client-Side Web Apps, Aplicaciones de consola, bases de datos, file systems, etc.</li>
-          <li class="fragment"><u>Component</u>: ¿Cómo estructuramos los fuentes? </li>
+          <li class="fragment"><u>Component</u>: ¿Cómo estructuramos los fuentes?  Ésta estructura mapea a los fuentes.</li>
           <li class="fragment"><u>Code</u></li>
         </ul>
       </section>
@@ -356,19 +357,45 @@
       </section>
 
       <section id="styles">
+        <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
+        <p class="chicoYalineadoIzq"><u>En capas, monolítico</u>: Partición en capas (segun cuestiones técnicas). Único artefacto de software para deployar, corriendo en un único proceso. Sus capas se comunican de la forma in-process.</p>
+        <p class="chicoYalineadoIzq"><u>SOA</u>: Partición funcional. Cada vertical es un artefacto para deployar, cada uno corriendo en su propio proceso. Los verticales se comunican de la forma inter-process, de forma síncrona.</p>
+        <p class="chicoYalineadoIzq"><u>Microservices</u>: Partición funcional, incluso hasta los datos. Cada microservice es deployado en forma independiente, desarrollado en forma independiente, escala en forma independiente. Comunicación <u>asíncrona</u> principalmente (event-based).</p>
+      </section>
+
+      <section id="styles">
+        <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
+        <p>¿Puedo tener partición vertical en arquitecturas monolíticas?</p>
+        <p class="fragment">¡ Por supuesto !</p>
+      </section>
+
+      <section id="styles">
+        <img src="imgs/modularmonolith.png">
+        <p class="chicoYalineadoIzq"><u>Modular Monolith</u>: Único artefacto para deployar, pero estructurado en módulos funcionales.</p>
+      </section>
+
+      <section id="styles">
         <h3>First Law of Software Architecture: Every decision is a trade-off.</h3>
       </section>
+
 
       <!-- Sistemas Homogeneos (monoliticos principalmente)-->
       <!-- Sistemas Heterogeneos (SOA o Microservicios principalmente, diferentes lenguajes, BDs, etc)-->
 
 
+      <section id="mod">
+        <div class="box2">Estructura de Módulos</div>
+      </section>
+
+      <section id="dist">
+        <div class="box2">Arquitecturas Distribuídas</div>
+      </section>
+
       <!-- Atributos de Calidad -->
 
       <section id="atri">
-        <h1>Atributos de Calidad</h1>
+        <div class="box2">Atributos de Calidad</div>
       </section>
-
       
 
       <!-- goglear diagramas de arquitectura en google para mostrar la diversidad de cosas, con colores y formas que no dicen nada -->
