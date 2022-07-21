@@ -101,7 +101,8 @@
           <li><a href="#/def">Definición</a></li>
           <li><a href="#/arqvsde">Diseño vs Arquitectura</a></li>
           <li><a href="#/vis">Visualización</a></li>
-          <li><a href="#/styles">Estilos</a></li>
+          <li><a href="#/styles">Estilos de Arquitectura</a></li>
+          <li><a href="#/codingarch">Coding the Architecture</a></li>
           <li><a href="#/atri">Atributos de Calidad</a></li>
         </ul>
         <div class="placeholder"></div>
@@ -336,7 +337,7 @@
       </section>
 
       <section id="styles">
-        <h3>Toda definición de arquitectura impone <u>restricciones</u> o <u>reglas de diseño</u> que debemos respetar para garantizar disciplina y no terminar con un producto de software del tipo <u>big ball of mud</u>. </h3>
+        <h3>Toda definición de arquitectura impone <span class="resaltar"><u>restricciones</u></span> o <span class="resaltar"><u>reglas de diseño</u></span> que debemos respetar para garantizar que la estructura seleccionada se mantenga en el tiempo. Y asi evitar terminar con un <span class="resaltar"><u>big ball of mud</u></span>. </h3>
       </section>
 
       <section id="styles">
@@ -346,16 +347,17 @@
 
       <section id="styles">
         <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
-        <p class="chicoYalineadoIzq">Arquitecturas Monolíticas: Único artefacto de software para deployar. Sus módulos  o capas se comunican de la forma in-process.</p>
-        <p class="chicoYalineadoIzq">Arquitecturas Distribuídas: Múltiples artefactos de software para deployar. Sus elementos se comunican de la forma inter-process.</p>
+        <p class="chicoYalineadoIzq"><u>Arquitecturas Monolíticas</u>: Único artefacto de software para deployar, corriendo en un único proceso. Sus módulos o capas se comunican de la forma in-process.</p>
+        <p class="chicoYalineadoIzq"><u>Arquitecturas Distribuídas</u>: Múltiples artefactos de software para deployar, cada uno corriendo en su propio proceso. Sus elementos se comunican de la forma inter-process.</p>
       </section>
 
       <section id="styles">
-          <img src="imgs/mono-soa-mocro.png"> <!-- width="300" -->
-<!--           <img width="333" height="441" src="imgs/soa.png">
-          <img width="331" height="510" src="imgs/microservices.png"> -->
+        <img src="imgs/mono-soa-mocro.png">
       </section>
 
+      <section id="styles">
+        <h3>First Law of Software Architecture: Every decision is a trade-off.</h3>
+      </section>
 
       <!-- Sistemas Homogeneos (monoliticos principalmente)-->
       <!-- Sistemas Heterogeneos (SOA o Microservicios principalmente, diferentes lenguajes, BDs, etc)-->
