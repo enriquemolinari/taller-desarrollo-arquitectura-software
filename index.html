@@ -23,6 +23,19 @@
           border-color: lightgray;
         }
 
+      .box3 {
+        /*width: 720px;
+        padding: 15px;
+        margin-left: 100px;*/
+        padding-left: 5px;
+        padding-right: 5px; 
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+
       .box2 {
         width: 720px;
         padding: 15px;
@@ -226,9 +239,9 @@
 
       <section id="vis">
       <!-- Existen diferentes estructuras y las vistas son la forma de visualizarlas-->
-      <p class="fragment">Existen diferentes Estructuras o Vistas</p>
+      <p class="fragment">Existen diferentes <span class="box3">Estructuras</span></p>
         <p class="fragment">Dependiendo qué <u>atributo de calidad</u> queremos analizar y a quienes nos dirigimos utilizaremos uno u otro.</p> 
-        <p class="fragment">Veamos cuales estructuras/vistas sugieren éstos dos autores</p>
+        <p class="fragment">Veamos cuales estructuras sugieren los siguientes dos autores.</p>
       </section>
 
       <section id="vis">
@@ -239,9 +252,9 @@
       </section>
 
       <section id="vis">
-        <p class="fragment">Segun SEI, existen 3 categorías de estructuras:</p>
+        <p class="fragment">Segun SEI, existen 3 categorías de <u>estructuras</u>:</p>
         <ul>
-          <li class="fragment"><u>Módulos</u>: ¿Cómo estructuramos los fuentes? Ésta estructura mapea a los fuentes.</li>
+          <li class="fragment"><u>Módulos</u>: ¿Cómo estructuramos los fuentes? Debemos identificar en el lenguaje de programación que utilicemos que abstracción utililzaremos para crear éstas estructuras.</li>
           <li class="fragment"><u>Componentes y Conectores</u>: Elementos de Software en ejecución.</li>
           <li class="fragment"><u>Deployment Físico</u>: Elementos de software deployados en equipos de HW.</li>
         </ul>
@@ -290,7 +303,7 @@
       </section>
 
       <section id="styles">
-        <h3>¿Qué estilos de arquitectura identificaron Garlan and Shaw por 1994?</h3>
+        <p class="titulo resaltar">¿Qué estilos de arquitectura identificaron Garlan and Shaw por 1994?</p>
       </section>
 
       <section id="styles">
@@ -333,16 +346,16 @@
       </section>
 
       <section id="styles">
-        <h3>¿Qué tienen en comun éstos estilos?</h3>
+        <p class="titulo resaltar">¿Qué tienen en común éstos estilos?</p>
         <p class="fragment">Definen un conjunto de <span class="fragment highlight-red">reglas de arquitectura</span> que como equipo de desarrollo debemos respetar, <span class="fragment highlight-red"><u>sin excepciones</u></span>.</p>
       </section>
 
       <section id="styles">
-        <h3>Toda definición de arquitectura impone <span class="resaltar"><u>restricciones</u></span> o <span class="resaltar"><u>reglas de diseño</u></span> que debemos respetar para garantizar que la estructura seleccionada se mantenga en el tiempo. Y asi evitar terminar con un <span class="resaltar"><u>big ball of mud</u></span>. </h3>
+        <p class="titulo resaltar">Toda definición de arquitectura impone <span class="resaltar"><u>restricciones</u></span> (<span class="resaltar">reglas de diseño</span>) que debemos respetar para garantizar que la estructura seleccionada se mantenga en el tiempo. Y asi evitar un <span class="resaltar"><u>big ball of mud</u></span>. </p>
       </section>
 
       <section id="styles">
-        <p>En definiciones más modernas, Richards y Ford (2021), proponen agrupar los estilos en dos categorías: <span class="fragment highlight-red">Monolíticas</span> y <span class="fragment highlight-red">Distribuídas</span>.</p>
+        <p>En definiciones más recientes, Richards y Ford (2021), proponen agrupar los estilos en dos categorías: <span class="fragment highlight-red">Monolíticas</span> y <span class="fragment highlight-red">Distribuídas</span>.</p>
         <img src="imgs/soft-arch-fund-book.png" width="308" height="415"/>
       </section>
 
@@ -375,17 +388,69 @@
       </section>
 
       <section id="styles">
-        <h3>First Law of Software Architecture: Every decision is a trade-off.</h3>
+        <p class="titulo resaltar">Every decision is a trade-off</p>
+        <p>(First Law of Software Architecture)</p>
+        <p class="fragment">Software Architecture Fundamentals.- Richards y Ford</p>
       </section>
-
 
       <!-- Sistemas Homogeneos (monoliticos principalmente)-->
       <!-- Sistemas Heterogeneos (SOA o Microservicios principalmente, diferentes lenguajes, BDs, etc)-->
 
 
       <section id="mod">
-        <div class="box2">Estructura de Módulos</div>
+        <div class="box2">Estructuras de Módulos</div>
+        <p>Hablemos ahora sobre los estilos que existen para crear estructuras de módulos.</p>
       </section>
+
+      <section id="mod">
+        <h3>Estructuras de Módulos</h3>
+        <p>Antes dijimos que debíamos encontrar, en el lenguaje de programación que utilicemos, que abstracción (estructura sintáctica) podemos utilizar para crear éstas módulos o capas.</p>
+        <p class="fragment">¿Cuáles son las opciones en Java?</p>
+        <p class="fragment">Desde Java v1, los <u>paquetes</u>. Java v9 incorporó la construcción sintáctica <u>module</u>.</p>
+      </section>
+
+      <section id="mod">
+        <h3>Estructuras de Módulos</h3>
+        <p>¿Cuál es la diferencia entre módulos o capas?</p>
+        <p class="fragment">Cuando hablamos de <b>capas</b>, hablamos de una <u>partición horizontal</u> del sistema, segun cuestiones técnicas.</p>
+        <p class="fragment">Cuando hablamos de <b>módulos</b>, hablamos de abstracciones que agrupan clases con el propósito de <u>reutilización</u> o para <u>partir verticalmente</u> una aplicación.</p>
+      </section>
+
+      <section id="mod">
+        <p class="resaltar">Robert C. Martin (Uncle Bob), propuso los siguientes principios para agrupar clases en módulos:</p>
+        <p class="chicoYalineadoIzq fragment"><b>Common Reuse Principle</b> (CRP): Sugiere que las clases que son reutilizadas juntas deben pertenecer al mismo módulo.</p>
+        <p class="chicoYalineadoIzq fragment"><b>Common Closure Principle</b> (CCP): Sugiere que debemos agrupar en un mismo módulo aquellas clases que cambian al mismo tiempo y por la misma razón. Está sumamente relacionado con la idea de partición vertical.</p>
+      </section>      
+
+      <section id="mod">
+        <img src="imgs/crp-ccp.png"></img>
+        <p class="chicoYalineadoIzq fragment">Tensión: CCP tiende a generar menos módulos que CRP, con más código y no reusables. Pero los cambios en general impactan en un único módulo. CRP tiende a generar más módulos, pequeños, reusables.</p>
+      </section>      
+
+      <section id="mod">
+        <h3>Estructuras de Módulos</h3>
+        <p class="fragment">En aplicaciones simples alcanza con una partición horizontal.</p>
+        <p class="fragment">En aplicaciones que preveemos serán complejas necesitamos necesariamente partición vertical.</p>
+      </section>      
+
+      <section id="mod">
+        <p>Alternativa al estilo de arquitectura en Capas</p>
+        <p class="resaltar fragment">Arquitectura Hexagonal (o Ports & Adapters)</p>
+        <p class="fragment">Creada por <a href="https://alistair.cockburn.us/hexagonal-architecture/">Alistair Cockburn</a></p>
+        <img class="fragment" src="imgs/hex-original.png">
+      </section>      
+
+      <section id="mod">
+        <p class="resaltar">Arquitectura Hexagonal</p>
+        <img src="imgs/capas-invertida.png">
+      </section>      
+
+      <section id="mod">
+        <p class="resaltar">Estructuras de Módulos: Ejemplo</p>
+        <img width="678" height="518" src="imgs/modular-monolith-hex.png">
+      </section>      
+
+      <!-- Arquitecturas Distribuidas -->
 
       <section id="dist">
         <div class="box2">Arquitecturas Distribuídas</div>
