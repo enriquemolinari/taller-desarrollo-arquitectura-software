@@ -83,6 +83,10 @@
         font-size: 24pt;
       }
 
+      p.maschico {
+        font-size: 20pt;
+      }
+
       p.chicoYalineadoIzq {
         font-size: 24pt;
         text-align: left;
@@ -450,10 +454,131 @@
         <img width="678" height="518" src="imgs/modular-monolith-hex.png">
       </section>      
 
+      <section id="mod">
+        <p class="resaltar">Separación Lógica vs Física</p>
+        <p class="chicoYalineadoIzq fragment" data-fragment-index="1"><u>Lógica</u>: Mismo espacio de  memoria, puedo importar sus clases, invocar métodos (in-process).</p>
+        <p class="chicoYalineadoIzq fragment" data-fragment-index="3"><u>Física</u>: Distinto espacio de memoria, invocación inter-process.</p>
+        <img class="fragment" src="imgs/logical-design.png" data-fragment-index="2">
+      </section>      
+
+      <section id="mod">
+        <p class="resaltar">Separación Lógica vs Física: <u>Verificación</u></p>
+        <p class="fragment">Java9 mejora este problema:</p>
+        <pre class="fragment"><code data-trim data-noescape>module radioa.competition {
+  exports competition.model.api;
+  //only for injection
+  exports competition.model to radioa.main;
+  exports competition.persistence to radioa.main;
+  //others requires
+  requires java.sql;
+  ...
+}</code></pre>
+     </section>
+
+      <section id="mod">
+        <p class="resaltar">Separación Lógica vs Física: <u>Verificación</u></p>
+        <p class="fragment">ArchUnit nos ayuda a detectar dependencias inválidas:</p>
+        <pre class="fragment"><code data-trim data-noescape>@Test
+public void packageApiOfCOnlyDependOnItOrJdk() {
+ JavaClasses jc = new ClassFileImporter()
+  .importPackages("apiofc", "c", "a", "apiofa"...);
+ classes().that()
+  .resideInAnyPackage("apiofc")
+  .should()
+  .onlyDependOnClassesThat()
+  .resideInAnyPackage("apiofc","java..")
+  .check(jc);
+}</code></pre>
+     </section>
+
       <!-- Arquitecturas Distribuidas -->
 
       <section id="dist">
         <div class="box2">Arquitecturas Distribuídas</div>
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico fragment">En las arquitecturas distribuidas el sistema es particionado en <u>aplicaciones simples</u> donde cada una se deploya en su <u>propio contenedor</u>, el cual corre en su <u>propio proceso</u> y se comunican entre ellas enviándose mensajes a través de la <u>red</u>.</p>
+        <img class="fragment" src="imgs/rest-call.png">
+      </section>      
+      <!-- width="678" height="518" -->
+
+      <section id="dist">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico">¿Porqué distribuir?</p>
+        <p class="fragment">Para mejorar la performance, la escalabilidad y la disponibilidad de un servicio.</p>
+        <p class="fragment">La arquitectura de microservicios es la vedette de moda hoy.</p>
+        <p class="fragment">¡ojo! Esto no significa que utilizar microservicios siempre sea nuestra mejor opción.</p>
+      </section>      
+
+      <section id="dist">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico">Distribuir una aplicación agrega complicaciones, una de ellas se conoce como: <u>Fallas Parciales</p></u></p>
+        <p class="chico fragment">Cuando ejecutamos una aplicación en una única máquina su comportamiento es predecible. Si el hardware donde corre funciona, la aplicación ante las mismas entradas producirá siempre las mismas salidas. Si el hardware donde corre fallara por algún motivo, la aplicación completa dejaría de funcionar. Es decir, una aplicación en una única máquina funciona o no funciona, pero no existe nada en el medio (quitando de la ecuación posibles bugs que la aplicación podría tener).</p>
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico">Distribuir una aplicación agrega complicaciones, una de ellas se conoce como: <u>Fallas Parciales</p></u></p>
+        <p class="chico fragment">Las aplicaciones distribuidas se conforman de varios elementos que podrían fallar. La red, junto a toda su complejidad, más las máquinas donde corra la aplicación son parte del mismo sistema. Cualquiera de alguno de estos elementos (equipos, dispositivos de red como routers, switches, etc) que forman parte de un sistema distribuido podría fallar mientras que el resto de los elementos podrían seguir funcionando. Esto se conoce como <u>falla parcial</u>.</p>
+        <p class="chico fragment">Inconvenientes frecuentemente ignorados: <a href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing">Falacias</a> de los sistemas distribuidos.</p>
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
+        <img class="fragment" src="imgs/distrib-systems1.png">
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
+        <img class="fragment" src="imgs/distrib-systems2.png">
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
+        <p class="chico fragment">¿Cómo lideamos con fallas parciales?</p>
+        <p class="chico fragment">Timeouts, Idempotencia, deduplicación</p>
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico fragment">Otro inconveniente: No tengo Transacciones!</p>
+        <p class="chico fragment">Consistencia Eventual</p>
+        <img class="fragment" src="imgs/sagas.png">
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
+        <p class="chico fragment">¡Ojo! hay mucha sobreingeniería en este tema. Se creen que "micro" implica muy poco y luego para integrarlos utilizan un conjunto de herramientas que complican todo de gran manera.</p>
+        <p class="chico fragment">¿Qué dicen la bibliografía sobre esto?</p>        
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
+        <img class="fragment" src="imgs/soft-arch-fund-book.png"/>
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
+        <p class="chico fragment">El término micro-servicio pareciera revelar que cada aplicación debería realizar lo mínimo indispensable. Pero el criterio es por sub-dominio (Bounded Context), y quizás ciertos sub-dominios no son pequeños</p>
+        <p class="chicoYalineadoIzq fragment"><u>Transacciones</u>: Si tenemos entidades que necesitan trabajar juntas de forma atómica, entonces deben estar en el mismo microservicio. Las transacciones distribuidas son complicadas, si es posible evitarlas, mejor.</p>
+        <p class="chicoYalineadoIzq fragment"><u>Comunicación</u>: Si algunos microservicios requieren demasiada comunicación entre ellos para ofrecer sus servicios quizás es mejor unificarlos en un único microservicio más grande.</p>
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
+        <img class="fragment" src="imgs/cont-soft-arch-practice.png"/>
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
+        <p class="maschico fragment">As a side note on microservices, we want to emphasize that the overall objective is to define loosely coupled components that can evolve independently (principle 4, Architect for change—leverage the “power of small”). However, micro can be interpreted as a desire to have components with an extremely small scope, which can result in unnecessary complexity of managing dependencies and interaction patterns. In addition, it can cause performance issues. As mentioned in Chapter 6, “Performance as an Architectural Concern,” calls between too many microservice instances can be costly in terms of overall execution time. The decision on the scope of microservices should be driven by your context and problem domain. Think about functions (or features) that will evolve together. The goal is to have loosely coupled, internally cohesive components rather than arbitrarily small services for their own sake.</p>
       </section>
 
       <!-- Atributos de Calidad -->
