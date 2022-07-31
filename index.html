@@ -785,7 +785,7 @@ public void packageApiOfCOnlyDependOnItOrJdk() {
       </section>
 
       <section id="atri">
-          <p class="titulo">¿Cómo se calcula la disponibilidad de un sistema?</p>
+          <p class="titulo">Cálculo de disponibilidad</p>
           <p class="fragment">Primero es necesario calcular la disponibilidad de cada elemento por separado. ¿Cómo se hace?</p>
           <p class="fragment">
             \[\begin{aligned}
@@ -797,7 +797,7 @@ public void packageApiOfCOnlyDependOnItOrJdk() {
       </section>
   
         <section id="atri">
-          <p class="titulo">¿Cómo se calcula la disponibilidad de un sistema?</p>
+          <p class="titulo">Cálculo de disponibilidad</p>
           <p class="fragment">¿Cómo sé cual es el MTBF y el MTTR de un elemento?</p>
           <p class="fragment">El MTBF, para los <u>elementos de HW</u>: el fabricante o proveedor. Se rigen por la curva <a href="https://en.wikipedia.org/wiki/Bathtub_curve">bathtub</a>.</p>
           <p class="fragment">El MTTR, para los <u>elementos de HW</u>: de nuestro equipo de operaciones (o AWS o proveedor). ¿Cuanto tarda en reemplazar una placa de red? ¿un disco? ¿memoria?.</p>
@@ -805,30 +805,29 @@ public void packageApiOfCOnlyDependOnItOrJdk() {
         </section>
 
         <section id="atri">
-          <p class="titulo">¿Cómo se calcula la disponibilidad de un sistema?</p>
+          <p class="titulo">Cálculo de disponibilidad</p>
           <p class="fragment">¿Cómo sé cual es el MTBF y el MTTR de un elemento?</p>
           <p class="fragment">El MTBF, para los <u>elementos de software</u>: Mediante la observación (no es facil sobre todo en software que incrementan su funcionalidad con frecuencia). </p>
           <p class="fragment">El MTTR, para los <u>elementos de software</u>: Equipo de desarrollo.</p>
         </section>
 
         <section id="atri">
-          <p class="titulo">¿Cómo se calcula la disponibilidad de un sistema?</p>
+          <p class="titulo">Cálculo de disponibilidad</p>
           <p class="fragment">¿Cómo sé cual es el MTBF y el MTTR de un elemento?</p>
           <p class="fragment"><a href="https://www.amazon.com/Availability-Network-Fundamentals-Chris-Oggerino/dp/1587130173">Cisco</a> asume 10.000 horas de MTBF para productos con recientes cambios o nuevas funcionalidades, y 30.000 horas de MTBF para productos sin cambios</p>
           <p class="fragment">MTTR de 0.1 horas (6 minutos en reiniciar). Reiniciar porque asume problemas de leaks de memoria, no bugs funcionales.</p>
         </section>
       
         <section id="atri">
-          <p class="titulo">¿Cómo se calcula la disponibilidad de un sistema?</p>
+          <p class="titulo">Cálculo de disponibilidad</p>
           <img src="imgs/radioa-deploy1.png"/> 
           <p class="fragment">Sabiendo como calcular la disponibilidad de cada elemento: ¿Cómo cálculo la de este sistema?</p>
         </section>
          
-
-
       <section id="atri">
-        <p class="titulo">¿Configuración en Serie?</p>
-        <p class="fragment">Si un elemento falla, el sistema entero falla. Multiplico la disponibilidad de sus elementos.</p> 
+        <p class="titulo">Cálculo de disponibilidad</p>
+        <p class="fragment">Si un elemento falla, ¿el sistema entero falla?</p> 
+        <p class="fragment">Entonces, multiplico la disponibilidad de sus elementos. Se denomina: <u>Configuración en Serie</u></p> 
         <p class="maschico fragment">
         \[\begin{aligned}
         Disponibilidad \ en \ Serie = \displaystyle \prod_{i=1}^{n} disponibilidadElemento
@@ -838,7 +837,7 @@ public void packageApiOfCOnlyDependOnItOrJdk() {
       </section>
 
       <section id="atri">
-        <p class="titulo">Configuración en Serie</p>
+        <p class="titulo">Cálculo de disponibilidad</p>
         <p class="maschicoYalineadoIzq">
           \[\begin{aligned}
           \textbf{Application Server}\;\textrm{(node-a1)}&=\frac{50000}{50000 + 8} = 0,999840026 \\
@@ -860,7 +859,7 @@ public void packageApiOfCOnlyDependOnItOrJdk() {
       </section>
 
       <section id="atri">
-        <p class="titulo">Configuración en Serie</p>
+        <p class="titulo">Cálculo de disponibilidad</p>
         <p class="maschicoYalineadoIzq">
           \[\begin{aligned}
           \textbf{Database Server}\;\textrm{(node-b1)}&=\frac{50000}{50000 + 8} = 0,999840026 \\
@@ -878,7 +877,7 @@ public void packageApiOfCOnlyDependOnItOrJdk() {
       </section>
 
       <section id="atri">
-        <p class="titulo">Configuración en Serie</p>
+        <p class="titulo">Cálculo de disponibilidad</p>
         <p class="maschicoYalineadoIzq">
           \[\begin{aligned}
           \textbf{Disponibilidad(app server)}\; &= 0,999840026\;\textrm{(node-a1)} \\
@@ -901,13 +900,60 @@ public void packageApiOfCOnlyDependOnItOrJdk() {
         </p>
       </section>      
 
+      <section id="atri">
+        <p class="titulo">Disponibilidad</p>
+        <p class="fragment">99,97% de disponibilidad. Estoy <u>muy lejos</u> de <strong>Alta Disponibilidad</strong> (cinco 9s)</p> 
+        <p class="fragment">Para alcanzar alta disponibilidad necesito eliminar los <u>Unicos Puntos de Falla</u></p>
+        <p class="fragment">No hay otra opción que tener <u>redundancia</u></p>
+      </section>
 
       <section id="atri">
+        <p class="titulo">¿Así elimino los unicos puntos de falla?</p>
+        <img src="imgs/radioa-deploy2-1.png" /> 
+        <p class="fragment">No!</p>
+      </section>
+
+      <section id="atri">
+        <p class="titulo">Elimando los Únicos Puntos de Falla</p>
+        <img width="690" height="405" src="imgs/radioa-deploy3.png" /> 
+      </section>
+
+      <section id="atri">
+        <p class="titulo">Cálculo de disponibilidad</p>
+        <p class="fragment">Cuando hay elementos redundantes, la fórmula cambia y se denomina: <u>Configuración en paralelo</u>.</p> 
+        <p class="chico fragment">
         \[\begin{aligned}
         \displaystyle 1 - [\prod_{i=1}^{n} (1 - disponibilidadElemento)]
         \end{aligned} \]
+        </p>
+        <p class="fragment">Calculemos ahora la disponibilidad de la nueva configuración redundante</p>
       </section>
 
+      <section id="atri">
+        <p class="titulo">Cálculo de disponibilidad</p>
+        <p class="maschicoYalineadoIzq">
+          \[\begin{aligned}
+          \textbf{Availability (app server)} &= 1 - (1 - 0,999828362)\times(1 - 0,999828362) \\
+          &= 1 - (0,000171638 \times 0,000171638) \\
+          &= 1 - 0,000000029 \\
+          &= 0,999999971 \times 100 = 99,99999\%
+          \end{aligned} \]
+      
+          \[\begin{aligned}
+          \textbf{Availability (bd server)} &= 1 - (1 - 0,999833361)\times(1 - 0,999833361) \\
+          &= 1 - (0,000166639 \times 0,000166639) \\
+          &= 1 - 0,000000028 \\
+          &= 0,999999972 \times 100 = 99,99999\%
+          \end{aligned} \]
+
+          \[\begin{aligned}
+          \textbf{System Availability} &= 0,999999971 \; (app\;server) \\
+          &\times  0,999999972 \; (db\;server) \\
+          &= 0,999999943 \times 100 = 99,99999\%
+          \end{aligned} \]
+        </p>
+      </section>
+      
       <section id="atri">
         <div class="box2">Escalabilidad</div>
       </section>
