@@ -1,282 +1,276 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
 
-    <title>Taller de Tecnologías y Producción de Software</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <link rel="stylesheet" href="dist/reset.css" />
-    <link rel="stylesheet" href="dist/reveal.css" />
-    <link rel="stylesheet" href="dist/theme/white.css" />
-    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
-    <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
-    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+  <title>Taller de Tecnologías y Producción de Software</title>
 
-    <style>
-      div.line {
-        border-bottom: 1px solid;
-        border-color: lightgray;
-      }
+  <link rel="stylesheet" href="dist/reset.css" />
+  <link rel="stylesheet" href="dist/reveal.css" />
+  <link rel="stylesheet" href="dist/theme/white.css" />
+  <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
 
-      .box3 {
-        /*width: 720px;
+  <style>
+    div.line {
+      border-bottom: 1px solid;
+      border-color: lightgray;
+    }
+
+    .box3 {
+      /*width: 720px;
         padding: 15px;
         margin-left: 100px;*/
-        padding-left: 5px;
-        padding-right: 5px;
-        background-color: #4a4e69;
-        color: white;
-        font-size: 50pt;
-        font-weight: bold;
-      }
+      padding-left: 5px;
+      padding-right: 5px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+    }
 
-      .box2 {
-        width: 720px;
-        padding: 15px;
-        margin-left: 100px;
-        background-color: #4a4e69;
-        color: white;
-        font-size: 50pt;
-        font-weight: bold;
-      }
+    .box2 {
+      width: 720px;
+      padding: 15px;
+      margin-left: 100px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+    }
 
-      .box {
-        width: 720px;
-        /*border: 15px solid green;*/
-        padding: 15px;
-        margin: 2px;
-        background-color: #4a4e69;
-        color: white;
-        font-size: 50pt;
-        font-weight: bold;
-        /*font-family: 'Times New Roman', Times, serif;*/
-      }
+    .box {
+      width: 720px;
+      /*border: 15px solid green;*/
+      padding: 15px;
+      margin: 2px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+      /*font-family: 'Times New Roman', Times, serif;*/
+    }
 
-      .portada .subtitulo {
-        color: lightgray;
-      }
+    .portada .subtitulo {
+      color: lightgray;
+    }
 
-      .autor {
-        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
-        font-size: 15pt;
-      }
+    .autor {
+      /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+      font-size: 15pt;
+    }
 
-      .fechahoy {
-        color: gray;
-      }
+    .fechahoy {
+      color: gray;
+    }
 
-      .titulo {
-        font-size: 50pt;
-      }
+    .titulo {
+      font-size: 50pt;
+    }
 
-      .resaltar {
-        color: #4a4e69;
-      }
+    .resaltar {
+      color: #4a4e69;
+    }
 
-      p.chico {
-        font-size: 24pt;
-      }
+    p.chico {
+      font-size: 24pt;
+    }
 
-      span.itali {
-        font-family: cursive;
-      }
+    span.itali {
+      font-family: cursive;
+    }
 
-      p.maschico {
-        font-size: 20pt;
-      }
+    p.maschico {
+      font-size: 20pt;
+    }
 
-      p.maschicoYalineadoIzq {
-        font-size: 12pt;
-        text-align: left;
-      }
+    p.maschicoYalineadoIzq {
+      font-size: 12pt;
+      text-align: left;
+    }
 
-      p.chicoYalineadoIzq {
-        font-size: 24pt;
-        text-align: left;
-      }
+    p.chicoYalineadoIzq {
+      font-size: 24pt;
+      text-align: left;
+    }
 
-      .reveal .slide-number {
-        background-color: white;
-        color: black;
-      }
+    .reveal .slide-number {
+      background-color: white;
+      color: black;
+    }
 
-      .reveal .footer {
-        position: absolute;
-        bottom: 1em;
-        left: 1em;
-        font-size: 0.5em;
-        color: gray;
-      }
-    </style>
-  </head>
+    .reveal .footer {
+      position: absolute;
+      bottom: 1em;
+      left: 1em;
+      font-size: 0.5em;
+      color: gray;
+    }
+  </style>
+</head>
 
-  <body>
-    <div class="reveal">
-      <div class="footer">Taller de Tecnologías y Producción de Software</div>
-      <div class="menubar line">
-        <div class="slide-number"></div>
-        <ul class="menu">
-          <li><a href="#/obj">Objetivo</a></li>
-          <li><a href="#/cont">Contenidos</a></li>
-          <li><a href="#/met">Metodología</a></li>
-          <li><a href="#/curfin">Cursada y Final</a></li>
-          <li><a href="#/practico">Trabajo Práctico</a></li>
-        </ul>
-        <div class="placeholder"></div>
-      </div>
-      <div class="slides">
-        <section
-          style="text-align: left"
-          data-transition="fade"
-          data-state="hide-menubar no-title-footer"
-        >
-          <div class="box">
-            <span>Taller de Tecnología y Producción de Software</span>
-          </div>
-          <div class="smallbox">Buenas Prácticas en Desarrollo de Software</div>
-          <p class="autor">Enrique Molinari</p>
-          <p id="hoy" class="autor fechahoy"></p>
-        </section>
-
-        <section id="obj">
-          <p class="titulo">Objetivo</p>
-          <p class="chico">
-            Introducir a los estudiantes en un esquema de desarrollo de software
-            utilizando las <u>mejores prácticas actuales</u> y tecnologías
-            actuales <b>aceptadas</b>.
-          </p>
-          <p class="chico">
-            Mejores Prácticas Actuales relacionadas con el diseño, la
-            arquitectura y el código que escribimos.
-          </p>
-        </section>
-
-        <section id="cont">
-          <p class="titulo">Contenidos</p>
-          <p class="chicoYalineadoIzq fragment">
-            Conceptos de Arquitectura de Software
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Conceptos de Aplicaciones Web Single-Page
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            El protocolo HTTP y servicios REST
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Conceptos de Bases de Datos NoSQL (relacional ya lo conocen)
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Conceptos de Integración Continua
-          </p>
-          <p class="chicoYalineadoIzq fragment">Análisis Estático de Código</p>
-        </section>
-
-        <section id="met">
-          <p class="titulo">Metodología</p>
-          <p class="chicoYalineadoIzq fragment">
-            A lo largo del curso vamos a ir construyendo una aplicación en
-            <u>equipo</u>.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Se irá construyendo en iteraciones de 2 semanas. Aproximadamente
-            tenemos 7 sprints.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Las iteraciones podrán tener tareas de desarrollo, de investigación
-            y pruebas de concepto (Ej: investigar una tecnología en particular
-            que necesitamos aplicar) y de pago de deuda técnica (Ej: Mejorar la
-            cobertura de test).
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            En ciertas etapas del desarrollo se iran impartiendo los diferentes
-            contenidos para aplicar en el desarrollo.
-          </p>
-          <p class="chicoYalineadoIzq fragment"></p>
-        </section>
-
-        <section id="met">
-          <p class="titulo">Metodología (Cont.)</p>
-          <p class="chicoYalineadoIzq fragment">
-            En las clases tendremos: Plannings, Dailies, consultas técnicas o
-            funcionales, clases teóricas.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            El rol de los docentes (cuando no se imparten clases teóricas) será
-            por momentos de consultor técnico (consejos y propuestas). Y además
-            como product owner.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Pueden utilizar tiempo de la clase para programar. Pero solo con eso
-            no va a alcanzar.
-          </p>
-        </section>
-
-        <section id="curfin">
-          <p class="titulo">Cursada y Final</p>
-          <p class="chicoYalineadoIzq fragment">
-            Los sprints debe estar al día. Dos atrasasos importantes en los
-            sprints es causa de pérdida de la materia.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Valoramos más: Diseños limpios, Código limpio, buena arquitectura,
-            alta cobertura de test, métricas de análisis estático altas y buena
-            documentación.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Por sobre: Usabilidad (UX), Diseño Web (CSS).
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            El final incluirá una tarea adicional individual sobre aplicación a
-            construir.
-          </p>
-        </section>
-      </div>
+<body>
+  <div class="reveal">
+    <div class="footer">Taller de Tecnologías y Producción de Software</div>
+    <div class="menubar line">
+      <div class="slide-number"></div>
+      <ul class="menu">
+        <li><a href="#/obj">Objetivo</a></li>
+        <li><a href="#/cont">Contenidos</a></li>
+        <li><a href="#/met">Metodología</a></li>
+        <li><a href="#/curfin">Cursada y Final</a></li>
+      </ul>
+      <div class="placeholder"></div>
     </div>
+    <div class="slides">
+      <section style="text-align: left" data-transition="fade" data-state="hide-menubar no-title-footer">
+        <div class="box">
+          <span>Taller de Tecnología y Producción de Software</span>
+        </div>
+        <div class="smallbox">Buenas Prácticas en Desarrollo de Software</div>
+        <p class="autor">Enrique Molinari</p>
+        <p id="hoy" class="autor fechahoy"></p>
+      </section>
 
-    <script src="dist/reveal.js"></script>
-    <script src="plugin/notes/notes.js"></script>
-    <script src="plugin/markdown/markdown.js"></script>
-    <script src="plugin/highlight/highlight.js"></script>
-    <script src="plugin/simplemenu/simplemenu.js"></script>
-    <script src="plugin/relativenumber/relativenumber.js"></script>
-    <script src="plugin/math/math.js"></script>
-    <script>
-      window.onload = function () {
-        let today = new Date().toLocaleDateString();
-        let obj = document.getElementById("hoy");
-        document.getElementById("hoy").innerText = today;
-      };
+      <section id="obj">
+        <p class="titulo">Objetivo</p>
+        <p class="chico">
+          Introducir a los estudiantes en un esquema de desarrollo de software
+          utilizando las <u>mejores prácticas actuales</u> y tecnologías
+          actuales <b>aceptadas</b>.
+        </p>
+        <p class="chico">
+          Mejores Prácticas Actuales relacionadas con el diseño, la
+          arquitectura y el código que escribimos.
+        </p>
+      </section>
 
-      Reveal.addEventListener("slidechanged", function (event) {
-        if (event.indexh > 0) {
-          document.querySelector(".reveal .footer").style.display = "block";
-        } else {
-          document.querySelector(".reveal .footer").style.display = "none";
-        }
-      });
+      <section id="cont">
+        <p class="titulo">Contenidos</p>
+        <p class="chicoYalineadoIzq fragment">
+          Conceptos de Arquitectura de Software
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          Conceptos de Aplicaciones Web Single-Page
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          El protocolo HTTP y servicios REST
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          Conceptos de Bases de Datos NoSQL (relacional ya lo conocen)
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          Conceptos de Integración Continua
+        </p>
+        <p class="chicoYalineadoIzq fragment">Análisis Estático de Código</p>
+      </section>
 
-      Reveal.addEventListener("ready", function (event) {
-        if (event.indexh === 0)
-          document.querySelector(".reveal .footer").style.display = "none";
-      });
+      <section id="met">
+        <p class="titulo">Metodología</p>
+        <p class="chicoYalineadoIzq fragment">
+          A lo largo del curso vamos a ir construyendo una aplicación en
+          <u>equipo</u>.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          Se irá construyendo en iteraciones de 2 semanas. Aproximadamente
+          tenemos 7 sprints.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          Las iteraciones podrán tener tareas de desarrollo, de investigación
+          y pruebas de concepto (Ej: investigar una tecnología en particular
+          que necesitamos aplicar) y de pago de deuda técnica (Ej: Mejorar la
+          cobertura de test).
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          En ciertas etapas del desarrollo se iran impartiendo los diferentes
+          contenidos para aplicar en el desarrollo.
+        </p>
+        <p class="chicoYalineadoIzq fragment"></p>
+      </section>
 
-      Reveal.initialize({
-        hash: true,
-        slideNumber: "c/t",
-        plugins: [
-          RevealMarkdown,
-          RevealHighlight,
-          RevealNotes,
-          RelativeNumber,
-          Simplemenu,
-          RevealMath.KaTeX,
-        ],
-      });
-    </script>
-  </body>
+      <section id="met">
+        <p class="titulo">Metodología (Cont.)</p>
+        <p class="chicoYalineadoIzq fragment">
+          En las clases tendremos: Plannings, Dailies, consultas técnicas o
+          funcionales, clases teóricas.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          El rol de los docentes (cuando no se imparten clases teóricas) será
+          por momentos de consultor técnico (consejos y propuestas). Y además
+          como product owner.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          Pueden utilizar tiempo de la clase para programar. Pero solo con eso
+          no va a alcanzar.
+        </p>
+      </section>
+
+      <section id="curfin">
+        <p class="titulo">Cursada y Final</p>
+        <p class="chicoYalineadoIzq fragment">
+          Los sprints debe estar al día. Dos atrasasos importantes en los
+          sprints es causa de pérdida de la materia.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          Valoramos más: Diseños limpios, Código limpio, buena arquitectura,
+          alta cobertura de test, métricas de análisis estático altas y buena
+          documentación.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          Por sobre: Usabilidad (UX), Diseño Web (CSS).
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          El final incluirá una tarea adicional individual sobre aplicación a
+          construir.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script src="plugin/simplemenu/simplemenu.js"></script>
+  <script src="plugin/relativenumber/relativenumber.js"></script>
+  <script src="plugin/math/math.js"></script>
+  <script>
+    window.onload = function () {
+      let today = new Date().toLocaleDateString();
+      let obj = document.getElementById("hoy");
+      document.getElementById("hoy").innerText = today;
+    };
+
+    Reveal.addEventListener("slidechanged", function (event) {
+      if (event.indexh > 0) {
+        document.querySelector(".reveal .footer").style.display = "block";
+      } else {
+        document.querySelector(".reveal .footer").style.display = "none";
+      }
+    });
+
+    Reveal.addEventListener("ready", function (event) {
+      if (event.indexh === 0)
+        document.querySelector(".reveal .footer").style.display = "none";
+    });
+
+    Reveal.initialize({
+      hash: true,
+      slideNumber: "c/t",
+      plugins: [
+        RevealMarkdown,
+        RevealHighlight,
+        RevealNotes,
+        RelativeNumber,
+        Simplemenu,
+        RevealMath.KaTeX,
+      ],
+    });
+  </script>
+</body>
+
 </html>
