@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>El Protocolo HTTP</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+
+    <style>
+      div.line {
+        border-bottom: 1px solid;
+        border-color: lightgray;
+      }
+
+      .box3 {
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box2 {
+        width: 720px;
+        padding: 15px;
+        margin-left: 100px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box {
+        width: 560px;
+        /*border: 15px solid green;*/
+        padding: 15px;
+        margin: 2px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+        /*font-family: 'Times New Roman', Times, serif;*/
+      }
+
+      .titulobox {
+        width: 540px;
+      }
+
+      .portada .subtitulo {
+        color: lightgray;
+      }
+
+      .autor {
+        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+        font-size: 15pt;
+      }
+
+      .fechahoy {
+        color: gray;
+      }
+
+      .titulo {
+        font-size: 50pt;
+      }
+
+      .resaltar {
+        color: #4a4e69;
+      }
+
+      p.chico {
+        font-size: 24pt;
+      }
+
+      span.itali {
+        font-family: cursive;
+      }
+
+      p.maschico {
+        font-size: 20pt;
+      }
+
+      p.alineadoIzq {
+        text-align: left;
+      }
+
+      p.maschicoYalineadoIzq {
+        font-size: 12pt;
+        text-align: left;
+      }
+
+      p.chicoYalineadoIzq {
+        font-size: 24pt;
+        text-align: left;
+      }
+
+      .reveal .slide-number {
+        background-color: white;
+        color: black;
+      }
+
+      .reveal .footer {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+        color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="footer">El Protocolo http</div>
+      <div class="menubar line">
+        <div class="slide-number"></div>
+        <ul class="menu">
+          <li><a href="#/intro">¿Qué es HTTP?</a></li>
+          <li><a href="#/metodos">HTTP Methods</a></li>
+          <li><a href="#/headers">HTTP Headers</a></li>
+          <li><a href="#/recodes">HTTP Reponse Codes</a></li>
+        </ul>
+        <div class="placeholder"></div>
+      </div>
+      <div class="slides">
+        <section
+          style="text-align: left"
+          data-transition="fade"
+          data-state="hide-menubar no-title-footer"
+        >
+          <div class="box">
+            <span>El Protocolo http://</span>
+          </div>
+          <div class="titulobox">
+            Entendamos el protocolo más utilizado del planeta
+          </div>
+          <p class="autor">Enrique Molinari</p>
+          <p id="hoy" class="autor fechahoy"></p>
+        </section>
+
+        <section id="intro">
+          <p class="titulo">¿Qué es HTTP?</p>
+          <p class="fragment">¿Donde han utilizado ya este protocolo?</p>
+          <p class="fragment">
+            <b>H</b>iper <b>T</b>ext <b>T</b>ransfer <b>P</b>rotocol
+          </p>
+          <p class="fragment">
+            Para realizar comunicaciones entre Servidores Web y clientes
+            (browsers y otros).
+          </p>
+          <p class="fragment">
+            Cara vez que ingresamos una URL en un navegador establecemos una
+            comunicación HTTP. Cuando utilizamos Ajax o cuando submiteamos un
+            Form.
+          </p>
+          <p class="fragment">HTTP <b>Request</b>/<b>Response</b></p>
+        </section>
+
+        <section id="intro">
+          <p class="titulo">HTTP es <b>stateless</b></p>
+          <p class="fragment">
+            Cada request es independiente del otro. No hay memoria donde retenga
+            que paso en request anteriores.
+          </p>
+          <p class="fragment">
+            El localStorage, las cookies o las sessiones se pueden utilizar para
+            mantener estado.
+          </p>
+        </section>
+
+        <section id="intro">
+          <p class="titulo">¿Qué es HTTP<b>S</b>?</p>
+          <p class="fragment">Hiper Text Transfer Protocol <b>Secure</b></p>
+          <p class="fragment">Los datos se envían encriptados.</p>
+          <p class="fragment">
+            Hoy es una buena práctica que cualquier sitio web utilice https.
+          </p>
+        </section>
+
+        <section id="metodos">
+          <p class="titulo">Métodos HTTP</p>
+          <p class="alineadoIzq fragment">
+            <b>GET</b>: Para obtener datos del servidor. Cada visita a una
+            página web es un request GET. Nunca utilizarlo para enviar o
+            modificar datos. Es <b>idempotente</b>.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            <b>Idempotencia</b>: La ejecución repetida de una petición con los
+            mismos parámetros sobre un mismo recurso tendrá el mismo efecto
+            siempre.
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>POST</b>: Para enviar datos al servidor. Ej: Submitear un
+            formulario. No es idempotente.
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>PUT</b>: Para modificar datos existentes. Idempotente.
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>DELETE</b>: Para borrar datos existentes. Idempotente.
+          </p>
+        </section>
+
+        <section id="metodos">
+          <p class="titulo">Métodos HTTP</p>
+          <p class="fragment">
+            Es sumamente importante utilizar correctamente los métodos http. Es
+            nuestra responsabilidad como desarrolladores. En protocolo en sí no
+            nos prohibe utilizar GET en operaciones con side-effects.
+          </p>
+          <p class="fragment">
+            Si submitieramos una compra y dicho request fuera GET podríamos sin
+            querer (Ej: apretando F5), submitearla N veces. Si es POST el
+            browser nos avisa con un warning. Porque el browser sabe que POST no
+            es una operación idempotente.
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/relativenumber/relativenumber.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      window.onload = function () {
+        let today = new Date().toLocaleDateString();
+        let obj = document.getElementById("hoy");
+        document.getElementById("hoy").innerText = today;
+      };
+
+      Reveal.addEventListener("slidechanged", function (event) {
+        if (event.indexh > 0) {
+          document.querySelector(".reveal .footer").style.display = "block";
+        } else {
+          document.querySelector(".reveal .footer").style.display = "none";
+        }
+      });
+
+      Reveal.addEventListener("ready", function (event) {
+        if (event.indexh === 0)
+          document.querySelector(".reveal .footer").style.display = "none";
+      });
+
+      Reveal.initialize({
+        hash: true,
+        slideNumber: "c/t",
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealNotes,
+          RelativeNumber,
+          Simplemenu,
+          RevealMath.KaTeX,
+        ],
+      });
+    </script>
+  </body>
+</html>
