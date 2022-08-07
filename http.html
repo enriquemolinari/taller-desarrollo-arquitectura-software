@@ -130,6 +130,7 @@
           <li><a href="#/metodos">HTTP Methods</a></li>
           <li><a href="#/headers">HTTP Headers</a></li>
           <li><a href="#/recodes">HTTP Reponse Codes</a></li>
+          <li><a href="#/cookie">Cookies</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -301,6 +302,56 @@ Content-Type: application/json
           <p class="alineadoIzq fragment">
             <b>5xx</b>: Error en el servidor. Ej: 500 Internal Server Error.
           </p>
+        </section>
+
+        <section id="cookie">
+          <p class="titulo">HTTP Cookies</p>
+          <p class="fragment">
+            Las cookies son datos estructurados de la forma
+            <em>clave</em>=<em>valor</em>. Son creados en el Web Server (aunque
+            tambien se pueden crear con javascript) y enviados hacia el cliente,
+            quién lo almacena para enviar con cada nuevo request.
+          </p>
+          <p class="fragment">
+            De esta forma fue posible generar la idea de estado en aplicaciones
+            Web.
+          </p>
+          </section>
+
+          <section id="cookie">
+            <p class="titulo">HTTP Cookies</p>
+            <p class="chico">Típica secuencia de creación de cookie de session</p>
+            <img src="imgs/httpcookiescomm.png"/>
+          </section>
+
+          <section id="cookie">
+            <p class="titulo">HTTP Cookies</p>
+            <p class="chico">Agregar cookies en response, con Javalin:</p>
+            <pre
+              class="fragment"
+            ><code data-trim data-noescape>private Handler login() {
+ return ctx -> {
+  ...          
+  response.setHeader("Set-Cookie", 
+            "token=" + token + "; HttpOnly");
+  ...
+ }
+}
+</code></pre>
+          </section>
+
+          <section id="cookie">
+            <p class="titulo">HTTP Cookies</p>
+            <p class="chico">Response:</p>
+            <pre
+              class="fragment"
+            ><code data-trim data-noescape data-line-numbers="1|4">HTTP/1.1 200 OK
+Date: Sat, 15 Oct 2021 14:28:02 GMT
+Server: Apache
+Set-Cookie: token=abc123; HttpOnly;
+...
+</code></pre>
+          </section>
         </section>
       </div>
     </div>
