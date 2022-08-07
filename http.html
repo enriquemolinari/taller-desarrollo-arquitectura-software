@@ -157,14 +157,19 @@
           </p>
           <p class="fragment">
             Para realizar comunicaciones entre Servidores Web y clientes
-            (browsers y otros).
+            (browsers y otros). Cliente - Servidor.
           </p>
           <p class="fragment">
             Cara vez que ingresamos una URL en un navegador establecemos una
             comunicación HTTP. Cuando utilizamos Ajax o cuando submiteamos un
             Form.
           </p>
-          <p class="fragment">HTTP <b>Request</b>/<b>Response</b></p>
+        </section>
+
+        <section id="intro">
+          <p class="titulo">Una Típica Comunicación HTTP</p>
+          <p class="fragment"><b>Request</b>/<b>Response</b></p>
+          <img class="fragment" src="imgs/httpcommunication.png" />
         </section>
 
         <section id="intro">
@@ -224,6 +229,77 @@
             querer (Ej: apretando F5), submitearla N veces. Si es POST el
             browser nos avisa con un warning. Porque el browser sabe que POST no
             es una operación idempotente.
+          </p>
+        </section>
+
+        <section id="headers">
+          <p class="titulo">HTTP Headers</p>
+          <p class="fragment">GET Request:</p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape data-line-numbers="1|2-3">GET /my-host/pagina.html HTTP/1.1
+Host: myhost.org
+User-Agent: un cliente</code></pre>
+          <p class="fragment">Response:</p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape data-line-numbers="1|2-8|9">HTTP/1.1 200 OK
+Date: Sat, 15 Oct 2021 14:28:02 GMT
+Server: Apache
+Last-Modified: Tue, 01 Oct 2021 20:18:22 GMT
+ETag: "51142bc1-7449-479b075b2891b"
+Accept-Ranges: bytes
+Content-Length: 29769
+Content-Type: text/html
+(body: requested web page)
+</code></pre>
+        </section>
+
+        <section id="headers">
+          <p class="titulo">HTTP Headers (cont)</p>
+          <p class="alineadoIzq fragment">
+            <b>GET</b>: Header + Body Opcional.
+          </p>
+          <p class="alineadoIzq fragment"><b>POST</b>: Header + Body.</p>
+          <p class="alineadoIzq fragment"><b>PUT</b>: Header + Body.</p>
+          <p class="alineadoIzq fragment">
+            <b>DELETE</b>: Header + Body Opcional.
+          </p>
+        </section>
+
+        <section id="headers">
+          <p class="titulo">HTTP Headers</p>
+          <p class="fragment">POST Request:</p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape data-line-numbers="1|4|6-9">POST /my-host/curso HTTP/1.1
+Host: myhost.org
+User-Agent: un client
+Content-Type: application/json
+
+{
+  "curso": "Taller de Tecnología y Producción de Software",
+  "año": "5to"
+}
+</code></pre>
+        </section>
+
+        <section id="recodes">
+          <p class="titulo">HTTP Response Codes</p>
+          <p class="alineadoIzq fragment">
+            <b>1xx</b>: informativo (Request recibido)
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>2xx</b>: Éxito (Success). Ej: 200 - OK
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>3xx</b>: Redirect. Ej: 301 Moved, 304 Cached Version.
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>4xx</b>: Request Incompleto. Ej: 401 Unauthorized.
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>5xx</b>: Error en el servidor. Ej: 500 Internal Server Error.
           </p>
         </section>
       </div>
