@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>Servicios HTTP y REST</title>
+    <title>HTTP y REST APIs</title>
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
@@ -122,15 +122,15 @@
 
   <body>
     <div class="reveal">
-      <div class="footer">REST y Servicios HTTP</div>
+      <div class="footer">HTTP y REST APIs</div>
       <div class="menubar line">
         <div class="slide-number"></div>
         <ul class="menu">
-          <li><a href="#/intro">Introducción</a></li>
-          <li><a href="#/metodos">Pilares</a></li>
-          <li><a href="#/headers">HTTP Headers</a></li>
-          <li><a href="#/recodes">HTTP Reponse Codes</a></li>
-          <li><a href="#/cookie">Cookies</a></li>
+          <li><a href="#/intro">HTTP API</a></li>
+          <li><a href="#/rest">Representation State Transfer (REST)</a></li>
+          <li><a href="#/rest2">HTTP &#8594; REST APIs (RMM)</a></li>
+          <!--           <li><a href="#/recodes">HTTP Reponse Codes</a></li>
+          <li><a href="#/cookie">Cookies</a></li> -->
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -141,7 +141,7 @@
           data-state="hide-menubar no-title-footer"
         >
           <div class="box">
-            <span>REST y Servicios HTTP</span>
+            <span>HTTP y REST APIs</span>
           </div>
           <div class="titulobox">
             Comunicación entre aplicaciones utilizando Servicios HTTP
@@ -151,27 +151,172 @@
         </section>
 
         <section id="intro">
-          <p class="titulo">¿Qué es un Servicio HTTP?</p>
+          <p class="titulo">¿Qué es HTTP API?</p>
           <p class="fragment">
-            Denominamos Servicio HTTP o Servicio WEB (o mal llamado a veces
-            Servicio REST), simplemente a un servicio expuesto en un Servidor
-            Web que como respuesta retorna JSON o XML (en lugar de una pagina
-            web).
+            Denominamos Servicio HTTP o HTTP API (o mal llamado a veces Servicio
+            REST), simplemente a un servicio expuesto en un Servidor Web que
+            como respuesta retorna JSON o XML (en lugar de una pagina web o HTML
+            + CSS).
           </p>
         </section>
 
-        <section id="intro">
+        <section id="rest">
           <p class="titulo">¿Qué es REST?</p>
           <p class="fragment">
             <b>Re</b>presentation <b>S</b>tate <b>T</b>ransfer
           </p>
           <p class="fragment">
-            Creado por Roy Fielding (2000).
+            Un estilo de arquitectura para sistemas de hipermedia distribuidos,
+            con todo lo que eso implica: <b>restricciones</b>.
+          </p>
+          <p class="fragment">
+            Creado por Roy Fielding (2000). Presentado en el capítulo 5 de su
             <a
               href="https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm"
-              >Phd Thesis</a
-            >
+              >tesis doctoral</a
+            >.
           </p>
+        </section>
+
+        <section id="rest">
+          <p class="titulo">REST Architectural Style</p>
+          <p class="chicoYalineadoIzq fragment">
+            <b>Client-Server</b>: Separación de responsabilidades.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            <b>Stateless</b>: Cada request contiene todo lo necesario para ser
+            ejecutado por el server.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            <b>Cacheable</b>: El server debe indicar si los datos de una
+            respuesta son cacheables o no.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            <b>Uniform Interface</b>: HTTP Specification (verbos y URIs) y
+            HATEOAS.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            <b>Layered</b>: Los clientes no pueden asumir que se comunican
+            directamente con el server. Puede haber dispositivos de red entre
+            ellos.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            <b>Code-on-Demand</b>: Transferir al cliente la ejecución de cierta
+            lógica (applets o scripts).
+          </p>
+        </section>
+
+        <section id="rest">
+          <p class="titulo">REST: Uniform Interface</p>
+          <p class="alineadoIzq fragment">
+            <b>Basado en Recursos</b>: Cosas (o Recursos) vs Acciones.
+            Sustantivos vs verbos.
+          </p>
+          <p class="alineadoIzq fragment">
+            Cliente, Libro, Película, Aula, Alumno, etc. En lugra de Agregar,
+            Buscar, Borrar, etc.
+          </p>
+          <p class="alineadoIzq fragment">
+            Identificamos los recursos vía una URI (Unified Resource
+            Identifier).
+          </p>
+        </section>
+
+        <section id="rest">
+          <p class="titulo">REST: Uniform Interface</p>
+          <p class="alineadoIzq fragment">
+            "Representations": Se refiere a como describimos los recursos: JSON
+            o XML.
+          </p>
+          <p class="alineadoIzq fragment">
+            Estas "representaciones" son lo que transferimos entre clientes y
+            servidores.
+          </p>
+          <p class="alineadoIzq fragment">
+            Utilizamos los <b>Métodos HTTP</b> para indicar <b>que operación</b>
+            queremos realizar sobre cada recurso.
+          </p>
+        </section>
+
+        <section id="rest">
+          <p class="titulo">REST: Uniform Interface</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Tarea</th>
+                <th>Método HTTP</th>
+                <th>URI (Path)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Crear un nuevo Cliente</td>
+                <td>POST</td>
+                <td>/clientes</td>
+              </tr>
+              <tr>
+                <td>Borrar un Cliente existente</td>
+                <td>DELETE</td>
+                <td>/clientes/{id}</td>
+              </tr>
+              <tr>
+                <td>Obtener un Cliente específico</td>
+                <td>GET</td>
+                <td>/clientes/{id}</td>
+              </tr>
+              <tr>
+                <td>Modificar un Cliente existente</td>
+                <td>PUT</td>
+                <td>/clientes/{id}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="rest">
+          <p class="titulo">HATEOAS</p>
+          <p>
+            <b>H</b>ypermedia <b>A</b>s <b>T</b>he <b>E</b>ngine <b>O</b>f
+            <b>A</b>pplication <b>S</b>tate
+          </p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape data-line-numbers="1|2-19">GET /clientes/100 HTTP/1.1
+{
+ "id": 100,
+ "nombre": "Ernesto"
+ "apellido": "Joel"
+ "_links" {
+  "permisos": {
+    "href": "https://host/clientes/100/permisos"
+  },
+  "compras": {
+    "href": "https://host/clientes/100/compras"
+  }
+ }
+}
+</code></pre>
+        </section>
+
+        <section id="rest">
+          <p class="titulo">REST: Uniform Interface</p>
+          <p>
+            I am getting frustrated by the number of people calling any
+            HTTP-based interface a REST API. -Roy Fielding.
+            <a
+              href="https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven"
+              >REST Must be Hypertext driven</a
+            >.
+          </p>
+        </section>
+
+        <section id="rest2">
+          <p class="titulo">Richardson Maturity Model</p>
+          <p>
+            Describe claramente los principales elementos de REST y nos
+            posiciona en un nivel de madurez segun como lo implementamos.
+          </p>
+          <img src="imgs/rest-maturity-model.png" />
         </section>
       </div>
     </div>
