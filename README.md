@@ -2,9 +2,9 @@
 
 ## Contenidos
 
-1. **Conceptos sobre Arquitectura de Software**: Definición (o mejor dicho definiciones). Visualización de la arquitectura de software de un sistema, principalmente con el [modelo C4](https://c4model.com/) de Simon Brown. Arquiecturas monolíticas vs distribuídas. Arquitecturas monolico modulares y microservicios. Atributos de calidad: mantenibilidad, escalabilidad y disponibilidad. Contenidos obtenidos de mi libro [Coding An Architecture Style](https://leanpub.com/codinganarchitecturestyle), que por supuesto **es gratis para mis alumnos** y cualquiera que quiera leerlo.
+1. **Conceptos sobre Arquitectura de Software**: Definición (o mejor dicho definiciones). Visualización de la arquitectura de software de un sistema, principalmente con el [modelo C4](https://c4model.com/) de Simon Brown. Arquitecturas monolíticas vs distribuídas. Arquitecturas monolico modulares y microservicios. Atributos de calidad: mantenibilidad, escalabilidad y disponibilidad. Contenidos obtenidos de mi libro [Coding An Architecture Style](https://leanpub.com/codinganarchitecturestyle), que por supuesto **es gratis para mis alumnos** y cualquiera que quiera leerlo.
 2. **Arquitectura Web**: El protocolo HTTP, Servicios HTTP y Servicios REST. Aplicaciones Web Single Page.
-3. **Integración Continua y Calidad**: Al desarrollando en equipo necesitamos configurar un robot que verifica la calidad del código producido por cada integrante. Por eso utilizaremos:
+3. **Integración Continua y Calidad**: Desarrollando en equipo necesitamos configurar un robot que verifique la calidad del código producido por cada integrante. Por eso utilizaremos:
 
 - [Checkstyle](https://maven.apache.org/plugins/maven-checkstyle-plugin/examples/custom-checker-config.html). Utilizamos la guía de estilos de [Google](https://google.github.io/styleguide/javaguide.html).
 - [PMD](https://maven.apache.org/plugins/maven-pmd-plugin/). Utilizamos las siguientes reglas [PMD Rules](https://pmd.github.io/latest/pmd_rules_java.html), excepto las relacionadas con la documentation (javadoc).
