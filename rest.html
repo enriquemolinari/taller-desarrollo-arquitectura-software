@@ -1,302 +1,293 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
 
-    <title>HTTP y REST APIs</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <link rel="stylesheet" href="dist/reset.css" />
-    <link rel="stylesheet" href="dist/reveal.css" />
-    <link rel="stylesheet" href="dist/theme/white.css" />
-    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
-    <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
-    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+  <title>HTTP y REST APIs</title>
 
-    <style>
-      div.line {
-        border-bottom: 1px solid;
-        border-color: lightgray;
-      }
+  <link rel="stylesheet" href="dist/reset.css" />
+  <link rel="stylesheet" href="dist/reveal.css" />
+  <link rel="stylesheet" href="dist/theme/white.css" />
+  <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
 
-      .box3 {
-        padding-left: 5px;
-        padding-right: 5px;
-        background-color: #4a4e69;
-        color: white;
-        font-size: 50pt;
-        font-weight: bold;
-      }
+  <style>
+    div.line {
+      border-bottom: 1px solid;
+      border-color: lightgray;
+    }
 
-      .box2 {
-        width: 720px;
-        padding: 15px;
-        margin-left: 100px;
-        background-color: #4a4e69;
-        color: white;
-        font-size: 50pt;
-        font-weight: bold;
-      }
+    .box3 {
+      padding-left: 5px;
+      padding-right: 5px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+    }
 
-      .box {
-        width: 650px;
-        /*border: 15px solid green;*/
-        padding: 15px;
-        margin: 2px;
-        background-color: #4a4e69;
-        color: white;
-        font-size: 50pt;
-        font-weight: bold;
-        /*font-family: 'Times New Roman', Times, serif;*/
-      }
+    .box2 {
+      width: 720px;
+      padding: 15px;
+      margin-left: 100px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+    }
 
-      .titulobox {
-        width: 650px;
-      }
+    .box {
+      width: 650px;
+      /*border: 15px solid green;*/
+      padding: 15px;
+      margin: 2px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+      /*font-family: 'Times New Roman', Times, serif;*/
+    }
 
-      .portada .subtitulo {
-        color: lightgray;
-      }
+    .titulobox {
+      width: 650px;
+    }
 
-      .autor {
-        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
-        font-size: 15pt;
-      }
+    .portada .subtitulo {
+      color: lightgray;
+    }
 
-      .fechahoy {
-        color: gray;
-      }
+    .autor {
+      /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+      font-size: 15pt;
+    }
 
-      .titulo {
-        font-size: 50pt;
-      }
+    .fechahoy {
+      color: gray;
+    }
 
-      .resaltar {
-        color: #4a4e69;
-      }
+    .titulo {
+      font-size: 50pt;
+    }
 
-      p.chico {
-        font-size: 24pt;
-      }
+    .resaltar {
+      color: #4a4e69;
+    }
 
-      span.itali {
-        font-family: cursive;
-      }
+    p.chico {
+      font-size: 24pt;
+    }
 
-      p.maschico {
-        font-size: 20pt;
-      }
+    span.itali {
+      font-family: cursive;
+    }
 
-      p.alineadoIzq {
-        text-align: left;
-      }
+    p.maschico {
+      font-size: 20pt;
+    }
 
-      p.maschicoYalineadoIzq {
-        font-size: 12pt;
-        text-align: left;
-      }
+    p.alineadoIzq {
+      text-align: left;
+    }
 
-      p.chicoYalineadoIzq {
-        font-size: 24pt;
-        text-align: left;
-      }
+    p.maschicoYalineadoIzq {
+      font-size: 12pt;
+      text-align: left;
+    }
 
-      .reveal .slide-number {
-        background-color: white;
-        color: black;
-      }
+    p.chicoYalineadoIzq {
+      font-size: 24pt;
+      text-align: left;
+    }
 
-      .reveal .footer {
-        position: absolute;
-        bottom: 1em;
-        left: 1em;
-        font-size: 0.5em;
-        color: gray;
-      }
-      .container-columna {
-        display: flex;
-      }
-      .col {
-        flex: 1;
-      }
+    .reveal .slide-number {
+      background-color: white;
+      color: black;
+    }
 
-      td.sinborde {
-        border-style: none !important;
-      }
-    </style>
-  </head>
+    .reveal .footer {
+      position: absolute;
+      bottom: 1em;
+      left: 1em;
+      font-size: 0.5em;
+      color: gray;
+    }
 
-  <body>
-    <div class="reveal">
-      <div class="footer">HTTP y REST APIs</div>
-      <div class="menubar line">
-        <div class="slide-number"></div>
-        <ul class="menu">
-          <li><a href="#/intro">HTTP API</a></li>
-          <li><a href="#/rest">Representation State Transfer (REST)</a></li>
-          <li><a href="#/rest2">HTTP &#8594; REST APIs (RMM)</a></li>
-          <li><a href="#/restnaming">Nombres: Buenas Prácticas</a></li>
-          <!--           <li><a href="#/cookie">Cookies</a></li> -->
-        </ul>
-        <div class="placeholder"></div>
-      </div>
-      <div class="slides">
-        <section
-          style="text-align: left"
-          data-transition="fade"
-          data-state="hide-menubar no-title-footer"
-        >
-          <div class="box">
-            <span>HTTP y REST APIs</span>
-          </div>
-          <div class="titulobox">
-            Comunicación entre aplicaciones utilizando Servicios HTTP
-          </div>
-          <p class="autor">Enrique Molinari</p>
-          <p id="hoy" class="autor fechahoy"></p>
-        </section>
+    .container-columna {
+      display: flex;
+    }
 
-        <section id="intro">
-          <p class="titulo">¿Qué es HTTP API?</p>
-          <p class="fragment">
-            Denominamos Servicio HTTP o HTTP API (o mal llamado a veces Servicio
-            REST), simplemente a un servicio expuesto en un Servidor Web que
-            como respuesta retorna JSON o XML (en lugar de una pagina web o HTML
-            + CSS).
-          </p>
-        </section>
+    .col {
+      flex: 1;
+    }
 
-        <section id="rest">
-          <p class="titulo">¿Qué es REST?</p>
-          <p class="fragment">
-            <b>Re</b>presentation <b>S</b>tate <b>T</b>ransfer
-          </p>
-          <p class="fragment">
-            Un estilo de arquitectura para sistemas de hipermedia distribuidos,
-            con todo lo que eso implica: <b>restricciones</b>.
-          </p>
-          <p class="fragment">
-            Creado por Roy Fielding (2000). Presentado en el capítulo 5 de su
-            <a
-              href="https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm"
-              >tesis doctoral</a
-            >.
-          </p>
-        </section>
+    td.sinborde {
+      border-style: none !important;
+    }
+  </style>
+</head>
 
-        <section id="rest">
-          <p class="titulo">REST Architectural Style</p>
-          <p class="chicoYalineadoIzq fragment">
-            <b>Client-Server</b>: Separación de responsabilidades.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            <b>Stateless</b>: Cada request contiene todo lo necesario para ser
-            ejecutado por el server.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            <b>Cacheable</b>: El server debe indicar si los datos de una
-            respuesta son cacheables o no.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            <b>Uniform Interface</b>: HTTP Specification (verbos y URIs) y
-            HATEOAS.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            <b>Layered</b>: Los clientes no pueden asumir que se comunican
-            directamente con el server. Puede haber dispositivos de red entre
-            ellos.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            <b>Code-on-Demand</b>: Transferir al cliente la ejecución de cierta
-            lógica (applets o scripts).
-          </p>
-        </section>
+<body>
+  <div class="reveal">
+    <div class="footer">HTTP y REST APIs</div>
+    <div class="menubar line">
+      <div class="slide-number"></div>
+      <ul class="menu">
+        <li><a href="#/intro">HTTP API</a></li>
+        <li><a href="#/rest">Representation State Transfer (REST)</a></li>
+        <li><a href="#/rest2">HTTP &#8594; REST APIs (RMM)</a></li>
+        <li><a href="#/restnaming">Nombres: Buenas Prácticas </a></li>
+        <!--           <li><a href="#/cookie">Cookies</a></li> -->
+      </ul>
+      <div class="placeholder"></div>
+    </div>
+    <div class="slides">
+      <section style="text-align: left" data-transition="fade" data-state="hide-menubar no-title-footer">
+        <div class="box">
+          <span>HTTP y REST APIs</span>
+        </div>
+        <div class="titulobox">
+          Comunicación entre aplicaciones utilizando Servicios HTTP
+        </div>
+        <p class="autor">Enrique Molinari</p>
+        <p id="hoy" class="autor fechahoy"></p>
+      </section>
 
-        <section id="rest">
-          <p class="titulo">REST: Uniform Interface</p>
-          <p class="alineadoIzq fragment">
-            <b>Basado en Recursos</b>: Cosas (o Recursos) vs Acciones.
-            Sustantivos vs verbos.
-          </p>
-          <p class="alineadoIzq fragment">
-            Cliente, Libro, Película, Aula, Alumno, etc. En lugra de Agregar,
-            Buscar, Borrar, etc.
-          </p>
-          <p class="alineadoIzq fragment">
-            Identificamos los recursos vía una URI (Unified Resource
-            Identifier).
-          </p>
-        </section>
+      <section id="intro">
+        <p class="titulo">¿Qué es HTTP API?</p>
+        <p class="fragment">
+          Denominamos Servicio HTTP o HTTP API (o mal llamado a veces Servicio
+          REST), simplemente a un servicio expuesto en un Servidor Web que
+          como respuesta retorna JSON o XML (en lugar de una pagina web o HTML
+          + CSS).
+        </p>
+      </section>
 
-        <section id="rest">
-          <p class="titulo">REST: Uniform Interface</p>
-          <p class="alineadoIzq fragment">
-            "Representations": Se refiere a como describimos los recursos: JSON
-            o XML.
-          </p>
-          <p class="alineadoIzq fragment">
-            Estas "representaciones" son lo que transferimos entre clientes y
-            servidores.
-          </p>
-          <p class="alineadoIzq fragment">
-            Utilizamos los <b>Métodos HTTP</b> para indicar <b>que operación</b>
-            queremos realizar sobre cada recurso.
-          </p>
-        </section>
+      <section id="rest">
+        <p class="titulo">¿Qué es REST?</p>
+        <p class="fragment">
+          <b>Re</b>presentation <b>S</b>tate <b>T</b>ransfer
+        </p>
+        <p class="fragment">
+          Un estilo de arquitectura para sistemas de hipermedia distribuidos,
+          con todo lo que eso implica: <b>restricciones</b>.
+        </p>
+        <p class="fragment">
+          Creado por Roy Fielding (2000). Presentado en el capítulo 5 de su
+          <a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm">tesis doctoral</a>.
+        </p>
+      </section>
 
-        <section id="rest">
-          <p class="titulo">REST: Uniform Interface</p>
-          <table>
-            <thead>
-              <tr>
-                <th>Tarea</th>
-                <th>Método HTTP</th>
-                <th>URI (Path)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Crear un nuevo Cliente</td>
-                <td>POST</td>
-                <td>/clientes</td>
-              </tr>
-              <tr>
-                <td>Borrar un Cliente existente</td>
-                <td>DELETE</td>
-                <td>/clientes/{id}</td>
-              </tr>
-              <tr>
-                <td>Obtener un Cliente específico</td>
-                <td>GET</td>
-                <td>/clientes/{id}</td>
-              </tr>
-              <tr>
-                <td>Modificar un Cliente existente</td>
-                <td>PUT</td>
-                <td>/clientes/{id}</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+      <section id="rest">
+        <p class="titulo">REST Architectural Style</p>
+        <p class="chicoYalineadoIzq fragment">
+          <b>Client-Server</b>: Separación de responsabilidades.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          <b>Stateless</b>: Cada request contiene todo lo necesario para ser
+          ejecutado por el server.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          <b>Cacheable</b>: El server debe indicar si los datos de una
+          respuesta son cacheables o no.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          <b>Uniform Interface</b>: HTTP Specification (verbos y URIs) y
+          HATEOAS.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          <b>Layered</b>: Los clientes no pueden asumir que se comunican
+          directamente con el server. Puede haber dispositivos de red entre
+          ellos.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          <b>Code-on-Demand</b>: Transferir al cliente la ejecución de cierta
+          lógica (applets o scripts).
+        </p>
+      </section>
 
-        <!--         # Correct Resource Names in url
+      <section id="rest">
+        <p class="titulo">REST: Uniform Interface</p>
+        <p class="alineadoIzq fragment">
+          <b>Basado en Recursos</b>: Cosas (o Recursos) vs Acciones.
+          Sustantivos vs verbos.
+        </p>
+        <p class="alineadoIzq fragment">
+          Cliente, Libro, Película, Aula, Alumno, etc. En lugra de Agregar,
+          Buscar, Borrar, etc.
+        </p>
+        <p class="alineadoIzq fragment">
+          Identificamos los recursos vía una URI (Unified Resource
+          Identifier).
+        </p>
+      </section>
+
+      <section id="rest">
+        <p class="titulo">REST: Uniform Interface</p>
+        <p class="alineadoIzq fragment">
+          "Representations": Se refiere a como describimos los recursos: JSON
+          o XML.
+        </p>
+        <p class="alineadoIzq fragment">
+          Estas "representaciones" son lo que transferimos entre clientes y
+          servidores.
+        </p>
+        <p class="alineadoIzq fragment">
+          Utilizamos los <b>Métodos HTTP</b> para indicar <b>que operación</b>
+          queremos realizar sobre cada recurso.
+        </p>
+      </section>
+
+      <section id="rest">
+        <p class="titulo">REST: Uniform Interface</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Tarea</th>
+              <th>Método HTTP</th>
+              <th>URI (Path)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Crear un nuevo Cliente</td>
+              <td>POST</td>
+              <td>/clientes</td>
+            </tr>
+            <tr>
+              <td>Borrar un Cliente existente</td>
+              <td>DELETE</td>
+              <td>/clientes/{id}</td>
+            </tr>
+            <tr>
+              <td>Obtener un Cliente específico</td>
+              <td>GET</td>
+              <td>/clientes/{id}</td>
+            </tr>
+            <tr>
+              <td>Modificar un Cliente existente</td>
+              <td>PUT</td>
+              <td>/clientes/{id}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!--         # Correct Resource Names in url
         http://api.example.com/weather/v1.0/user/login
         http://api.example.com/weather/v1.0/user/logout
         http://api.example.com/weather/v1.0/user/checkout -->
 
-        <section id="rest">
-          <p class="titulo">HATEOAS</p>
-          <p>
-            <b>H</b>ypermedia <b>A</b>s <b>T</b>he <b>E</b>ngine <b>O</b>f
-            <b>A</b>pplication <b>S</b>tate
-          </p>
-          <pre
-            class="fragment"
-          ><code data-trim data-noescape data-line-numbers="1|2-19">GET /clientes/100 HTTP/1.1
+      <section id="rest">
+        <p class="titulo">HATEOAS</p>
+        <p>
+          <b>H</b>ypermedia <b>A</b>s <b>T</b>he <b>E</b>ngine <b>O</b>f
+          <b>A</b>pplication <b>S</b>tate
+        </p>
+        <pre class="fragment"><code data-trim data-noescape data-line-numbers="1|2-19">GET /clientes/100 HTTP/1.1
 {
  "id": 100,
  "nombre": "Ernesto"
@@ -311,254 +302,253 @@
  }
 }
 </code></pre>
-        </section>
+      </section>
 
-        <section id="rest">
-          <p class="titulo">REST: Uniform Interface</p>
-          <p>
-            I am getting frustrated by the number of people calling any
-            HTTP-based interface a REST API. -Roy Fielding.
-            <a
-              href="https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven"
-              >REST Must be Hypertext driven</a
-            >.
-          </p>
-        </section>
+      <section id="rest">
+        <p class="titulo">REST: Uniform Interface</p>
+        <p>
+          I am getting frustrated by the number of people calling any
+          HTTP-based interface a REST API. -Roy Fielding.
+          <a href="https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven">REST Must be Hypertext
+            driven</a>.
+        </p>
+      </section>
 
-        <section id="rest2">
-          <p class="titulo">Richardson Maturity Model</p>
-          <p>
-            Describe claramente los principales elementos de REST y nos
-            posiciona en un nivel de madurez segun como lo implementamos.
-          </p>
-          <img src="imgs/rest-maturity-model.png" />
-        </section>
+      <section id="rest2">
+        <p class="titulo">Richardson Maturity Model</p>
+        <p>
+          Describe claramente los principales elementos de REST y nos
+          posiciona en un nivel de madurez segun como lo implementamos.
+        </p>
+        <img src="imgs/rest-maturity-model.png" />
+      </section>
 
-        <section id="restnaming">
-          <p class="titulo">REST: Naming</p>
-          <p class="fragment"><b>Sustantivos</b> por sobre Verbos</p>
-          <div class="fragment container-columna">
-            <div class="col">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Así</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="sinborde">/libros</td>
-                  </tr>
-                  <tr>
-                    <td class="sinborde">/productos</td>
-                  </tr>
-                  <tr>
-                    <td class="sinborde">/peliculas</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col">
-              <table>
-                <thead>
-                  <tr>
-                    <th>No así</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="sinborde">/recuperar-libros</td>
-                  </tr>
-                  <tr>
-                    <td class="sinborde">/crearLibro</td>
-                  </tr>
-                  <tr>
-                    <td class="sinborde">/modificar-libros</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      <section id="restnaming">
+        <p class="titulo">REST: Naming</p>
+        <p class="fragment"><b>Sustantivos</b> por sobre Verbos</p>
+        <div class="fragment container-columna">
+          <div class="col">
+            <table>
+              <thead>
+                <tr>
+                  <th>Así</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="sinborde">/libros</td>
+                </tr>
+                <tr>
+                  <td class="sinborde">/productos</td>
+                </tr>
+                <tr>
+                  <td class="sinborde">/peliculas</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </section>
-
-        <section id="restnaming">
-          <p class="titulo">REST: Naming</p>
-          <p class="fragment"><b>Singular</b> por sobre plural</p>
-          <div class="fragment container-columna">
-            <div class="col">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Así</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="sinborde">/peliculas</td>
-                  </tr>
-                  <tr>
-                    <td class="sinborde">/peliculas/123</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col">
-              <table>
-                <thead>
-                  <tr>
-                    <th>No así</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="sinborde">/pelicula</td>
-                  </tr>
-                  <tr>
-                    <td class="sinborde">/pelicula/123</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="col">
+            <table>
+              <thead>
+                <tr>
+                  <th>No así</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="sinborde">/recuperar-libros</td>
+                </tr>
+                <tr>
+                  <td class="sinborde">/crearLibro</td>
+                </tr>
+                <tr>
+                  <td class="sinborde">/modificar-libros</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <p class="fragment">
-            Utilizar singular para traer una colección no queda bien. Y mezclar
-            singular con plural es confuso.
-          </p>
-        </section>
+        </div>
+      </section>
 
-        <section id="restnaming">
-          <p class="titulo">REST: Naming</p>
-          <p class="fragment"><b>Minúsculas</b> por sobre mayúsculas</p>
-          <div class="fragment container-columna">
-            <div class="col">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Así</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="sinborde">/mis-carpetas</td>
-                  </tr>
-                  <tr>
-                    <td class="sinborde">/mis-carpetas/123</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col">
-              <table>
-                <thead>
-                  <tr>
-                    <th>No así</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="sinborde">/MisCarpetas</td>
-                  </tr>
-                  <tr>
-                    <td class="sinborde">/Mis-Carpetas/123</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      <section id="restnaming">
+        <p class="titulo">REST: Naming</p>
+        <p class="fragment"><b>Singular</b> por sobre plural</p>
+        <div class="fragment container-columna">
+          <div class="col">
+            <table>
+              <thead>
+                <tr>
+                  <th>Así</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="sinborde">/peliculas</td>
+                </tr>
+                <tr>
+                  <td class="sinborde">/peliculas/123</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </section>
+          <div class="col">
+            <table>
+              <thead>
+                <tr>
+                  <th>No así</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="sinborde">/pelicula</td>
+                </tr>
+                <tr>
+                  <td class="sinborde">/pelicula/123</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="fragment">
+          Utilizar singular para traer una colección no queda bien. Y mezclar
+          singular con plural es confuso.
+        </p>
+      </section>
 
-        <section id="restnaming">
-          <p class="titulo">REST: Naming</p>
-          <p class="fragment"><b>Asociaciones</b></p>
-          <table class="fragment">
-            <thead>
-              <tr>
-                <th>Así</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="sinborde">/usuarios/123/permisos</td>
-              </tr>
-              <tr>
-                <td class="sinborde">/usuarios/123</td>
-              </tr>
-              <tr>
-                <td class="sinborde">/profesor/123/cursos/345</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+      <section id="restnaming">
+        <p class="titulo">REST: Naming</p>
+        <p class="fragment"><b>Minúsculas</b> por sobre mayúsculas</p>
+        <div class="fragment container-columna">
+          <div class="col">
+            <table>
+              <thead>
+                <tr>
+                  <th>Así</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="sinborde">/mis-carpetas</td>
+                </tr>
+                <tr>
+                  <td class="sinborde">/mis-carpetas/123</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col">
+            <table>
+              <thead>
+                <tr>
+                  <th>No así</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="sinborde">/MisCarpetas</td>
+                </tr>
+                <tr>
+                  <td class="sinborde">/Mis-Carpetas/123</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
-        <section id="restnaming">
-          <p class="titulo">REST: Naming</p>
-          <p class="fragment"><b>Acciones</b> más alla de las CRUD</p>
-          <table class="fragment">
-            <thead>
-              <tr>
-                <th>Así</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="sinborde">/usuarios/123/change-password</td>
-              </tr>
-              <tr>
-                <td class="sinborde">/usuarios/123/login</td>
-              </tr>
-              <tr>
-                <td class="sinborde">/clientes/123/ordenes/pagar</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+      <section id="restnaming">
+        <p class="titulo">REST: Naming</p>
+        <p class="fragment"><b>Asociaciones</b></p>
+        <table class="fragment">
+          <thead>
+            <tr>
+              <th>Así</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="sinborde">/usuarios/123/permisos</td>
+            </tr>
+            <tr>
+              <td class="sinborde">/usuarios/123</td>
+            </tr>
+            <tr>
+              <td class="sinborde">/profesor/123/cursos/345</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
-        <!--         # Correct Resource Names in url
+      <section id="restnaming">
+        <p class="titulo">REST: Naming</p>
+        <p class="fragment"><b>Acciones</b> más alla de las CRUD</p>
+        <table class="fragment">
+          <thead>
+            <tr>
+              <th>Así</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="sinborde">/usuarios/123/change-password</td>
+            </tr>
+            <tr>
+              <td class="sinborde">/usuarios/123/login</td>
+            </tr>
+            <tr>
+              <td class="sinborde">/clientes/123/ordenes/pagar</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!--         # Correct Resource Names in url
         http://api.example.com/weather/v1.0/user/login
         http://api.example.com/weather/v1.0/user/logout
         http://api.example.com/weather/v1.0/user/checkout -->
-      </div>
     </div>
+  </div>
 
-    <script src="dist/reveal.js"></script>
-    <script src="plugin/notes/notes.js"></script>
-    <script src="plugin/markdown/markdown.js"></script>
-    <script src="plugin/highlight/highlight.js"></script>
-    <script src="plugin/simplemenu/simplemenu.js"></script>
-    <script src="plugin/relativenumber/relativenumber.js"></script>
-    <script src="plugin/math/math.js"></script>
-    <script>
-      window.onload = function () {
-        let today = new Date().toLocaleDateString();
-        let obj = document.getElementById("hoy");
-        document.getElementById("hoy").innerText = today;
-      };
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script src="plugin/simplemenu/simplemenu.js"></script>
+  <script src="plugin/relativenumber/relativenumber.js"></script>
+  <script src="plugin/math/math.js"></script>
+  <script>
+    window.onload = function () {
+      let today = new Date().toLocaleDateString();
+      let obj = document.getElementById("hoy");
+      document.getElementById("hoy").innerText = today;
+    };
 
-      Reveal.addEventListener("slidechanged", function (event) {
-        if (event.indexh > 0) {
-          document.querySelector(".reveal .footer").style.display = "block";
-        } else {
-          document.querySelector(".reveal .footer").style.display = "none";
-        }
-      });
+    Reveal.addEventListener("slidechanged", function (event) {
+      if (event.indexh > 0) {
+        document.querySelector(".reveal .footer").style.display = "block";
+      } else {
+        document.querySelector(".reveal .footer").style.display = "none";
+      }
+    });
 
-      Reveal.addEventListener("ready", function (event) {
-        if (event.indexh === 0)
-          document.querySelector(".reveal .footer").style.display = "none";
-      });
+    Reveal.addEventListener("ready", function (event) {
+      if (event.indexh === 0)
+        document.querySelector(".reveal .footer").style.display = "none";
+    });
 
-      Reveal.initialize({
-        hash: true,
-        slideNumber: "c/t",
-        plugins: [
-          RevealMarkdown,
-          RevealHighlight,
-          RevealNotes,
-          RelativeNumber,
-          Simplemenu,
-          RevealMath.KaTeX,
-        ],
-      });
-    </script>
-  </body>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: "c/t",
+      plugins: [
+        RevealMarkdown,
+        RevealHighlight,
+        RevealNotes,
+        RelativeNumber,
+        Simplemenu,
+        RevealMath.KaTeX,
+      ],
+    });
+  </script>
+</body>
+
 </html>
