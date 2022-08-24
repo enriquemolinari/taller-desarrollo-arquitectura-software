@@ -14,10 +14,10 @@
 
 4. **NoSQL** y **NewSQL**: ¿Qué motivó su aparición?. Consistencia. Teorema de CAP y Conceptos Básicos de Arquitecturas Distribuídas. Escalar en Bases de Datos Relacionales y en Base de Datos NoSQL. Arquitecturas Master-Slave. Sharding. Familias de BDs NoSQL: Conceptos sobre almacenamiento de tipo Clave-Valor (Redis), Documento (MongoDB), Familia de Columnas (Cassandra) y Grafos (Neo4J / Gremlin). Usos adecuados de cada uno. Comparación con usos adecuados de bases de datos relacionales.
 
-## Running
+## ¿Queres correr este proyecto?
 
-Se recomienda clonar, instalar e iniciar para ver las teóricas. Hay algunas animaciones que en los PDFs no se ven:
-
-1. clonar el proyecto
+1. clonalo y luego:
 2. npm install
 3. npm start
+
+Los contenidos de este curso estan desarrollados utilizando el hermoso framework [Reveal.JS](https://revealjs.com/).
