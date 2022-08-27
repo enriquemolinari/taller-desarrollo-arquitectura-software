@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>NoSQL - Redis</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+
+    <style>
+      div.line {
+        border-bottom: 1px solid;
+        border-color: lightgray;
+      }
+      .titulobox {
+        width: 610px;
+      }
+
+      .box3 {
+        /*width: 720px;
+        padding: 15px;
+        margin-left: 100px;*/
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box2 {
+        width: 720px;
+        padding: 15px;
+        margin-left: 100px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box {
+        width: 590px;
+        /*border: 15px solid green;*/
+        padding: 15px;
+        margin: 2px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+        /*font-family: 'Times New Roman', Times, serif;*/
+      }
+
+      .portada .subtitulo {
+        color: lightgray;
+      }
+
+      .autor {
+        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+        font-size: 15pt;
+      }
+
+      .fechahoy {
+        color: gray;
+      }
+
+      .titulo {
+        font-size: 50pt;
+      }
+
+      .resaltar {
+        color: #4a4e69;
+      }
+
+      p.chico {
+        font-size: 24pt;
+      }
+
+      span.itali {
+        font-family: cursive;
+      }
+
+      p.maschico {
+        font-size: 20pt;
+      }
+
+      p.maschicoYalineadoIzq {
+        font-size: 12pt;
+        text-align: left;
+      }
+
+      p.chicoYalineadoIzq {
+        font-size: 24pt;
+        text-align: left;
+      }
+
+      .reveal .slide-number {
+        background-color: white;
+        color: black;
+      }
+
+      .reveal .footer {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+        color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="footer">Introducción a Redis</div>
+      <div class="menubar line">
+        <div class="slide-number"></div>
+        <ul class="menu">
+          <li><a href="#/def">Introducción</a></li>
+          <li><a href="#/tipos">Tipos de Datos</a></li>
+          <li><a href="#/cli">redis-cli</a></li>
+          <li><a href="#/cluster">Redis Cluster</a></li>
+          <li><a href="#/javaclient">Java Client - Jedis</a></li>
+        </ul>
+        <div class="placeholder"></div>
+      </div>
+      <div class="slides">
+        <section
+          style="text-align: left"
+          data-transition="fade"
+          data-state="hide-menubar no-title-footer"
+        >
+          <div class="box">
+            <span>Introducción a Redis</span>
+          </div>
+          <div class="titulobox">
+            Más que una Base de Datos de tipo <b>Clave-Valor</b>
+          </div>
+          <p id="hoy" class="autor fechahoy"></p>
+        </section>
+
+        <section id="def">
+          <p class="titulo">
+            ¿Qué es <span class="titulo resaltar">Redis</span>?
+          </p>
+          <p class="fragment">
+            Redis is an open source (BSD licensed), in-memory data structure
+            store used as a database, cache, message broker, and streaming
+            engine.
+          </p>
+          <p class="fragment">
+            Es una base de datos de tipo <b>clave-valor</b>, diseñada para dar
+            solución a ciertos problemas <b>específicos</b>. Por ejemplo
+            <b>caché</b>. Por eso decimos que es más que una base de datos de
+            clave-valor.
+          </p>
+        </section>
+
+        <!-- Tipos -->
+
+        <section id="tipos">
+          <div class="box2">Diseño vs Arquitectura</div>
+          <p class="fragment">
+            ¿Existe la línea donde termina el diseño y comienza la arquitectura?
+          </p>
+        </section>
+
+        <section id="cli">
+          <div class="box2">redis cli</div>
+        </section>
+
+        <section id="cluster">
+          <div class="box2">Visualización de la Arquitectura de Software</div>
+          <p class="fragment">
+            ¿Cómo describimos la arquiectura de un sistema de software?
+          </p>
+        </section>
+
+        <section id="cluster">
+          <div class="box2">Escalabilidad</div>
+        </section>
+
+        <section id="javaclient">
+          <div class="box2">Jedis</div>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/relativenumber/relativenumber.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      window.onload = function () {
+        let today = new Date().toLocaleDateString();
+        let obj = document.getElementById("hoy");
+        document.getElementById("hoy").innerText = today;
+      };
+
+      Reveal.addEventListener("slidechanged", function (event) {
+        if (event.indexh > 0) {
+          document.querySelector(".reveal .footer").style.display = "block";
+        } else {
+          document.querySelector(".reveal .footer").style.display = "none";
+        }
+      });
+
+      Reveal.addEventListener("ready", function (event) {
+        if (event.indexh === 0)
+          document.querySelector(".reveal .footer").style.display = "none";
+      });
+
+      Reveal.initialize({
+        hash: true,
+        slideNumber: "c/t",
+
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealNotes,
+          RelativeNumber,
+          Simplemenu,
+          RevealMath.KaTeX,
+        ],
+      });
+    </script>
+  </body>
+</html>
