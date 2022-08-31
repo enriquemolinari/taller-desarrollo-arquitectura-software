@@ -152,9 +152,9 @@
             ¿Qué es <span class="titulo resaltar">Redis</span>?
           </p>
           <p class="fragment">
-            Redis is an open source (BSD licensed), in-memory data structure
-            store used as a database, cache, message broker, and streaming
-            engine.
+            <a href="https://redis.io/docs/about/">Redis</a> is an open source
+            (BSD licensed), in-memory data structure store used as a database,
+            cache, message broker, and streaming engine.
           </p>
           <p class="fragment">
             Es una base de datos de tipo <b>clave-valor</b>, diseñada para dar
@@ -167,11 +167,32 @@
         <!-- Tipos -->
 
         <section id="tipos">
-          <div class="box2">Diseño vs Arquitectura</div>
+          <p class="titulo">Tipos de Datos en Redis</p>
           <p class="fragment">
-            ¿Existe la línea donde termina el diseño y comienza la arquitectura?
+            Redis es una base de datos de tipo clave-valor, pero ofrece, por
+            sobre la estructura de clave-valor, un conjunto de tipos de datos
+            para resolver casos de uso especificos.
           </p>
         </section>
+
+        <section id="tipos">
+          <p class="titulo">String</p>
+          <p class="fragment">
+            Es el tipo de datos más básico. Generalmente utilizado para caching.
+          </p>
+          <p class="fragment">¿Qué es Caching?</p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape lang="shell" data-line-numbers="1-2|3-4|5">
+> SET username enrique
+OK
+> GET username
+"enrique"
+> SET id:321 "{'username': 'enrique', 'ticket_id': 321, 'products': [1, 2, 3]}"
+</code></pre>
+        </section>
+
+        <!-- redis-cli -->
 
         <section id="cli">
           <div class="box2">redis cli</div>
