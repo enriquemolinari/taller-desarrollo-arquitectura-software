@@ -181,14 +181,50 @@
             Es el tipo de datos más básico. Generalmente utilizado para caching.
           </p>
           <p class="fragment">¿Qué es Caching?</p>
+          <p class="fragment">
+            Capa de almacenamiento temporal de acceso <b>mucho</b> más rápido
+            que una base de datos. Permite mejorar la performance del sistema,
+            quitarle carga a la base de datos.
+          </p>
+        </section>
+
+        <section data-auto-animate id="tipos">
+          <p class="titulo">¿Qué es Caching?</p>
+          <p>Aplicación sin utilizar Caché</p>
+          <img class="fragment" src="imgs/aplicacion-sin-cache.png" />
+        </section>
+        <section data-auto-animate id="tipos">
+          <p class="titulo">¿Qué es Caching?</p>
+          <p>La misma aplicación utilizando Caché</p>
+          <img class="fragment" src="imgs/aplicacion-con-cache.png" />
+        </section>
+
+        <section id="tipos">
+          <p class="titulo">redis-cli: String</p>
+          <p>Veamos algunos ejemplos utilizando <b>redis-cli</b></p>
           <pre
             class="fragment"
-          ><code data-trim data-noescape lang="shell" data-line-numbers="1-2|3-4|5">
-> SET username enrique
-OK
-> GET username
-"enrique"
-> SET id:321 "{'username': 'enrique', 'ticket_id': 321, 'products': [1, 2, 3]}"
+          ><code data-trim data-noescape lang="shell" data-line-numbers="1-2|3-4|5|6|7-8|9-10|11-12|13-14|15-16|17-18|19-20">
+  > SET username enrique
+  OK
+  > GET username
+  "enrique"
+  > SET id:1 "{'ticket_id': 1, 'products': [1, 2, 3]}"
+  > SET id:2 "{'ticket_id': 2, 'products': [1, 2]}" EX 20
+  > TTL id:2
+  (integer) 19
+  > GET id:2
+  "{'ticket_id': 2, 'products': [1, 2]}"
+  > TTL id:2
+  (integer) -2
+  > GET id:2
+  (nil)
+  > INCR clicks:publicidad:1 
+  (integer) 1
+  > INCRBY clicks:publicidad:1 5 
+  (integer) 6
+  > GET clicks:publicidad:1
+  (integer) 6
 </code></pre>
         </section>
 
