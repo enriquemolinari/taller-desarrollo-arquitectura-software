@@ -126,7 +126,6 @@
         <ul class="menu">
           <li><a href="#/def">Introducción</a></li>
           <li><a href="#/tipos">Tipos de Datos</a></li>
-          <li><a href="#/cli">redis-cli</a></li>
           <li><a href="#/cluster">Redis Cluster</a></li>
           <li><a href="#/javaclient">Java Client - Jedis</a></li>
         </ul>
@@ -200,7 +199,7 @@
         </section>
 
         <section id="tipos">
-          <p class="titulo">redis-cli: String</p>
+          <p class="titulo">String</p>
           <p>Veamos algunos ejemplos utilizando <b>redis-cli</b></p>
           <pre
             class="fragment"
@@ -228,19 +227,95 @@
 </code></pre>
         </section>
 
-        <!-- redis-cli -->
-
-        <section id="cli">
-          <div class="box2">redis cli</div>
-        </section>
-
-        <section id="cluster">
-          <div class="box2">Visualización de la Arquitectura de Software</div>
+        <section id="tipos">
+          <p class="titulo">Listas</p>
           <p class="fragment">
-            ¿Cómo describimos la arquiectura de un sistema de software?
+            Listas enlazadas (linked-list) de Strings. Útiles para implementar
+            estructuras de pilas y colas.
           </p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape lang="shell" data-line-numbers="1-2|3-9|10-11|12-13|14-15|16-17">
+> LPUSH lista1 1 2 3 4 5 6
+(integer) 6
+> LRANGE lista1 0 5 
+1) "6"
+2) "5"
+3) "4"
+4) "3"
+5) "2"
+6) "1"
+> LPUSH cola 1 2 3 4 5 6
+(integer) 6
+> RPOP cola
+"1"
+> LPUSH pila 1 2 3 4 5 6
+(integer) 6
+> LPOP pila
+"6"
+</code></pre>
         </section>
 
+        <section id="tipos">
+          <p class="titulo">Hashes</p>
+          <p class="fragment">
+            Registros estructurados como una colección de pares campo-valor.
+          </p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape lang="shell" data-line-numbers="1-2|3-4|5-11|12-15|16-19">
+  > HSET user:1 usuario em name enrique apellido molinari
+  (integer) 3
+  > HGET user:1 name 
+  "enrique"
+  > HGETALL user:1
+  1) "usuario"
+  2) "em"
+  3) "name"
+  4) "enrique"
+  5) "apellido"
+  6) "molinari"
+  > HKEYS user:1
+  1) "usuario"
+  2) "name"
+  3) "apellido"
+  > HVALS user:1
+  1) "em"
+  2) "enrique"
+  3) "molinari"
+  </code></pre>
+        </section>
+
+        <section id="tipos">
+          <p class="titulo">Sets</p>
+          <p class="fragment">
+            Una colección sin orden de valores únicos. Útil para trackear
+            valores únicos (ej: direcciones IP).
+          </p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape lang="shell" data-line-numbers="1-2|3-4|5-6|7-8|9-17|18-19">
+    > SADD user:e 1 2 3 4
+    (integer) 4
+    > SADD user:j 5 6 7 8 4 
+    (integer) 5
+    > SCARD user:e
+    (integer) 4
+    > SINTER user:e user:j
+    1) "4"
+    > SUNION user:e user:j
+    1) "1"
+    2) "2"
+    3) "3"
+    4) "4"
+    5) "5"
+    6) "6"
+    7) "7"
+    8) "8"
+    > SISMEMBER user:e 2
+    (integer) 1    
+    </code></pre>
+        </section>
         <section id="cluster">
           <div class="box2">Escalabilidad</div>
         </section>
