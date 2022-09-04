@@ -126,7 +126,8 @@
         <ul class="menu">
           <li><a href="#/def">Introducción</a></li>
           <li><a href="#/tipos">Tipos de Datos</a></li>
-          <li><a href="#/cluster">Redis Cluster</a></li>
+          <!--           <li><a href="#/cluster">Redis Cluster</a></li>
+ -->
           <li><a href="#/javaclient">Java Client - Jedis</a></li>
         </ul>
         <div class="placeholder"></div>
@@ -294,7 +295,7 @@
           </p>
           <pre
             class="fragment"
-          ><code data-trim data-noescape lang="shell" data-line-numbers="1-2|3-4|5-6|7-8|9-17|18-19">
+          ><code data-trim data-noescape lang="shell" data-line-numbers="1-2|3-4|5-6|7-8|9-17|18-19|20-25">
     > SADD user:e 1 2 3 4
     (integer) 4
     > SADD user:j 5 6 7 8 4 
@@ -313,15 +314,34 @@
     7) "7"
     8) "8"
     > SISMEMBER user:e 2
-    (integer) 1    
+    (integer) 1
+    > SMEMBERS user:e
+    1) "1"
+    2) "2"
+    3) "3"
+    4) "4"        
     </code></pre>
         </section>
-        <section id="cluster">
+
+        <!--        <section id="cluster">
           <div class="box2">Escalabilidad</div>
-        </section>
+        </section> -->
 
         <section id="javaclient">
-          <div class="box2">Jedis</div>
+          <section id="tipos">
+            <p class="titulo">Java Client</p>
+            <p class="fragment">
+              ¿Como utilizo Redis desde una aplicación Java?
+            </p>
+            <p class="fragment">
+              Una opción es utilizar:
+              <a href="https://github.com/redis/jedis">Jedis</a>
+            </p>
+            <pre class="fragment"><code data-trim data-noescape>
+JedisPooled jedis = new JedisPooled("localhost", 6379);
+jedis.set("user", "enrique");                
+           </code></pre>
+          </section>
         </section>
       </div>
     </div>
