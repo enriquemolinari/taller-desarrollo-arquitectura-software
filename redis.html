@@ -126,6 +126,7 @@
         <ul class="menu">
           <li><a href="#/def">Introducción</a></li>
           <li><a href="#/tipos">Tipos de Datos</a></li>
+          <li><a href="#/tx">Transacciones</a></li>
           <!--           <li><a href="#/cluster">Redis Cluster</a></li>
  -->
           <li><a href="#/javaclient">Java Client - Jedis</a></li>
@@ -323,25 +324,42 @@
     </code></pre>
         </section>
 
+        <section id="tx">
+          <p class="titulo">Transacciones</p>
+          <p class="fragment">
+            ¿Cómo ejecuto varios comandos en forma atómica?
+          </p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape lang="shell" data-line-numbers="1-2|2-6|7-9">
+> MULTI
+OK
+(TX)> set k1 value1 
+QUEUED
+(TX)> set k2 value2 
+QUEUED
+(TX)> EXEC
+1) OK
+2) OK 
+             </code></pre>
+          <p class="fragment">o DISCARD en lugar de EXEC para anular.</p>
+        </section>
         <!--        <section id="cluster">
           <div class="box2">Escalabilidad</div>
         </section> -->
 
         <section id="javaclient">
-          <section id="tipos">
-            <p class="titulo">Java Client</p>
-            <p class="fragment">
-              ¿Como utilizo Redis desde una aplicación Java?
-            </p>
-            <p class="fragment">
-              Una opción es utilizar:
-              <a href="https://github.com/redis/jedis">Jedis</a>
-            </p>
-            <pre class="fragment"><code data-trim data-noescape>
+          <p class="titulo">Java Client</p>
+          <p class="fragment">¿Cómo utilizo Redis desde una aplicación Java?</p>
+          <p class="fragment">
+            Una opción es utilizar:
+            <a href="https://github.com/redis/jedis">Jedis</a>
+          </p>
+          <pre class="fragment"><code data-trim data-noescape language="java">
 JedisPooled jedis = new JedisPooled("localhost", 6379);
-jedis.set("user", "enrique");                
+jedis.set("user", "enrique");
+jedis.sadd("user", "m1", "m2", "m3");
            </code></pre>
-          </section>
         </section>
       </div>
     </div>
