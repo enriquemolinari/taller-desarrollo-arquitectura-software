@@ -355,10 +355,16 @@ QUEUED
             Una opción es utilizar:
             <a href="https://github.com/redis/jedis">Jedis</a>
           </p>
-          <pre class="fragment"><code data-trim data-noescape language="java">
-JedisPooled jedis = new JedisPooled("localhost", 6379);
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape language="java" data-line-numbers="1|2|3|4-7">
+Jedis jedis = new Jedis("localhost", 6379);
 jedis.set("user", "enrique");
 jedis.sadd("user", "m1", "m2", "m3");
+Transaction tx = jedis.multi();
+tx.set("a1", "bla");
+tx.set("a2", "ble");
+tx.exec();
            </code></pre>
         </section>
       </div>
