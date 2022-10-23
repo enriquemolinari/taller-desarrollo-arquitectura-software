@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <title>Arquitecturas Distribuídas</title>
+
+  <link rel="stylesheet" href="dist/reset.css" />
+  <link rel="stylesheet" href="dist/reveal.css" />
+  <link rel="stylesheet" href="dist/theme/white.css" />
+  <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+
+  <style>
+    div.line {
+      border-bottom: 1px solid;
+      border-color: lightgray;
+    }
+
+    .box3 {
+      /*width: 720px;
+        padding: 15px;
+        margin-left: 100px;*/
+      padding-left: 5px;
+      padding-right: 5px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+    }
+
+
+    .box2 {
+      width: 720px;
+      padding: 15px;
+      margin-left: 100px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+    }
+
+    .box {
+      width: 760px;
+      /*border: 15px solid green;*/
+      padding: 15px;
+      margin: 2px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+      /*font-family: 'Times New Roman', Times, serif;*/
+    }
+
+    .portada .subtitulo {
+      color: lightgray;
+    }
+
+    .autor {
+      /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+      font-size: 15pt;
+    }
+
+    .fechahoy {
+      color: gray;
+    }
+
+    .titulo {
+      font-size: 50pt;
+    }
+
+    .resaltar {
+      color: #4a4e69
+    }
+
+    p.chico {
+      font-size: 24pt;
+    }
+
+    span.itali {
+      font-family: cursive;
+    }
+
+    p.maschico {
+      font-size: 20pt;
+    }
+
+    p.maschicoYalineadoIzq {
+      font-size: 12pt;
+      text-align: left;
+    }
+
+    p.chicoYalineadoIzq {
+      font-size: 24pt;
+      text-align: left;
+    }
+
+    .reveal .slide-number {
+      background-color: white;
+      color: black;
+    }
+
+    .reveal .footer {
+      position: absolute;
+      bottom: 1em;
+      left: 1em;
+      font-size: 0.5em;
+      color: gray;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="footer">
+      Arquitecturas Distribuídas - Conceptos Fundamentales
+    </div>
+    <div class="menubar line">
+      <div class="slide-number"></div>
+      <ul class="menu">
+        <li><a href="#/vs">vs Monolíticas</a></li>
+        <li><a href="#/fp">Fallas Praciales</a></li>
+        <li><a href="#/tx">Transacciones</a></li>
+        <li><a href="#/mic">Microservicios</a></li>
+      </ul>
+      <div class="placeholder"></div>
+    </div>
+    <div class="slides">
+      <section style="text-align: left" data-transition="fade" data-state="hide-menubar no-title-footer">
+        <div class="box">
+          <span>Arquitecturas Distribuídas</span>
+        </div>
+        <div class="smallbox">Conceptos Fundamentales</div>
+        <p class="autor">ENRIQUE MOLINARI</p>
+        <p id="hoy" class="autor fechahoy"></p>
+      </section>
+
+      <section id="vs">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico fragment">En las arquitecturas distribuidas el sistema es particionado en <u>aplicaciones
+            simples</u> donde cada una se deploya en su <u>propio contenedor</u>, el cual corre en su <u>propio
+            proceso</u> y se comunican entre ellas enviándose mensajes a través de la <u>red</u>.</p>
+        <img class="fragment" src="imgs/rest-call.png">
+      </section>
+      <!-- width="678" height="518" -->
+
+      <section id="vs">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico">¿Porqué distribuir?</p>
+        <p class="fragment">Para mejorar la performance, la escalabilidad y la disponibilidad de un servicio.</p>
+        <p class="fragment">La arquitectura de microservicios es la vedette de moda hoy.</p>
+        <p class="fragment">¡ojo! Esto no significa que utilizar microservicios siempre sea nuestra mejor opción.</p>
+      </section>
+
+      <section id="fp">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico">Distribuir una aplicación agrega complicaciones, una de ellas se conoce como: <u>Fallas
+            Parciales</p></u></p>
+        <p class="chico fragment">Cuando ejecutamos una aplicación en una única máquina su comportamiento es predecible.
+          Si el hardware donde corre funciona, la aplicación ante las mismas entradas producirá siempre las mismas
+          salidas. Si el hardware donde corre fallara por algún motivo, la aplicación completa dejaría de funcionar. Es
+          decir, una aplicación en una única máquina funciona o no funciona, pero no existe nada en el medio (quitando
+          de la ecuación posibles bugs que la aplicación podría tener).</p>
+      </section>
+
+      <section id="fp">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico">Distribuir una aplicación agrega complicaciones, una de ellas se conoce como: <u>Fallas
+            Parciales</p></u></p>
+        <p class="chico fragment">Las aplicaciones distribuidas se conforman de varios elementos que podrían fallar. La
+          red, junto a toda su complejidad, más las máquinas donde corra la aplicación son parte del mismo sistema.
+          Cualquiera de alguno de estos elementos (equipos, dispositivos de red como routers, switches, etc) que forman
+          parte de un sistema distribuido podría fallar mientras que el resto de los elementos podrían seguir
+          funcionando. Esto se conoce como <u>falla parcial</u>.</p>
+        <p class="chico fragment">Inconvenientes frecuentemente ignorados: <a
+            href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing">Falacias</a> de los sistemas
+          distribuidos.</p>
+      </section>
+
+      <section id="fp">
+        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
+        <img class="fragment" src="imgs/distrib-systems1.png">
+      </section>
+
+      <section id="fp">
+        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
+        <img class="fragment" src="imgs/distrib-systems2.png">
+      </section>
+
+      <section id="fp">
+        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
+        <p class="chico fragment">¿Cómo lideamos con fallas parciales?</p>
+        <p class="chico fragment">Timeouts, Idempotencia, deduplicación</p>
+      </section>
+
+      <section id="tx">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico fragment">Otro inconveniente: No tengo Transacciones!</p>
+        <p class="chico fragment">Consistencia Eventual</p>
+        <img class="fragment" src="imgs/sagas.png">
+      </section>
+
+      <section id="mic">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
+        <p class="chico fragment">¡Ojo! hay mucha sobreingeniería en este tema. Se creen que "micro" implica muy poco y
+          luego para integrarlos utilizan un conjunto de herramientas que complican todo de gran manera.</p>
+        <p class="chico fragment">¿Qué dicen la bibliografía sobre esto?</p>
+      </section>
+
+<!--      <section id="dist">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
+        <img class="fragment" src="imgs/soft-arch-fund-book.png" />
+      </section>
+-->
+      <section id="mic">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
+        <p class="chico fragment">El término micro-servicio pareciera revelar que cada aplicación debería realizar lo
+          mínimo indispensable. Pero el criterio es por sub-dominio (Bounded Context), y quizás ciertos sub-dominios no
+          son pequeños</p>
+        <p class="chicoYalineadoIzq fragment"><u>Transacciones</u>: Si tenemos entidades que necesitan trabajar juntas
+          de forma atómica, entonces deben estar en el mismo microservicio. Las transacciones distribuidas son
+          complicadas, si es posible evitarlas, mejor.</p>
+        <p class="chicoYalineadoIzq fragment"><u>Comunicación</u>: Si algunos microservicios requieren demasiada
+          comunicación entre ellos para ofrecer sus servicios quizás es mejor unificarlos en un único microservicio más
+          grande.</p>
+      </section>
+<!--
+      <section id="dist">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
+        <img class="fragment" src="imgs/cont-soft-arch-practice.png" />
+      </section>
+
+      <section id="dist">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
+        <p class="maschico fragment">As a side note on microservices, we want to emphasize that the overall objective is
+          to define loosely coupled components that can evolve independently (principle 4, Architect for change—leverage
+          the “power of small”). However, micro can be interpreted as a desire to have components with an extremely
+          small scope, which can result in unnecessary complexity of managing dependencies and interaction patterns. In
+          addition, it can cause performance issues. As mentioned in Chapter 6, “Performance as an Architectural
+          Concern,” calls between too many microservice instances can be costly in terms of overall execution time. The
+          decision on the scope of microservices should be driven by your context and problem domain. Think about
+          functions (or features) that will evolve together. The goal is to have loosely coupled, internally cohesive
+          components rather than arbitrarily small services for their own sake.</p>
+      </section>
+-->
+
+
+<!--       https://aws.amazon.com/es/blogs/apn/the-6-pillars-of-the-aws-well-architected-framework/ -->
+<!-- https://blog.devgenius.io/top-10-architecture-characteristics-non-functional-requirements-with-cheatsheat-7ad14bbb0a9b -->
+
+      <!-- en escalabilidad puedo poner el grafico del libro de alex yu de feed -->
+
+      <!-- 
+        https://blog.devgenius.io/top-10-architecture-characteristics-non-functional-requirements-with-cheatsheat-7ad14bbb0a9b
+       -->
+
+      <!-- goglear diagramas de arquitectura en google para mostrar la diversidad de cosas, con colores y formas que no dicen nada -->
+      <!-- Common sense of abstracionts is more important than a common notation -->
+      <!-- cuando abro los fuentes, espero ver BIEN claro esta definicion en el codigo. Model-code gap, no quiero -->
+
+      <!-- Screaming the architecture !!!! -->
+      <!--
+        Modificabilidad: Utilizar un layeres ayuda a nivel codigo. Utilizar un API Gateway tambien, proque podria cambiar el backend final, sin afectar la aplicacion cliente.
+      -->
+
+      <!-- News Feed System de Alex Xu -->
+
+      <!--
+        <section id="ghi">Slide 2</section>
+        <section id="ghi1">Slide 2</section>
+        <section id="ghi1">Slide 2</section>
+        <section id="ghi1">Slide 2</section>-->
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script src="plugin/simplemenu/simplemenu.js"></script>
+  <script src="plugin/relativenumber/relativenumber.js"></script>
+  <script src="plugin/math/math.js"></script>
+  <script>
+    window.onload = function () {
+      let today = new Date().toLocaleDateString();
+      let obj = document.getElementById("hoy");
+      document.getElementById("hoy").innerText = today;
+    };
+
+    Reveal.addEventListener("slidechanged", function (event) {
+      if (event.indexh > 0) {
+        document.querySelector(".reveal .footer").style.display = "block";
+      } else {
+        document.querySelector(".reveal .footer").style.display = "none";
+      }
+    });
+
+    Reveal.addEventListener("ready", function (event) {
+      if (event.indexh === 0)
+        document.querySelector(".reveal .footer").style.display = "none";
+    });
+
+    Reveal.initialize({
+      hash: true,
+      slideNumber: "c/t",
+      /*         width: 1920,
+              height: 1080, */
+      //slideNumber: true,
+      // Learn about plugins: https://revealjs.com/plugins/
+      /*dependencies: [
+        {
+          src: "plugin/title-footer/title-footer.js",
+          async: true,
+          callback: function () {
+            console.log(document.title);
+            title_footer.initialize(document.title);
+          },
+        },
+      ],*/
+
+      plugins: [
+        RevealMarkdown,
+        RevealHighlight,
+        RevealNotes,
+        RelativeNumber,
+        Simplemenu,
+        RevealMath.KaTeX
+      ],
+    });
+  </script>
+</body>
+
+</html>

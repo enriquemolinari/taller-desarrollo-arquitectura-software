@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Atributos de Calidad - Arquitectura de Software</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+
+    <style>
+      div.line {
+        border-bottom: 1px solid;
+        border-color: lightgray;
+      }
+
+      .box3 {
+        /*width: 720px;
+        padding: 15px;
+        margin-left: 100px;*/
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box2 {
+        width: 720px;
+        padding: 15px;
+        margin-left: 100px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box {
+        width: 590px;
+        /*border: 15px solid green;*/
+        padding: 15px;
+        margin: 2px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+        /*font-family: 'Times New Roman', Times, serif;*/
+      }
+
+      .portada .subtitulo {
+        color: lightgray;
+      }
+
+      .autor {
+        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+        font-size: 15pt;
+      }
+
+      .fechahoy {
+        color: gray;
+      }
+
+      .titulo {
+        font-size: 50pt;
+      }
+
+      .resaltar {
+        color: #4a4e69;
+      }
+
+      p.chico {
+        font-size: 24pt;
+      }
+
+      span.itali {
+        font-family: cursive;
+      }
+
+      p.maschico {
+        font-size: 20pt;
+      }
+
+      p.maschicoYalineadoIzq {
+        font-size: 12pt;
+        text-align: left;
+      }
+
+      p.chicoYalineadoIzq {
+        font-size: 24pt;
+        text-align: left;
+      }
+
+      .reveal .slide-number {
+        background-color: white;
+        color: black;
+      }
+
+      .reveal .footer {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+        color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="footer">Atributos de Calidad - Arquitectura de Software</div>
+      <div class="menubar line">
+        <div class="slide-number"></div>
+        <ul class="menu">
+          <li><a href="#/def">Definición</a></li>
+          <li><a href="#/dis">Disponibilidad</a></li>
+          <li><a href="#/esc">Escalabilidad</a></li>
+        </ul>
+        <div class="placeholder"></div>
+      </div>
+      <div class="slides">
+        <section
+          style="text-align: left"
+          data-transition="fade"
+          data-state="hide-menubar no-title-footer"
+        >
+          <div class="box">
+            <span>Atributos de Calidad</span>
+          </div>
+          <div class="smallbox">o Requerimientos No Funcionales</div>
+          <p class="autor">ENRIQUE MOLINARI</p>
+          <p id="hoy" class="autor fechahoy"></p>
+        </section>
+
+        <!-- Atributos de Calidad -->
+
+        <section id="def">
+          <p>¿Qué son los Atributos de Calidad?</p>
+          <p>
+            Propiedades medibles y testeables de los sistemas que son utilizadas
+            para entender cuan bien los sistemas satisfacen las necesidades de
+            los stakeholders.
+          </p>
+        </section>
+
+        <section id="def">
+          <p>Ya hemos hablando mucho sobre <u>Modificabilidad</u></p>
+          <p>
+            Con elementos de software a nivel componente (contenedor) tambien
+            tengo modificabilidad. Ej: API Gateway
+          </p>
+        </section>
+
+        <section id="dis">
+          <div class="box2">Disponibilidad</div>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">¿Qué significa Disponibilidad?</p>
+          <p class="fragment">
+            Un sistema está <u>disponible</u> si al recibir una petición
+            responde de acuerdo a lo especificado.
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">¿Cómo se define la disponibilidad de un sistema?</p>
+          <p class="fragment">
+            La disponibilidad se define como la <u>probabilidad</u> de que un
+            sistema este en funcionamiento en un momento dado.
+          </p>
+          <p class="fragment">¿Por qué?</p>
+          <p class="fragment">
+            No hay forma de saber de antemano cuando los elementos de un sistema
+            dejaran de funcionar.
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">¿Cómo se define la disponibilidad de un sistema?</p>
+          <p class="fragment">
+            Para especificar la disponibilidad de un sistema se utiliza la
+            <u>notación de nueves</u>.
+          </p>
+          <p class="fragment">
+            Si decimos que un sistema tiene 99.9% de disponibilidad, lo que
+            realmente estoy diciendo es que en un año podría estar 8,76 horas no
+            disponible.
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">¿Cómo se define la disponibilidad de un sistema?</p>
+          <p class="fragment">¿Cómo llego a ese resultado?</p>
+          <p class="fragment">
+            99.9 / 100 = 0,999. Multiplicando 365 * 0.999 = 364,635, obtengo la
+            cantidad de días en el año en los que el sistema estará disponible.
+            O sea que no estará disponible 365 - 364,635 = 0,365 días en el año.
+            Si hacemos 0,365 * 24 obtenemos 8,76 horas al año no disponible.
+          </p>
+        </section>
+
+        <section id="dis">
+          <table>
+            <tbody>
+              <th>Disponibilidad</th>
+              <th>9s</th>
+              <th>No disponible</th>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>90%</td>
+                <td>un nueve</td>
+                <td>36,5 días/año</td>
+              </tr>
+              <tr>
+                <td>99%</td>
+                <td>dos nueves</td>
+                <td>3,65 días/año</td>
+              </tr>
+              <tr>
+                <td>99,9%</td>
+                <td>tres nueves</td>
+                <td>8,76 horas/año</td>
+              </tr>
+              <tr>
+                <td>99,99%</td>
+                <td>cuatro nueves</td>
+                <td>52 minutos/año</td>
+              </tr>
+              <tr>
+                <td>99,999%</td>
+                <td>cinco nueves</td>
+                <td>5 minutos/año</td>
+              </tr>
+              <tr>
+                <td>99,9999%</td>
+                <td>seis nueves</td>
+                <td>31 segundos/año</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="fragment">
+            Se considera <u>Alta Disponibilidad</u> cinco nueves o mas
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">
+            ¿Cómo se calcula la disponibilidad de un sistema?
+          </p>
+          <p class="fragment">
+            Supongamos, dada la siguiente configuración física:
+          </p>
+          <img class="fragment" src="imgs/radioa-deploy1.png" />
+          <p class="fragment">¿Qué disponibilidad tiene?</p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Cálculo de disponibilidad</p>
+          <p class="fragment">
+            Primero es necesario calcular la disponibilidad de cada elemento por
+            separado. ¿Cómo se hace?
+          </p>
+          <p class="fragment">
+            \[\begin{aligned} \frac{MTBF}{MTBF + MTTR} \end{aligned} \]
+          </p>
+          <p class="fragment">
+            MTBF: Tiempo transcurrido entre dos fallas. MTTR: promedio de tiempo
+            en repararlo. Ambos representados en horas.
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Cálculo de disponibilidad</p>
+          <p class="fragment">
+            ¿Cómo sé cual es el MTBF y el MTTR de un elemento?
+          </p>
+          <p class="fragment">
+            El MTBF, para los <u>elementos de HW</u>: el fabricante o proveedor.
+            Se rigen por la curva
+            <a href="https://en.wikipedia.org/wiki/Bathtub_curve">bathtub</a>.
+          </p>
+          <p class="fragment">
+            El MTTR, para los <u>elementos de HW</u>: de nuestro equipo de
+            operaciones (o AWS o proveedor). ¿Cuanto tarda en reemplazar una
+            placa de red? ¿un disco? ¿memoria?.
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Cálculo de disponibilidad</p>
+          <p class="fragment">
+            ¿Cómo sé cual es el MTBF y el MTTR de un elemento?
+          </p>
+          <p class="fragment">
+            El MTBF, para los <u>elementos de software</u>: Mediante la
+            observación (no es facil sobre todo en software que incrementan su
+            funcionalidad con frecuencia).
+          </p>
+          <p class="fragment">
+            El MTTR, para los <u>elementos de software</u>: Equipo de
+            desarrollo.
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Cálculo de disponibilidad</p>
+          <p class="fragment">
+            ¿Cómo sé cual es el MTBF y el MTTR de un elemento?
+          </p>
+          <p class="fragment">
+            <a
+              href="https://www.amazon.com/Availability-Network-Fundamentals-Chris-Oggerino/dp/1587130173"
+              >Cisco</a
+            >
+            asume 10.000 horas de MTBF para productos con recientes cambios o
+            nuevas funcionalidades, y 30.000 horas de MTBF para productos sin
+            cambios
+          </p>
+          <p class="fragment">
+            MTTR de 0.1 horas (6 minutos en reiniciar). Reiniciar porque asume
+            problemas de leaks de memoria, no bugs funcionales.
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Cálculo de disponibilidad</p>
+          <img src="imgs/radioa-deploy1.png" />
+          <p class="fragment">
+            Sabiendo como calcular la disponibilidad de cada elemento: ¿Cómo
+            cálculo la de este sistema?
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Cálculo de disponibilidad</p>
+          <p class="fragment">
+            Si un elemento falla, ¿el sistema entero falla?
+          </p>
+          <p class="fragment">
+            Entonces, multiplico la disponibilidad de sus elementos. Se
+            denomina: <u>Configuración en Serie</u>
+          </p>
+          <p class="maschico fragment">
+            \[\begin{aligned} Disponibilidad \ en \ Serie = \displaystyle
+            \prod_{i=1}^{n} disponibilidadElemento \end{aligned} \]
+          </p>
+          <p class="chico fragment">
+            Donde <span class="itali">n</span> es el número total de elementos e
+            <span class="itali">i</span> el i-ésimo elemento
+          </p>
+          .
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Cálculo de disponibilidad</p>
+          <p class="maschicoYalineadoIzq">
+            \[\begin{aligned} \textbf{Application
+            Server}\;\textrm{(node-a1)}&=\frac{50000}{50000 + 8} = 0,999840026
+            \\ &\textrm{(Asumimos 50.000 horas de MTBF y 8 horas de MTTR)}.
+            \end{aligned} \] \[\begin{aligned} \textbf{Ubuntu
+            v20}\;\textrm{(node-a1)}&=\frac{30000}{30000 + 0.1} = 0,999996667 \\
+            &\textrm{(Asumimos 30.000 horas de MTBF y 0.1 horas MTTR)}.
+            \end{aligned} \] \[\begin{aligned} \textbf{Jetty/JVM
+            v11}\;\textrm{(node-a1)}&=\frac{30000}{30000 + 0.1} = 0,999996667 \\
+            &\textrm{(Asumimos 30.000 horas de MTBF y 0.1 horas de MTTR)}.
+            \end{aligned} \] \[\begin{aligned} \textbf{RadioA}\;\textrm{(Java
+            Swing App)}&=\frac{20000}{20000 + 0.1} = 0,999995 \\
+            &\textrm{(Asumimos 20.000 horas de MTBF y 0.1 horas of MTTR)}.
+            \end{aligned} \]
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Cálculo de disponibilidad</p>
+          <p class="maschicoYalineadoIzq">
+            \[\begin{aligned} \textbf{Database
+            Server}\;\textrm{(node-b1)}&=\frac{50000}{50000 + 8} = 0,999840026
+            \\ &\textrm{(Asumimos 50.000 horas de MTBF y 8 horas de MTTR)}.
+            \end{aligned} \] \[\begin{aligned} \textbf{Ubuntu
+            v20}\;\textrm{(node-b1)}&=\frac{30000}{30000 + 0.1} = 0,999996667 \\
+            &\textrm{(Asumimos 30.000 horas de MTBF y 0.1 horas MTTR)}.
+            \end{aligned} \] \[\begin{aligned} \textbf{PostgreSQL
+            v12}\;\textrm{(node-b1)}&=\frac{30000}{30000 + 0.1} = 0,999996667 \\
+            &\textrm{(Asumimos 30.000 horas de MTBF y 0.1 horas MTTR)}.
+            \end{aligned} \]
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Cálculo de disponibilidad</p>
+          <p class="maschicoYalineadoIzq">
+            \[\begin{aligned} \textbf{Disponibilidad(app server)}\; &=
+            0,999840026\;\textrm{(node-a1)} \\
+            &\times\;0,999996667\;\textrm{(Ubuntu v20)} \\
+            &\times\;0,999996667\;\textrm{(Jetty/JVM v11)} \\
+            &\times\;0,999995\;\textrm{(RadioA App)} \\ &=\;0,999828362
+            \end{aligned} \] \[\begin{aligned} \textbf{Disponibilidad (db
+            server)}\; &= 0,999840026\;\textrm{(node-b1)} \\
+            &\times\;0,999996667\;\textrm{(Ubuntu v20)} \\
+            &\times\;0,999996667\;\textrm{(PostgreSQL)} \\ &=\;0,999833361
+            \end{aligned} \] \[\begin{aligned} \textbf{Disponibilidad del
+            Sistema}\; &= 0,999828362\;\textrm{(app server)} \\
+            &\times\;0,999833361\;\textrm{(db server)} \\ &=\;0,999661752 \times
+            \; 100 \; = \; 99,97\% \end{aligned} \]
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Disponibilidad</p>
+          <p class="fragment">
+            99,97% de disponibilidad. Estoy <u>muy lejos</u> de
+            <strong>Alta Disponibilidad</strong> (cinco 9s)
+          </p>
+          <p class="fragment">
+            Para alcanzar alta disponibilidad necesito eliminar los
+            <u>Unicos Puntos de Falla</u>
+          </p>
+          <p class="fragment">
+            No hay otra opción que tener <u>redundancia</u>
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">¿Así elimino los unicos puntos de falla?</p>
+          <img src="imgs/radioa-deploy2-1.png" />
+          <p class="fragment">No!</p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Elimando los Únicos Puntos de Falla</p>
+          <img width="690" height="405" src="imgs/radioa-deploy3.png" />
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Cálculo de disponibilidad</p>
+          <p class="fragment">
+            Cuando hay elementos redundantes, la fórmula cambia y se denomina:
+            <u>Configuración en paralelo</u>.
+          </p>
+          <p class="chico fragment">
+            \[\begin{aligned} \displaystyle 1 - [\prod_{i=1}^{n} (1 -
+            disponibilidadElemento)] \end{aligned} \]
+          </p>
+          <p class="fragment">
+            Calculemos ahora la disponibilidad de la nueva configuración
+            redundante
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">Cálculo de disponibilidad</p>
+          <p class="maschicoYalineadoIzq">
+            \[\begin{aligned} \textbf{Availability (app server)} &= 1 - (1 -
+            0,999828362)\times(1 - 0,999828362) \\ &= 1 - (0,000171638 \times
+            0,000171638) \\ &= 1 - 0,000000029 \\ &= 0,999999971 \times 100 =
+            99,99999\% \end{aligned} \] \[\begin{aligned} \textbf{Availability
+            (bd server)} &= 1 - (1 - 0,999833361)\times(1 - 0,999833361) \\ &= 1
+            - (0,000166639 \times 0,000166639) \\ &= 1 - 0,000000028 \\ &=
+            0,999999972 \times 100 = 99,99999\% \end{aligned} \]
+            \[\begin{aligned} \textbf{System Availability} &= 0,999999971 \;
+            (app\;server) \\ &\times 0,999999972 \; (db\;server) \\ &=
+            0,999999943 \times 100 = 99,99999\% \end{aligned} \]
+          </p>
+        </section>
+
+        <section id="esc">
+          <div class="box2">Escalabilidad</div>
+        </section>
+
+        <section id="esc">
+          <img src="imgs/scaling-out-up.png" />
+        </section>
+
+        <section id="esc">
+          <img src="imgs/scaling-sticky-session.png" />
+        </section>
+
+        <!--       https://aws.amazon.com/es/blogs/apn/the-6-pillars-of-the-aws-well-architected-framework/ -->
+        <!-- https://blog.devgenius.io/top-10-architecture-characteristics-non-functional-requirements-with-cheatsheat-7ad14bbb0a9b -->
+
+        <!-- en escalabilidad puedo poner el grafico del libro de alex yu de feed -->
+
+        <!-- 
+        https://blog.devgenius.io/top-10-architecture-characteristics-non-functional-requirements-with-cheatsheat-7ad14bbb0a9b
+       -->
+
+        <!-- goglear diagramas de arquitectura en google para mostrar la diversidad de cosas, con colores y formas que no dicen nada -->
+        <!-- Common sense of abstracionts is more important than a common notation -->
+        <!-- cuando abro los fuentes, espero ver BIEN claro esta definicion en el codigo. Model-code gap, no quiero -->
+
+        <!-- Screaming the architecture !!!! -->
+        <!--
+        Modificabilidad: Utilizar un layeres ayuda a nivel codigo. Utilizar un API Gateway tambien, proque podria cambiar el backend final, sin afectar la aplicacion cliente.
+      -->
+
+        <!-- News Feed System de Alex Xu -->
+
+        <!--
+        <section id="ghi">Slide 2</section>
+        <section id="ghi1">Slide 2</section>
+        <section id="ghi1">Slide 2</section>
+        <section id="ghi1">Slide 2</section>-->
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/relativenumber/relativenumber.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      window.onload = function () {
+        let today = new Date().toLocaleDateString();
+        let obj = document.getElementById("hoy");
+        document.getElementById("hoy").innerText = today;
+      };
+
+      Reveal.addEventListener("slidechanged", function (event) {
+        if (event.indexh > 0) {
+          document.querySelector(".reveal .footer").style.display = "block";
+        } else {
+          document.querySelector(".reveal .footer").style.display = "none";
+        }
+      });
+
+      Reveal.addEventListener("ready", function (event) {
+        if (event.indexh === 0)
+          document.querySelector(".reveal .footer").style.display = "none";
+      });
+
+      Reveal.initialize({
+        hash: true,
+        slideNumber: "c/t",
+        /*         width: 1920,
+              height: 1080, */
+        //slideNumber: true,
+        // Learn about plugins: https://revealjs.com/plugins/
+        /*dependencies: [
+        {
+          src: "plugin/title-footer/title-footer.js",
+          async: true,
+          callback: function () {
+            console.log(document.title);
+            title_footer.initialize(document.title);
+          },
+        },
+      ],*/
+
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealNotes,
+          RelativeNumber,
+          Simplemenu,
+          RevealMath.KaTeX,
+        ],
+      });
+    </script>
+  </body>
+</html>
