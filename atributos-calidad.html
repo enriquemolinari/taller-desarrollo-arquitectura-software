@@ -483,7 +483,48 @@
         </section>
 
         <section id="esc">
+          <p>¿Cómo escalamos en forma horizontal la siguiente configuración?</p>
+          <img class="fragment" src="imgs/radioa-deploy1.png" />
+          <p class="fragment">
+            ¿Comencemos por el servicio de aplicación? ¿Donde almacenamos la
+            session de usuario?
+          </p>
+        </section>
+
+        <section id="esc">
+          <p>Load balancer con "session affinity"</p>
           <img src="imgs/scaling-sticky-session.png" />
+        </section>
+
+        <section id="esc">
+          <img src="imgs/scaling-web.png" />
+        </section>
+
+        <section id="esc">
+          <p>¿Cómo escalamos la Base de Datos?</p>
+          <p class="fragment">
+            Podemos escalar solo las operaciones de lectura agregando replicas
+            read-only
+          </p>
+        </section>
+
+        <section id="esc">
+          <img src="imgs/scaling-read-replicas-2.png" />
+        </section>
+
+        <section id="esc">
+          <p>Tener presente el Teorema de CAP y PACELC</p>
+        </section>
+
+        <section id="esc">
+          <p>
+            La única forma de escalar las operaciones de <b>escritura</b> es
+            utilizando <b>Sharding</b>.
+          </p>
+        </section>
+
+        <section id="esc">
+          <img src="imgs/sharding.png" />
         </section>
 
         <!--       https://aws.amazon.com/es/blogs/apn/the-6-pillars-of-the-aws-well-architected-framework/ -->
