@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>CI and Static Analysis</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+
+    <style>
+      div.line {
+        border-bottom: 1px solid;
+        border-color: lightgray;
+      }
+
+      .box3 {
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box2 {
+        width: 720px;
+        padding: 15px;
+        margin-left: 100px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box {
+        width: 620px;
+        /*border: 15px solid green;*/
+        padding: 15px;
+        margin: 2px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+        /*font-family: 'Times New Roman', Times, serif;*/
+      }
+
+      .box4 {
+        width: 730px;
+        padding: 15px;
+        margin: 2px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 30pt;
+        font-weight: bold;
+      }
+      .titulobox {
+        width: 890px;
+      }
+
+      .portada .subtitulo {
+        color: lightgray;
+      }
+
+      .autor {
+        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+        font-size: 15pt;
+      }
+
+      .fechahoy {
+        color: gray;
+      }
+
+      .titulo {
+        font-size: 50pt;
+      }
+
+      .resaltar {
+        color: #4a4e69;
+      }
+
+      p.chico {
+        font-size: 24pt;
+      }
+
+      span.itali {
+        font-family: cursive;
+      }
+
+      p.maschico {
+        font-size: 20pt;
+      }
+
+      p.alineadoIzq {
+        text-align: left;
+      }
+
+      p.maschicoYalineadoIzq {
+        font-size: 12pt;
+        text-align: left;
+      }
+
+      p.chicoYalineadoIzq {
+        font-size: 24pt;
+        text-align: left;
+      }
+
+      .reveal .slide-number {
+        background-color: white;
+        color: black;
+      }
+
+      .reveal .footer {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+        color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="footer">Integración Continua y Análisis Estático</div>
+      <div class="menubar line">
+        <div class="slide-number"></div>
+        <ul class="menu">
+          <li><a href="#/intro">¿Qué es Integración Continua?</a></li>
+          <li><a href="#/metodos">HTTP Methods</a></li>
+          <li><a href="#/headers">HTTP Headers</a></li>
+          <li><a href="#/recodes">HTTP Reponse Codes</a></li>
+          <li><a href="#/cookie">Cookies</a></li>
+        </ul>
+        <div class="placeholder"></div>
+      </div>
+      <div class="slides">
+        <section
+          style="text-align: left"
+          data-transition="fade"
+          data-state="hide-menubar no-title-footer"
+        >
+        <div class="box">
+          <p>Integración Continua</p> 
+        </div>  
+        <div class="box4">
+          <span>+ Verificación de Calidad de Código Fuente</span>
+        </div>  
+      <div class="titulobox">
+            Entendamos cómo trabajar en equipo respentando cierto nivel de calidad de código.
+          </div>
+          <p class="autor">Enrique Molinari</p>
+          <p id="hoy" class="autor fechahoy"></p>
+        </section>
+
+        <section id="intro">
+          <p class="titulo">CI y Análisis</p>
+          <p class="fragment">imagen de CI y contenido segun yegor?</p>
+          <p class="fragment">quality wall: static analysis, unit test, integration test, coverage tool</p>
+          <p class="fragment">Continuos Delivery: push to PROD (apretando un boton)</p>
+          <p class="fragment">CI/CD tools: jenkins, github actions, gitlab, Travis, etc</p>
+          <p class="fragment">No confiamos en nosotros...</p>
+          <p class="fragment">Static analisis: busca bugs potenciales</p>
+          <p class="fragment">Checkstyle, pmd, cpd, spotbuts, otros</p>
+          <p class="fragment">Linters en JavaScript</p>
+          <p class="fragment">Ejemplo de algun error de cada uno</p>
+          <p class="fragment">Ejemplo suprimir</p>
+          <p class="fragment">badges</p>
+        </section>
+
+        <section id="intro">
+          <p class="titulo">Una Típica Comunicación HTTP</p>
+          <p class="fragment"><b>Request</b>/<b>Response</b></p>
+          <img class="fragment" src="imgs/httpcommunication.png" />
+        </section>
+
+        <section id="intro">
+          <p class="titulo">HTTP es <b>stateless</b></p>
+          <p class="fragment">
+            Cada request es independiente del otro. No hay memoria donde retenga
+            que paso en request anteriores.
+          </p>
+          <p class="fragment">
+            El localStorage, las cookies o las sessiones se pueden utilizar para
+            mantener estado.
+          </p>
+        </section>
+
+        <section id="intro">
+          <p class="titulo">¿Qué es HTTP<b>S</b>?</p>
+          <p class="fragment">Hiper Text Transfer Protocol <b>Secure</b></p>
+          <p class="fragment">Los datos se envían encriptados.</p>
+          <p class="fragment">
+            Hoy es una buena práctica que cualquier sitio web utilice https.
+          </p>
+        </section>
+
+        <section id="metodos">
+          <p class="titulo">Métodos HTTP</p>
+          <p class="alineadoIzq fragment">
+            <b>GET</b>: Para obtener datos del servidor. Cada visita a una
+            página web es un request GET. Nunca utilizarlo para enviar o
+            modificar datos. Es <b>idempotente</b>.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            <b>Idempotencia</b>: La ejecución repetida de una petición con los
+            mismos parámetros sobre un mismo recurso tendrá el mismo efecto
+            siempre.
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>POST</b>: Para enviar datos al servidor. Ej: Submitear un
+            formulario. No es idempotente.
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>PUT</b>: Para modificar datos existentes. Idempotente.
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>DELETE</b>: Para borrar datos existentes. Idempotente.
+          </p>
+        </section>
+
+        <section id="metodos">
+          <p class="titulo">Métodos HTTP</p>
+          <p class="fragment">
+            Es sumamente importante utilizar correctamente los métodos http. Es
+            nuestra responsabilidad como desarrolladores. El protocolo en sí no
+            nos prohibe utilizar GET en operaciones con side-effects.
+          </p>
+          <p class="fragment">
+            Si submitieramos una compra y dicho request fuera GET podríamos sin
+            querer (Ej: apretando F5), submitearla N veces. Si es POST el
+            browser nos avisa con un warning. Porque el browser sabe que POST no
+            es una operación idempotente.
+          </p>
+        </section>
+
+        <section id="headers">
+          <p class="titulo">HTTP Headers</p>
+          <p class="fragment">GET Request:</p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape data-line-numbers="1|2-3">GET /my-host/pagina.html HTTP/1.1
+Host: myhost.org
+User-Agent: un cliente</code></pre>
+          <p class="fragment">Response:</p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape data-line-numbers="1|2-8|9">HTTP/1.1 200 OK
+Date: Sat, 15 Oct 2021 14:28:02 GMT
+Server: Apache
+Last-Modified: Tue, 01 Oct 2021 20:18:22 GMT
+ETag: "51142bc1-7449-479b075b2891b"
+Accept-Ranges: bytes
+Content-Length: 29769
+Content-Type: text/html
+(body: requested web page)
+</code></pre>
+        </section>
+
+        <section id="headers">
+          <p class="titulo">HTTP Headers (cont)</p>
+          <p class="alineadoIzq fragment">
+            <b>GET</b>: Header + Body Opcional.
+          </p>
+          <p class="alineadoIzq fragment"><b>POST</b>: Header + Body.</p>
+          <p class="alineadoIzq fragment"><b>PUT</b>: Header + Body.</p>
+          <p class="alineadoIzq fragment">
+            <b>DELETE</b>: Header + Body Opcional.
+          </p>
+        </section>
+
+        <section id="headers">
+          <p class="titulo">HTTP Headers</p>
+          <p class="fragment">POST Request (header + body):</p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape data-line-numbers="1|4|6-9">POST /my-host/curso HTTP/1.1
+Host: myhost.org
+User-Agent: un client
+Content-Type: application/json
+
+{
+  "curso": "Taller de Tecnología y Producción de Software",
+  "año": "5to"
+}
+</code></pre>
+        </section>
+
+        <section id="recodes">
+          <p class="titulo">HTTP Response Codes</p>
+          <p class="alineadoIzq fragment">
+            <b>1xx</b>: informativo (Request recibido)
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>2xx</b>: Éxito (Success). Ej: 200 - OK
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>3xx</b>: Redirect. Ej: 301 Moved, 304 Cached Version.
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>4xx</b>: Request Incompleto. Ej: 401 Unauthorized.
+          </p>
+          <p class="alineadoIzq fragment">
+            <b>5xx</b>: Error en el servidor. Ej: 500 Internal Server Error.
+          </p>
+        </section>
+
+        <section id="cookie">
+          <p class="titulo">HTTP Cookies</p>
+          <p class="fragment">
+            Las cookies son datos estructurados de la forma
+            <em>clave</em>=<em>valor</em>. Son creados en el Web Server (aunque
+            tambien se pueden crear con javascript) y enviados hacia el cliente,
+            quién lo almacena para enviar con cada nuevo request.
+          </p>
+          <p class="fragment">
+            De esta forma fue posible generar la idea de estado en aplicaciones
+            Web.
+          </p>
+          </section>
+
+          <section id="cookie">
+            <p class="titulo">HTTP Cookies</p>
+            <p class="chico">Típica secuencia de creación de cookie de session</p>
+            <img src="imgs/httpcookiescomm.png"/>
+          </section>
+
+          <section id="cookie">
+            <p class="titulo">HTTP Cookies</p>
+            <p class="chico">Agregar cookies en response, con Javalin:</p>
+            <pre
+              class="fragment"
+            ><code data-trim data-noescape>private Handler login() {
+ return ctx -> {
+  ...          
+  response.setHeader("Set-Cookie", 
+            "token=" + token + "; HttpOnly");
+  ...
+ }
+}
+</code></pre>
+          </section>
+
+          <section id="cookie">
+            <p class="titulo">HTTP Cookies</p>
+            <p class="chico">Response:</p>
+            <pre
+              class="fragment"
+            ><code data-trim data-noescape data-line-numbers="1|4">HTTP/1.1 200 OK
+Date: Sat, 15 Oct 2021 14:28:02 GMT
+Server: Apache
+Set-Cookie: token=abc123; HttpOnly;
+...
+</code></pre>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/relativenumber/relativenumber.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      window.onload = function () {
+        let today = new Date().toLocaleDateString();
+        let obj = document.getElementById("hoy");
+        document.getElementById("hoy").innerText = today;
+      };
+
+      Reveal.addEventListener("slidechanged", function (event) {
+        if (event.indexh > 0) {
+          document.querySelector(".reveal .footer").style.display = "block";
+        } else {
+          document.querySelector(".reveal .footer").style.display = "none";
+        }
+      });
+
+      Reveal.addEventListener("ready", function (event) {
+        if (event.indexh === 0)
+          document.querySelector(".reveal .footer").style.display = "none";
+      });
+
+      Reveal.initialize({
+        hash: true,
+        slideNumber: "c/t",
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealNotes,
+          RelativeNumber,
+          Simplemenu,
+          RevealMath.KaTeX,
+        ],
+      });
+    </script>
+  </body>
+</html>
