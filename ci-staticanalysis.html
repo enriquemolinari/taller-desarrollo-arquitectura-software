@@ -43,7 +43,7 @@
       }
 
       .box {
-        width: 620px;
+        width: 910px;
         /*border: 15px solid green;*/
         padding: 15px;
         margin: 2px;
@@ -57,7 +57,8 @@
       .box4 {
         width: 730px;
         padding: 15px;
-        margin: 2px;
+        margin-left: 2px;
+        margin-top: 10px;
         background-color: #4a4e69;
         color: white;
         font-size: 30pt;
@@ -82,6 +83,10 @@
 
       .titulo {
         font-size: 50pt;
+      }
+
+      .titulomaschico {
+        font-size: 30pt;
       }
 
       .resaltar {
@@ -131,15 +136,15 @@
 
   <body>
     <div class="reveal">
-      <div class="footer">Integración Continua y Análisis Estático</div>
+      <div class="footer">Integración y Delivery Continuo</div>
       <div class="menubar line">
         <div class="slide-number"></div>
         <ul class="menu">
-          <li><a href="#/cd">Continuous Delivery</a></li>
-          <li><a href="#/ci">Continuous Integration</a></li>
-          <li><a href="#/headers">HTTP Headers</a></li>
-          <li><a href="#/recodes">HTTP Reponse Codes</a></li>
-          <li><a href="#/cookie">Cookies</a></li>
+          <li><a href="#/cd">CI/CD</a></li>
+          <li><a href="#/ci">Integración Continua</a></li>
+          <li><a href="#/ae">Análisis Estático</a></li>
+          <li><a href="#/test">Test y Covertura</a></li>
+          <li><a href="#/deploy">Deployment</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -149,54 +154,133 @@
           data-transition="fade"
           data-state="hide-menubar no-title-footer"
         >
-        <div class="box">
-          <p>Integración Continua</p> 
-        </div>  
-        <div class="box4">
-          <span>+ Verificación de Calidad de Código Fuente</span>
-        </div>  
-      <div class="titulobox">
-            Entendamos cómo trabajar en equipo respentando cierto nivel de calidad de código.
+          <div class="box">
+            <p>Integración y Delivery Continuo</p>
+          </div>
+          <div class="box4">
+            <span>+ Verificación de Calidad de Código Fuente</span>
+          </div>
+          <div class="titulobox">
+            Entendamos cómo trabajar en equipo respentando cierto nivel de
+            calidad de código.
           </div>
           <p class="autor">Enrique Molinari</p>
           <p id="hoy" class="autor fechahoy"></p>
         </section>
 
-<!--        <section id="intro">
+        <!--        <section id="intro">
           <p class="titulo">CI y Análisis</p>
           <p class="fragment">imagen de CI y contenido segun yegor?</p>
           <p class="fragment">quality wall: static analysis, unit test, integration test, coverage tool</p>
-          <p class="fragment">Continuos Delivery: push to PROD (apretando un boton)</p>
           <p class="fragment">CI/CD tools: jenkins, github actions, gitlab, Travis, etc</p>
           <p class="fragment">No confiamos en nosotros...</p>
           <p class="fragment">Static analisis: busca bugs potenciales</p>
-          <p class="fragment">Checkstyle, pmd, cpd, spotbuts, otros</p>
+          <p class="fragment">Checkstyle, pmd, cpd (codeclimate copy paste detector tiene), spotbuts, codeclimate, otros</p>
           <p class="fragment">Linters en JavaScript</p>
           <p class="fragment">Ejemplo de algun error de cada uno</p>
           <p class="fragment">Ejemplo suprimir</p>
           <p class="fragment">badges</p>
+          <p class="fragment">Blue/Green Deployment</p>
+          <p class="fragment">cambios compatibles para atras de BD se pasan antes</p>
         </section>
 -->
         <section id="cd">
-          <p class="titulo">Continuous Delivery</p>
-          <p class="fragment">¿Cual es la idea de delivery continuo?</p>
-          <p class="fragment">Apretando un boton puedo poner en PROD una nueva versión de mi aplicación o servicio.</p>
+          <p class="titulo">Integración y Delivery Continuo</p>
+          <p class="fragment">¿De qué se trata?</p>
+          <p class="fragment">
+            Proceso automático que permite poner en PROD una nueva versión de
+            una aplicación o servicio.
+          </p>
+          <p class="fragment">
+            Esto requiere previamente verificar el funcionamiento mediantes
+            testing automatizado y además la calidad del código fuente.
+          </p>
+        </section>
+
+        <section id="cd">
+          <p class="titulo">CI / CD</p>
+          <img src="imgs/ci-cd.png" />
+        </section>
+
+        <section id="ci">
+          <div class="box2">Integración Continua</div>
         </section>
 
         <section id="ci">
           <p class="titulo">Integración Continua</p>
-          <img src="imgs/continuous-integration.png"/>        
+          <img src="imgs/ci.png" />
         </section>
 
-        <section id="intro">
-          <p class="titulo">¿Qué es HTTP<b>S</b>?</p>
-          <p class="fragment">Hiper Text Transfer Protocol <b>Secure</b></p>
-          <p class="fragment">Los datos se envían encriptados.</p>
+        <section id="deploy">
+          <p class="titulo">Blue/Green Deployment</p>
           <p class="fragment">
-            Hoy es una buena práctica que cualquier sitio web utilice https.
+            Hay que tener 2 ambientes de producción completos e identicos.
+          </p>
+          <p class="fragment">
+            Uno que esta siendo utilizado por los usuarios.
+          </p>
+          <p class="fragment">
+            Y otro que va a ser utilizado luego del nuevo deployment.
           </p>
         </section>
 
+        <section id="deploy">
+          <p class="titulomaschico">Blue/Green Deployment - Shared Database</p>
+          <img src="imgs/bluegreendeploy2.png" />
+        </section>
+
+        <section id="deploy">
+          <p class="titulo">Blue/Green Deployment - Shared Database</p>
+          <p class="chico fragment">
+            Requiere que los cambios de base de datos, scripts de DDL y DML,
+            sean compatibles con la versión actual de la aplicación.
+          </p>
+          <p class="chico fragment">
+            Primero se corren los scripts de base de datos, sin deployar una
+            nueva versión. La compatibilidad garantiza que la versión actual
+            sigue funcionando.
+          </p>
+          <p class="chico fragment">
+            Luego se deploya la nueva versión de la aplicación en el ambiente
+            blue.
+          </p>
+          <p class="chico fragment">
+            Se prueba y si esta Ok, se cambia el proxy reverso para la nueva
+            versión.
+          </p>
+        </section>
+
+        <section id="deploy">
+          <p class="titulomaschico">Blue/Green Deployment</p>
+          <img src="imgs/bluegreendeploy.png" />
+          <!--           <p class="maschico">
+            Más complejo: Las bases de datos necesitan estar replicandose
+            (sincronizadas)
+          </p> -->
+        </section>
+
+        <section id="deploy">
+          <p class="titulo">Blue/Green Deployment</p>
+          <p class="chico fragment">
+            Requiere mantener las bases de datos de los ambientes green y blue
+            sincronizados mediante replicación.
+          </p>
+        </section>
+
+        <section id="deploy">
+          <p class="titulo">Canary Deployment</p>
+          <img src="imgs/canary-deploy.png" />
+        </section>
+
+        <section id="deploy">
+          <p class="titulo">Canary Deployment</p>
+          <p class="chico fragment">
+            Requiere mantener las bases de datos de los ambientes sincronizados
+            mediante replicación.
+          </p>
+        </section>
+
+        <!-- 
         <section id="metodos">
           <p class="titulo">Métodos HTTP</p>
           <p class="alineadoIzq fragment">
@@ -355,7 +439,7 @@ Set-Cookie: token=abc123; HttpOnly;
 ...
 </code></pre>
           </section>
-        </section>
+        </section> -->
       </div>
     </div>
 
