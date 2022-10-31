@@ -1,243 +1,330 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Arquitectura de Software - Conceptos Fundamentales</title>
 
-  <title>Arquitectura de Software - Conceptos Fundamentales</title>
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
 
-  <link rel="stylesheet" href="dist/reset.css" />
-  <link rel="stylesheet" href="dist/reveal.css" />
-  <link rel="stylesheet" href="dist/theme/white.css" />
-  <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
-  <!-- Theme used for syntax highlighted code -->
-  <link rel="stylesheet" href="plugin/highlight/monokai.css" />
-  <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+    <style>
+      div.line {
+        border-bottom: 1px solid;
+        border-color: lightgray;
+      }
 
-  <style>
-    div.line {
-      border-bottom: 1px solid;
-      border-color: lightgray;
-    }
-
-    .box3 {
-      /*width: 720px;
+      .box3 {
+        /*width: 720px;
         padding: 15px;
         margin-left: 100px;*/
-      padding-left: 5px;
-      padding-right: 5px;
-      background-color: #4a4e69;
-      color: white;
-      font-size: 50pt;
-      font-weight: bold;
-    }
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
 
+      .box2 {
+        width: 720px;
+        padding: 15px;
+        margin-left: 100px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
 
-    .box2 {
-      width: 720px;
-      padding: 15px;
-      margin-left: 100px;
-      background-color: #4a4e69;
-      color: white;
-      font-size: 50pt;
-      font-weight: bold;
-    }
+      .box {
+        width: 720px;
+        /*border: 15px solid green;*/
+        padding: 15px;
+        margin: 2px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+        /*font-family: 'Times New Roman', Times, serif;*/
+      }
 
-    .box {
-      width: 720px;
-      /*border: 15px solid green;*/
-      padding: 15px;
-      margin: 2px;
-      background-color: #4a4e69;
-      color: white;
-      font-size: 50pt;
-      font-weight: bold;
-      /*font-family: 'Times New Roman', Times, serif;*/
-    }
+      .portada .subtitulo {
+        color: lightgray;
+      }
 
-    .portada .subtitulo {
-      color: lightgray;
-    }
+      .autor {
+        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+        font-size: 15pt;
+      }
 
-    .autor {
-      /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
-      font-size: 15pt;
-    }
+      .fechahoy {
+        color: gray;
+      }
 
-    .fechahoy {
-      color: gray;
-    }
+      .titulo {
+        font-size: 50pt;
+      }
 
-    .titulo {
-      font-size: 50pt;
-    }
+      .resaltar {
+        color: #4a4e69;
+      }
 
-    .resaltar {
-      color: #4a4e69
-    }
+      p.chico {
+        font-size: 24pt;
+      }
 
-    p.chico {
-      font-size: 24pt;
-    }
+      span.itali {
+        font-family: cursive;
+      }
 
-    span.itali {
-      font-family: cursive;
-    }
+      p.maschico {
+        font-size: 20pt;
+      }
 
-    p.maschico {
-      font-size: 20pt;
-    }
+      p.maschicoYalineadoIzq {
+        font-size: 12pt;
+        text-align: left;
+      }
 
-    p.maschicoYalineadoIzq {
-      font-size: 12pt;
-      text-align: left;
-    }
+      p.chicoYalineadoIzq {
+        font-size: 24pt;
+        text-align: left;
+      }
 
-    p.chicoYalineadoIzq {
-      font-size: 24pt;
-      text-align: left;
-    }
+      .reveal .slide-number {
+        background-color: white;
+        color: black;
+      }
 
-    .reveal .slide-number {
-      background-color: white;
-      color: black;
-    }
+      .reveal .footer {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+        color: gray;
+      }
+    </style>
+  </head>
 
-    .reveal .footer {
-      position: absolute;
-      bottom: 1em;
-      left: 1em;
-      font-size: 0.5em;
-      color: gray;
-    }
-  </style>
-</head>
+  <body>
+    <div class="reveal">
+      <div class="footer">
+        Arquitectura de Software - Conceptos Fundamentales
+      </div>
+      <div class="menubar line">
+        <div class="slide-number"></div>
+        <ul class="menu">
+          <li><a href="#/def">Definición</a></li>
+          <!--         <li><a href="#/arqvsde">Diseño vs Arquitectura</a></li> -->
+          <li><a href="#/vis">Visualización</a></li>
+          <li><a href="#/styles">Estilos de Arquitectura</a></li>
+          <li><a href="#/mod">Estructura de Módulos</a></li>
+          <!--           <li><a href="#/dist">Arq. Distribuídas</a></li> -->
+          <!--         <li><a href="#/atri">Atributos de Calidad</a></li> -->
+        </ul>
+        <div class="placeholder"></div>
+      </div>
+      <div class="slides">
+        <section
+          style="text-align: left"
+          data-transition="fade"
+          data-state="hide-menubar no-title-footer"
+        >
+          <div class="box">
+            <span>Arquitectura de Software</span>
+          </div>
+          <div class="smallbox">Conceptos Fundamentales</div>
+          <p class="autor">ENRIQUE MOLINARI</p>
+          <p id="hoy" class="autor fechahoy"></p>
+        </section>
+        <section id="def">
+          <h2><img src="/imgs/the-matrix-the-architect.jpg" /></h2>
+          "I'm the Architect, I created The Matrix"
+        </section>
+        <section id="def">
+          <p class="titulo">
+            ¿Qué entendemos por <br />
+            <span class="titulo resaltar">Arquitectura de Sofware</span>?
+          </p>
 
-<body>
-  <div class="reveal">
-    <div class="footer">
-      Arquitectura de Software - Conceptos Fundamentales
-    </div>
-    <div class="menubar line">
-      <div class="slide-number"></div>
-      <ul class="menu">
-        <li><a href="#/def">Definición</a></li>
-<!--         <li><a href="#/arqvsde">Diseño vs Arquitectura</a></li> -->
-        <li><a href="#/vis">Visualización</a></li>
-        <li><a href="#/styles">Estilos de Arquitectura</a></li>
-        <li><a href="#/mod">Estructura de Módulos</a></li>
-        <li><a href="#/dist">Arq. Distribuídas</a></li>
-<!--         <li><a href="#/atri">Atributos de Calidad</a></li> -->
-      </ul>
-      <div class="placeholder"></div>
-    </div>
-    <div class="slides">
-      <section style="text-align: left" data-transition="fade" data-state="hide-menubar no-title-footer">
-        <div class="box">
-          <span>Arquitectura de Software</span>
-        </div>
-        <div class="smallbox">Conceptos Fundamentales</div>
-        <p class="autor">ENRIQUE MOLINARI</p>
-        <p id="hoy" class="autor fechahoy"></p>
-      </section>
-      <section id="def">
-        <h2><img src="/imgs/the-matrix-the-architect.jpg"></h2>
-        "I'm the Architect, I created The Matrix"
-      </section>
-      <section id="def">
-        <p class="titulo">¿Qué entendemos por <br /> <span class="titulo resaltar">Arquitectura de Sofware</span>?</p>
+          <p class="fragment">Veamos algunas definiciones...</p>
+        </section>
 
-        <p class="fragment">Veamos algunas definiciones...</p>
-      </section>
+        <section id="def" data-auto-animate>
+          <p>
+            Architecture represents the
+            <span class="fragment highlight-red"
+              >significant design decisions</span
+            >
+            that <span class="fragment highlight-red">shape</span> a system,
+            where significant is measured by
+            <span class="fragment highlight-red"> cost of change</span>. - Grady
+            Booch (2006).
+          </p>
+        </section>
 
-      <section id="def" data-auto-animate>
-        <p>Architecture represents the <span class="fragment highlight-red">significant design decisions</span> that
-          <span class="fragment highlight-red">shape</span> a system, where significant is measured by <span
-            class="fragment highlight-red"> cost of change</span>. - Grady Booch (2006).
-        </p>
-      </section>
+        <section id="def" data-auto-animate>
+          <p>
+            Architecture represents the
+            <span class="fragment highlight-red" data-fragment-index="0"
+              >significant design decisions</span
+            >
+            that
+            <span class="fragment highlight-red" data-fragment-index="0"
+              >shape</span
+            >
+            a system, where significant is measured by
+            <span class="fragment highlight-red" data-fragment-index="0">
+              cost of change</span
+            >. - Grady Booch (2006).
+          </p>
+          <img src="imgs/grady.png" width="190" height="264" />
+        </section>
 
-      <section id="def" data-auto-animate>
-        <p>Architecture represents the <span class="fragment highlight-red" data-fragment-index="0">significant design
-            decisions</span> that <span class="fragment highlight-red" data-fragment-index="0">shape</span> a system,
-          where significant is measured by <span class="fragment highlight-red" data-fragment-index="0"> cost of
-            change</span>. - Grady Booch (2006).</p>
-        <img src="imgs/grady.png" width="190" height="264">
-      </section>
+        <section id="def" data-auto-animate>
+          <p>
+            The software architecture of a system is the set of
+            <span class="fragment highlight-red">structure</span> needed to
+            reason about the system, which comprises
+            <span class="fragment highlight-red">software elements</span>,
+            relations among them, and properties of both.
+          </p>
+        </section>
 
-      <section id="def" data-auto-animate>
-        <p>The software architecture of a system is the set of <span class="fragment highlight-red">structure</span>
-          needed to reason about the system, which comprises <span class="fragment highlight-red">software
-            elements</span>, relations among them, and properties of both.</p>
-      </section>
+        <section id="def" data-auto-animate>
+          <p>
+            The software architecture of a system is the set of
+            <span class="fragment highlight-red" data-fragment-index="0"
+              >structure</span
+            >
+            needed to reason about the system, which comprises
+            <span class="fragment highlight-red" data-fragment-index="0"
+              >software elements</span
+            >, relations among them, and properties of both.
+          </p>
+          <img
+            src="imgs/software-arch-in-practice.png"
+            width="269"
+            height="362"
+          />
+        </section>
 
-      <section id="def" data-auto-animate>
-        <p>The software architecture of a system is the set of <span class="fragment highlight-red"
-            data-fragment-index="0">structure</span> needed to reason about the system, which comprises <span
-            class="fragment highlight-red" data-fragment-index="0">software elements</span>, relations among them, and
-          properties of both.</p>
-        <img src="imgs/software-arch-in-practice.png" width="269" height="362">
-      </section>
+        <section id="def" data-auto-animate>
+          <p>
+            Software architecture is the art of drawing lines that I call
+            <span class="fragment highlight-red">boundaries</span>. Those
+            boundaries separate
+            <span class="fragment highlight-red">software elements</span> from
+            one another, and restrict those on one side from knowing about those
+            on the other.
+          </p>
+        </section>
 
-      <section id="def" data-auto-animate>
-        <p>Software architecture is the art of drawing lines that I call <span
-            class="fragment highlight-red">boundaries</span>. Those boundaries separate <span
-            class="fragment highlight-red">software elements</span> from one another, and restrict those on one side
-          from knowing about those on the other.</p>
-      </section>
+        <section id="def" data-auto-animate>
+          <p>
+            Software architecture is the art of drawing lines that I call
+            <span class="fragment highlight-red" data-fragment-index="0"
+              >boundaries</span
+            >. Those boundaries separate
+            <span class="fragment highlight-red" data-fragment-index="0"
+              >software elements</span
+            >
+            from one another, and restrict those on one side from knowing about
+            those on the other.
+          </p>
+          <img src="imgs/clean-arch-book.png" width="262" height="364" />
+        </section>
 
-      <section id="def" data-auto-animate>
-        <p>Software architecture is the art of drawing lines that I call <span class="fragment highlight-red"
-            data-fragment-index="0">boundaries</span>. Those boundaries separate <span class="fragment highlight-red"
-            data-fragment-index="0">software elements</span> from one another, and restrict those on one side from
-          knowing about those on the other.</p>
-        <img src="imgs/clean-arch-book.png" width="262" height="364">
-      </section>
+        <section id="def" data-auto-animate>
+          <p>
+            Software architecture is the set of
+            <span class="fragment highlight-red">design decisions</span> which,
+            if made incorrectly, may cause your project to be
+            <span class="fragment highlight-red">cancelled</span>. - Eoin Woods
+            (2010).
+          </p>
+        </section>
 
-      <section id="def" data-auto-animate>
-        <p>Software architecture is the set of <span class="fragment highlight-red">design decisions</span> which, if
-          made incorrectly, may cause your project to be <span class="fragment highlight-red">cancelled</span>. - Eoin
-          Woods (2010).</p>
-      </section>
+        <section id="def" data-auto-animate>
+          <p>
+            Software architecture is the set of
+            <span class="fragment highlight-red" data-fragment-index="0"
+              >design decisions</span
+            >
+            which, if made incorrectly, may cause your project to be
+            <span class="fragment highlight-red" data-fragment-index="0"
+              >cancelled</span
+            >. - Eoin Woods (2010).
+          </p>
+          <img src="imgs/eoin.png" />
+        </section>
 
-      <section id="def" data-auto-animate>
-        <p>Software architecture is the set of <span class="fragment highlight-red" data-fragment-index="0">design
-            decisions</span> which, if made incorrectly, may cause your project to be <span
-            class="fragment highlight-red" data-fragment-index="0">cancelled</span>. - Eoin Woods (2010).</p>
-        <img src="imgs/eoin.png">
-      </section>
+        <section id="def" data-auto-animate>
+          <p>
+            Architecture is about the
+            <span class="fragment highlight-red" data-fragment-index="0"
+              >important stuff</span
+            >. Whatever that is. - Ralph Johnson.
+          </p>
+        </section>
 
-      <section id="def" data-auto-animate>
-        <p>Architecture is about the <span class="fragment highlight-red" data-fragment-index="0">important
-            stuff</span>. Whatever that is. - Ralph Johnson.</p>
-      </section>
+        <section id="def" data-auto-animate>
+          <p>
+            Architecture is about the
+            <span class="fragment highlight-red" data-fragment-index="0"
+              >important stuff</span
+            >. Whatever that is. - Ralph Johnson.
+          </p>
+          <img src="imgs/ralph.png" />
+        </section>
 
-      <section id="def" data-auto-animate>
-        <p>Architecture is about the <span class="fragment highlight-red" data-fragment-index="0">important
-            stuff</span>. Whatever that is. - Ralph Johnson.</p>
-        <img src="imgs/ralph.png">
-      </section>
+        <section id="def">
+          <p>
+            La arquitectura de software establece de qué manera un producto de
+            software o sistema está
+            <span class="fragment highlight-red" data-fragment-index="0"
+              >estructurado</span
+            >. La
+            <span class="fragment highlight-blue" data-fragment-index="1"
+              >estructura</span
+            >
+            comprende
+            <span class="fragment highlight-red" data-fragment-index="1"
+              >elementos de software</span
+            >, sus
+            <span class="fragment highlight-red" data-fragment-index="1"
+              >propiedades</span
+            >
+            y las
+            <span class="fragment highlight-red" data-fragment-index="1"
+              >relaciones</span
+            >
+            entre ellos.
+          </p>
+        </section>
 
-      <section id="def">
-        <p>La arquitectura de software establece de qué manera un producto de software o sistema
-          está <span class="fragment highlight-red" data-fragment-index="0">estructurado</span>. La <span
-            class="fragment highlight-blue" data-fragment-index="1">estructura</span> comprende <span
-            class="fragment highlight-red" data-fragment-index="1">elementos de software</span>, sus <span
-            class="fragment highlight-red" data-fragment-index="1">propiedades</span> y las <span
-            class="fragment highlight-red" data-fragment-index="1">relaciones</span> entre ellos. </p>
-      </section>
+        <section id="def">
+          <div class="box2">Elemento de software</div>
+          <p>
+            Cualquier pieza de software que podría ir desde una función,
+            procedimiento, clase, módulo, capa y paquete hasta aplicaciones,
+            repositorios de datos, ambientes de ejecución (web servers,
+            contenedores, etc), API gateways, colas de mensajes, entre otros.
+          </p>
+        </section>
 
-      <section id="def">
-        <div class="box2">Elemento de software</div>
-        <p>Cualquier pieza de software que podría ir desde una función, procedimiento, clase, módulo, capa y paquete
-          hasta aplicaciones, repositorios de datos, ambientes de ejecución (web servers, contenedores, etc), API
-          gateways, colas de mensajes, entre otros. </p>
-      </section>
+        <!-- Diseño vs Arquitectura -->
 
-      <!-- Diseño vs Arquitectura -->
-
-<!--       <section id="arqvsde">
+        <!--       <section id="arqvsde">
         <div class="box2">Diseño vs Arquitectura</div>
         <p class="fragment">¿Existe la línea donde termina el diseño y comienza la arquitectura?</p>
       </section>
@@ -277,243 +364,356 @@
           arquitectura.</p>
       </section> -->
 
-      <!-- Visualización de la Arquitectura -->
+        <!-- Visualización de la Arquitectura -->
 
-      <section id="vis">
-        <div class="box2">Visualización de la Arquitectura de Software</div>
-        <p class="fragment">¿Cómo describimos la arquiectura de un sistema de software?</p>
-      </section>
+        <section id="vis">
+          <div class="box2">Visualización de la Arquitectura de Software</div>
+          <p class="fragment">
+            ¿Cómo describimos la arquiectura de un sistema de software?
+          </p>
+        </section>
 
-      <section id="vis">
-        <!-- Existen diferentes estructuras y las vistas son la forma de visualizarlas-->
-        <p class="fragment">Existen diferentes <span class="box3">Estructuras</span></p>
-        <p class="fragment">Dependiendo qué <u>atributo de calidad</u> queremos analizar y a quienes nos dirigimos
-          utilizaremos uno u otro.</p>
-        <p class="fragment">Veamos cuales estructuras sugieren los siguientes dos autores.</p>
-      </section>
+        <section id="vis">
+          <!-- Existen diferentes estructuras y las vistas son la forma de visualizarlas-->
+          <p class="fragment">
+            Existen diferentes <span class="box3">Estructuras</span>
+          </p>
+          <p class="fragment">
+            Dependiendo qué <u>atributo de calidad</u> queremos analizar y a
+            quienes nos dirigimos utilizaremos uno u otro.
+          </p>
+          <p class="fragment">
+            Veamos cuales estructuras sugieren los siguientes dos autores.
+          </p>
+        </section>
 
-      <section id="vis">
-        <p class="fragment" data-fragment-index="0">Software Engineering Institute (Carnegie Mellon University)</p>
-        <p class="fragment" data-fragment-index="1">Simon Brown (Consultor Independiente)</p>
-        <img class="fragment" data-fragment-index="0" src="imgs/software-arch-in-practice.png" width="249"
-          height="342" />
-        <img class="fragment" data-fragment-index="1" src="imgs/c4-book.png" width="249" height="342" />
-      </section>
+        <section id="vis">
+          <p class="fragment" data-fragment-index="0">
+            Software Engineering Institute (Carnegie Mellon University)
+          </p>
+          <p class="fragment" data-fragment-index="1">
+            Simon Brown (Consultor Independiente)
+          </p>
+          <img
+            class="fragment"
+            data-fragment-index="0"
+            src="imgs/software-arch-in-practice.png"
+            width="249"
+            height="342"
+          />
+          <img
+            class="fragment"
+            data-fragment-index="1"
+            src="imgs/c4-book.png"
+            width="249"
+            height="342"
+          />
+        </section>
 
-      <section id="vis">
-        <p class="fragment">Segun SEI, existen 3 categorías de <u>estructuras</u>:</p>
-        <ul>
-          <li class="fragment"><u>Módulos</u>: ¿Cómo estructuramos los fuentes? Debemos identificar en el lenguaje de
-            programación que utilicemos que abstracción utililzaremos para crear éstas estructuras.</li>
-          <li class="fragment"><u>Componentes y Conectores</u>: Elementos de Software en ejecución.</li>
-          <li class="fragment"><u>Deployment Físico</u>: Elementos de software deployados en equipos de HW.</li>
-        </ul>
-      </section>
+        <section id="vis">
+          <p class="fragment">
+            Segun SEI, existen 3 categorías de <u>estructuras</u>:
+          </p>
+          <ul>
+            <li class="fragment">
+              <u>Módulos</u>: ¿Cómo estructuramos los fuentes? Debemos
+              identificar en el lenguaje de programación que utilicemos que
+              abstracción utililzaremos para crear éstas estructuras.
+            </li>
+            <li class="fragment">
+              <u>Componentes y Conectores</u>: Elementos de Software en
+              ejecución.
+            </li>
+            <li class="fragment">
+              <u>Deployment Físico</u>: Elementos de software deployados en
+              equipos de HW.
+            </li>
+          </ul>
+        </section>
 
-      <section id="vis">
-        <p class="fragment">El Modelo C4</p>
-        <ul>
-          <li class="fragment"><u>Context</u>: ¿Con que otros sistemas interfaceo? </li>
-          <li class="fragment"><u>Container</u>: Web Apps, Client-Side Web Apps, Aplicaciones de consola, bases de
-            datos, file systems, etc.</li>
-          <li class="fragment"><u>Component</u>: ¿Cómo estructuramos los fuentes? Ésta estructura mapea a los fuentes.
-          </li>
-          <li class="fragment"><u>Code</u></li>
-        </ul>
-      </section>
+        <section id="vis">
+          <p class="fragment">El Modelo C4</p>
+          <ul>
+            <li class="fragment">
+              <u>Context</u>: ¿Con que otros sistemas interfaceo?
+            </li>
+            <li class="fragment">
+              <u>Container</u>: Web Apps, Client-Side Web Apps, Aplicaciones de
+              consola, bases de datos, file systems, etc.
+            </li>
+            <li class="fragment">
+              <u>Component</u>: ¿Cómo estructuramos los fuentes? Ésta estructura
+              mapea a los fuentes.
+            </li>
+            <li class="fragment"><u>Code</u></li>
+          </ul>
+        </section>
 
-      <section id="vis">
-        <img src="imgs/c4-model-1.png" />
-      </section>
+        <section id="vis">
+          <img src="imgs/c4-model-1.png" />
+        </section>
 
-      <section id="vis">
-        <p>Módulos (SEI) o Componentes (C4)</p>
-        <img src="imgs/radioa-layers1.png" />
-      </section>
+        <section id="vis">
+          <p>Módulos (SEI) o Componentes (C4)</p>
+          <img src="imgs/radioa-layers1.png" />
+        </section>
 
-      <section id="vis">
-        <p>C&C (SEI) o Containers (C4)</p>
-        <img src="imgs/radioa-containers.png" />
-      </section>
+        <section id="vis">
+          <p>C&C (SEI) o Containers (C4)</p>
+          <img src="imgs/radioa-containers.png" />
+        </section>
 
-      <section id="vis">
-        <p>Deployment Físico v1 (SEI) - En un server</p>
-        <img src="imgs/radioa-deploy2.png" />
-      </section>
+        <section id="vis">
+          <p>Deployment Físico v1 (SEI) - En un server</p>
+          <img src="imgs/radioa-deploy2.png" />
+        </section>
 
-      <section id="vis">
-        <p>Deployment Físico (SEI) - En dos servers</p>
-        <img src="imgs/radioa-deploy1.png" />
-      </section>
+        <section id="vis">
+          <p>Deployment Físico (SEI) - En dos servers</p>
+          <img src="imgs/radioa-deploy1.png" />
+        </section>
 
-      <!-- Estilos -->
+        <!-- Estilos -->
 
-      <section id="styles">
-        <div class="box2">Estilos de Arquitectura</div>
-        <p>"Just as good programmers recognized useful data structures in the late 1960s, good
-          software system designers now recognize useful system organizations". - David Garlan and Mary Shaw </p>
-      </section>
+        <section id="styles">
+          <div class="box2">Estilos de Arquitectura</div>
+          <p>
+            "Just as good programmers recognized useful data structures in the
+            late 1960s, good software system designers now recognize useful
+            system organizations". - David Garlan and Mary Shaw
+          </p>
+        </section>
 
-      <section id="styles">
-        <p class="titulo resaltar">¿Qué estilos de arquitectura identificaron Garlan and Shaw por 1994?</p>
-      </section>
+        <section id="styles">
+          <p class="titulo resaltar">
+            ¿Qué estilos de arquitectura identificaron Garlan and Shaw por 1994?
+          </p>
+        </section>
 
-      <section id="styles">
-        <h3>Pipes & Filters</h3>
-        <img src="imgs/pipe-filter.png" />
-        <p class="chicoYalineadoIzq">Cada componente (filtro) tiene un conjunto de entrada de datos, realiza una
-          transformación y produce una de salida.</p>
-        <p class="chicoYalineadoIzq">Los conectores pueden ser archivos, comunicaciones vía puertos, etc.</p>
-      </section>
+        <section id="styles">
+          <h3>Pipes & Filters</h3>
+          <img src="imgs/pipe-filter.png" />
+          <p class="chicoYalineadoIzq">
+            Cada componente (filtro) tiene un conjunto de entrada de datos,
+            realiza una transformación y produce una de salida.
+          </p>
+          <p class="chicoYalineadoIzq">
+            Los conectores pueden ser archivos, comunicaciones vía puertos, etc.
+          </p>
+        </section>
 
-      <section id="styles">
-        <h3>Pipes & Filters</h3>
-        <img src="imgs/pipe-filter.png" />
-        <p class="chicoYalineadoIzq">Los filtros deben ser independientes: no comparten estado.</p>
-        <p class="chicoYalineadoIzq">Los filtros no estan acoplados entre si, no conocen quien genera su entrada o a
-          quien va dirigida su salida.</p>
-      </section>
+        <section id="styles">
+          <h3>Pipes & Filters</h3>
+          <img src="imgs/pipe-filter.png" />
+          <p class="chicoYalineadoIzq">
+            Los filtros deben ser independientes: no comparten estado.
+          </p>
+          <p class="chicoYalineadoIzq">
+            Los filtros no estan acoplados entre si, no conocen quien genera su
+            entrada o a quien va dirigida su salida.
+          </p>
+        </section>
 
-      <section id="styles">
-        <h3>Event Based: invocación implícita</h3>
-        <img src="imgs/event-based-arch.png" />
-        <p class="chicoYalineadoIzq">En lugar de invocar servicios en forma explícita, un componente, ante ciertos casos
-          de uso, publica un evento que otros componentes pueden o no estar interesados.</p>
-        <p class="chicoYalineadoIzq">Como parte de esa publicación podrían compartirse datos (payload).</p>
-      </section>
+        <section id="styles">
+          <h3>Event Based: invocación implícita</h3>
+          <img src="imgs/event-based-arch.png" />
+          <p class="chicoYalineadoIzq">
+            En lugar de invocar servicios en forma explícita, un componente,
+            ante ciertos casos de uso, publica un evento que otros componentes
+            pueden o no estar interesados.
+          </p>
+          <p class="chicoYalineadoIzq">
+            Como parte de esa publicación podrían compartirse datos (payload).
+          </p>
+        </section>
 
-      <section id="styles">
-        <h3>Event Based: invocación implícita</h3>
-        <img src="imgs/event-based-arch.png" />
-        <p class="chicoYalineadoIzq">Los componentes que publican eventos no conocen qué componentes estan interesados
-          en esos eventos. Tampoco conocen que procesamiento se realiza en otros componentes como resultado de consumir
-          un evento. <u>Bajo acoplamiento</u>.</p>
-      </section>
+        <section id="styles">
+          <h3>Event Based: invocación implícita</h3>
+          <img src="imgs/event-based-arch.png" />
+          <p class="chicoYalineadoIzq">
+            Los componentes que publican eventos no conocen qué componentes
+            estan interesados en esos eventos. Tampoco conocen que procesamiento
+            se realiza en otros componentes como resultado de consumir un
+            evento. <u>Bajo acoplamiento</u>.
+          </p>
+        </section>
 
-      <section id="styles">
-        <h3>Layered Systems</h3>
-        <img src="imgs/layered-system.png" />
-        <p class="chicoYalineadoIzq">Cada capa (layer) consume servicios de la capa inmediatamente inferior. Los
-          componentes pueden ser módulos o elementos en ejecución.</p>
-      </section>
+        <section id="styles">
+          <h3>Layered Systems</h3>
+          <img src="imgs/layered-system.png" />
+          <p class="chicoYalineadoIzq">
+            Cada capa (layer) consume servicios de la capa inmediatamente
+            inferior. Los componentes pueden ser módulos o elementos en
+            ejecución.
+          </p>
+        </section>
 
-      <section id="styles">
-        <h3>Layered Systems</h3>
-        <img src="imgs/layered-system.png" />
-        <p class="chicoYalineadoIzq">Los conectores pueden ser invocación de métodos (in-process) o vía port
-          communication (inter-process). No se permite invocar servicios de otras capas que no sean la inmediatamente
-          inferior.</p>
-      </section>
+        <section id="styles">
+          <h3>Layered Systems</h3>
+          <img src="imgs/layered-system.png" />
+          <p class="chicoYalineadoIzq">
+            Los conectores pueden ser invocación de métodos (in-process) o vía
+            port communication (inter-process). No se permite invocar servicios
+            de otras capas que no sean la inmediatamente inferior.
+          </p>
+        </section>
 
-      <section id="styles">
-        <p class="titulo resaltar">¿Qué tienen en común éstos estilos?</p>
-        <p class="fragment">Definen un conjunto de <span class="fragment highlight-red">reglas de arquitectura</span>
-          que como equipo de desarrollo debemos respetar, <span class="fragment highlight-red"><u>sin
-              excepciones</u></span>.</p>
-      </section>
+        <section id="styles">
+          <p class="titulo resaltar">¿Qué tienen en común éstos estilos?</p>
+          <p class="fragment">
+            Definen un conjunto de
+            <span class="fragment highlight-red">reglas de arquitectura</span>
+            que como equipo de desarrollo debemos respetar,
+            <span class="fragment highlight-red"><u>sin excepciones</u></span
+            >.
+          </p>
+        </section>
 
-      <section id="styles">
-        <p class="titulo resaltar">Toda definición de arquitectura impone <span
-            class="resaltar"><u>restricciones</u></span> (<span class="resaltar">reglas de diseño</span>) que debemos
-          respetar para garantizar que la estructura seleccionada se mantenga en el tiempo. Y asi evitar un <span
-            class="resaltar"><u>big ball of mud</u></span>. </p>
-      </section>
+        <section id="styles">
+          <p class="titulo resaltar">
+            Toda definición de arquitectura impone
+            <span class="resaltar"><u>restricciones</u></span> (<span
+              class="resaltar"
+              >reglas de diseño</span
+            >) que debemos respetar para garantizar que la estructura
+            seleccionada se mantenga en el tiempo. Y asi evitar un
+            <span class="resaltar"><u>big ball of mud</u></span
+            >.
+          </p>
+        </section>
 
-      <section id="styles">
-        <p>En definiciones más recientes, Richards y Ford (2021), proponen agrupar los estilos en dos categorías: <span
-            class="fragment highlight-red">Monolíticas</span> y <span
-            class="fragment highlight-red">Distribuídas</span>.</p>
-        <img src="imgs/soft-arch-fund-book.png" width="308" height="415" />
-      </section>
+        <section id="styles">
+          <p>
+            En definiciones más recientes, Richards y Ford (2021), proponen
+            agrupar los estilos en dos categorías:
+            <span class="fragment highlight-red">Monolíticas</span> y
+            <span class="fragment highlight-red">Distribuídas</span>.
+          </p>
+          <img src="imgs/soft-arch-fund-book.png" width="308" height="415" />
+        </section>
 
-      <section id="styles">
-        <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
-        <p class="chicoYalineadoIzq"><u>Arquitecturas Monolíticas</u>: Único artefacto de software para deployar,
-          corriendo en un único proceso. Sus módulos o capas se comunican de la forma in-process.</p>
-        <p class="chicoYalineadoIzq"><u>Arquitecturas Distribuídas</u>: Múltiples artefactos de software para deployar,
-          cada uno corriendo en su propio proceso. Sus elementos se comunican de la forma inter-process.</p>
-      </section>
+        <section id="styles">
+          <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
+          <p class="chicoYalineadoIzq">
+            <u>Arquitecturas Monolíticas</u>: Único artefacto de software para
+            deployar, corriendo en un único proceso. Sus módulos o capas se
+            comunican de la forma in-process.
+          </p>
+          <p class="chicoYalineadoIzq">
+            <u>Arquitecturas Distribuídas</u>: Múltiples artefactos de software
+            para deployar, cada uno corriendo en su propio proceso. Sus
+            elementos se comunican de la forma inter-process.
+          </p>
+        </section>
 
-      <section id="styles">
-        <img src="imgs/mono-soa-mocro.png">
-      </section>
+        <section id="styles">
+          <img src="imgs/mono-soa-mocro.png" />
+        </section>
 
-      <section id="styles">
-        <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
-        <p class="chicoYalineadoIzq"><u>En capas, monolítico</u>: Partición en capas (segun cuestiones técnicas). Único
-          artefacto de software para deployar, corriendo en un único proceso. Sus capas se comunican de la forma
-          in-process.</p>
-        <p class="chicoYalineadoIzq"><u>SOA</u>: Partición funcional. Cada vertical es un artefacto para deployar, cada
-          uno corriendo en su propio proceso. Los verticales se comunican de la forma inter-process, de forma síncrona.
-        </p>
-        <p class="chicoYalineadoIzq"><u>Microservices</u>: Partición funcional, incluso hasta los datos. Cada
-          microservice es deployado en forma independiente, desarrollado en forma independiente, escala en forma
-          independiente. Comunicación <u>asíncrona</u> principalmente (event-based).</p>
-      </section>
+        <section id="styles">
+          <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
+          <p class="chicoYalineadoIzq">
+            <u>En capas, monolítico</u>: Partición en capas (segun cuestiones
+            técnicas). Único artefacto de software para deployar, corriendo en
+            un único proceso. Sus capas se comunican de la forma in-process.
+          </p>
+          <p class="chicoYalineadoIzq">
+            <u>SOA</u>: Partición funcional. Cada vertical es un artefacto para
+            deployar, cada uno corriendo en su propio proceso. Los verticales se
+            comunican de la forma inter-process, de forma síncrona.
+          </p>
+          <p class="chicoYalineadoIzq">
+            <u>Microservices</u>: Partición funcional, incluso hasta los datos.
+            Cada microservice es deployado en forma independiente, desarrollado
+            en forma independiente, escala en forma independiente. Comunicación
+            <u>asíncrona</u> principalmente (event-based).
+          </p>
+        </section>
 
-      <section id="styles">
-        <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
-        <p>¿Puedo tener partición vertical en arquitecturas monolíticas?</p>
-        <p class="fragment">¡ Por supuesto !</p>
-      </section>
+        <section id="styles">
+          <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
+          <p>¿Puedo tener partición vertical en arquitecturas monolíticas?</p>
+          <p class="fragment">¡ Por supuesto !</p>
+        </section>
 
-      <section id="styles">
-        <img src="imgs/modularmonolith.png">
-        <p class="chicoYalineadoIzq"><u>Modular Monolith</u>: Único artefacto para deployar, pero estructurado en
-          módulos funcionales.</p>
-      </section>
+        <section id="styles">
+          <img src="imgs/modularmonolith.png" />
+          <p class="chicoYalineadoIzq">
+            <u>Modular Monolith</u>: Único artefacto para deployar, pero
+            estructurado en módulos funcionales.
+          </p>
+        </section>
 
-      <section id="styles">
-        <p class="titulo resaltar">Every decision is a trade-off</p>
-        <p>(First Law of Software Architecture)</p>
-        <p class="fragment">Software Architecture Fundamentals.- Richards y Ford</p>
-      </section>
+        <section id="styles">
+          <p class="titulo resaltar">Every decision is a trade-off</p>
+          <p>(First Law of Software Architecture)</p>
+          <p class="fragment">
+            Software Architecture Fundamentals.- Richards y Ford
+          </p>
+        </section>
 
-      <!-- Sistemas Homogeneos (monoliticos principalmente)-->
-      <!-- Sistemas Heterogeneos (SOA o Microservicios principalmente, diferentes lenguajes, BDs, etc)-->
+        <!-- Sistemas Homogeneos (monoliticos principalmente)-->
+        <!-- Sistemas Heterogeneos (SOA o Microservicios principalmente, diferentes lenguajes, BDs, etc)-->
 
+        <section id="mod">
+          <div class="box2">Estructuras de Módulos</div>
+          <p>
+            Hablemos ahora sobre los estilos que existen para crear estructuras
+            de módulos.
+          </p>
+        </section>
 
-      <section id="mod">
-        <div class="box2">Estructuras de Módulos</div>
-        <p>Hablemos ahora sobre los estilos que existen para crear estructuras de módulos.</p>
-      </section>
+        <section id="mod">
+          <h3>Estructuras de Módulos</h3>
+          <p>
+            ¿Por qué debemos partir una aplicacion en módulos? y ¿Por qué
+            definir sus relaciones y respetarlas?
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            Porque cuando hagamos un cambio tendremos noción de donde éste
+            repercute.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            Porque de esa forma tenemos "pequeños sistemas" más simples. Mas
+            simple implica más facil de modificar.
+          </p>
+        </section>
 
-      <section id="mod">
-        <h3>Estructuras de Módulos</h3>
-        <p>¿Por qué debemos partir una aplicacion en módulos? y ¿Por qué definir sus relaciones y respetarlas?</p>
-        <p class="chicoYalineadoIzq fragment">Porque cuando hagamos un cambio tendremos noción de donde éste repercute.
-        </p>
-        <p class="chicoYalineadoIzq fragment">Porque de esa forma tenemos "pequeños sistemas" más simples. Mas simple
-          implica más facil de modificar.</p>
-      </section>
+        <section id="mod">
+          <h3>Estructuras de Módulos</h3>
+          <!--         <p>¿Porque debemos partir una aplicacion en módulos? y ¿Porqué definir sus relaciones y respetarlas?</p> -->
+          <img src="imgs/layer-modular-bigball.png" />
+        </section>
 
-      <section id="mod">
-        <h3>Estructuras de Módulos</h3>
-        <!--         <p>¿Porque debemos partir una aplicacion en módulos? y ¿Porqué definir sus relaciones y respetarlas?</p> -->
-        <img src="imgs/layer-modular-bigball.png" />
-      </section>
+        <section id="mod">
+          <h3>Estructuras de Módulos</h3>
+          <p>
+            Antes dijimos que debíamos encontrar, en el lenguaje de programación
+            que utilicemos, que abstracción (estructura sintáctica) podemos
+            utilizar para crear éstas módulos o capas.
+          </p>
+          <p class="fragment">¿Cuáles son las opciones en Java?</p>
+          <p class="fragment">
+            Desde Java v1, los <u>paquetes</u>. Java v9 incorporó la
+            construcción sintáctica <u>module</u>.
+          </p>
+        </section>
 
+        <section id="mod">
+          <h3>Estructuras de Módulos</h3>
+          <p>¿Cuál es la diferencia entre módulos o capas?</p>
+          <p class="fragment">
+            Cuando hablamos de <b>capas</b>, hablamos de una
+            <u>partición horizontal</u> del sistema, segun cuestiones técnicas.
+          </p>
+          <p class="fragment">
+            Cuando hablamos de <b>módulos</b>, hablamos de abstracciones que
+            agrupan clases con el propósito de <u>reutilización</u> o para
+            <u>partir verticalmente</u> una aplicación.
+          </p>
+        </section>
 
-      <section id="mod">
-        <h3>Estructuras de Módulos</h3>
-        <p>Antes dijimos que debíamos encontrar, en el lenguaje de programación que utilicemos, que abstracción
-          (estructura sintáctica) podemos utilizar para crear éstas módulos o capas.</p>
-        <p class="fragment">¿Cuáles son las opciones en Java?</p>
-        <p class="fragment">Desde Java v1, los <u>paquetes</u>. Java v9 incorporó la construcción sintáctica
-          <u>module</u>.
-        </p>
-      </section>
-
-      <section id="mod">
-        <h3>Estructuras de Módulos</h3>
-        <p>¿Cuál es la diferencia entre módulos o capas?</p>
-        <p class="fragment">Cuando hablamos de <b>capas</b>, hablamos de una <u>partición horizontal</u> del sistema,
-          segun cuestiones técnicas.</p>
-        <p class="fragment">Cuando hablamos de <b>módulos</b>, hablamos de abstracciones que agrupan clases con el
-          propósito de <u>reutilización</u> o para <u>partir verticalmente</u> una aplicación.</p>
-      </section>
-
-<!--       <section id="mod">
+        <!--       <section id="mod">
         <p class="resaltar">Robert C. Martin (Uncle Bob), propuso los siguientes principios para agrupar clases en
           módulos:</p>
         <p class="chicoYalineadoIzq fragment"><b>Common Reuse Principle</b> (CRP): Sugiere que las clases que son
@@ -530,44 +730,66 @@
           pequeños, reusables.</p>
       </section>
  -->
-      <section id="mod">
-        <h3>Estructuras de Módulos</h3>
-        <p class="fragment">En aplicaciones simples alcanza con una partición horizontal.</p>
-        <p class="fragment">En aplicaciones que preveemos serán complejas necesitamos necesariamente partición vertical.
-        </p>
-      </section>
+        <section id="mod">
+          <h3>Estructuras de Módulos</h3>
+          <p class="fragment">
+            En aplicaciones simples alcanza con una partición horizontal.
+          </p>
+          <p class="fragment">
+            En aplicaciones que preveemos serán complejas necesitamos
+            necesariamente partición vertical.
+          </p>
+        </section>
 
-      <section id="mod">
-        <p>Alternativa al estilo de arquitectura en Capas</p>
-        <p class="resaltar fragment">Arquitectura Hexagonal (o Ports & Adapters)</p>
-        <p class="fragment">Creada por <a href="https://alistair.cockburn.us/hexagonal-architecture/">Alistair
-            Cockburn</a></p>
-        <img class="fragment" src="imgs/hex-original.png">
-      </section>
+        <section id="mod">
+          <p>Alternativa al estilo de arquitectura en Capas</p>
+          <p class="resaltar fragment">
+            Arquitectura Hexagonal (o Ports & Adapters)
+          </p>
+          <p class="fragment">
+            Creada por
+            <a href="https://alistair.cockburn.us/hexagonal-architecture/"
+              >Alistair Cockburn</a
+            >
+          </p>
+          <img class="fragment" src="imgs/hex-original.png" />
+        </section>
 
-      <section id="mod">
-        <p class="resaltar">Arquitectura Hexagonal</p>
-        <img src="imgs/capas-invertida.png">
-      </section>
+        <section id="mod">
+          <p class="resaltar">Arquitectura Hexagonal</p>
+          <img src="imgs/capas-invertida.png" />
+        </section>
 
-      <section id="mod">
-        <p class="resaltar">Estructuras de Módulos: Ejemplo</p>
-        <img width="678" height="518" src="imgs/modular-monolith-hex.png">
-      </section>
+        <section id="mod">
+          <p class="resaltar">Estructuras de Módulos: Ejemplo</p>
+          <img width="678" height="518" src="imgs/modular-monolith-hex.png" />
+        </section>
 
-      <section id="mod">
-        <p class="resaltar">Separación Lógica vs Física</p>
-        <p class="chicoYalineadoIzq fragment" data-fragment-index="1"><u>Lógica</u>: Mismo espacio de memoria, puedo
-          importar sus clases, invocar métodos (in-process).</p>
-        <p class="chicoYalineadoIzq fragment" data-fragment-index="3"><u>Física</u>: Distinto espacio de memoria,
-          invocación inter-process.</p>
-        <img class="fragment" src="imgs/logical-design.png" data-fragment-index="2">
-      </section>
+        <section id="mod">
+          <p class="resaltar">Separación Lógica vs Física</p>
+          <p class="chicoYalineadoIzq fragment" data-fragment-index="1">
+            <u>Lógica</u>: Mismo espacio de memoria, puedo importar sus clases,
+            invocar métodos (in-process).
+          </p>
+          <p class="chicoYalineadoIzq fragment" data-fragment-index="3">
+            <u>Física</u>: Distinto espacio de memoria, invocación
+            inter-process.
+          </p>
+          <img
+            class="fragment"
+            src="imgs/logical-design.png"
+            data-fragment-index="2"
+          />
+        </section>
 
-      <section id="mod">
-        <p class="resaltar">Separación Lógica vs Física: <u>Verificación</u></p>
-        <p class="fragment">Java9 mejora este problema:</p>
-        <pre class="fragment"><code data-trim data-noescape>module radioa.competition {
+        <section id="mod">
+          <p class="resaltar">
+            Separación Lógica vs Física: <u>Verificación</u>
+          </p>
+          <p class="fragment">Java9 mejora este problema:</p>
+          <pre
+            class="fragment"
+          ><code data-trim data-noescape>module radioa.competition {
   exports competition.model.api;
   //only for injection
   exports competition.model to radioa.main;
@@ -576,12 +798,16 @@
   requires java.sql;
   ...
 }</code></pre>
-      </section>
+        </section>
 
-      <section id="mod">
-        <p class="resaltar">Separación Lógica vs Física: <u>Verificación</u></p>
-        <p class="fragment">ArchUnit nos ayuda a detectar dependencias inválidas:</p>
-        <pre class="fragment"><code data-trim data-noescape>@Test
+        <section id="mod">
+          <p class="resaltar">
+            Separación Lógica vs Física: <u>Verificación</u>
+          </p>
+          <p class="fragment">
+            ArchUnit nos ayuda a detectar dependencias inválidas:
+          </p>
+          <pre class="fragment"><code data-trim data-noescape>@Test
 public void packageApiOfCOnlyDependOnItOrJdk() {
  JavaClasses jc = new ClassFileImporter()
   .importPackages("apiofc", "c", "a", "apiofa"...);
@@ -592,130 +818,13 @@ public void packageApiOfCOnlyDependOnItOrJdk() {
   .resideInAnyPackage("apiofc","java..")
   .check(jc);
 }</code></pre>
-      </section>
+        </section>
 
-      <!-- Arquitecturas Distribuidas -->
+        <!-- Arquitecturas Distribuidas -->
 
-      <section id="dist">
-        <div class="box2">Arquitecturas Distribuídas</div>
-      </section>
+        <!-- Atributos de Calidad -->
 
-      <section id="dist">
-        <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico fragment">En las arquitecturas distribuidas el sistema es particionado en <u>aplicaciones
-            simples</u> donde cada una se deploya en su <u>propio contenedor</u>, el cual corre en su <u>propio
-            proceso</u> y se comunican entre ellas enviándose mensajes a través de la <u>red</u>.</p>
-        <img class="fragment" src="imgs/rest-call.png">
-      </section>
-      <!-- width="678" height="518" -->
-
-      <section id="dist">
-        <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico">¿Porqué distribuir?</p>
-        <p class="fragment">Para mejorar la performance, la escalabilidad y la disponibilidad de un servicio.</p>
-        <p class="fragment">La arquitectura de microservicios es la vedette de moda hoy.</p>
-        <p class="fragment">¡ojo! Esto no significa que utilizar microservicios siempre sea nuestra mejor opción.</p>
-      </section>
-
-      <section id="dist">
-        <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico">Distribuir una aplicación agrega complicaciones, una de ellas se conoce como: <u>Fallas
-            Parciales</p></u></p>
-        <p class="chico fragment">Cuando ejecutamos una aplicación en una única máquina su comportamiento es predecible.
-          Si el hardware donde corre funciona, la aplicación ante las mismas entradas producirá siempre las mismas
-          salidas. Si el hardware donde corre fallara por algún motivo, la aplicación completa dejaría de funcionar. Es
-          decir, una aplicación en una única máquina funciona o no funciona, pero no existe nada en el medio (quitando
-          de la ecuación posibles bugs que la aplicación podría tener).</p>
-      </section>
-
-      <section id="dist">
-        <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico">Distribuir una aplicación agrega complicaciones, una de ellas se conoce como: <u>Fallas
-            Parciales</p></u></p>
-        <p class="chico fragment">Las aplicaciones distribuidas se conforman de varios elementos que podrían fallar. La
-          red, junto a toda su complejidad, más las máquinas donde corra la aplicación son parte del mismo sistema.
-          Cualquiera de alguno de estos elementos (equipos, dispositivos de red como routers, switches, etc) que forman
-          parte de un sistema distribuido podría fallar mientras que el resto de los elementos podrían seguir
-          funcionando. Esto se conoce como <u>falla parcial</u>.</p>
-        <p class="chico fragment">Inconvenientes frecuentemente ignorados: <a
-            href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing">Falacias</a> de los sistemas
-          distribuidos.</p>
-      </section>
-
-      <section id="dist">
-        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
-        <img class="fragment" src="imgs/distrib-systems1.png">
-      </section>
-
-      <section id="dist">
-        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
-        <img class="fragment" src="imgs/distrib-systems2.png">
-      </section>
-
-      <section id="dist">
-        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
-        <p class="chico fragment">¿Cómo lideamos con fallas parciales?</p>
-        <p class="chico fragment">Timeouts, Idempotencia, deduplicación</p>
-      </section>
-
-      <section id="dist">
-        <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico fragment">Otro inconveniente: No tengo Transacciones!</p>
-        <p class="chico fragment">Consistencia Eventual</p>
-        <img class="fragment" src="imgs/sagas.png">
-      </section>
-
-      <section id="dist">
-        <p class="resaltar">Microservicios</p>
-        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
-        <p class="chico fragment">¡Ojo! hay mucha sobreingeniería en este tema. Se creen que "micro" implica muy poco y
-          luego para integrarlos utilizan un conjunto de herramientas que complican todo de gran manera.</p>
-        <p class="chico fragment">¿Qué dicen la bibliografía sobre esto?</p>
-      </section>
-
-<!--      <section id="dist">
-        <p class="resaltar">Microservicios</p>
-        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
-        <img class="fragment" src="imgs/soft-arch-fund-book.png" />
-      </section>
--->
-      <section id="dist">
-        <p class="resaltar">Microservicios</p>
-        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
-        <p class="chico fragment">El término micro-servicio pareciera revelar que cada aplicación debería realizar lo
-          mínimo indispensable. Pero el criterio es por sub-dominio (Bounded Context), y quizás ciertos sub-dominios no
-          son pequeños</p>
-        <p class="chicoYalineadoIzq fragment"><u>Transacciones</u>: Si tenemos entidades que necesitan trabajar juntas
-          de forma atómica, entonces deben estar en el mismo microservicio. Las transacciones distribuidas son
-          complicadas, si es posible evitarlas, mejor.</p>
-        <p class="chicoYalineadoIzq fragment"><u>Comunicación</u>: Si algunos microservicios requieren demasiada
-          comunicación entre ellos para ofrecer sus servicios quizás es mejor unificarlos en un único microservicio más
-          grande.</p>
-      </section>
-<!--
-      <section id="dist">
-        <p class="resaltar">Microservicios</p>
-        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
-        <img class="fragment" src="imgs/cont-soft-arch-practice.png" />
-      </section>
-
-      <section id="dist">
-        <p class="resaltar">Microservicios</p>
-        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
-        <p class="maschico fragment">As a side note on microservices, we want to emphasize that the overall objective is
-          to define loosely coupled components that can evolve independently (principle 4, Architect for change—leverage
-          the “power of small”). However, micro can be interpreted as a desire to have components with an extremely
-          small scope, which can result in unnecessary complexity of managing dependencies and interaction patterns. In
-          addition, it can cause performance issues. As mentioned in Chapter 6, “Performance as an Architectural
-          Concern,” calls between too many microservice instances can be costly in terms of overall execution time. The
-          decision on the scope of microservices should be driven by your context and problem domain. Think about
-          functions (or features) that will evolve together. The goal is to have loosely coupled, internally cohesive
-          components rather than arbitrarily small services for their own sake.</p>
-      </section>
--->
-      <!-- Atributos de Calidad -->
-
-<!--       <section id="atri">
+        <!--       <section id="atri">
         <div class="box2">Atributos de Calidad</div>
       </section>
 
@@ -955,69 +1064,69 @@ public void packageApiOfCOnlyDependOnItOrJdk() {
         <div class="box2">Escalabilidad</div>
       </section> -->
 
-<!--       https://aws.amazon.com/es/blogs/apn/the-6-pillars-of-the-aws-well-architected-framework/ -->
-<!-- https://blog.devgenius.io/top-10-architecture-characteristics-non-functional-requirements-with-cheatsheat-7ad14bbb0a9b -->
+        <!--       https://aws.amazon.com/es/blogs/apn/the-6-pillars-of-the-aws-well-architected-framework/ -->
+        <!-- https://blog.devgenius.io/top-10-architecture-characteristics-non-functional-requirements-with-cheatsheat-7ad14bbb0a9b -->
 
-      <!-- en escalabilidad puedo poner el grafico del libro de alex yu de feed -->
+        <!-- en escalabilidad puedo poner el grafico del libro de alex yu de feed -->
 
-      <!-- 
+        <!-- 
         https://blog.devgenius.io/top-10-architecture-characteristics-non-functional-requirements-with-cheatsheat-7ad14bbb0a9b
        -->
 
-      <!-- goglear diagramas de arquitectura en google para mostrar la diversidad de cosas, con colores y formas que no dicen nada -->
-      <!-- Common sense of abstracionts is more important than a common notation -->
-      <!-- cuando abro los fuentes, espero ver BIEN claro esta definicion en el codigo. Model-code gap, no quiero -->
+        <!-- goglear diagramas de arquitectura en google para mostrar la diversidad de cosas, con colores y formas que no dicen nada -->
+        <!-- Common sense of abstracionts is more important than a common notation -->
+        <!-- cuando abro los fuentes, espero ver BIEN claro esta definicion en el codigo. Model-code gap, no quiero -->
 
-      <!-- Screaming the architecture !!!! -->
-      <!--
+        <!-- Screaming the architecture !!!! -->
+        <!--
         Modificabilidad: Utilizar un layeres ayuda a nivel codigo. Utilizar un API Gateway tambien, proque podria cambiar el backend final, sin afectar la aplicacion cliente.
       -->
 
-      <!-- News Feed System de Alex Xu -->
+        <!-- News Feed System de Alex Xu -->
 
-      <!--
+        <!--
         <section id="ghi">Slide 2</section>
         <section id="ghi1">Slide 2</section>
         <section id="ghi1">Slide 2</section>
         <section id="ghi1">Slide 2</section>-->
+      </div>
     </div>
-  </div>
 
-  <script src="dist/reveal.js"></script>
-  <script src="plugin/notes/notes.js"></script>
-  <script src="plugin/markdown/markdown.js"></script>
-  <script src="plugin/highlight/highlight.js"></script>
-  <script src="plugin/simplemenu/simplemenu.js"></script>
-  <script src="plugin/relativenumber/relativenumber.js"></script>
-  <script src="plugin/math/math.js"></script>
-  <script>
-    window.onload = function () {
-      let today = new Date().toLocaleDateString();
-      let obj = document.getElementById("hoy");
-      document.getElementById("hoy").innerText = today;
-    };
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/relativenumber/relativenumber.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      window.onload = function () {
+        let today = new Date().toLocaleDateString();
+        let obj = document.getElementById("hoy");
+        document.getElementById("hoy").innerText = today;
+      };
 
-    Reveal.addEventListener("slidechanged", function (event) {
-      if (event.indexh > 0) {
-        document.querySelector(".reveal .footer").style.display = "block";
-      } else {
-        document.querySelector(".reveal .footer").style.display = "none";
-      }
-    });
+      Reveal.addEventListener("slidechanged", function (event) {
+        if (event.indexh > 0) {
+          document.querySelector(".reveal .footer").style.display = "block";
+        } else {
+          document.querySelector(".reveal .footer").style.display = "none";
+        }
+      });
 
-    Reveal.addEventListener("ready", function (event) {
-      if (event.indexh === 0)
-        document.querySelector(".reveal .footer").style.display = "none";
-    });
+      Reveal.addEventListener("ready", function (event) {
+        if (event.indexh === 0)
+          document.querySelector(".reveal .footer").style.display = "none";
+      });
 
-    Reveal.initialize({
-      hash: true,
-      slideNumber: "c/t",
-      /*         width: 1920,
+      Reveal.initialize({
+        hash: true,
+        slideNumber: "c/t",
+        /*         width: 1920,
               height: 1080, */
-      //slideNumber: true,
-      // Learn about plugins: https://revealjs.com/plugins/
-      /*dependencies: [
+        //slideNumber: true,
+        // Learn about plugins: https://revealjs.com/plugins/
+        /*dependencies: [
         {
           src: "plugin/title-footer/title-footer.js",
           async: true,
@@ -1028,16 +1137,15 @@ public void packageApiOfCOnlyDependOnItOrJdk() {
         },
       ],*/
 
-      plugins: [
-        RevealMarkdown,
-        RevealHighlight,
-        RevealNotes,
-        RelativeNumber,
-        Simplemenu,
-        RevealMath.KaTeX
-      ],
-    });
-  </script>
-</body>
-
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealNotes,
+          RelativeNumber,
+          Simplemenu,
+          RevealMath.KaTeX,
+        ],
+      });
+    </script>
+  </body>
 </html>
