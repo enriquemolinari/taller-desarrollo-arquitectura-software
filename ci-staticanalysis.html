@@ -18,6 +18,22 @@
     <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
 
     <style>
+      .simplecode {
+        background-color: #edecec;
+        color: #272822;
+        border-radius: 0.3em;
+        padding: 4px 5px 6px;
+        white-space: nowrap;
+      }
+
+      .inlinecode {
+        background-color: #edecec;
+        color: #272822;
+        border-radius: 0.3em;
+        padding: 4px 5px 6px;
+        white-space: nowrap;
+      }
+
       .reveal section code.small1 {
         font-size: 0.8em;
       }
@@ -106,6 +122,9 @@
       }
 
       p.maschico {
+        font-size: 20pt;
+      }
+      li.maschico {
         font-size: 20pt;
       }
 
@@ -211,7 +230,7 @@
           <img src="imgs/ci.png" />
         </section>
 
-        <section id="ci">
+        <section id="ci" data-auto-animate>
           <p class="titulo">Integración Continua: tools!</p>
           <img src="imgs/jenkins.png" />
           <img src="imgs/github.jpg" />
@@ -221,10 +240,30 @@
           <img src="imgs/circleci.png" />
         </section>
 
+        <section id="ci" data-auto-animate>
+          <p>Nosotros vamos a utilizar:</p>
+          <img src="imgs/github.jpg" />
+          <p class="fragment"><img src="imgs/github-actions.png" /></p>
+        </section>
+
+        <section id="ci" data-auto-animate>
+          <p>¿Cómo incorporamos Github Actions a un proyecto?</p>
+          <p class="fragment"><img src="imgs/github-actions.png" /></p>
+        </section>
+
         <section id="ci">
-          <!--           <img src="imgs/github.jpg" />
-          <p>Actions</p>
- -->
+          <ol>
+            <li class="maschico">
+              Crear el directorio
+              <span class="inlinecode">.github/workflows</span> en la raiz del
+              proyecto.
+            </li>
+            <li class="maschico fragment">
+              Allí adentro colocamos el archivo YAML (.yml) que contiene las
+              instrucciones del proceso de integración continua. Veamos un
+              ejemplo:
+            </li>
+          </ol>
           <pre
             class="fragment"
           ><code class="small1" data-trim data-noescape data-line-numbers="1|2|3-4|5-6|7|8-9|10-12|13-16|18">name: Demo
@@ -255,13 +294,44 @@ jobs:
           <p class="titulo">Análisis Estático de Código Fuente</p>
           <p class="fragment">
             Como parte de la <b>Quality Net</b> existen herramientas que nos
-            permiten
+            permiten, automáticamente (ideal para un proceso de CI), realizar
+            ciertos chequeos sobre los fuentes, en dos cuestiones:
+          </p>
+          <ol>
+            <li class="fragment">
+              Estilo de como escribimos código. Trabajando en equipo necesitamos
+              consistencia.
+            </li>
+            <li class="fragment">Potenciales bugs.</li>
+          </ol>
+        </section>
+
+        <section id="ae">
+          <p class="titulo">Verificación de Estilo con:</p>
+          <img class="fragment" src="imgs/checkstyle.png" />
+          <p class="fragment">
+            ¿Usamos espacios o tabs para las tabulaciones? ¿Cuantos niveles?
+          </p>
+          <p class="fragment">
+            ¿Cómo escribimos <span class="simplecode">if</span>s,
+            <span class="simplecode">for</span>s o
+            <span class="simplecode">while</span>s? ¿Usamos llaves si tienen una
+            sola sentencia?
+          </p>
+          <p class="fragment">
+            ¿Donde y cuando usamos mayúsculas? ¿minúsculas?
           </p>
         </section>
 
         <section id="ae">
-          <img src="imgs/checkstyle.png" />
-          <p>...</p>
+          <p class="titulo">Verificación de Estilo con:</p>
+          <img class="fragment" src="imgs/checkstyle.png" />
+          <p class="fragment">
+            Vamos a utilizar la Guía de Estilos de
+            <a href="https://google.github.io/styleguide/javaguide.html"
+              >Google</a
+            >.
+          </p>
         </section>
 
         <section id="ae">
@@ -275,6 +345,22 @@ jobs:
         <section id="ae">
           <img src="imgs/spotbugs.png" />
           <p>...</p>
+        </section>
+
+        <section id="ae">
+          <p class="titulo">Análisis Estático</p>
+          <p class="fragment">¿Cómo corremos estas verificaciones?</p>
+          <p class="fragment">Utilizando <b>Maven</b></p>
+          <p class="fragment">
+            Lo podemos correr local y por supuesto también desde Github Actions.
+          </p>
+          <p class="fragment">Tambien existen como plugins para los IDEs.</p>
+          <p class="fragment">
+            Repo de ejemplo:
+            <a href="https://github.com/enriquemolinari/static-analysis"
+              >Static Analisys</a
+            >
+          </p>
         </section>
 
         <section id="deploy">
