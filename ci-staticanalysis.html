@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
 
     <style>
+      .reveal section code.small1 {
+        font-size: 0.8em;
+      }
+
       div.line {
         border-bottom: 1px solid;
         border-color: lightgray;
@@ -215,6 +219,32 @@
           <img src="imgs/travisci.png" />
           <img src="imgs/teamcity.png" />
           <img src="imgs/circleci.png" />
+        </section>
+
+        <section id="ci">
+          <!--           <img src="imgs/github.jpg" />
+          <p>Actions</p>
+ -->
+          <pre
+            class="fragment"
+          ><code class="small1" data-trim data-noescape data-line-numbers="1|2|3-4|5-6|7|8-9|10-12|13-16|18">name: Demo
+on: [push]
+# un workflow puede tener mas de un job
+jobs:
+ # nombre del único job en este workflow 
+ demo-job:
+  runs-on: ubuntu-latest
+  # representa una secuencia de tareas a ejecutar
+  steps:
+   # nombre del step
+   - name: Check out repository code
+     uses: actions/checkout@v3
+   # nombre del step
+   - name: List files in the repository
+     run: |
+      ls ${{ github.workspace }}
+   # Simplemente ejecuta un echo   
+   - run: echo "This job's status is ${{ job.status }}."</code></pre>
         </section>
 
         <section id="ae">
