@@ -166,7 +166,10 @@
           <li><a href="#/cd">CI/CD</a></li>
           <li><a href="#/ci">Integración Continua</a></li>
           <li><a href="#/ae">Análisis Estático</a></li>
-          <li><a href="#/test">Test y Covertura</a></li>
+          <li><a href="#/test">Test y Cobertura</a></li>
+          <li><a href="#/maven">Maven</a></li>
+          <li><a href="#/nube">En la Nube</a></li>
+          <li><a href="#/cucardas">Cucardas</a></li>
           <li><a href="#/deploy">Deployment</a></li>
         </ul>
         <div class="placeholder"></div>
@@ -336,25 +339,86 @@ jobs:
 
         <section id="ae">
           <img src="imgs/pmd.png" />
-          <p>
-            It finds common programming flaws like unused variables, empty catch
-            blocks, unnecessary object creation, and so forth.
+          <p>Busca <b>potenciales</b> fallas o bugs. ¿Cuáles?</p>
+          <p class="fragment">
+            <a href="https://pmd.github.io/latest/pmd_rules_java.html"
+              >Reglas PMD</a
+            >
           </p>
         </section>
 
         <section id="ae">
           <img src="imgs/spotbugs.png" />
-          <p>...</p>
+          <p>Similar a PMD, busca potenciales bugs. ¿Cuáles?</p>
+          <p class="fragment">
+            Código que permite SQL Injection y recursos (BDs) no cerrados
+            correctamente son algunos de los diferentes a PMD.
+          </p>
+          <a
+            class="fragment"
+            href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html"
+            >Reglas Spotbugs</a
+          >
         </section>
 
-        <section id="ae">
-          <p class="titulo">Análisis Estático</p>
-          <p class="fragment">¿Cómo corremos estas verificaciones?</p>
-          <p class="fragment">Utilizando <b>Maven</b></p>
+        <section id="test">
+          <p class="titulo">Testing y Cobertura</p>
           <p class="fragment">
-            Lo podemos correr local y por supuesto también desde Github Actions.
+            Como parte de la <b>Quality Net</b> también necesitamos tener
+            <b>testing automatizado</b> y <b>medir</b> su cobertura.
           </p>
-          <p class="fragment">Tambien existen como plugins para los IDEs.</p>
+        </section>
+
+        <section id="test">
+          <p class="titulo">Categorías de Test y Herramientas</p>
+          <p class="fragment">
+            <b>Unit Testing</b>: JUnit (no solo modelo, controllers y servicios
+            es posible también).
+          </p>
+          <p class="fragment">
+            <b>Integration Tests</b>: Cada back-end framework provee
+            facilidades.
+          </p>
+          <p class="fragment">
+            <b>UI Unit Tests</b> (Javascript):
+            <a href="https://jestjs.io/">Jest</a>,
+            <a href="https://mochajs.org/">Mocha</a>,
+            <a href="https://jasmine.github.io/">Jasmine</a>.
+          </p>
+          <p class="fragment">
+            <b>End-to-End Tests</b>:
+            <a href="https://playwright.dev/">Playwright</a>,
+            <a href="https://www.cypress.io/">Cypress</a>,
+            <a href="https://www.protractortest.org/#/">Protractor</a> (solo con
+            Angular), <a href="https://www.selenium.dev/">Selenium</a>.
+          </p>
+        </section>
+
+        <section id="test">
+          <p class="titulo">Mike Cohn's tests pyramid</p>
+          <!--           <img src="imgs/jacoco.jpeg" /> -->
+          <img src="imgs/tests-piramid.png" />
+        </section>
+
+        <section id="test">
+          <p class="titulo">Midiendo Cobertura</p>
+          <!--           <img src="imgs/jacoco.jpeg" /> -->
+          <img src="imgs/jacoco-results.png" />
+          <p class="fragment">Entre 70% y 80% de cobertura es aceptable.</p>
+        </section>
+
+        <section id="maven">
+          <p class="titulo">Maven</p>
+          <p class="fragment">
+            Permite manejar dependencias, ejecutar builds, generar reportes y
+            documentación de un proyecto de software.
+          </p>
+          <p class="fragment">
+            A travez de sus <b>plugins</b> podemos ejecutar Checkstyle, PMD,
+            Spotbugs, Tests y generar documentación de calidad de código y
+            cobertura. Lo podemos correr local y por supuesto también desde
+            Github Actions.
+          </p>
           <p class="fragment">
             Repo de ejemplo:
             <a href="https://github.com/enriquemolinari/static-analysis"
