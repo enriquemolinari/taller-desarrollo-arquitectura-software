@@ -169,7 +169,7 @@
           <li><a href="#/test">Test y Cobertura</a></li>
           <li><a href="#/maven">Maven</a></li>
           <li><a href="#/nube">En la Nube</a></li>
-          <li><a href="#/cucardas">Cucardas</a></li>
+          <li><a href="#/medallas">Medallas</a></li>
           <li><a href="#/deploy">Deployment</a></li>
         </ul>
         <div class="placeholder"></div>
@@ -368,6 +368,40 @@ jobs:
           >
         </section>
 
+        <section id="ae">
+          <p class="titulo">Falsos positivos</p>
+          <p class="fragment">
+            Tanto PMD como Spotbugs pueden reportar falsos positivos. Usando
+            anotaciones puedo quitar la verificación de cierto bloque de código,
+            en PMD sería:
+          </p>
+          <pre class="fragment">
+          <code class="small1" data-trim data-noescape>@SuppressWarnings("PMD.UnusedLocalVariable")
+public class Bar {
+ void bar() {
+  int foo;
+ }
+}</code></pre>
+        </section>
+
+        <section id="ae">
+          <p class="titulo">Falsos positivos</p>
+          <p class="fragment">
+            En Spotbugs, primero debe crear la anotación y luego usarla. Lo que
+            vemos aca es un falso positivo real!.
+          </p>
+          <pre class="fragment">
+          <code class="small1" data-trim data-noescape>@Retention(RetentionPolicy.CLASS)
+public @interface SuppressFBWarnings {
+ String[] value() default {};
+ String justification() default "";
+}
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP2"})
+public JpaSalesOnline(EntityManager em) {
+ this.em = em;
+}</code></pre>
+        </section>
+
         <section id="test">
           <p class="titulo">Testing y Cobertura</p>
           <p class="fragment">
@@ -441,16 +475,45 @@ jobs:
         <section id="nube">
           <p class="titulo">Quality Net en la Nube!</p>
           <p class="fragment">
-            <a href="https://www.codacy.com/">Codacy</a>
+            <a href="https://www.codacy.com/">Codacy</a>: Checkstyle, PMD,
+            Spotbugs y similares para otros Lenguajes de Programación en la
+            nube.
           </p>
           <p class="fragment">
-            <a href="https://codeclimate.com/">Code Climate</a>
+            <a href="https://codeclimate.com/">Code Climate</a>: Tiene una
+            métrica de mantenibilidad basada en 10 puntos:
+            <a
+              href="https://docs.codeclimate.com/docs/configuring-your-analysis#section-maintainability-checks"
+              >Maintainability Checks</a
+            >.
           </p>
           <p class="fragment">
-            <a href="https://about.codecov.io/">Codecov</a>
+            <a href="https://about.codecov.io/">Codecov</a>: Cobertura.
+            <a href="https://lgtm.com/">LGTM</a>: Security, finding
+            vulnerabilities.
           </p>
           <p class="fragment">
             Se loguean (a travéz github) y accede a tu repo para analizarlo.
+          </p>
+        </section>
+
+        <section id="medallas">
+          <div class="box2">Medallas</div>
+          <p>Mostra qué dicen las métricas de calidad</p>
+          <p>sobre tu código.</p>
+        </section>
+
+        <section id="medallas">
+          <p class="titulo">Badges (medallas)</p>
+          <img class="fragment" src="imgs/badge-build.png" />
+          <p class="fragment">Veamos algunos ejemplos de repos open source:</p>
+          <p class="fragment">
+            <a href="https://github.com/hibernate/">Hibernate</a>.
+            <a href="https://github.com/apache/commons-lang">commons-lang</a>.
+            <a href="https://github.com/javalin/javalin">Javalin</a>.
+            <a href="https://github.com/spring-projects/spring-framework"
+              >Spring</a
+            >. <a href="https://github.com/enriquemolinari/jqueue">JQueue</a>.
           </p>
         </section>
 
@@ -523,167 +586,6 @@ jobs:
             mediante replicación.
           </p>
         </section>
-
-        <!-- 
-        <section id="metodos">
-          <p class="titulo">Métodos HTTP</p>
-          <p class="alineadoIzq fragment">
-            <b>GET</b>: Para obtener datos del servidor. Cada visita a una
-            página web es un request GET. Nunca utilizarlo para enviar o
-            modificar datos. Es <b>idempotente</b>.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            <b>Idempotencia</b>: La ejecución repetida de una petición con los
-            mismos parámetros sobre un mismo recurso tendrá el mismo efecto
-            siempre.
-          </p>
-          <p class="alineadoIzq fragment">
-            <b>POST</b>: Para enviar datos al servidor. Ej: Submitear un
-            formulario. No es idempotente.
-          </p>
-          <p class="alineadoIzq fragment">
-            <b>PUT</b>: Para modificar datos existentes. Idempotente.
-          </p>
-          <p class="alineadoIzq fragment">
-            <b>DELETE</b>: Para borrar datos existentes. Idempotente.
-          </p>
-        </section>
-
-        <section id="metodos">
-          <p class="titulo">Métodos HTTP</p>
-          <p class="fragment">
-            Es sumamente importante utilizar correctamente los métodos http. Es
-            nuestra responsabilidad como desarrolladores. El protocolo en sí no
-            nos prohibe utilizar GET en operaciones con side-effects.
-          </p>
-          <p class="fragment">
-            Si submitieramos una compra y dicho request fuera GET podríamos sin
-            querer (Ej: apretando F5), submitearla N veces. Si es POST el
-            browser nos avisa con un warning. Porque el browser sabe que POST no
-            es una operación idempotente.
-          </p>
-        </section>
-
-        <section id="headers">
-          <p class="titulo">HTTP Headers</p>
-          <p class="fragment">GET Request:</p>
-          <pre
-            class="fragment"
-          ><code data-trim data-noescape data-line-numbers="1|2-3">GET /my-host/pagina.html HTTP/1.1
-Host: myhost.org
-User-Agent: un cliente</code></pre>
-          <p class="fragment">Response:</p>
-          <pre
-            class="fragment"
-          ><code data-trim data-noescape data-line-numbers="1|2-8|9">HTTP/1.1 200 OK
-Date: Sat, 15 Oct 2021 14:28:02 GMT
-Server: Apache
-Last-Modified: Tue, 01 Oct 2021 20:18:22 GMT
-ETag: "51142bc1-7449-479b075b2891b"
-Accept-Ranges: bytes
-Content-Length: 29769
-Content-Type: text/html
-(body: requested web page)
-</code></pre>
-        </section>
-
-        <section id="headers">
-          <p class="titulo">HTTP Headers (cont)</p>
-          <p class="alineadoIzq fragment">
-            <b>GET</b>: Header + Body Opcional.
-          </p>
-          <p class="alineadoIzq fragment"><b>POST</b>: Header + Body.</p>
-          <p class="alineadoIzq fragment"><b>PUT</b>: Header + Body.</p>
-          <p class="alineadoIzq fragment">
-            <b>DELETE</b>: Header + Body Opcional.
-          </p>
-        </section>
-
-        <section id="headers">
-          <p class="titulo">HTTP Headers</p>
-          <p class="fragment">POST Request (header + body):</p>
-          <pre
-            class="fragment"
-          ><code data-trim data-noescape data-line-numbers="1|4|6-9">POST /my-host/curso HTTP/1.1
-Host: myhost.org
-User-Agent: un client
-Content-Type: application/json
-
-{
-  "curso": "Taller de Tecnología y Producción de Software",
-  "año": "5to"
-}
-</code></pre>
-        </section>
-
-        <section id="recodes">
-          <p class="titulo">HTTP Response Codes</p>
-          <p class="alineadoIzq fragment">
-            <b>1xx</b>: informativo (Request recibido)
-          </p>
-          <p class="alineadoIzq fragment">
-            <b>2xx</b>: Éxito (Success). Ej: 200 - OK
-          </p>
-          <p class="alineadoIzq fragment">
-            <b>3xx</b>: Redirect. Ej: 301 Moved, 304 Cached Version.
-          </p>
-          <p class="alineadoIzq fragment">
-            <b>4xx</b>: Request Incompleto. Ej: 401 Unauthorized.
-          </p>
-          <p class="alineadoIzq fragment">
-            <b>5xx</b>: Error en el servidor. Ej: 500 Internal Server Error.
-          </p>
-        </section>
-
-        <section id="cookie">
-          <p class="titulo">HTTP Cookies</p>
-          <p class="fragment">
-            Las cookies son datos estructurados de la forma
-            <em>clave</em>=<em>valor</em>. Son creados en el Web Server (aunque
-            tambien se pueden crear con javascript) y enviados hacia el cliente,
-            quién lo almacena para enviar con cada nuevo request.
-          </p>
-          <p class="fragment">
-            De esta forma fue posible generar la idea de estado en aplicaciones
-            Web.
-          </p>
-          </section>
-
-          <section id="cookie">
-            <p class="titulo">HTTP Cookies</p>
-            <p class="chico">Típica secuencia de creación de cookie de session</p>
-            <img src="imgs/httpcookiescomm.png"/>
-          </section>
-
-          <section id="cookie">
-            <p class="titulo">HTTP Cookies</p>
-            <p class="chico">Agregar cookies en response, con Javalin:</p>
-            <pre
-              class="fragment"
-            ><code data-trim data-noescape>private Handler login() {
- return ctx -> {
-  ...          
-  response.setHeader("Set-Cookie", 
-            "token=" + token + "; HttpOnly");
-  ...
- }
-}
-</code></pre>
-          </section>
-
-          <section id="cookie">
-            <p class="titulo">HTTP Cookies</p>
-            <p class="chico">Response:</p>
-            <pre
-              class="fragment"
-            ><code data-trim data-noescape data-line-numbers="1|4">HTTP/1.1 200 OK
-Date: Sat, 15 Oct 2021 14:28:02 GMT
-Server: Apache
-Set-Cookie: token=abc123; HttpOnly;
-...
-</code></pre>
-          </section>
-        </section> -->
       </div>
     </div>
 
