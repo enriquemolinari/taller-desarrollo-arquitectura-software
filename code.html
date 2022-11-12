@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>CI and Static Analysis</title>
+    <title>Packages, Design and Code</title>
 
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/reveal.css" />
@@ -63,7 +63,7 @@
       }
 
       .box {
-        width: 930px;
+        width: 760px;
         /*border: 15px solid green;*/
         padding: 15px;
         margin: 2px;
@@ -159,7 +159,7 @@
 
   <body>
     <div class="reveal">
-      <div class="footer">Estructura de Paquetes y Código</div>
+      <div class="footer">Paquetes, Diseño y Código</div>
       <div class="menubar line">
         <div class="slide-number"></div>
         <!--         - estructuras de paquetes
@@ -190,7 +190,7 @@
           data-state="hide-menubar no-title-footer"
         >
           <div class="box">
-            <p>Estructura de paquetes y Código</p>
+            <p>Paquetes, Diseño y Código</p>
           </div>
           <div class="titulobox">Estructura clara y bien definida</div>
           <p class="autor">Enrique Molinari</p>
@@ -204,6 +204,29 @@
             clara!
           </p>
         </section>
+
+        <!--linea que no veo dibujada es una dependencia prohibida!-->
+        <section data-auto-animate>
+          <h1>Auto-Animate</h1>
+        </section>
+        <section data-auto-animate>
+          <h1 style="margin-top: 100px; color: red;">Auto-Animate</h1>
+        </section>
+
+
+        <section data-transition="slide-in fade-out">
+          <img src="imgs/c4model-container.png" />
+        </section>
+
+        <section data-transition="fade-in">
+          <img src="imgs/C4model-component.png" />
+        </section>
+
+        <section id="packages" data-auto-animate>
+          <p class="titulomaschico">Package by Layers Clásica</p>
+          <img src="imgs/package-layers.png" />
+        </section>
+
 
         <section id="packages" data-auto-animate>
           <p class="titulomaschico">Package by Layers Clásica</p>
@@ -235,15 +258,14 @@
             Controllers flacos y modelos gordos. Empujen el código hacia lo más
             cerca del modelo que puedan.
           </p>
-          <!--           data-line-numbers="1|2|3-4|5-6|7|8-9|10-12|13-16|18" -->
           <pre
             class="fragment"
-          ><code class="small1" data-trim data-noescape >@RestController
+          ><code class="small1" lang="java" data-trim data-noescape >@RestController
 public class UserController {                        
  @PostMapping
  @ResponseStatus(HttpStatus.CREATED)
  @Transactional
- public User create(@RequestBody User user) {
+ public User login(String username, String password) {
   u = this.userService.findByName(username);
   this.userService.validatePassword(u.getPassword(),password);
   String token = getJWTToken(username);
@@ -253,17 +275,57 @@ public class UserController {
 }</code></pre>
         </section>
 
+        <section id="ci">
+          <p class="titulomaschico">
+            Controllers flacos y modelos gordos. Empujen el código hacia lo más
+            cerca del modelo que puedan.
+          </p>
+          <!--           data-line-numbers="1|2|3-4|5-6|7|8-9|10-12|13-16|18" -->
+          <pre
+            class="fragment"
+          ><code class="small1" lang="java" data-trim data-noescape >@RestController
+public class UserController {                        
+ @PostMapping
+ @ResponseStatus(HttpStatus.CREATED)
+ @Transactional
+ public User login(String username, String password) {
+  this.userService.authenticate(username, password);
+ }
+}</code></pre>
+        </section>
+
         <section id="ae">
-          <p class="titulo">Exceptions pertenecen a una capa</p>
-          <p class="fragment"></p>
-          <pre class="fragment">
+          <p class="titulomaschico">Exceptions pertenecen a una capa o módulo</p>
+          <img src="imgs/layers-exceptions.png"></img>
+<!--           <pre class="fragment">
           <code class="small1" data-trim data-noescape>@SuppressWarnings("PMD.UnusedLocalVariable")
 public class Bar {
  void bar() {
   int foo;
  }
-}</code></pre>
+}</code></pre> -->
         </section>
+
+        <section id="ae">
+          <p class="titulomaschico">Exceptions pertenecen a una capa o módulo</p>
+          <img src="imgs/layers-exceptions-2.png"></img>
+        </section>       
+
+        <section id="ae">
+          <p class="titulomaschico">Exceptions, ¿Cómo manejarlas?</p>
+          <p class="fragment">Cada capa atrapa y lanza su exception o el framework que uso atrapa cualquiera y muestra mensaje</p>
+          <pre class="fragment">
+          <code class="small1" data-trim data-noescape>public class DomainClass {
+ void doSomething() {
+  try {
+   this.repo.doSomething();
+  } catch(DataException e) {
+    throw new DomainException(e, "Imposible hacer esto...");
+  }
+ }
+}</code></pre>
+
+        </section>       
       </div>
     </div>
 
