@@ -63,7 +63,7 @@
       }
 
       .box {
-        width: 910px;
+        width: 930px;
         /*border: 15px solid green;*/
         padding: 15px;
         margin: 2px;
@@ -159,7 +159,7 @@
 
   <body>
     <div class="reveal">
-      <div class="footer">Layers y Paquetes</div>
+      <div class="footer">Estructura de Paquetes y Código</div>
       <div class="menubar line">
         <div class="slide-number"></div>
         <!--         - estructuras de paquetes
@@ -172,14 +172,14 @@
           <!-- slide 43 package by layers -->
           <!-- slide 50 package by layers / big ball of mud -->
           <!-- slide 59  por eso package by feature (screeming the architecture) -->
-          <!-- hexagons, onions and ports/adapters-->
+          <!-- hexagons, onions |d ports/adapters-->
           <!-- slide 66 para que vean la Exception -->
-          <li><a href="#/cd">Packages</a></li>
+          <li><a href="#/packages">Estructura de Paquetes</a></li>
           <!-- aca hablo de controllers livianos y objetos anemicos -->
           <!--mostrar link de fowler-->
-          <li><a href="#/ci">Controller/Domain/Database</a></li>
+          <li><a href="#/code">Controller/Domain/Data</a></li>
           <!-- aca puedo mostrar la del Token -->
-          <li><a href="#/ci">Depender de Abstracciones</a></li>
+          <li><a href="#/dip">Depender de Abstracciones</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -190,22 +190,44 @@
           data-state="hide-menubar no-title-footer"
         >
           <div class="box">
-            <p>Layers y paquetes</p>
+            <p>Estructura de paquetes y Código</p>
           </div>
-          <div class="titulobox">
-            Estructura clara dentro de un Microservicio!
-          </div>
+          <div class="titulobox">Estructura clara y bien definida</div>
           <p class="autor">Enrique Molinari</p>
           <p id="hoy" class="autor fechahoy"></p>
         </section>
 
-        <section id="ae">
+        <section id="packages">
           <p class="titulo">Estructura de capas clara!</p>
           <p class="fragment">
             Ni bien abro un proyecto tengo que ver la estructura de capas bien
             clara!
           </p>
-          <p>Layers tradicional o Hexagonal</p>
+        </section>
+
+        <section id="packages" data-auto-animate>
+          <p class="titulomaschico">Package by Layers Clásica</p>
+          <img src="imgs/package-layers.png" />
+        </section>
+
+        <section id="packages" data-auto-animate>
+          <p class="titulochico">Package by Layers (con modelo compartido)</p>
+          <img src="imgs/package-layer-shared-model.png" />
+        </section>
+
+        <section id="packages" data-auto-animate>
+          <p class="titulo">Package by feature</p>
+          <img src="imgs/package-feature-1.png" />
+        </section>
+
+        <section id="packages" data-auto-animate>
+          <p class="titulo">Arquitectura Hexagonal (o ports and adapters)</p>
+          <img src="imgs/package-hexagonal.png" />
+        </section>
+
+        <section id="packages" data-auto-animate>
+          <p class="titulo">Package by feature (layer y hexagonal)</p>
+          <img src="imgs/package-feature.png" />
         </section>
 
         <section id="ci">
