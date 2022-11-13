@@ -168,16 +168,11 @@
         --- para poder hacer test unitarios, y para poder cambiar implementaciones FACIL!
  -->
         <ul class="menu">
-          <!-- package by feature, package by layer, Hexagonal -->
-          <!-- slide 43 package by layers -->
-          <!-- slide 50 package by layers / big ball of mud -->
-          <!-- slide 59  por eso package by feature (screeming the architecture) -->
-          <!-- hexagons, onions |d ports/adapters-->
-          <!-- slide 66 para que vean la Exception -->
-          <li><a href="#/packages">Estructura de Paquetes</a></li>
+          <li><a href="#/c4">C4 Model</a></li>
+          <li><a href="#/packages">Paquetes/Componentes</a></li>
           <!-- aca hablo de controllers livianos y objetos anemicos -->
           <!--mostrar link de fowler-->
-          <li><a href="#/code">Controller/Domain/Data</a></li>
+          <li><a href="#/code">Código</a></li>
           <!-- aca puedo mostrar la del Token -->
           <li><a href="#/dip">Depender de Abstracciones</a></li>
         </ul>
@@ -197,68 +192,86 @@
           <p id="hoy" class="autor fechahoy"></p>
         </section>
 
-        <section id="packages">
-          <p class="titulo">Estructura de capas clara!</p>
-          <p class="fragment">
-            Ni bien abro un proyecto tengo que ver la estructura de capas bien
-            clara!
-          </p>
-        </section>
-
-        <!--linea que no veo dibujada es una dependencia prohibida!-->
-        <section data-transition="slide-in fade-out">
+        <section id="c4" data-transition="fade-out">
+          <p class="titulochico">Model C4 / Abstraciones</p>
           <img src="imgs/c4model.png" />
         </section>
 
-
-        <section data-transition="fade-in">
+<!--         <section id="c4" data-transition="fade-in">
           <img src="imgs/C4model-ss.png" />
-        </section>
+        </section> -->
 
-        <section data-transition="fade-in">
+        <section id="c4" data-transition="fade-in">
+          <p class="titulochico">Containers</p>
           <img src="imgs/c4model-container.png" />
         </section>
 
-        <section data-transition="fade-in">
+        <section id="c4" data-transition="fade-in">
+          <p class="titulochico">Containers</p>
+          <img src="imgs/microservices-style.png" />
+          <p class="fragment chico">¿Rest API y Admin, son contenedores distintos?</p>
+        </section>
+
+        <section id="packages" data-transition="fade-in">
+          <p class="titulochico">Components</p>
           <img src="imgs/C4model-component.png" />
         </section>
 
-        <section data-transition="fade-in">
-          <img src="imgs/c4model-code.png" />
+        <section id="packages">
+          <p class="titulo">Estructura clara y bien definida</p>
+          <p class="fragment">
+            Ni bien abro un proyecto tengo que ver su estructura bien clara. Debe ser <b>evidente</b> que estilo de arquitectura hemos elegido.
+          </p>
         </section>
 
-        <section id="packages" data-auto-animate>
-          <p class="titulomaschico">Package by Layers Clásica</p>
-          <img src="imgs/package-layers.png" />
+        <section id="packages">
+          <p class="titulochico"><a href="http://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html">Screaming the Architecture</a></p>
+          <p>"When you look at the top level directory structure, and the source files in the highest level package; what does they scream?" (by Robert C. Martin)</p>          
+          <img src="imgs/unclebob.png" />
+<!--           <a class="fragment" href="http://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html">Screaming Architecture</a>
+ -->        </section>
+
+        <section id="packages">
+          <p class="titulochico">Architecturally Evident Coding Style</p>
+          <img src="imgs/george-book.jpg" />
         </section>
 
-
-        <section id="packages" data-auto-animate>
-          <p class="titulomaschico">Package by Layers Clásica</p>
-          <img src="imgs/package-layers.png" />
-        </section>
-
-        <section id="packages" data-auto-animate>
-          <p class="titulochico">Package by Layers (con modelo compartido)</p>
-          <img src="imgs/package-layer-shared-model.png" />
-        </section>
-
-        <section id="packages" data-auto-animate>
+        <section id="packages">
           <p class="titulo">Package by feature</p>
           <img src="imgs/package-feature-1.png" />
         </section>
 
-        <section id="packages" data-auto-animate>
-          <p class="titulo">Arquitectura Hexagonal (o ports and adapters)</p>
+        <section id="packages">
+          <p class="titulomaschico">Package by Layers Clásica</p>
+          <img src="imgs/package-layers.png" />
+        </section>
+
+        <section id="packages">
+          <p class="titulochico">Package by Layers (con modelo compartido)</p>
+          <img src="imgs/package-layer-shared-model.png" />
+        </section>
+
+        <section id="packages">
+          <p class="titulochico">Arquitectura Hexagonal (o ports and adapters)</p>
           <img src="imgs/package-hexagonal.png" />
         </section>
 
-        <section id="packages" data-auto-animate>
-          <p class="titulo">Package by feature (layer y hexagonal)</p>
+        <section id="packages">
+          <p class="titulochico">Package by feature (layer y hexagonal)</p>
           <img src="imgs/package-feature.png" />
         </section>
 
-        <section id="ci">
+        <section id="packages">
+          <p class="titulochico">Package by Component</p>
+          <img src="imgs/package-component.png"/>
+        </section>
+
+        <section id="code" data-transition="fade-in">
+          <p class="titulochico">Code o Classes</p>
+          <img src="imgs/c4model-code.png" />
+        </section>
+
+        <section id="code">
           <p class="titulomaschico">
             Controllers flacos y modelos gordos. Empujen el código hacia lo más
             cerca del modelo que puedan.
@@ -280,7 +293,7 @@ public class UserController {
 }</code></pre>
         </section>
 
-        <section id="ci">
+        <section id="code">
           <p class="titulomaschico">
             Controllers flacos y modelos gordos. Empujen el código hacia lo más
             cerca del modelo que puedan.
@@ -299,7 +312,7 @@ public class UserController {
 }</code></pre>
         </section>
 
-        <section id="ae">
+        <section id="code">
           <p class="titulomaschico">Exceptions pertenecen a una capa o módulo</p>
           <img src="imgs/layers-exceptions.png"></img>
 <!--           <pre class="fragment">
@@ -311,7 +324,7 @@ public class Bar {
 }</code></pre> -->
         </section>
 
-        <section id="ae">
+        <section id="code">
           <p class="titulomaschico">Exceptions pertenecen a una capa o módulo</p>
           <img src="imgs/layers-exceptions-2.png"></img>
         </section>       
