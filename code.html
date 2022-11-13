@@ -124,6 +124,11 @@
       p.maschico {
         font-size: 20pt;
       }
+
+      span.maschico {
+        font-size: 20pt;
+      }
+
       li.maschico {
         font-size: 20pt;
       }
@@ -173,8 +178,6 @@
           <!-- aca hablo de controllers livianos y objetos anemicos -->
           <!--mostrar link de fowler-->
           <li><a href="#/code">Código</a></li>
-          <!-- aca puedo mostrar la del Token -->
-          <li><a href="#/dip">Depender de Abstracciones</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -218,9 +221,59 @@
         </section>
 
         <section id="packages">
-          <p class="titulo">Estructura clara y bien definida</p>
+          <p class="titulochico">Estructuras de Componentes o Módulos</p>
+          <p class="chico">
+            ¿Por qué debemos partir una aplicacion en componentes o módulos? y ¿Por qué
+            definir sus relaciones y respetarlas?
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            Porque cuando hagamos un cambio tendremos <u>noción de donde éste
+            repercute</u>.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            Porque de esa forma tenemos "pequeños sistemas" más simples. <u>Mas
+            simple implica más facil de modificar</u>.
+          </p>
+        </section>
+
+        <section id="packages" data-transition="fade-out fade-in">
+          <p class="titulochico">Layered Architecture</p>
+          <img src="imgs/layer-bigball0.png" />
+          <p class="fragment">¿Acá tenemos noción donde repercute un cambio?</p>
+        </section>
+
+        <section id="packages" data-transition="fade-out fade-in">
+          <p class="titulochico">Layered Architecture</p>
+          <img src="imgs/layer-bigball1.png" />
+          <p class="fragment">¿y... acá? <span class="fragment">Esto sucede si no tenemos disciplina!</span></p>
+        </section>
+
+        <section id="packages">
+          <p class="titulochico">Estructuras de Componentes o Módulos</p>
+          <p class="fragment chico">¿Existe en Java la keyword Component? o ¿Layer?</p>
+          <p class="fragment chico">
+            <b>Debemos</b> encontrar en el lenguaje de programación
+            que utilicemos, que abstracción (estructura sintáctica) podemos
+            utilizar para crear éstas módulos o componentes. <u>Las clases tienen demasiado detalle</u>.
+          </p>
+          <p class="fragment">¿Cuáles son las opciones en Java?</p>
           <p class="fragment">
-            Ni bien abro un proyecto tengo que ver su estructura bien clara. Debe ser <b>evidente</b> que estilo de arquitectura hemos elegido.
+            Desde Java v1, los <u>paquetes</u>. Java v9 incorporó la
+            construcción sintáctica <u>module</u>.
+          </p>
+        </section>
+
+        <section id="packages">
+          <p class="titulochico">Estructuras de Componentes o Módulos</p>
+          <p class="fragment">
+            Ok. Tenemos que estructurar aplicaciones Java utilizando paquetes. ¿Qué opciones tengo?    
+          </p>
+        </section>
+
+        <section id="packages">
+          <p class="titulochico">Estructuras de Componentes o Módulos</p>
+          <p class="fragment">
+            Además, ni bien abro un proyecto tengo que ver su estructura bien clara. Debe ser <b>evidente</b> que estilo de arquitectura hemos elegido.
           </p>
         </section>
 
@@ -230,6 +283,15 @@
           <img src="imgs/unclebob.png" />
 <!--           <a class="fragment" href="http://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html">Screaming Architecture</a>
  -->        </section>
+
+        <section id="packages">
+          <p class="titulomaschico">¿Es claro?</p>
+          <img src="imgs/no-evidente.png" />
+          <p class="fragment maschico"><b>"auth"</b> término funcional mezclado con capas horizontales. 
+          <span class="fragment maschico"><b>"exception"</b> ¿es de alguna capa? ¿cuál?. </span> 
+          <span class="fragment maschico"><b>"generic"</b> ¿es de alguna capa? ¿o de todo el sistema?</span>
+          </p> 
+        </section>
 
         <section id="packages">
           <p class="titulochico">Architecturally Evident Coding Style</p>
@@ -257,7 +319,7 @@
         </section>
 
         <section id="packages">
-          <p class="titulochico">Package by feature (layer y hexagonal)</p>
+          <p class="titulochico">Package by feature y sub-feature</p>
           <img src="imgs/package-feature.png" />
         </section>
 
@@ -315,13 +377,6 @@ public class UserController {
         <section id="code">
           <p class="titulomaschico">Exceptions pertenecen a una capa o módulo</p>
           <img src="imgs/layers-exceptions.png"></img>
-<!--           <pre class="fragment">
-          <code class="small1" data-trim data-noescape>@SuppressWarnings("PMD.UnusedLocalVariable")
-public class Bar {
- void bar() {
-  int foo;
- }
-}</code></pre> -->
         </section>
 
         <section id="code">
@@ -329,7 +384,7 @@ public class Bar {
           <img src="imgs/layers-exceptions-2.png"></img>
         </section>       
 
-        <section id="ae">
+        <section id="code">
           <p class="titulomaschico">Exceptions, ¿Cómo manejarlas?</p>
           <p class="fragment">Cada capa atrapa y lanza su exception o el framework que uso atrapa cualquiera y muestra mensaje</p>
           <pre class="fragment">
@@ -342,8 +397,86 @@ public class Bar {
   }
  }
 }</code></pre>
+        </section>
+        
+        <section id="code">
+          <p class="titulomaschico">Evitar modelos anémicos</p>
+          <pre class="fragment">
+            <code class="small1" data-trim data-noescape>@Entity
+public class ClientUser {
+ ...   
+ @Transient
+ private transient Token t;
 
-        </section>       
+ @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+ @JoinColumn(name = "id_user")
+ private List<Role> roles;
+
+ public ClientUser(Long id, String username, String password) {
+  this(id, username, password, new Role[0]);
+ }
+
+ public ClientUser(Long id, String username, String password, Token t) {
+  this(id, username, password, new Role[0]);
+  this.t = t;
+ }
+
+ public ClientUser(Long id, String username, String password, Role... roles) {
+  this.id = id;
+  this.username = username;
+  this.password = new Encriptar(password).value();
+  this.roles = Arrays.<Role>asList(roles);
+ }
+
+ public String generateToken() {
+  return t.value(this.username);
+ }
+
+ public User toUser() {
+  return new User() {
+   @Override
+   public String userName() {
+    return userName();
+   }
+
+   @Override
+   public String token() {
+    return generateToken();
+   }
+  };
+ }
+}
+</code></pre>
+  <p class="fragment chico">Él mismo genera el Dto usando toUser(). Encripta la clave, genera el token. Análisis de sangren con menos anemia. Si no esta lógica va a parar a los servicios, o peor, a los controllers.</p>
+        </section>
+
+        <section id="code">
+          <p class="titulochico">Depender de abstracciones (SOLID principle)</p>
+          <pre>
+          <code class="small1" data-trim data-noescape data-line-numbers="2-6|10-12|16-20">@Entity
+public class ClientUser {
+ ...           
+ public ClientUser(Long id, String username, String password, Token t) {
+  this(id, username, password, new Role[0]);
+  this.t = t;
+ }
+            
+ ...            
+ public String generateToken() {
+  return t.value(this.username);
+ }
+ ...
+}
+
+package user.model;
+
+public interface Token {
+  String value(String username);
+}
+</code></pre>
+  <p class="fragment chico">Hoy se usa JWT, pero mañana por ahi se usa Paceto.</p>
+</section> 
+
       </div>
     </div>
 
