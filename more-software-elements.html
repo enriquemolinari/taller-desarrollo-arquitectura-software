@@ -125,7 +125,7 @@
           <li><a href="#/dns">DNS</a></li>
           <li><a href="#/lb">Load Balancer</a></li>
           <li><a href="#/cache">Cache</a></li>
-          <li><a href="#/cache">Browser Cache y CDN</a></li>
+          <li><a href="#/cache2">Browser Cache y CDN</a></li>
           <li><a href="#/queues">Messages Queues</a></li>
         </ul>
         <div class="placeholder"></div>
@@ -300,9 +300,42 @@
           <p class="titulo">Caching Strategies</p>
           <p class="titulochico">Cache Aside (cache de lado)</p>
           <img src="imgs/cache-aside.png">  
-          <p class="chico"></p>
+          <p class="chico">La aplicación primero busca en cache si no encuentra va al almacenamiento persistente, luego refresca el cache y devuelve el dato. Require de TTL. Cuando hay cache miss la latencia es mayor.</p>
         </section>
 
+        <section id="cache">
+          <p class="titulo">Caching Strategies</p>
+          <p class="titulochico">Read Through</p>
+          <img src="imgs/read-through.png">  
+          <p class="chico">La aplicación siempre lee del cache. Si la entrada no esta allí es el cache quien busca en el almacenamiento permanente el dato y lo deja en cache para que este disponible. Require TTL. Al igual que la estrategia anterior, tiene latencia adicional si el dato no esta en cache.</p>
+        </section>
+
+        <section id="cache">
+          <p class="titulo">Caching Strategies</p>
+          <p class="titulochico">Write Through</p>
+          <img src="imgs/write-through.png">  
+          <p class="chico">La aplicación siempre lee y escribe en cache (almancenamiento principal). El cache actualiza de forma síncrona, el almacenamiento persistente. No es atómico, tiene siempre latencia adicional en la escritura al ser síncrono, pero las lecturas siempre serán del cache. Podría haber datos en cache que nunca son leídos.</p>
+        </section>
+
+        <section id="cache">
+          <p class="titulo">Caching Strategies</p>
+          <p class="titulochico">Write Behind</p>
+          <img src="imgs/write-behind.png">  
+          <p class="chico">La aplicación siempre lee y escribe en cache (almancenamiento principal). El cache actualiza de forma asíncrona, el almacenamiento persistente. Elimino la latencia en las escrituras.</p>
+        </section>
+
+
+        <section id="cache">
+          <p class="titulo">Caching Strategies</p>
+          <p class="titulochico">Refresh Ahead</p>
+          <img src="imgs/refresh-ahead.png">  
+          <p class="chico">El cache se configura para actualizar aquellos items que estan por expirar. Es específico para la lectura de ciertos items de datos. Las escrituras son sobre el almacenamiento persistente.</p>
+        </section>
+
+        <section id="cache2">
+          <p class="titulo">Browser Cache</p>
+          <p class="fragment">¿Cómo funciona el request de una página web?</p>
+        </section>
 
         <section id="queues">
           <p class="titulo">Message Queues</p>
