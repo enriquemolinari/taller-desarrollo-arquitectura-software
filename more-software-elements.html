@@ -125,8 +125,8 @@
           <li><a href="#/dns">DNS</a></li>
           <li><a href="#/lb">Load Balancer</a></li>
           <li><a href="#/cache">Cache</a></li>
-          <li><a href="#/cache">Browser Cache</a></li>
-          <li><a href="#/cache">CDN y Contenido Estático</a></li>
+          <li><a href="#/cache">Browser Cache y CDN</a></li>
+          <li><a href="#/queues">Messages Queues</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -268,6 +268,47 @@
           <p class="fragment chicoYalineadoIzq"><b>Least Connections</b>: Envía al servicio que esta ejecutando menos cantidad de request.</p>          
           <p class="fragment chicoYalineadoIzq"><b>Least Response time</b>: Selecciona segun cantidad de request ejecutándose y el tiempo promedio de respuesta.</p>    
         </section>
+
+        <section id="cache">
+          <p class="titulo">Caching</p>
+          <p class="fragment">¿Qué es?</p>
+          <p class="fragment">Caching refiere al proceso de almancenar datos en un almancenamiento temporal de rápido acceso principalmente para reducir la latencia de nuestra aplicación.</p>
+          <p class="fragment">El almancenamiento de rápido acceso es más caro y de poca capacidad, por eso es importante entener la mejor estrategia para tener ese cache fresco.</p>
+        </section>
+
+        <section id="cache">
+          <p class="titulo">Caching</p>
+          <img src="imgs/disk-vs-mem.png"/>
+        </section>
+
+        <section id="cache">
+          <p class="titulo">Caching</p>
+          <p class="titulochico">Algunos términos importantes</p>
+          <p class="fragment chicoYalineadoIzq"><b>Cache hit</b>: Es cuando se encuentra el dato en el cache y se recupera de allí.</p>
+          <p class="fragment chicoYalineadoIzq"><b>Cache miss</b>: Es cuando no se encuentra el dato en el cache y debe recuperarse del almacenamiento permanente</p>
+          <p class="fragment chicoYalineadoIzq"><b>Cache eviction</b>: Refiere a quitar entradas del cache porque estan desactualizadas, inconsistentes con el almacenamiento permanente.</p>
+          <p class="fragment chicoYalineadoIzq"><b>TTL</b>: Time to live. El tiempo en el que ese dato será borrado del cache.</p>
+        </section>
+
+        <section id="cache">
+          <p class="titulo">Caching</p>
+          <p class="titulochico">Hoy las bases de datos NoSQL de tipo Clave-valor brillan para ser utilizadas como mecanimos de cache.</p>
+          <p class="fragment"><b>Redis</b>, <b>Memcache</b>, <b>Ehcache</b>, etc. 
+        </section>
+
+        <section id="cache">
+          <p class="titulo">Caching Strategies</p>
+          <p class="titulochico">Cache Aside (cache de lado)</p>
+          <img src="imgs/cache-aside.png">  
+          <p class="chico"></p>
+        </section>
+
+
+        <section id="queues">
+          <p class="titulo">Message Queues</p>
+          <p class="fragment">¿Qué son? ¿Cuándo utilizaras?</p>
+        </section>
+
 
         <!-- 
         <section id="ci" data-auto-animate>
