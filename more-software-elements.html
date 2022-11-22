@@ -337,10 +337,55 @@
           <p class="fragment">¿Cómo funciona el request de una página web?</p>
         </section>
 
+        <section id="cache2">
+          <p class="titulo">Browser Cache</p>
+          <p class="titulochico">Future Expire Headers: Utiliza la del cache, no me preguntes.</p>
+          <pre
+            class="fragment"
+          ><code class="small1" lang="java" data-trim data-noescape >ExpiresActive On
+ExpiresByType image/jpg "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/gif "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType text/css "access plus 1 year"
+ExpiresByType application/javascript "access plus 1 year"
+</code></pre>
+<p class="fragment chico">¿Cuándo saco una versión nueva de la aplicación como invalido el cache de mis clientes?</p>
+<p class="fragment chico">Agregando un número de versión a todo lo que cache con future expire headers</p>
+</section>
+
+
+<section id="cache2">
+  <p class="titulo">Browser Cache</p>
+  <p class="titulochico">Agregando versionado al contenido estático</p>
+  <pre
+    class="fragment"
+  ><code class="small1" lang="html" data-trim><link href="/miapp/css/hideColumn.css?v=1666621220" rel="..."/>
+<link href="/miapp/css/bootstrap.css?v=1665509236" rel="..."/> 
+<script src="/miapp/js/hidecolumns.js?v=1666621220"></script>
+<script src="/miapp/jquery.js?v=1665509236"></script>
+<script src="/miapp/bundle.js?v=1665509236"></script>
+</code></pre>
+<p class="fragment chico">En cada nuevo deploy el número de versión debe cambiar. De esta forma el browser lo vuelve a pedir.</p>
+</section>
+
+    <section id="cache2">
+      <p class="titulo">CDN (Content Delivery Network)</p>
+      <p class="fragment">Deployamos contenido estatico cerca del cliente.</p>
+      <p class="fragment">Imagenes, videos, js, css, etc</p>
+      <p class="fragment">Servicio ofrecido por grandes ISPs para Aplicaciones con potencial acceso mundial.</p>
+      <p class="fragment">Youtube, Netflix, etc, son grandes usuarios de CDN.</p>
+    </section>
+
+
         <section id="queues">
           <p class="titulo">Message Queues</p>
           <p class="fragment">¿Qué son? ¿Cuándo utilizaras?</p>
           <p>Asynchronous workflows help reduce request times for expensive operations that would otherwise be performed in-line. They can also help by doing time-consuming work in advance, such as periodic aggregation of data.</p>
+
+          
+          <p>time-consuming tasks</p>
+          <p>unreliable services</p>
         </section>
 
 
