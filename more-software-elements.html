@@ -219,7 +219,7 @@
 
         <section id="dns" data-auto-animate>
           <p class="titulo">DNS (Domain Name Service)</p>
-          <p>Cualquier servicio en Internet, lo primero que contacta es a un DNS. Por este motivo la Web necesita que este servicio tenga <u>alta disponibilidad</u> y <u>cercanía geografica</u> para reducir la latencia. Por eso sus entradas esta replicadas en practicamente todo el planeta y esto es la principal causa por la cual actualizar tablas de DNSs lleva tiempo.</p>
+          <p>Cualquier servicio en Internet, lo primero que contacta es a un DNS. Por este motivo la Web necesita que este servicio tenga <u>alta disponibilidad</u> y <u>cercanía geografica</u> para reducir la latencia. Por eso sus entradas estan replicadas en practicamente todo el planeta y esto es la principal causa por la cual actualizar tablas de DNSs lleva tiempo.</p>
         </section>
 
         <section id="dns">
@@ -378,15 +378,21 @@ ExpiresByType application/javascript "access plus 1 year"
     </section>
 
 
-        <section id="queues">
+        <section id="queues" data-auto-animate="fade-out">
           <p class="titulo">Message Queues</p>
-          <p class="fragment">¿Qué son? ¿Cuándo utilizaras?</p>
-          <p>Asynchronous workflows help reduce request times for expensive operations that would otherwise be performed in-line. They can also help by doing time-consuming work in advance, such as periodic aggregation of data.</p>
-
-          
-          <p>time-consuming tasks</p>
-          <p>unreliable services</p>
+          <p class="fragment">Es un servicio que permite comunicar dos o más aplicaciones de forma asíncrona.</p> 
+          <img class="fragment" src="imgs/queue.png"/>
+          <p class="fragment">Ofrecen varias formas de comunicación (ej: 1 a 1 o 1 a N) y puede ser en memoria o en disco.</p>
         </section>
+
+        <section id="queues" data-auto-animate="fade-in">
+          <p class="titulo">Message Queues</p>
+          <img class="fragment" src="imgs/queue.png"/>
+          <p class="fragment chico">¿Pará que utilizaríamos una cola de mensajes?</p>
+          <p class="fragment chico">Para <u>reducir la latencia en procesos costosos</u>. Ej: Consumo de un servicio en la Nube, consumo de un servicio externo a mi aplicación (ej: envío de un email), pre-procesamiento o denormalización de ciertos datos para mejorar las lecturas de ciertas funcionalidades, replicar datos, publicar eventos, entre otros.</p>
+        </section>
+
+
 
 
         <!-- 
