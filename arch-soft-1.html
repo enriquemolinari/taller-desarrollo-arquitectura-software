@@ -165,20 +165,56 @@
           </html> -->
 
         <section id="def" data-auto-animate>
-          <p>
+          <p class="chico fragment">
+            Technical Report: An Introduction to Software Architecture (Shaw y
+            Garlan, 1994)
+          </p>
+          <p class="chico fragment">
+            As the size and complexity of software systems increases, the design
+            problem goes beyond the algorithms and data structures of the
+            computation:
+            <span class="fragment highlight-red"
+              >designing and specifying the overall system structure</span
+            >
+            emerges as a new kind of problem.
+          </p>
+        </section>
+
+        <section id="def" data-auto-animate>
+          <p class="chico">
+            Technical Report: An Introduction to Software Architecture (Shaw y
+            Garlan, 1994)
+          </p>
+          <p class="chico">
+            Structural issues includes: protocols for communication,
+            synchronization and data access; assignment of functionality to
+            <span class="fragment highlight-red">design elements</span>;
+            <span class="fragment highlight-red">physical</span> distribution;
+            composition of design elements;
+            <span class="fragment highlight-red">scaling</span> and performance;
+            and selection among design alternatives.
+            <span class="fragment highlight-blue"
+              >This is the software architecture level of design</span
+            >
+          </p>
+        </section>
+
+        <section id="def" data-auto-animate>
+          <p class="chico fragment">Grady Booch</p>
+          <p class="chico fragment">
             Architecture represents the
             <span class="fragment highlight-red"
               >significant design decisions</span
             >
             that <span class="fragment highlight-red">shape</span> a system,
             where significant is measured by
-            <span class="fragment highlight-red"> cost of change</span>. - Grady
-            Booch (2006).
+            <span class="fragment highlight-red"> cost of change</span>.
           </p>
         </section>
 
         <section id="def" data-auto-animate>
-          <p>
+          <p class="chico">Grady Booch</p>
+          <p class="chico">
             Architecture represents the
             <span class="fragment highlight-red" data-fragment-index="0"
               >significant design decisions</span
@@ -190,13 +226,17 @@
             a system, where significant is measured by
             <span class="fragment highlight-red" data-fragment-index="0">
               cost of change</span
-            >. - Grady Booch (2006).
+            >.
           </p>
           <img src="imgs/grady.png" width="190" height="264" />
         </section>
 
         <section id="def" data-auto-animate>
-          <p>
+          <p class="chico fragment">
+            Software Architecture in Practice (3era Edición, 2012)
+          </p>
+
+          <p class="chico fragment">
             The software architecture of a system is the set of
             <span class="fragment highlight-red">structure</span> needed to
             reason about the system, which comprises
@@ -206,7 +246,11 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p>
+          <p class="chico">
+            Software Architecture in Practice (3era Edición, 2012)
+          </p>
+
+          <p class="chico">
             The software architecture of a system is the set of
             <span class="fragment highlight-red" data-fragment-index="0"
               >structure</span
@@ -224,7 +268,11 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p>
+          <p class="chico fragment">
+            Bob Martin (Clean Architecture Book, 2017)
+          </p>
+
+          <p class="chico fragment">
             Software architecture is the art of drawing lines that I call
             <span class="fragment highlight-red">boundaries</span>. Those
             boundaries separate
@@ -235,7 +283,9 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p>
+          <p class="chico">Bob Martin (Clean Architecture Book, 2017)</p>
+
+          <p class="chico">
             Software architecture is the art of drawing lines that I call
             <span class="fragment highlight-red" data-fragment-index="0"
               >boundaries</span
@@ -250,70 +300,163 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p>
-            Software architecture is the set of
-            <span class="fragment highlight-red">design decisions</span> which,
-            if made incorrectly, may cause your project to be
-            <span class="fragment highlight-red">cancelled</span>. - Eoin Woods
-            (2010).
-          </p>
-        </section>
+          <p class="chico fragment">Ralph Johnson</p>
 
-        <section id="def" data-auto-animate>
-          <p>
-            Software architecture is the set of
-            <span class="fragment highlight-red" data-fragment-index="0"
-              >design decisions</span
-            >
-            which, if made incorrectly, may cause your project to be
-            <span class="fragment highlight-red" data-fragment-index="0"
-              >cancelled</span
-            >. - Eoin Woods (2010).
-          </p>
-          <img src="imgs/eoin.png" />
-        </section>
-
-        <section id="def" data-auto-animate>
-          <p>
+          <p class="chico fragment">
             Architecture is about the
             <span class="fragment highlight-red" data-fragment-index="0"
               >important stuff</span
-            >. Whatever that is. - Ralph Johnson.
+            >. Whatever that is.
           </p>
         </section>
 
         <section id="def" data-auto-animate>
-          <p>
+          <p class="chico">Ralph Johnson</p>
+
+          <p class="chico">
             Architecture is about the
             <span class="fragment highlight-red" data-fragment-index="0"
               >important stuff</span
-            >. Whatever that is. - Ralph Johnson.
+            >. Whatever that is.
           </p>
           <img src="imgs/ralph.png" />
         </section>
 
-        <section id="def">
-          <p>
-            La arquitectura de software establece de qué manera un producto de
-            software o sistema está
+        <section id="def" data-auto-animate>
+          <p class="chico fragment">Martin Fowler (2002)</p>
+
+          <p class="chico fragment">
+            The software industry delights in taking words and stretching them
+            into a myriad of subtly contradictory meanings. One of the biggest
+            sufferers is "architecture". I tend to look at “architecture” as one
+            of those impressive-sounding words, used primarily to indicate that
+            we’re talking something that’s important. But I’m pragmatic enough
+            not to let my cynicism get in the way of attracting people to my
+            book. :-).
+          </p>
+        </section>
+
+        <section id="def" data-auto-animate>
+          <p class="chico">Martin Fowler (2002)</p>
+
+          <p class="chico fragment">
+            “Architecture” is a term that lots of people try to deﬁne, with
+            little agreement. There are two common elements: One is the
+            highest-level breakdown of a system into its parts; the other,
+            decisions that are hard to change.
+          </p>
+        </section>
+
+        <section id="def" data-auto-animate>
+          <p class="chico">Martin Fowler (2002)</p>
+
+          <p class="chico fragment">
+            It’s also increasingly realized that there isn’t just one way to
+            state a system’s architecture; rather, there are multiple
+            architectures in a system, and the view of what is architecturally
+            signiﬁcant is one that can change over a system’s lifetime.
+          </p>
+        </section>
+
+        <section id="def" data-auto-animate>
+          <p class="chico">Martin Fowler (2002)</p>
+
+          <p class="chico">
+            It’s also increasingly realized that there isn’t just one way to
+            state a system’s architecture; rather, there are multiple
+            architectures in a system, and the view of what is architecturally
+            signiﬁcant is one that can change over a system’s lifetime.
+          </p>
+          <img src="imgs/patterns-arch-fowler.png" width="229" height="322" />
+        </section>
+
+        <section id="def" data-auto-animate>
+          <p class="chico fragment">
+            Software Architecture Fundamentals (2020)
+          </p>
+
+          <p class="chico fragment">
+            The industry as a whole has struggled to precisely define "software
+            architecture". Some architects refer to software architecture as the
+            blueprint of the system. The issue with these common definitions is
+            understanding what the blueprint actually contains.
+          </p>
+          <p class="chico fragment">What is analyzed when an architect analyzes an architecture?</p>
+        </section>
+
+        <section id="def" data-auto-animate>
+          <p class="chico">
+            Software Architecture Fundamentals (2020)
+          </p>
+
+          <p class="chico">
+            Software architecture consists of the
             <span class="fragment highlight-red" data-fragment-index="0"
-              >estructurado</span
-            >. La
-            <span class="fragment highlight-blue" data-fragment-index="1"
-              >estructura</span
-            >
-            comprende
+              >structure of the system</span
+            >, combined with
             <span class="fragment highlight-red" data-fragment-index="1"
-              >elementos de software</span
-            >, sus
-            <span class="fragment highlight-red" data-fragment-index="1"
-              >propiedades</span
+              >architecture characteristics</span
             >
-            y las
-            <span class="fragment highlight-red" data-fragment-index="1"
-              >relaciones</span
-            >
-            entre ellos.
+            the system must support,
+            <span class="fragment highlight-red" data-fragment-index="2"
+              >architecture decisions</span
+            >, and finally
+            <span class="fragment highlight-red" data-fragment-index="3"
+              >design principles</span
+            >.
+          </p>
+          <img class="fragment"
+            src="imgs/software-arch-fundamentals.png"
+            width="229"
+            height="322"
+          />
+        </section>
+
+        <section id="def" data-auto-animate>
+          <p class="chico">
+            Software Architecture Fundamentals (2020)
+          </p>
+          <ul>
+            <li>
+              <p class="chico"><b>Structure of the system</b>: The architecture style (Layered,
+              Modular, etc).</p>
+            </li>
+            <li>
+              <p class="chico"><b>Architecture characteristics</b>: También conocidos como
+              Quality Atributes o Requerimientos No Funcionales. Ejemplo: Scalability.</p>
+            </li>
+            <li>
+              <p class="chico"><b>Architecture decisions</b>: Ejemplo: Solo la capa de negocios puede
+              hablar con la capa de persistencia.</p>
+            </li>
+            <li>
+              <p class="chico"><b>Design Principles</b>: Consejos (guidelines) mas que reglas que
+              debemos respetar. Por ejemplo, utilzación de comunicación
+              asíncrona por sobre la síncrona.</p>
+            </li>
+          </ul>
+          </p>
+        </section>
+
+        <section id="def" data-auto-animate>
+          <p>
+            ¿Mareados?
+          </p>
+          <p class="fragment">
+            Arquitectura de Software es lo que Uds decidan, segun que autor les gusta más. 
+          </p>
+          <p class="fragment">
+            ¿Quizas representa muchas cosas y por eso cuesta encontrar una única definición?
+          </p>
+        </section>
+
+        <section id="def" data-auto-animate>
+          <p class="chico fragment">
+            ¿Qué decimos que es en esta materia?
+          </p>
+              <p class="chico fragment">Tiene que ver con cómo <b>estructuramos</b> el sistema a nivel lógico (código fuente, diseño) y físico (en runtime, deployment).</p>
+              <p class="chico fragment">Definimos la estructura del sistema para cumplir con <b>Atributos de Calidad</b> específicos (modificabilidad, escalabilidad, disponibilidad, seguridad, etc).</p>
+              <p class="chico fragment">Y a dicha estructura le agregamos <b>desiciones de arquitectura</b> (o design decisions).</p>
           </p>
         </section>
 
