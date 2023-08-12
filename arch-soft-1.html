@@ -18,6 +18,31 @@
     <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
 
     <style>
+      ul.arrow {
+        font-size: 24pt;
+        line-height: 1.5em;
+        margin: 5px 0 15px;
+        padding: 0;
+        color: var(--r-main-color)
+      }
+      ul.arrow li {
+        list-style: none;
+        position: relative;
+        padding: 0 0 0 30px;
+      }
+
+      ul.arrow li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 20px;
+        height: 10px;
+        width: 10px;
+        border: 1px solid #ff6600;
+        border-width: 2px 2px 0 0;
+        transform: rotate(45deg);
+      }
+
       div.line {
         border-bottom: 1px solid;
         border-color: lightgray;
@@ -69,8 +94,8 @@
       .fechahoy {
         color: gray;
       }
-
       .titulo {
+
         font-size: 50pt;
       }
 
@@ -123,11 +148,13 @@
       <div class="menubar line">
         <div class="slide-number"></div>
         <ul class="menu">
-          <li><a href="#/def">Definición</a></li>
+          <li><a href="#/def">¿Arquitectura de Software?</a></li>
+          <li><a href="#/def2">Nuestra Definición</a></li>
           <!--         <li><a href="#/arqvsde">Diseño vs Arquitectura</a></li> -->
-          <li><a href="#/vis">Visualización</a></li>
-          <li><a href="#/styles">Estilos de Arquitectura</a></li>
-          <li><a href="#/mod">Estructura de Módulos</a></li>
+<!--           <li><a href="#/estru">¿Cómo Estructuramos un Sistema?</a></li> -->
+<!--           <li><a href="#/vis">Visualización</a></li>
+          <li><a href="#/styles">Estilos de Arquitectura</a></li> -->
+          <li><a href="#/mod">Organización Lógica</a></li>
           <!--           <li><a href="#/dist">Arq. Distribuídas</a></li> -->
           <!--         <li><a href="#/atri">Atributos de Calidad</a></li> -->
         </ul>
@@ -166,8 +193,8 @@
 
         <section id="def" data-auto-animate>
           <p class="chico fragment">
-            Technical Report: An Introduction to Software Architecture (Shaw y
-            Garlan, 1994)
+            Technical Report: <span class="resaltar">An Introduction to Software Architecture (Shaw y
+            Garlan, 1994)</span>
           </p>
           <p class="chico fragment">
             As the size and complexity of software systems increases, the design
@@ -200,7 +227,8 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico fragment">Grady Booch</p>
+          <p class="chico fragment resaltar">Grady Booch</p>
+          <p class="chico fragment">All architecture is design, but not all design is architecture</p>
           <p class="chico fragment">
             Architecture represents the
             <span class="fragment highlight-red"
@@ -213,7 +241,8 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico">Grady Booch</p>
+          <p class="chico resaltar">Grady Booch</p>
+          <p class="chico">All architecture is design, but not all design is architecture</p>
           <p class="chico">
             Architecture represents the
             <span class="fragment highlight-red" data-fragment-index="0"
@@ -232,7 +261,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico fragment">
+          <p class="chico fragment resaltar">
             Software Architecture in Practice (3era Edición, 2012)
           </p>
 
@@ -246,7 +275,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico">
+          <p class="chico resaltar">
             Software Architecture in Practice (3era Edición, 2012)
           </p>
 
@@ -268,7 +297,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico fragment">
+          <p class="chico fragment resaltar">
             Bob Martin (Clean Architecture Book, 2017)
           </p>
 
@@ -283,7 +312,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico">Bob Martin (Clean Architecture Book, 2017)</p>
+          <p class="chico resaltar">Bob Martin (Clean Architecture Book, 2017)</p>
 
           <p class="chico">
             Software architecture is the art of drawing lines that I call
@@ -300,7 +329,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico fragment">Ralph Johnson</p>
+          <p class="chico fragment resaltar">Ralph Johnson</p>
 
           <p class="chico fragment">
             Architecture is about the
@@ -311,7 +340,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico">Ralph Johnson</p>
+          <p class="chico resaltar">Ralph Johnson</p>
 
           <p class="chico">
             Architecture is about the
@@ -323,7 +352,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico fragment">Martin Fowler (2002)</p>
+          <p class="chico fragment resaltar">Martin Fowler (2002)</p>
 
           <p class="chico fragment">
             The software industry delights in taking words and stretching them
@@ -337,7 +366,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico">Martin Fowler (2002)</p>
+          <p class="chico resaltar">Martin Fowler (2002)</p>
 
           <p class="chico fragment">
             “Architecture” is a term that lots of people try to deﬁne, with
@@ -348,7 +377,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico">Martin Fowler (2002)</p>
+          <p class="chico resaltar">Martin Fowler (2002)</p>
 
           <p class="chico fragment">
             It’s also increasingly realized that there isn’t just one way to
@@ -359,7 +388,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico">Martin Fowler (2002)</p>
+          <p class="chico resaltar">Martin Fowler (2002)</p>
 
           <p class="chico">
             It’s also increasingly realized that there isn’t just one way to
@@ -371,7 +400,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico fragment">
+          <p class="chico fragment resaltar">
             Software Architecture Fundamentals (2020)
           </p>
 
@@ -385,7 +414,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico">
+          <p class="chico resaltar">
             Software Architecture Fundamentals (2020)
           </p>
 
@@ -413,10 +442,10 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p class="chico">
+          <p class="chico resaltar">
             Software Architecture Fundamentals (2020)
           </p>
-          <ul>
+          <ul class="arrow">
             <li>
               <p class="chico"><b>Structure of the system</b>: The architecture style (Layered,
               Modular, etc).</p>
@@ -439,7 +468,7 @@
         </section>
 
         <section id="def" data-auto-animate>
-          <p>
+          <p class="titulo resaltar">
             ¿Mareados?
           </p>
           <p class="fragment">
@@ -450,70 +479,114 @@
           </p>
         </section>
 
-        <section id="def" data-auto-animate>
-          <p class="chico fragment">
+        <section id="def2" data-auto-animate>
+          <p class="titulo resaltar">
             ¿Qué decimos que es en esta materia?
           </p>
-              <p class="chico fragment">Tiene que ver con cómo <b>estructuramos</b> el sistema a nivel lógico (código fuente, diseño) y físico (en runtime, deployment).</p>
-              <p class="chico fragment">Definimos la estructura del sistema para cumplir con <b>Atributos de Calidad</b> específicos (modificabilidad, escalabilidad, disponibilidad, seguridad, etc).</p>
-              <p class="chico fragment">Y a dicha estructura le agregamos <b>desiciones de arquitectura</b> (o design decisions).</p>
+          <ul class="arrow">
+            <li class="fragment">Tiene que ver con cómo <b>estructuramos</b> u <b>organizamos</b> el sistema a nivel <u>lógico</u> y a nivel <u>físico</u>.</li>
+            <li class="fragment"><b>Estructuramos</b> u <b>organizamos</b> un sistema identificando sus <b>elementos</b> y especificando como se <b>relacionan</b> entre ellos.</li>
+          </ul>
           </p>
         </section>
 
-        <section id="def">
-          <div class="box2">Elemento de software</div>
-          <p>
-            Cualquier pieza de software que podría ir desde una función,
-            procedimiento, clase, módulo, capa y paquete hasta aplicaciones,
-            repositorios de datos, ambientes de ejecución (web servers,
-            contenedores, etc), API gateways, colas de mensajes, entre otros.
+        <section id="def2" data-auto-animate>
+          <p class="titulo resaltar">
+            ¿Qué decimos que es en esta materia?
+          </p>
+          <ul class="arrow">
+            <li class="fragment">A nivel <u>lógico</u> (Arquitectura Lógica) tenemos elementos de software como las funciones, métodos, clases, los paquetes, lo módulos, las capas (layers). Se comunican de la forma in-process.</li>
+            <li class="fragment">A nivel <u>físico</u> (Arquitectura Física) tenemos elementos en runtime (procesos), y la forma en que los deployamos en HW. Sé comunican de la forma inter-process. </li>
+          </ul>
           </p>
         </section>
 
-        <!-- Diseño vs Arquitectura -->
 
-        <!--       <section id="arqvsde">
-        <div class="box2">Diseño vs Arquitectura</div>
-        <p class="fragment">¿Existe la línea donde termina el diseño y comienza la arquitectura?</p>
-      </section>
+        <section id="def2" data-auto-animate>
+          <p class="titulo resaltar">
+            ¿Qué decimos que es en esta materia?
+          </p>
+          <ul class="arrow">
+            <li class="fragment"><b>Estructuramos</b> u <b>organizamos</b> un sistema de cierta forma con el objetivos de cumplir con <b>Atributos de Calidad</b> específicos (modificabilidad, escalabilidad, disponibilidad, seguridad, etc).</li>
+            <li class="fragment">Finalmente, a dicha estructura le agregamos <b>desiciones de arquitectura</b> (o design decisions) que debemos garantizar sean cumplidas.</li>
+          </ul>
+          </p>
+        </section>
 
-      <section id="arqvsde">
-        <img src="imgs/codigo-diseno-arch.svg">
-      </section>
+        <section id="def2" data-auto-animate>
+          <p class="titulo resaltar">
+            Ilustremos ésta definición
+          </p>
+          <ul class="arrow">
+            <li class="fragment">Supongamos una aplicación Web con un back-end Web en SpringBoot y un front-end en React.</li>
+            <li class="fragment">Con eso ya tenemos nuestra primera definición de <u>arquitectura física</u>.</li>
+            <li class="fragment">Atributo de Calidad: <u>Modificabilidad</u>. Me permite distribuir desarrollo de front-end vs back-end y avanzar en paralelo sin grandes pérdidas de tiempo en comunicación entre equipos. </li>
+          </ul>
+          </p>
+        </section>
 
-      <section id="arqvsde">
-        <p class="titulo resaltar">¿Qué dice la bibliografía sobre esto?</p>
-      </section>
+        <section id="def2" data-transition="fade-out">
+          <p class="titulochico">Arquitectura Física</p>
+          <img src="imgs/def-arq-ilustracion-1.png" />
+        </section>
 
-      <section id="arqvsde">
-        <p class="fragment chico">As the size and complexity of software systems increases, the design problem goes
-          beyond the algorithms and data structures of the computation: <span class="fragment highlight-red">designing
-            and specifying the overall system structure emerges as a new kind of problem</span>. </p>
-        <p class="fragment chico">System Structural issues includes: protocols for communication, synchronization, and
-          data access; assignment of functionality to design elements; physical distribution; composition of design
-          elements; scaling and performance; and selection among design alternatives. - David Garlan y Mary Shaw (1994)
-        </p>
-      </section>
+        <section id="def2" data-transition="fade-in">
+          <p class="titulochico">Arquitectura Física</p>
+          <img src="imgs/def-arq-ilustracion-2.png" />
+        </section>
 
-      <section id="arqvsde">
-        <img src="imgs/grady-arch-vs-des.png">
-        <p class="fragment chico">Si arquitectura es medida en funcion del costo del cambio entonces el lenguaje de
-          programación elegido más las herramientas (frameworks, tool set en general) son decisiones de arquitectura. -
-          <a href="https://simonbrown.je/">Simon Brown</a> (Autor de Software Architecture for Developers)
-        </p>
-      </section>
+        <section id="def2" data-transition="fade-out">
+          <p class="titulochico">Arquitectura Física (Deployment)</p>
+          <img src="imgs/def-arq-ilustracion-3.png" />
+        </section>
 
-      <section id="arqvsde">
-        <p>Si tomamos desiciones técnicas que impactan sobre algún <span class="fragment highlight-red"
-            data-fragment-index="0">atributo de calidad</span> del sistema entonces son desiciones de arquitectura.</p>
-        <p class="fragment chicoYalineadoIzq">Atributos de Calidad: Modificabilidad, Escalabilidad, Disponibilidad,
-          Monitoriabilidad, Performance, etc.</p>
-        <p class="fragment chicoYalineadoIzq">También conocidos como requerimientos no-funcionales o características de
-          arquitectura.</p>
-      </section> -->
+        <section id="def2" data-transition="fade-in">
+          <p class="titulochico">Arquitectura Física (Deployment, opción 2)</p>
+          <img src="imgs/def-arq-ilustracion-3-1.png" />
+        </section>
+
+        <section id="def2" data-transition="fade-out">
+          <img src="imgs/def-arq-ilustracion-3-1.png" />
+          <p class="maschico">Atributo de Calidad: <u>Escalabilidad</u>. Me permite escalar (asignar mas HW) en forma independiente.</p>
+        </section>
+
+        <section id="def2" data-auto-animate>
+          <p class="titulo resaltar">
+            Ilustremos ésta definición
+          </p>
+          <ul class="arrow">
+            <li class="fragment">¿Y qué organización lógica le quiero dar a mi back-end?</li>
+            <li class="fragment">La más simple y conocida por todos: <u>capas</u>.</li>
+          </ul>
+          <img class="fragment" src="imgs/def-arq-ilustracion-4.png" />
+        </section>
+
+        <section id="def2" data-auto-animate>
+          <p class="titulo resaltar">
+            Ilustremos ésta definición
+          </p>
+          <ul class="arrow">
+            <li class="fragment">Con esta organización lógica ya tenemos la primer <u>decisión de arquitectura</u> que debemos cumplir.</li>
+            <li class="fragment">Las dependencies entre las capas. Controller no puede acceder directamente a la capa de Acceso a Datos.</li>
+          </ul>
+        </section>
+
+        <section id="def2" data-auto-animate>
+          <p class="titulo resaltar">
+            Arquitectura de Software: repasemos
+          </p>
+          <ul class="arrow">
+            <li class="fragment">Estructura u organización física: Procesos (aplicaciones en runtime) y Deployment</li>
+            <li class="fragment">Estructura u organización lógica: Capas, Módulos (paquetes en Java, las clases tienen mucho detalle)</li>
+            <li class="fragment">Organizamos los elementos de una arquitectura para cumplir ciertos <u>atributos de calidad</u>.</li>
+            <li class="fragment">Definimos <u>Decisiones de Arquitectura</u> que debemos cumplir.</li>
+          </ul>
+        </section>
+
+
 
         <!-- Visualización de la Arquitectura -->
-
+<!-- 
         <section id="vis">
           <div class="box2">Visualización de la Arquitectura de Software</div>
           <p class="fragment">
@@ -522,7 +595,6 @@
         </section>
 
         <section id="vis">
-          <!-- Existen diferentes estructuras y las vistas son la forma de visualizarlas-->
           <p class="fragment">
             Existen diferentes <span class="box3">Estructuras</span>
           </p>
@@ -556,9 +628,9 @@
             width="249"
             height="342"
           />
-        </section>
+        </section> -->
 
-        <section id="vis">
+<!--         <section id="vis">
           <p class="fragment">
             Segun SEI, existen 3 categorías de <u>estructuras</u>:
           </p>
@@ -619,11 +691,11 @@
         <section id="vis">
           <p>Deployment Físico (SEI) - En dos servers</p>
           <img src="imgs/radioa-deploy1.png" />
-        </section>
+        </section> -->
 
         <!-- Estilos -->
 
-        <section id="styles">
+<!--         <section id="styles">
           <div class="box2">Estilos de Arquitectura</div>
           <p>
             "Just as good programmers recognized useful data structures in the
@@ -799,7 +871,7 @@
             Software Architecture Fundamentals.- Richards y Ford
           </p>
         </section>
-
+ -->
         <!-- Sistemas Homogeneos (monoliticos principalmente)-->
         <!-- Sistemas Heterogeneos (SOA o Microservicios principalmente, diferentes lenguajes, BDs, etc)-->
 
