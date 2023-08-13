@@ -154,7 +154,8 @@
 <!--           <li><a href="#/estru">¿Cómo Estructuramos un Sistema?</a></li> -->
 <!--           <li><a href="#/vis">Visualización</a></li>
           <li><a href="#/styles">Estilos de Arquitectura</a></li> -->
-          <li><a href="#/mod">Organización Lógica</a></li>
+          <li><a href="#/estilos1">Estilos de Organización Lógica</a></li>
+          <li><a href="#/estilos2">Estilos de Organización Física</a></li>
           <!--           <li><a href="#/dist">Arq. Distribuídas</a></li> -->
           <!--         <li><a href="#/atri">Atributos de Calidad</a></li> -->
         </ul>
@@ -583,306 +584,164 @@
           </ul>
         </section>
 
-
-
-        <!-- Visualización de la Arquitectura -->
-<!-- 
-        <section id="vis">
-          <div class="box2">Visualización de la Arquitectura de Software</div>
-          <p class="fragment">
-            ¿Cómo describimos la arquiectura de un sistema de software?
-          </p>
-        </section>
-
-        <section id="vis">
-          <p class="fragment">
-            Existen diferentes <span class="box3">Estructuras</span>
-          </p>
-          <p class="fragment">
-            Dependiendo qué <u>atributo de calidad</u> queremos analizar y a
-            quienes nos dirigimos utilizaremos uno u otro.
-          </p>
-          <p class="fragment">
-            Veamos cuales estructuras sugieren los siguientes dos autores.
-          </p>
-        </section>
-
-        <section id="vis">
-          <p class="fragment" data-fragment-index="0">
-            Software Engineering Institute (Carnegie Mellon University)
-          </p>
-          <p class="fragment" data-fragment-index="1">
-            Simon Brown (Consultor Independiente)
-          </p>
-          <img
-            class="fragment"
-            data-fragment-index="0"
-            src="imgs/software-arch-in-practice.png"
-            width="249"
-            height="342"
-          />
-          <img
-            class="fragment"
-            data-fragment-index="1"
-            src="imgs/c4-book.png"
-            width="249"
-            height="342"
-          />
-        </section> -->
-
-<!--         <section id="vis">
-          <p class="fragment">
-            Segun SEI, existen 3 categorías de <u>estructuras</u>:
-          </p>
-          <ul>
-            <li class="fragment">
-              <u>Módulos</u>: ¿Cómo estructuramos los fuentes? Debemos
-              identificar en el lenguaje de programación que utilicemos que
-              abstracción utililzaremos para crear éstas estructuras.
-            </li>
-            <li class="fragment">
-              <u>Componentes y Conectores</u>: Elementos de Software en
-              ejecución.
-            </li>
-            <li class="fragment">
-              <u>Deployment Físico</u>: Elementos de software deployados en
-              equipos de HW.
-            </li>
-          </ul>
-        </section>
-
-        <section id="vis">
-          <p class="fragment">El Modelo C4</p>
-          <ul>
-            <li class="fragment">
-              <u>Context</u>: ¿Con que otros sistemas interfaceo?
-            </li>
-            <li class="fragment">
-              <u>Container</u>: Web Apps, Client-Side Web Apps, Aplicaciones de
-              consola, bases de datos, file systems, etc.
-            </li>
-            <li class="fragment">
-              <u>Component</u>: ¿Cómo estructuramos los fuentes? Ésta estructura
-              mapea a los fuentes.
-            </li>
-            <li class="fragment"><u>Code</u></li>
-          </ul>
-        </section>
-
-        <section id="vis">
-          <img src="imgs/c4-model-1.png" />
-        </section>
-
-        <section id="vis">
-          <p>Módulos (SEI) o Componentes (C4)</p>
-          <img src="imgs/radioa-layers1.png" />
-        </section>
-
-        <section id="vis">
-          <p>C&C (SEI) o Containers (C4)</p>
-          <img src="imgs/radioa-containers.png" />
-        </section>
-
-        <section id="vis">
-          <p>Deployment Físico v1 (SEI) - En un server</p>
-          <img src="imgs/radioa-deploy2.png" />
-        </section>
-
-        <section id="vis">
-          <p>Deployment Físico (SEI) - En dos servers</p>
-          <img src="imgs/radioa-deploy1.png" />
-        </section> -->
-
-        <!-- Estilos -->
-
-<!--         <section id="styles">
-          <div class="box2">Estilos de Arquitectura</div>
-          <p>
-            "Just as good programmers recognized useful data structures in the
-            late 1960s, good software system designers now recognize useful
-            system organizations". - David Garlan and Mary Shaw
-          </p>
-        </section>
-
-        <section id="styles">
-          <p class="titulo resaltar">
-            ¿Qué estilos de arquitectura identificaron Garlan and Shaw por 1994?
-          </p>
-        </section>
-
-        <section id="styles">
-          <h3>Pipes & Filters</h3>
-          <img src="imgs/pipe-filter.png" />
-          <p class="chicoYalineadoIzq">
-            Cada componente (filtro) tiene un conjunto de entrada de datos,
-            realiza una transformación y produce una de salida.
-          </p>
-          <p class="chicoYalineadoIzq">
-            Los conectores pueden ser archivos, comunicaciones vía puertos, etc.
-          </p>
-        </section>
-
-        <section id="styles">
-          <h3>Pipes & Filters</h3>
-          <img src="imgs/pipe-filter.png" />
-          <p class="chicoYalineadoIzq">
-            Los filtros deben ser independientes: no comparten estado.
-          </p>
-          <p class="chicoYalineadoIzq">
-            Los filtros no estan acoplados entre si, no conocen quien genera su
-            entrada o a quien va dirigida su salida.
-          </p>
-        </section>
-
-        <section id="styles">
-          <h3>Event Based: invocación implícita</h3>
-          <img src="imgs/event-based-arch.png" />
-          <p class="chicoYalineadoIzq">
-            En lugar de invocar servicios en forma explícita, un componente,
-            ante ciertos casos de uso, publica un evento que otros componentes
-            pueden o no estar interesados.
-          </p>
-          <p class="chicoYalineadoIzq">
-            Como parte de esa publicación podrían compartirse datos (payload).
-          </p>
-        </section>
-
-        <section id="styles">
-          <h3>Event Based: invocación implícita</h3>
-          <img src="imgs/event-based-arch.png" />
-          <p class="chicoYalineadoIzq">
-            Los componentes que publican eventos no conocen qué componentes
-            estan interesados en esos eventos. Tampoco conocen que procesamiento
-            se realiza en otros componentes como resultado de consumir un
-            evento. <u>Bajo acoplamiento</u>.
-          </p>
-        </section>
-
-        <section id="styles">
-          <h3>Layered Systems</h3>
-          <img src="imgs/layered-system.png" />
-          <p class="chicoYalineadoIzq">
-            Cada capa (layer) consume servicios de la capa inmediatamente
-            inferior. Los componentes pueden ser módulos o elementos en
-            ejecución.
-          </p>
-        </section>
-
-        <section id="styles">
-          <h3>Layered Systems</h3>
-          <img src="imgs/layered-system.png" />
-          <p class="chicoYalineadoIzq">
-            Los conectores pueden ser invocación de métodos (in-process) o vía
-            port communication (inter-process). No se permite invocar servicios
-            de otras capas que no sean la inmediatamente inferior.
-          </p>
-        </section>
-
-        <section id="styles">
-          <p class="titulo resaltar">¿Qué tienen en común éstos estilos?</p>
-          <p class="fragment">
-            Definen un conjunto de
-            <span class="fragment highlight-red">reglas de arquitectura</span>
-            que como equipo de desarrollo debemos respetar,
-            <span class="fragment highlight-red"><u>sin excepciones</u></span
-            >.
-          </p>
-        </section>
-
-        <section id="styles">
-          <p class="titulo resaltar">
-            Toda definición de arquitectura impone
-            <span class="resaltar"><u>restricciones</u></span> (<span
-              class="resaltar"
-              >reglas de diseño</span
-            >) que debemos respetar para garantizar que la estructura
-            seleccionada se mantenga en el tiempo. Y asi evitar un
-            <span class="resaltar"><u>big ball of mud</u></span
-            >.
-          </p>
-        </section>
-
-        <section id="styles">
-          <p>
-            En definiciones más recientes, Richards y Ford (2021), proponen
-            agrupar los estilos en dos categorías:
-            <span class="fragment highlight-red">Monolíticas</span> y
-            <span class="fragment highlight-red">Distribuídas</span>.
-          </p>
-          <img src="imgs/soft-arch-fund-book.png" width="308" height="415" />
-        </section>
-
-        <section id="styles">
-          <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
-          <p class="chicoYalineadoIzq">
-            <u>Arquitecturas Monolíticas</u>: Único artefacto de software para
-            deployar, corriendo en un único proceso. Sus módulos o capas se
-            comunican de la forma in-process.
-          </p>
-          <p class="chicoYalineadoIzq">
-            <u>Arquitecturas Distribuídas</u>: Múltiples artefactos de software
-            para deployar, cada uno corriendo en su propio proceso. Sus
-            elementos se comunican de la forma inter-process.
-          </p>
-        </section>
-
-        <section id="styles">
-          <img src="imgs/mono-soa-mocro.png" />
-        </section>
-
-        <section id="styles">
-          <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
-          <p class="chicoYalineadoIzq">
-            <u>En capas, monolítico</u>: Partición en capas (segun cuestiones
-            técnicas). Único artefacto de software para deployar, corriendo en
-            un único proceso. Sus capas se comunican de la forma in-process.
-          </p>
-          <p class="chicoYalineadoIzq">
-            <u>SOA</u>: Partición funcional. Cada vertical es un artefacto para
-            deployar, cada uno corriendo en su propio proceso. Los verticales se
-            comunican de la forma inter-process, de forma síncrona.
-          </p>
-          <p class="chicoYalineadoIzq">
-            <u>Microservices</u>: Partición funcional, incluso hasta los datos.
-            Cada microservice es deployado en forma independiente, desarrollado
-            en forma independiente, escala en forma independiente. Comunicación
-            <u>asíncrona</u> principalmente (event-based).
-          </p>
-        </section>
-
-        <section id="styles">
-          <h3>Arquitecturas Monolíticas vs Distribuídas</h3>
-          <p>¿Puedo tener partición vertical en arquitecturas monolíticas?</p>
-          <p class="fragment">¡ Por supuesto !</p>
-        </section>
-
-        <section id="styles">
-          <img src="imgs/modularmonolith.png" />
-          <p class="chicoYalineadoIzq">
-            <u>Modular Monolith</u>: Único artefacto para deployar, pero
-            estructurado en módulos funcionales.
-          </p>
-        </section>
-
-        <section id="styles">
-          <p class="titulo resaltar">Every decision is a trade-off</p>
-          <p>(First Law of Software Architecture)</p>
-          <p class="fragment">
-            Software Architecture Fundamentals.- Richards y Ford
-          </p>
-        </section>
- -->
         <!-- Sistemas Homogeneos (monoliticos principalmente)-->
         <!-- Sistemas Heterogeneos (SOA o Microservicios principalmente, diferentes lenguajes, BDs, etc)-->
 
-        <section id="mod">
-          <div class="box2">Estructuras de Módulos</div>
+        <section id="estilos1">
+          <div class="box2">Organización Lógica</div>
           <p>
-            Hablemos ahora sobre los estilos que existen para crear estructuras
-            de módulos.
+            Estilos y posibilidades conocidas para la organización lógica.
           </p>
         </section>
 
+        <section id="estilos1">
+          <p class="titulo resaltar">Organización Lógica</p>
+          <p class="chico">
+            ¿Por qué debemos preocuparnos por <u>organizar</u> el código de una aplicación?
+          </p>
+          <ul class="arrow">
+          <li class="fragment">Sin ningun tipo de organización definida con el tiempo dejamos de tener noción de que parte del sistema afectamos cuando hacemos un cambio. Supera ampliamente nuestra capacidad cognitiva.</li>
+          <li class="fragment">
+            La organización entonces tiene que ver con <u>partir</u> la aplicación en "pequeñas aplicaciones" más simples, idealmente que puedan caber en nuestra capacidad cognitiva. 
+          </li>
+          <li class="fragment">
+            También necesitamos definir como éstas "pequeñas aplicaciones" se <u>relacionan</u> o se <u>comunican</u> entre ellas.
+          </li>
+<!--           <li class="fragment">
+            "Pequeñas aplicaciones": Capas, módulos, sub-sistemas.
+            </li> -->
+        </ul>
+        </section>
+
+        <section id="estilos1">
+          <p class="titulo resaltar">Organización Lógica</p>
+          <ul class="arrow">
+            <li class="fragment">"Pequeñas aplicaciones": Capas, módulos, sub-sistemas.</li>
+            <li class="fragment">¿Existe en Java la keyword Layer?, ¿module? ¿sub-sistema?</li>
+            <li class="fragment"><b>Debemos</b> encontrar en el lenguaje de programación
+              que utilicemos, que abstracción (estructura sintáctica) podemos
+              utilizar para crear éstas partes. <u>Las clases tienen demasiado detalle</u></li>
+              <li class="fragment">¿Cuáles son las opciones en Java?</li>
+              <li class="fragment">Desde Java v1, los <u>paquetes</u>. Java v9 incorporó la
+              construcción sintáctica <u>module</u>.</li>  
+          </ul>
+        </section>
+
+        <section id="estilos1">
+          <p class="titulo resaltar">Organización Lógica</p>
+          <p class="fragment">
+            Ok. Tenemos los paquetes para estructurar una aplicación. ¿Qué alternativas o estilos tengo?    
+          </p>
+        </section>
+
+ <!--       <section id="estilos1">
+          <p class="titulochico">Estructuras de Componentes o Módulos</p>
+          <p class="fragment">
+            Además, ni bien abro un proyecto tengo que ver su estructura bien clara. Debe ser <b>evidente</b> que estilo de arquitectura hemos elegido.
+          </p>
+        </section>-->
+<!--
+        <section id="estilos1">
+          <p class="titulochico"><a href="http://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html">Screaming the Architecture</a></p>
+          <p>"When you look at the top level directory structure, and the source files in the highest level package; what does they scream?" (by Robert C. Martin)</p>          
+          <img src="imgs/unclebob.png" />
+        </section>
+      -->
+<!--        <section id="estilos1">
+          <p class="titulomaschico">¿Es claro?</p>
+          <img src="imgs/no-evidente.png" />
+          <p class="fragment maschico"><b>"auth"</b> término funcional mezclado con capas horizontales. 
+          <span class="fragment maschico"><b>"exception"</b> ¿es de alguna capa? ¿cuál?. </span> 
+          <span class="fragment maschico"><b>"generic"</b> ¿es de alguna capa? ¿o de todo el sistema?</span>
+          </p> 
+        </section>
+-->
+<!--       <section id="estilos1">
+          <p class="titulochico">Architecturally Evident Coding Style</p>
+          <img src="imgs/george-book.jpg" />
+        </section>
+      -->
+
+      <section id="estilos1" data-transition="fade-out fade-in">
+        <p class="titulochico">Layered Architecture</p>
+        <img src="imgs/layer-bigball0.png" />
+        <p class="fragment">Partición Horizontal - Respecto de la tecnología</p>
+      </section>
+
+      <section id="estilos1">
+        <p class="titulomaschico">Package by Layers Clásica</p>
+        <img src="imgs/layers-clasica-1.png" />
+      </section>
+
+        <section id="estilos1">
+          <p class="titulomaschico">Package by Layers Clásica</p>
+          <img src="imgs/package-layers.png" />
+        </section>
+
+        <section id="estilos1">
+          <p class="titulochico">Package by Layers (con modelo compartido)</p>
+          <img src="imgs/package-layer-shared-model.png" />
+        </section>
+
+        <section id="estilos1" data-transition="fade-out fade-in">
+          <p class="titulochico">Potencial Problema con Layered Architecture</p>
+          <img src="imgs/layer-bigball0.png" />
+          <p class="chico fragment">El problema es que con el tiempo suele pasar esto...</p>
+        </section>
+   
+        <section id="estilos1" data-transition="fade-out fade-in">
+          <p class="titulochico">Potencial Problema con Layered Architecture</p>
+          <img src="imgs/layer-bigball1.png" />
+          <p class="chico">¿y... acá? Pierdo noción...</p>
+        </section>
+
+        <section id="estilos1" data-transition="fade-out fade-in">
+          <p class="titulochico">Potencial Problema con Layered Architecture</p>
+          <img src="imgs/by-feature1.png" />
+          <p class="chico">¿y si primero parto en forma vertical?</p>
+        </section>
+
+    <!--    <section id="estilos1" data-transition="fade-out fade-in">
+          <p class="titulochico">Potencial Problema con Layered Architecture</p>
+          <img src="imgs/by-feature2.png" />
+          <p class="chico">y si...</p>
+        </section>
+-->
+
+        <section id="estilos1">
+          <p class="titulo">Package by feature</p>
+          <img src="imgs/package-feature-1.png" />
+        </section>
+
+
+        <section id="estilos1">
+          <p class="titulo resaltar">Organización Lógica</p>
+          <ul class="arrow">
+            <li class="fragment">Partición Horizontal: Segun cuestiones técnicas</li>
+            <li class="fragment">Partición Vertical: Segun funcionalidad.</li>
+            <li class="fragment">Partición Vertical: No confundir... No es una entidad y su CRUD. </li>
+            <li class="fragment">Partición Vertical: Comprende un grupo de funcionalides relacionadas/cohesivas.</li>
+            <li class="fragment">Por ejemplo: Login, authentication y authorization, Catálogo de Productos, Compras/Ventas, Ranking, Notificaciones, etc.</li>
+          </ul>
+        </section>
+
+  <!--
+        <section id="estilos1">
+          <p class="titulochico">Package by feature y sub-feature</p>
+          <img src="imgs/package-feature.png" />
+        </section>
+      -->
+        <section id="estilos1">
+          <p class="titulochico">Arquitectura Hexagonal (o ports and adapters)</p>
+          <img src="imgs/package-hexagonal.png" />
+        </section>
+
+        <section id="estilos1">
+          <p class="titulochico">Package by Component</p>
+          <img src="imgs/package-component.png"/>
+        </section>
+
+        <!--
         <section id="mod">
           <h3>Estructuras de Módulos</h3>
           <p>
@@ -901,7 +760,6 @@
 
         <section id="mod">
           <h3>Estructuras de Módulos</h3>
-          <!--         <p>¿Porque debemos partir una aplicacion en módulos? y ¿Porqué definir sus relaciones y respetarlas?</p> -->
           <img src="imgs/layer-modular-bigball.png" />
         </section>
 
@@ -933,23 +791,6 @@
           </p>
         </section>
 
-        <!--       <section id="mod">
-        <p class="resaltar">Robert C. Martin (Uncle Bob), propuso los siguientes principios para agrupar clases en
-          módulos:</p>
-        <p class="chicoYalineadoIzq fragment"><b>Common Reuse Principle</b> (CRP): Sugiere que las clases que son
-          reutilizadas juntas deben pertenecer al mismo módulo.</p>
-        <p class="chicoYalineadoIzq fragment"><b>Common Closure Principle</b> (CCP): Sugiere que debemos agrupar en un
-          mismo módulo aquellas clases que cambian al mismo tiempo y por la misma razón. Está sumamente relacionado con
-          la idea de partición vertical.</p>
-      </section>
-
-      <section id="mod">
-        <img src="imgs/crp-ccp.png"></img>
-        <p class="chicoYalineadoIzq fragment">Tensión: CCP tiende a generar menos módulos que CRP, con más código y no
-          reusables. Pero los cambios en general impactan en un único módulo. CRP tiende a generar más módulos,
-          pequeños, reusables.</p>
-      </section>
- -->
         <section id="mod">
           <h3>Estructuras de Módulos</h3>
           <p class="fragment">
@@ -1039,7 +880,7 @@ public void packageApiOfCOnlyDependOnItOrJdk() {
   .check(jc);
 }</code></pre>
         </section>
-
+-->
         <!-- Arquitecturas Distribuidas -->
 
         <!-- Atributos de Calidad -->
