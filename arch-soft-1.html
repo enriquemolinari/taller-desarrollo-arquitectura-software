@@ -152,8 +152,8 @@
           <li><a href="#/def2">Nuestra Definición</a></li>
           <!--         <li><a href="#/arqvsde">Diseño vs Arquitectura</a></li> -->
 <!--           <li><a href="#/estru">¿Cómo Estructuramos un Sistema?</a></li> -->
-<!--           <li><a href="#/vis">Visualización</a></li>
-          <li><a href="#/styles">Estilos de Arquitectura</a></li> -->
+<!--           <li><a href="#/vis">Visualización</a></li>-->
+          <li><a href="#/estilosdef">Estilos de Arquitectura</a></li> 
           <li><a href="#/estilos1">Estilos de Organización Lógica</a></li>
           <li><a href="#/estilos2">Estilos de Organización Física</a></li>
           <!--           <li><a href="#/dist">Arq. Distribuídas</a></li> -->
@@ -587,6 +587,20 @@
         <!-- Sistemas Homogeneos (monoliticos principalmente)-->
         <!-- Sistemas Heterogeneos (SOA o Microservicios principalmente, diferentes lenguajes, BDs, etc)-->
 
+        <section id="estilosdef">
+          <div class="box2">Estilos de Arquitectura</div>
+          <p>"Just as good programmers recognized useful data structures in the late 1960s, good
+            software system designers now recognize useful system organizations". - David Garlan and Mary Shaw (1994) </p>
+        </section>
+
+        <section id="estilosdef">
+          <p class="titulo resaltar">¿Qué tienen en común los estilos de arquitectura?</p>
+          <p class="fragment">Definen un conjunto de <span class="fragment highlight-red">decisiones de arquitectura</span>
+            que como equipo de desarrollo debemos respetar, <span class="fragment highlight-red"><u>sin
+                excepciones</u></span>.</p>
+        </section>
+  
+
         <section id="estilos1">
           <div class="box2">Organización Lógica</div>
           <p>
@@ -725,12 +739,6 @@
           </ul>
         </section>
 
-  <!--
-        <section id="estilos1">
-          <p class="titulochico">Package by feature y sub-feature</p>
-          <img src="imgs/package-feature.png" />
-        </section>
-      -->
         <section id="estilos1">
           <p class="titulochico">Arquitectura Hexagonal (o ports and adapters)</p>
           <img src="imgs/package-hexagonal.png" />
@@ -741,415 +749,160 @@
           <img src="imgs/package-component.png"/>
         </section>
 
+        <section id="estilos2">
+          <div class="box2">Organización Física</div>
+          <p>
+            Estilos y posibilidades conocidas para la organización Física de un sistema.
+          </p>
+        </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <p class="titulochico">Organización Física</p>
+          <img src="imgs/def-arq-ilustracion-2x.png"/>
+          <ul class="arrow">
+            <li class="fragment">Ya habiamos tomado una primera decisión de organización física separando el back-end del front-end.</li>
+          </ul>
+        </section>
+        <section id="estilos2" data-transition="fade-out">
+          <p class="titulochico">Organización Física</p>
+          <img src="imgs/def-arq-ilustracion-2x.png"/>
+          <ul class="arrow">
+            <li class="fragment">Estilo de Arquitectura conocido como <b>N-Tier Architecture</b>.</li>
+            <li class="fragment"><b>Layers</b> vs <b>Tiers</b>: lógico vs físico.</li>
+          </ul>
+        </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <p class="titulochico">Organización Física</p>
+          <img src="imgs/def-arq-ilustracion-2x.png" />
+          <ul class="arrow">
+            <li class="fragment">Vamos un poco más arriesgados ahora, hablemos de <u>organización física</u> del <u>back-end</u>.</li>
+          </ul>
+        </section>
+        
+        <section id="estilos2">
+          <p class="titulochico">Estilos de Organización Física</p>
+          <ul class="arrow">
+            <li class="fragment">Si tomaramos este back-end con su estructura lógica y la deployamos como un <b>único artefacto</b> donde sus elementos lógicos se comunican de la forma in-process, decimos que tenemos un back-end <b>monolítico</b>.</li>
+            <li class="fragment">Por otro lado, es posible también, tomar la organización lógica de nuestro back-end y transformarlo en una organización física. Separando los elementos físicamente, y <b>deployándolos como artefactos independientes</b> que se comunican de la forma inter-process. Aquí tenemos un back-end <b>distribuído</b>.</li>
+          </ul>
+        </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <p class="titulomaschico">Back-end organizado en layers lógicos (2-Tier Arch.)</p>
+          <p><img src="imgs/logical-to-physical0.png" /></p>
+        </section>
+          
+        <section id="estilos2" data-transition="fade-in">
+          <p class="titulomaschico">Back-end distribuído 3-Tier Arch.</p>
+          <p><img src="imgs/logical-to-physical1.png" /></p>
+        </section>
+                              
+        <section id="estilos2" data-transition="fade-in">
+          <p class="titulomaschico">Back-end distribuído 3-Tier Arch.</p>
+          <ul class="arrow">
+            <li class="fragment"><b>Gano</b> en escalabilidad. Puedo escalar de forma difirente las capas de acceso a datos vs la de negocios. Puedo partir el trabajo en diferentes equipos (generalmente multi-repo). Independencia de tecnologías.</li>
+            <li class="fragment"><b>Pierdo</b> en complejidad, monitoriabilidad. Las comunicaciones que antes eran in-process ahora son inter-process. La Tx ahora es responsabilidad del acceso a datos. Logs de mi back-end creado por diferentes procesos.</li>
+            <li class="fragment">Veamos otras opciones...</li>
+          </ul>
+        </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <p class="titulomaschico">Organización lógica by-feature</p>
+          <img src="imgs/logica-to-physical-byfeature0.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <p class="titulo">
+          Creemos <b>separación física</b> a partir de la organización lógica.
+        </p>
+      </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <img src="imgs/by-feature-physical1.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-out">
+          <img src="imgs/by-feature-physical2.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-out">
+          <img src="imgs/by-feature-physical2-1.png" />
+        </section>
+        
+        <section id="estilos2" data-transition="fade-out">
+          <img src="imgs/by-feature-physical2-2.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-out">
+          <img src="imgs/by-feature-physical3.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-out">
+          <img src="imgs/by-feature-physical3-1.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-out">
+          <p class="titulochico">Microservicios</p>
+          <ul class="arrow">
+            <li class="fragment">Servicios auto-contenidos (o lo más posible) con partición funcional (o vertical) física de todo el stack, incluído los datos.</li>
+            <li class="fragment">Desarrollado y deployado de forma independiente.</li>
+            <li class="fragment">Auto-contenidos: Evitar que se hablen mucho entre ellos (chatty anti-pattern).</li>
+            <li class="fragment">Event-based: idealmente utilizan comunicación asíncrona.</li>
+            <li class="fragment"><b>Decisión de Arquitectura</b> de éste estilo: No pueden acceder a la BD de otro Microservicio.</li>
+          </ul>
+        </section>
+
+
+        <section id="estilos2" data-transition="fade-out">
+          <img src="imgs/data-duplication-microservices0.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <img src="imgs/data-duplication-microservices1.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <img src="imgs/data-duplication-microservices2.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <img src="imgs/data-duplication-microservices3.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <img src="imgs/data-duplication-microservices4.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <img src="imgs/data-duplication-microservices5.png" />
+        </section>
+
+        <section id="estilos2" data-transition="fade-in">
+          <img src="imgs/data-duplication-microservices6.png" />
+        </section>
+        
+        <section id="estilos2" data-transition="fade-in">
+          <img src="imgs/data-duplication-microservices.png" />
+        </section>
+
         <!--
-        <section id="mod">
-          <h3>Estructuras de Módulos</h3>
-          <p>
-            ¿Por qué debemos partir una aplicacion en módulos? y ¿Por qué
-            definir sus relaciones y respetarlas?
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Porque cuando hagamos un cambio tendremos noción de donde éste
-            repercute.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Porque de esa forma tenemos "pequeños sistemas" más simples. Mas
-            simple implica más facil de modificar.
-          </p>
+        <section id="estilos2">
+          <h3>Event Based: invocación implícita</h3>
+          <img src="imgs/event-based-arch.png" />
+          <p class="chicoYalineadoIzq">En lugar de invocar servicios en forma explícita, un componente, ante ciertos casos
+            de uso, publica un evento que otros componentes pueden o no estar interesados.</p>
+          <p class="chicoYalineadoIzq">Como parte de esa publicación podrían compartirse datos (payload).</p>
         </section>
-
-        <section id="mod">
-          <h3>Estructuras de Módulos</h3>
-          <img src="imgs/layer-modular-bigball.png" />
-        </section>
-
-        <section id="mod">
-          <h3>Estructuras de Módulos</h3>
-          <p>
-            Antes dijimos que debíamos encontrar, en el lenguaje de programación
-            que utilicemos, que abstracción (estructura sintáctica) podemos
-            utilizar para crear éstas módulos o capas.
-          </p>
-          <p class="fragment">¿Cuáles son las opciones en Java?</p>
-          <p class="fragment">
-            Desde Java v1, los <u>paquetes</u>. Java v9 incorporó la
-            construcción sintáctica <u>module</u>.
-          </p>
-        </section>
-
-        <section id="mod">
-          <h3>Estructuras de Módulos</h3>
-          <p>¿Cuál es la diferencia entre módulos o capas?</p>
-          <p class="fragment">
-            Cuando hablamos de <b>capas</b>, hablamos de una
-            <u>partición horizontal</u> del sistema, segun cuestiones técnicas.
-          </p>
-          <p class="fragment">
-            Cuando hablamos de <b>módulos</b>, hablamos de abstracciones que
-            agrupan clases con el propósito de <u>reutilización</u> o para
-            <u>partir verticalmente</u> una aplicación.
-          </p>
-        </section>
-
-        <section id="mod">
-          <h3>Estructuras de Módulos</h3>
-          <p class="fragment">
-            En aplicaciones simples alcanza con una partición horizontal.
-          </p>
-          <p class="fragment">
-            En aplicaciones que preveemos serán complejas necesitamos
-            necesariamente partición vertical.
-          </p>
-        </section>
-
-        <section id="mod">
-          <p>Alternativa al estilo de arquitectura en Capas</p>
-          <p class="resaltar fragment">
-            Arquitectura Hexagonal (o Ports & Adapters)
-          </p>
-          <p class="fragment">
-            Creada por
-            <a href="https://alistair.cockburn.us/hexagonal-architecture/"
-              >Alistair Cockburn</a
-            >
-          </p>
-          <img class="fragment" src="imgs/hex-original.png" />
-        </section>
-
-        <section id="mod">
-          <p class="resaltar">Arquitectura Hexagonal</p>
-          <img src="imgs/capas-invertida.png" />
-        </section>
-
-        <section id="mod">
-          <p class="resaltar">Estructuras de Módulos: Ejemplo</p>
-          <img width="678" height="518" src="imgs/modular-monolith-hex.png" />
-        </section>
-
-        <section id="mod">
-          <p class="resaltar">Separación Lógica vs Física</p>
-          <p class="chicoYalineadoIzq fragment" data-fragment-index="1">
-            <u>Lógica</u>: Mismo espacio de memoria, puedo importar sus clases,
-            invocar métodos (in-process).
-          </p>
-          <p class="chicoYalineadoIzq fragment" data-fragment-index="3">
-            <u>Física</u>: Distinto espacio de memoria, invocación
-            inter-process.
-          </p>
-          <img
-            class="fragment"
-            src="imgs/logical-design.png"
-            data-fragment-index="2"
-          />
-        </section>
-
-        <section id="mod">
-          <p class="resaltar">
-            Separación Lógica vs Física: <u>Verificación</u>
-          </p>
-          <p class="fragment">Java9 mejora este problema:</p>
-          <pre
-            class="fragment"
-          ><code data-trim data-noescape>module radioa.competition {
-  exports competition.model.api;
-  //only for injection
-  exports competition.model to radioa.main;
-  exports competition.persistence to radioa.main;
-  //others requires
-  requires java.sql;
-  ...
-}</code></pre>
-        </section>
-
-        <section id="mod">
-          <p class="resaltar">
-            Separación Lógica vs Física: <u>Verificación</u>
-          </p>
-          <p class="fragment">
-            ArchUnit nos ayuda a detectar dependencias inválidas:
-          </p>
-          <pre class="fragment"><code data-trim data-noescape>@Test
-public void packageApiOfCOnlyDependOnItOrJdk() {
- JavaClasses jc = new ClassFileImporter()
-  .importPackages("apiofc", "c", "a", "apiofa"...);
- classes().that()
-  .resideInAnyPackage("apiofc")
-  .should()
-  .onlyDependOnClassesThat()
-  .resideInAnyPackage("apiofc","java..")
-  .check(jc);
-}</code></pre>
+  
+        <section id="estilos2">
+          <h3>Event Based: invocación implícita</h3>
+          <img src="imgs/event-based-arch.png" />
+          <p class="chicoYalineadoIzq">Los componentes que publican eventos no conocen qué componentes estan interesados
+            en esos eventos. Tampoco conocen que procesamiento se realiza en otros componentes como resultado de consumir
+            un evento. <u>Bajo acoplamiento</u>.</p>
         </section>
 -->
-        <!-- Arquitecturas Distribuidas -->
-
-        <!-- Atributos de Calidad -->
-
-        <!--       <section id="atri">
-        <div class="box2">Atributos de Calidad</div>
-      </section>
-
-      <section id="atri">
-        <p>¿Qué son los Atributos de Calidad?</p>
-        <p>Propiedades medibles y testeables de los sistemas que son utilizadas para entender cuan bien los sistemas satisfacen las necesidades de los stakeholders.</p>
-      </section>
-
-      <section id="atri">
-        <p>Ya hemos hablando mucho sobre <u>Modificabilidad</u></p>
-        <p>Con elementos de software a nivel componente (contenedor) tambien tengo modificabilidad. Ej: API Gateway</p>
-      </section>
-
-      <section id="atri">
-        <div class="box2">Disponibilidad</div>
-      </section>
-
-      <section id="atri">
-        <p class="titulo">¿Qué significa Disponibilidad?</p>
-        <p class="fragment">Un sistema está <u>disponible</u> si al recibir una petición responde de acuerdo a lo especificado.</p>
-      </section>
-
-      <section id="atri">
-        <p class="titulo">¿Cómo se define la disponibilidad de un sistema?</p>
-        <p class="fragment">La disponibilidad se define como la <u>probabilidad</u> de que un sistema este en funcionamiento en un momento dado.</p>
-        <p class="fragment">¿Por qué?</p>
-        <p class="fragment">No hay forma de saber de antemano cuando los elementos de un sistema dejaran de funcionar.</p>
-      </section>
-
-      <section id="atri">
-        <p class="titulo">¿Cómo se define la disponibilidad de un sistema?</p>
-        <p class="fragment">Para especificar la disponibilidad de un sistema se utiliza la <u>notación de nueves</u>.</p>
-        <p class="fragment">Si decimos que un sistema tiene 99.9% de disponibilidad, lo que realmente estoy diciendo es que en un año podría estar 8,76 horas no disponible.</p>
-      </section>
-
-      <section id="atri">
-        <p class="titulo">¿Cómo se define la disponibilidad de un sistema?</p>
-        <p class="fragment"> ¿Cómo llego a ese resultado?</p> 
-        <p class="fragment"> 99.9 / 100 = 0,999. Multiplicando 365 * 0.999 = 364,635, obtengo la cantidad de días en el año en los que el sistema estará disponible. O sea que no estará disponible 365 - 364,635 = 0,365 días en el año. Si hacemos 0,365 * 24 obtenemos 8,76 horas al año no disponible.</p>
-      </section>
-
-      <section id="atri">
-        <table>
-          <tbody>
-            <th>Disponibilidad</th>
-            <th>9s</th>
-            <th>No disponible</th>
-          </tbody>
-          <tbody>
-            <tr><td>90%</td><td>un nueve</td><td>36,5 días/año</td></tr>
-            <tr><td>99%</td><td>dos nueves</td><td>3,65 días/año</td></tr>
-            <tr><td>99,9%</td><td>tres nueves</td><td>8,76 horas/año</td></tr>
-            <tr><td>99,99%</td><td>cuatro nueves</td><td>52 minutos/año</td></tr>
-            <tr><td>99,999%</td><td>cinco nueves</td><td>5 minutos/año</td></tr>
-            <tr><td>99,9999%</td><td>seis nueves</td><td>31 segundos/año</td></tr>
-          </tbody>
-        </table>
-        <p class="fragment">Se considera <u>Alta Disponibilidad</u> cinco nueves o mas</p>
-      </section>
-
-      <section id="atri">
-        <p class="titulo">¿Cómo se calcula la disponibilidad de un sistema?</p>
-        <p class="fragment">Supongamos, dada la siguiente configuración física:</p>
-          <img class="fragment" src="imgs/radioa-deploy1.png"/> 
-          <p class="fragment">¿Qué disponibilidad tiene?</p>
-      </section>
-
-      <section id="atri">
-          <p class="titulo">Cálculo de disponibilidad</p>
-          <p class="fragment">Primero es necesario calcular la disponibilidad de cada elemento por separado. ¿Cómo se hace?</p>
-          <p class="fragment">
-            \[\begin{aligned}
-            \frac{MTBF}{MTBF + MTTR}
-            \end{aligned} \]
-          </p>  
-          <p class="fragment">MTBF: Tiempo transcurrido entre dos fallas. MTTR: promedio de tiempo en repararlo. Ambos representados en horas.</p>
-      </section>
-  
-        <section id="atri">
-          <p class="titulo">Cálculo de disponibilidad</p>
-          <p class="fragment">¿Cómo sé cual es el MTBF y el MTTR de un elemento?</p>
-          <p class="fragment">El MTBF, para los <u>elementos de HW</u>: el fabricante o proveedor. Se rigen por la curva <a href="https://en.wikipedia.org/wiki/Bathtub_curve">bathtub</a>.</p>
-          <p class="fragment">El MTTR, para los <u>elementos de HW</u>: de nuestro equipo de operaciones (o AWS o proveedor). ¿Cuanto tarda en reemplazar una placa de red? ¿un disco? ¿memoria?.</p>
-        </section>
-
-        <section id="atri">
-          <p class="titulo">Cálculo de disponibilidad</p>
-          <p class="fragment">¿Cómo sé cual es el MTBF y el MTTR de un elemento?</p>
-          <p class="fragment">El MTBF, para los <u>elementos de software</u>: Mediante la observación (no es facil sobre todo en software que incrementan su funcionalidad con frecuencia). </p>
-          <p class="fragment">El MTTR, para los <u>elementos de software</u>: Equipo de desarrollo.</p>
-        </section>
-
-        <section id="atri">
-          <p class="titulo">Cálculo de disponibilidad</p>
-          <p class="fragment">¿Cómo sé cual es el MTBF y el MTTR de un elemento?</p>
-          <p class="fragment"><a href="https://www.amazon.com/Availability-Network-Fundamentals-Chris-Oggerino/dp/1587130173">Cisco</a> asume 10.000 horas de MTBF para productos con recientes cambios o nuevas funcionalidades, y 30.000 horas de MTBF para productos sin cambios</p>
-          <p class="fragment">MTTR de 0.1 horas (6 minutos en reiniciar). Reiniciar porque asume problemas de leaks de memoria, no bugs funcionales.</p>
-        </section>
-      
-        <section id="atri">
-          <p class="titulo">Cálculo de disponibilidad</p>
-          <img src="imgs/radioa-deploy1.png"/> 
-          <p class="fragment">Sabiendo como calcular la disponibilidad de cada elemento: ¿Cómo cálculo la de este sistema?</p>
-        </section>
-         
-      <section id="atri">
-        <p class="titulo">Cálculo de disponibilidad</p>
-        <p class="fragment">Si un elemento falla, ¿el sistema entero falla?</p> 
-        <p class="fragment">Entonces, multiplico la disponibilidad de sus elementos. Se denomina: <u>Configuración en Serie</u></p> 
-        <p class="maschico fragment">
-        \[\begin{aligned}
-        Disponibilidad \ en \ Serie = \displaystyle \prod_{i=1}^{n} disponibilidadElemento
-        \end{aligned} \]
-        </p>
-        <p class="chico fragment"> Donde <span class="itali">n</span> es el número total de elementos e <span class="itali">i</span> el i-ésimo elemento</p>. 
-      </section>
-
-      <section id="atri">
-        <p class="titulo">Cálculo de disponibilidad</p>
-        <p class="maschicoYalineadoIzq">
-          \[\begin{aligned}
-          \textbf{Application Server}\;\textrm{(node-a1)}&=\frac{50000}{50000 + 8} = 0,999840026 \\
-          &\textrm{(Asumimos 50.000 horas de MTBF y 8 horas de MTTR)}.
-          \end{aligned} \]
-          \[\begin{aligned}
-          \textbf{Ubuntu v20}\;\textrm{(node-a1)}&=\frac{30000}{30000 + 0.1} = 0,999996667 \\
-          &\textrm{(Asumimos 30.000 horas de MTBF y 0.1 horas MTTR)}.
-          \end{aligned} \]
-          \[\begin{aligned}
-          \textbf{Jetty/JVM v11}\;\textrm{(node-a1)}&=\frac{30000}{30000 + 0.1} = 0,999996667 \\
-          &\textrm{(Asumimos 30.000 horas de MTBF y 0.1 horas de MTTR)}.
-          \end{aligned} \]
-          \[\begin{aligned}
-          \textbf{RadioA}\;\textrm{(Java Swing App)}&=\frac{20000}{20000 + 0.1} = 0,999995 \\
-          &\textrm{(Asumimos 20.000 horas de MTBF y 0.1 horas of MTTR)}.
-          \end{aligned} \]
-        </p>
-      </section>
-
-      <section id="atri">
-        <p class="titulo">Cálculo de disponibilidad</p>
-        <p class="maschicoYalineadoIzq">
-          \[\begin{aligned}
-          \textbf{Database Server}\;\textrm{(node-b1)}&=\frac{50000}{50000 + 8} = 0,999840026 \\
-          &\textrm{(Asumimos 50.000 horas de MTBF y 8 horas de MTTR)}.
-          \end{aligned} \]
-          \[\begin{aligned}
-          \textbf{Ubuntu v20}\;\textrm{(node-b1)}&=\frac{30000}{30000 + 0.1} = 0,999996667 \\
-          &\textrm{(Asumimos 30.000 horas de MTBF y 0.1 horas MTTR)}.
-          \end{aligned} \]
-          \[\begin{aligned}
-          \textbf{PostgreSQL v12}\;\textrm{(node-b1)}&=\frac{30000}{30000 + 0.1} = 0,999996667 \\
-          &\textrm{(Asumimos 30.000 horas de MTBF y 0.1 horas MTTR)}.
-          \end{aligned} \]
-        </p>
-      </section>
-
-      <section id="atri">
-        <p class="titulo">Cálculo de disponibilidad</p>
-        <p class="maschicoYalineadoIzq">
-          \[\begin{aligned}
-          \textbf{Disponibilidad(app server)}\; &= 0,999840026\;\textrm{(node-a1)} \\
-          &\times\;0,999996667\;\textrm{(Ubuntu v20)} \\
-          &\times\;0,999996667\;\textrm{(Jetty/JVM v11)} \\
-          &\times\;0,999995\;\textrm{(RadioA App)} \\
-          &=\;0,999828362
-          \end{aligned} \]
-          \[\begin{aligned}
-          \textbf{Disponibilidad (db server)}\; &= 0,999840026\;\textrm{(node-b1)} \\
-          &\times\;0,999996667\;\textrm{(Ubuntu v20)} \\
-          &\times\;0,999996667\;\textrm{(PostgreSQL)} \\
-          &=\;0,999833361
-          \end{aligned} \]
-          \[\begin{aligned}
-          \textbf{Disponibilidad del Sistema}\; &= 0,999828362\;\textrm{(app server)} \\
-          &\times\;0,999833361\;\textrm{(db server)} \\
-          &=\;0,999661752 \times \; 100 \; = \; 99,97\%
-          \end{aligned} \]
-        </p>
-      </section>      
-
-      <section id="atri">
-        <p class="titulo">Disponibilidad</p>
-        <p class="fragment">99,97% de disponibilidad. Estoy <u>muy lejos</u> de <strong>Alta Disponibilidad</strong> (cinco 9s)</p> 
-        <p class="fragment">Para alcanzar alta disponibilidad necesito eliminar los <u>Unicos Puntos de Falla</u></p>
-        <p class="fragment">No hay otra opción que tener <u>redundancia</u></p>
-      </section>
-
-      <section id="atri">
-        <p class="titulo">¿Así elimino los unicos puntos de falla?</p>
-        <img src="imgs/radioa-deploy2-1.png" /> 
-        <p class="fragment">No!</p>
-      </section>
-
-      <section id="atri">
-        <p class="titulo">Elimando los Únicos Puntos de Falla</p>
-        <img width="690" height="405" src="imgs/radioa-deploy3.png" /> 
-      </section>
-
-      <section id="atri">
-        <p class="titulo">Cálculo de disponibilidad</p>
-        <p class="fragment">Cuando hay elementos redundantes, la fórmula cambia y se denomina: <u>Configuración en paralelo</u>.</p> 
-        <p class="chico fragment">
-        \[\begin{aligned}
-        \displaystyle 1 - [\prod_{i=1}^{n} (1 - disponibilidadElemento)]
-        \end{aligned} \]
-        </p>
-        <p class="fragment">Calculemos ahora la disponibilidad de la nueva configuración redundante</p>
-      </section>
-
-      <section id="atri">
-        <p class="titulo">Cálculo de disponibilidad</p>
-        <p class="maschicoYalineadoIzq">
-          \[\begin{aligned}
-          \textbf{Availability (app server)} &= 1 - (1 - 0,999828362)\times(1 - 0,999828362) \\
-          &= 1 - (0,000171638 \times 0,000171638) \\
-          &= 1 - 0,000000029 \\
-          &= 0,999999971 \times 100 = 99,99999\%
-          \end{aligned} \]
-      
-          \[\begin{aligned}
-          \textbf{Availability (bd server)} &= 1 - (1 - 0,999833361)\times(1 - 0,999833361) \\
-          &= 1 - (0,000166639 \times 0,000166639) \\
-          &= 1 - 0,000000028 \\
-          &= 0,999999972 \times 100 = 99,99999\%
-          \end{aligned} \]
-
-          \[\begin{aligned}
-          \textbf{System Availability} &= 0,999999971 \; (app\;server) \\
-          &\times  0,999999972 \; (db\;server) \\
-          &= 0,999999943 \times 100 = 99,99999\%
-          \end{aligned} \]
-        </p>
-      </section>
-      
-      <section id="atri">
-        <div class="box2">Escalabilidad</div>
-      </section> -->
-
-        <!--       https://aws.amazon.com/es/blogs/apn/the-6-pillars-of-the-aws-well-architected-framework/ -->
-        <!-- https://blog.devgenius.io/top-10-architecture-characteristics-non-functional-requirements-with-cheatsheat-7ad14bbb0a9b -->
-
-        <!-- en escalabilidad puedo poner el grafico del libro de alex yu de feed -->
-
-        <!-- 
-        https://blog.devgenius.io/top-10-architecture-characteristics-non-functional-requirements-with-cheatsheat-7ad14bbb0a9b
-       -->
-
-        <!-- goglear diagramas de arquitectura en google para mostrar la diversidad de cosas, con colores y formas que no dicen nada -->
-        <!-- Common sense of abstracionts is more important than a common notation -->
-        <!-- cuando abro los fuentes, espero ver BIEN claro esta definicion en el codigo. Model-code gap, no quiero -->
-
-        <!-- Screaming the architecture !!!! -->
-        <!--
-        Modificabilidad: Utilizar un layeres ayuda a nivel codigo. Utilizar un API Gateway tambien, proque podria cambiar el backend final, sin afectar la aplicacion cliente.
-      -->
-
-        <!-- News Feed System de Alex Xu -->
-
-        <!--
-        <section id="ghi">Slide 2</section>
-        <section id="ghi1">Slide 2</section>
-        <section id="ghi1">Slide 2</section>
-        <section id="ghi1">Slide 2</section>-->
       </div>
     </div>
 
