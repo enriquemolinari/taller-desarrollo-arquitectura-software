@@ -268,7 +268,7 @@
 
           <p class="chico fragment">
             The software architecture of a system is the set of
-            <span class="fragment highlight-red">structure</span> needed to
+            <span class="fragment highlight-red">structures</span> needed to
             reason about the system, which comprises
             <span class="fragment highlight-red">software elements</span>,
             relations among them, and properties of both.
@@ -375,9 +375,10 @@
             highest-level breakdown of a system into its parts; the other,
             decisions that are hard to change.
           </p>
+          <img class="fragment" src="imgs/patterns-arch-fowler.png" width="229" height="322" />
         </section>
 
-        <section id="def" data-auto-animate>
+<!--        <section id="def" data-auto-animate>
           <p class="chico resaltar">Martin Fowler (2002)</p>
 
           <p class="chico fragment">
@@ -399,7 +400,7 @@
           </p>
           <img src="imgs/patterns-arch-fowler.png" width="229" height="322" />
         </section>
-
+-->
         <section id="def" data-auto-animate>
           <p class="chico fragment resaltar">
             Software Architecture Fundamentals (2020)
@@ -476,7 +477,7 @@
             Arquitectura de Software es lo que Uds decidan, segun que autor les gusta más. 
           </p>
           <p class="fragment">
-            ¿Quizas representa muchas cosas y por eso cuesta encontrar una única definición?
+            ¿Quizás representa muchas cosas y por eso cuesta encontrar una única definición?
           </p>
         </section>
 
@@ -578,7 +579,7 @@
           </p>
           <ul class="arrow">
             <li class="fragment">Estructura u organización física: Procesos (aplicaciones en runtime) y Deployment</li>
-            <li class="fragment">Estructura u organización lógica: Capas, Módulos (paquetes en Java, las clases tienen mucho detalle)</li>
+            <li class="fragment">Estructura u organización lógica: Capas, Módulos (paquetes en Java, las clases tienen mucho detalle). Con una API <u>pública definida</u> y su implementación <u>privada</u>.</li>
             <li class="fragment">Organizamos los elementos de una arquitectura para cumplir ciertos <u>atributos de calidad</u>.</li>
             <li class="fragment">Definimos <u>Decisiones de Arquitectura</u> que debemos cumplir.</li>
           </ul>
@@ -679,7 +680,7 @@
       <section id="estilos1" data-transition="fade-out fade-in">
         <p class="titulochico">Layered Architecture</p>
         <img src="imgs/layer-bigball0.png" />
-        <p class="fragment">Partición Horizontal - Respecto de la tecnología</p>
+        <p class="fragment">Partición Horizontal - Respecto de cuestiones técnicas</p>
       </section>
 
       <section id="estilos1">
@@ -783,7 +784,7 @@
         <section id="estilos2">
           <p class="titulochico">Estilos de Organización Física</p>
           <ul class="arrow">
-            <li class="fragment">Si tomaramos este back-end con su estructura lógica y la deployamos como un <b>único artefacto</b> donde sus elementos lógicos se comunican de la forma in-process, decimos que tenemos un back-end <b>monolítico</b>.</li>
+            <li class="fragment">Si tomaramos este back-end con su estructura lógica y la deployamos como un <b>único artefacto</b> donde sus elementos lógicos se comunican de la forma in-process, decimos que tenemos un back-end <b>monolítico</b> (o monolítico modular).</li>
             <li class="fragment">Por otro lado, es posible también, tomar la organización lógica de nuestro back-end y transformarlo en una organización física. Separando los elementos físicamente, y <b>deployándolos como artefactos independientes</b> que se comunican de la forma inter-process. Aquí tenemos un back-end <b>distribuído</b>.</li>
           </ul>
         </section>
@@ -853,6 +854,16 @@
           </ul>
         </section>
 
+        <section id="estilos2" data-transition="fade-out">
+          <p class="titulochico">Microservicios: Ejemplo</p>
+          <ul class="arrow">
+            <li class="fragment">Supongamos los requerimientos de catálogo de películas y carrito de compras.</li>
+            <li class="fragment">Supongamos ahora que implementamos cada uno como un microservicio.</li>
+            <li class="fragment">Productos: Debe mostrar una lista paginada de peliculas: nombre, precio, actores, directores, etc.</li>
+            <li class="fragment">Carrito: Debe mostrar las peliculas agregadas. Nombre Pelicula, Precio, Cantidad, Fecha.</li>
+            <li class="fragment">¿Cómo lo resolvemos?</li>
+          </ul>
+        </section>
 
         <section id="estilos2" data-transition="fade-out">
           <img src="imgs/data-duplication-microservices0.png" />
@@ -885,6 +896,15 @@
         <section id="estilos2" data-transition="fade-in">
           <img src="imgs/data-duplication-microservices.png" />
         </section>
+
+        <section id="estilos2" data-transition="fade-out">
+          <p class="titulochico">Microservicios: Ejemplo</p>
+          <ul class="arrow">
+            <li class="fragment">Usando comunicación sincrónica es simple. Pero el carrito ya no seria auto-contenido. Tengo una penalidad en la performance (el join en una aplicación + request de red adicional).</li>
+            <li class="fragment">Usando comunicación asincrónica el carrito es auto-contenido y performa mejor. Pero tengo mas complejidad, tengo que mantener más infra. Consistencia eventual vs Consistencia fuerte (nombre vs precio).</li>
+          </ul>
+        </section>
+
 
         <!--
         <section id="estilos2">
