@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Verificación de la Organización Lógica</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+
+    <style>
+      .simplecode {
+        background-color: #edecec;
+        color: #272822;
+        border-radius: 0.3em;
+        padding: 4px 5px 6px;
+        white-space: nowrap;
+      }
+
+      .inlinecode {
+        background-color: #edecec;
+        color: #272822;
+        border-radius: 0.3em;
+        padding: 4px 5px 6px;
+        white-space: nowrap;
+      }
+
+      .reveal section code.small1 {
+        font-size: 0.8em;
+      }
+
+      div.line {
+        border-bottom: 1px solid;
+        border-color: lightgray;
+      }
+
+      .box3 {
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box2 {
+        width: 720px;
+        padding: 15px;
+        margin-left: 100px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box {
+        width: 900px;
+        /*border: 15px solid green;*/
+        padding: 15px;
+        margin: 2px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+        /*font-family: 'Times New Roman', Times, serif;*/
+      }
+
+      .box4 {
+        width: 730px;
+        padding: 15px;
+        margin-left: 2px;
+        margin-top: 10px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 30pt;
+        font-weight: bold;
+      }
+      .titulobox {
+        width: 970px;
+      }
+
+      .portada .subtitulo {
+        color: lightgray;
+      }
+
+      .autor {
+        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+        font-size: 15pt;
+      }
+
+      .fechahoy {
+        color: gray;
+      }
+
+      .titulo {
+        font-size: 50pt;
+      }
+
+      .titulomaschico {
+        font-size: 30pt;
+      }
+
+      .resaltar {
+        color: #4a4e69;
+      }
+
+      p.chico {
+        font-size: 24pt;
+      }
+
+      span.itali {
+        font-family: cursive;
+      }
+
+      p.maschico {
+        font-size: 20pt;
+      }
+
+      span.maschico {
+        font-size: 20pt;
+      }
+
+      li.maschico {
+        font-size: 20pt;
+      }
+
+      p.alineadoIzq {
+        text-align: left;
+      }
+
+      p.maschicoYalineadoIzq {
+        font-size: 12pt;
+        text-align: left;
+      }
+
+      p.chicoYalineadoIzq {
+        font-size: 24pt;
+        text-align: left;
+      }
+
+      .reveal .slide-number {
+        background-color: white;
+        color: black;
+      }
+
+      .reveal .footer {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+        color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="footer">Verificación de la Organización Lógica</div>
+      <div class="menubar line">
+        <div class="slide-number"></div>
+        <ul class="menu">
+          <li><a href="#/necesidad">¿Por qué necesito verificar?</a></li>
+          <li><a href="#/javam">Java Modules</a></li>
+          <li><a href="#/archunit">ArchUnit</a></li>
+        </ul>
+        <div class="placeholder"></div>
+      </div>
+      <div class="slides">
+        <section
+          style="text-align: left"
+          data-transition="fade"
+          data-state="hide-menubar no-title-footer"
+        >
+          <div class="box">
+            <p>Verificación de la Organización Lógica</p>
+          </div>
+          <div class="titulobox">
+            Asegurando que la arquitectura lógica que definamos se mantenga en
+            el tiempo
+          </div>
+          <p class="autor">Enrique Molinari</p>
+          <p id="hoy" class="autor fechahoy"></p>
+        </section>
+
+        <section id="necesidad" data-transition="fade-out">
+          <img src="imgs/invalid-dependencies-0.png" />
+        </section>
+
+        <section id="necesidad" data-transition="fade-in">
+          <img src="imgs/invalid-dependencies-1.png" />
+        </section>
+
+        <section id="necesidad" data-transition="fade-out">
+          <img src="imgs/invalid-dependencies-2.png" />
+        </section>
+
+        <section id="necesidad" data-transition="fade-in">
+          <img src="imgs/invalid-dependencies-3.png" />
+        </section>
+
+        <section id="necesidad" data-transition="fade-in">
+          <img src="imgs/invalid-dependencies-4.png" />
+        </section>
+
+        <section id="javam" data-transition="fade-out">
+          <p class="fragment">Java 9+ propone usar <b>Modules</b>.</p>
+          <p class="fragment">¿Cómo declaramos el <b>Módulo</b> Data?</p>
+          <pre class="fragment"><code data-trim data-noescape>module data {
+ //exporta las clases públicas del paquete data.api
+ exports data.api;
+
+ //others requires
+ requires jarA;
+ requires jarB;
+ ...
+}</code></pre>
+          <p class="maschico fragment">
+            Ésta definición va en <em>module-info.java</em>, en la raiz del
+            <em>src/main/java</em> folder.
+          </p>
+        </section>
+        <section id="javam" data-transition="fade-in">
+          <p>¿Cómo declaramos el <b>Módulo</b> Domain?</p>
+          <pre class="fragment"><code data-trim data-noescape>module domain {
+ //exporta las clases públicas del paquete domain.api
+ exports domain.api;
+
+ requires data;
+
+ //others requires
+ requires jarX;
+ ...
+}</code></pre>
+          <p class="maschico fragment">
+            Observen que requiere el módulo <em>data</em> y éste solo exporta su
+            paquete <em>data.api</em>.
+          </p>
+        </section>
+
+        <section id="archunit">
+          <p class="resaltar">
+            Validación de la Arquitectura Lógica con ArchUnit
+          </p>
+          <p class="fragment">
+            ArchUnit nos ayuda a detectar dependencias inválidas:
+          </p>
+          <pre class="fragment"><code data-trim data-noescape>@Test
+public void domainOnlyDependOnDataApi() {
+ JavaClasses jc = new ClassFileImporter()
+     .importPackages("controller", "..data..", "..domain..");
+ 
+ classes().that().resideInAnyPackage("domain.service")
+   .should().onlyDependOnClassesThat()
+   .resideInAnyPackage("data.api", "domain.api", "domain",  
+         "java..", "jarx..")
+   .check(jc);
+}</code></pre>
+          <p class="maschico fragment">
+            <em>..data..</em> significa cualquier paquete que contenga
+            <em>data</em>, no importa que hay antes o después.
+          </p>
+        </section>
+
+        <section id="archunit">
+          <p class="resaltar">
+            Validación de la Arquitectura Lógica con ArchUnit
+          </p>
+          <p class="fragment">
+            También sirve para verificar otros tipos de decisiones:
+          </p>
+          <pre class="fragment"><code data-trim data-noescape>@Test
+public void verifyControllersName() {
+ JavaClasses jc = new ClassFileImporter()
+  .importPackages("..app..");
+
+ classes().that().areAnnotatedWith(RestController.class)
+  .should().haveSimpleNameEndingWith("Controller")
+  .check(jc);           
+}</code></pre>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/relativenumber/relativenumber.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      window.onload = function () {
+        let today = new Date().toLocaleDateString();
+        let obj = document.getElementById("hoy");
+        document.getElementById("hoy").innerText = today;
+      };
+
+      Reveal.addEventListener("slidechanged", function (event) {
+        if (event.indexh > 0) {
+          document.querySelector(".reveal .footer").style.display = "block";
+        } else {
+          document.querySelector(".reveal .footer").style.display = "none";
+        }
+      });
+
+      Reveal.addEventListener("ready", function (event) {
+        if (event.indexh === 0)
+          document.querySelector(".reveal .footer").style.display = "none";
+      });
+
+      Reveal.initialize({
+        hash: true,
+        slideNumber: "c/t",
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealNotes,
+          RelativeNumber,
+          Simplemenu,
+          RevealMath.KaTeX,
+        ],
+      });
+    </script>
+  </body>
+</html>
