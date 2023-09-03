@@ -18,6 +18,31 @@
     <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
 
     <style>
+      ul.arrow {
+        font-size: 24pt;
+        line-height: 1.5em;
+        margin: 5px 0 15px;
+        padding: 0;
+        color: var(--r-main-color);
+      }
+      ul.arrow li {
+        list-style: none;
+        position: relative;
+        padding: 0 0 0 30px;
+      }
+
+      ul.arrow li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 20px;
+        height: 10px;
+        width: 10px;
+        border: 1px solid #ff6600;
+        border-width: 2px 2px 0 0;
+        transform: rotate(45deg);
+      }
+
       .simplecode {
         background-color: #edecec;
         color: #272822;
@@ -171,6 +196,7 @@
           <li><a href="#/necesidad">¿Por qué necesito verificar?</a></li>
           <li><a href="#/javam">Java Modules</a></li>
           <li><a href="#/archunit">ArchUnit</a></li>
+          <li><a href="#/recursos">Recursos</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -286,6 +312,38 @@ public void verifyControllersName() {
   .should().haveSimpleNameEndingWith("Controller")
   .check(jc);           
 }</code></pre>
+        </section>
+
+        <section id="recursos">
+          <p class="titulochico">Recursos</p>
+          <ul class="arrow">
+            <li>
+              <a
+                href="https://github.com/enriquemolinari/book-ch2-validate-dependencies/tree/main/ch2-archunit"
+                >Repo</a
+              >
+              con ejemplos de ArchUnit en un Proyecto Java
+            </li>
+            <li>
+              <a
+                href="https://github.com/enriquemolinari/book-ch2-validate-dependencies"
+                >Repo</a
+              >
+              con ejemplos de Java9 Modules
+            </li>
+            <li>
+              <a href="https://github.com/enriquemolinari/spring-boot-sample"
+                >Repo</a
+              >
+              con ejemplos de ArchUnit en un Proyecto SpringBoot
+            </li>
+            <li>
+              <a
+                href="https://www.oracle.com/corporate/features/understanding-java-9-modules.html"
+                >Java9+ Modules</a
+              >
+            </li>
+          </ul>
         </section>
       </div>
     </div>
