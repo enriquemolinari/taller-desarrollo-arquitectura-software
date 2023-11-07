@@ -124,9 +124,9 @@
           <li><a href="#/def">Definición</a></li>
           <li><a href="#/dns">DNS</a></li>
           <li><a href="#/lb">Load Balancer</a></li>
+          <li><a href="#/queues">Messages Queues</a></li>
           <li><a href="#/cache">Cache</a></li>
           <li><a href="#/cache2">Browser Cache y CDN</a></li>
-          <li><a href="#/queues">Messages Queues</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -149,63 +149,9 @@
           <p class="fragment titulo" data-fragment-index="0">
             ¿Arquitectura de Software?
           </p>
-          <p class="fragment" data-fragment-index="1">
-            La arquitectura de software establece de qué manera un producto de
-            software o sistema está
-            <span class="fragment highlight-red" data-fragment-index="2"
-              >estructurado</span
-            >. La
-            <span class="fragment highlight-blue" data-fragment-index="3"
-              >estructura</span
-            >
-            comprende
-            <span class="fragment highlight-red" data-fragment-index="3"
-              ><u>elementos de software</u></span
-            >, sus
-            <span class="fragment highlight-red" data-fragment-index="3"
-              >propiedades</span
-            >
-            y las
-            <span class="fragment highlight-red" data-fragment-index="3"
-              >relaciones</span
-            >
-            entre ellos.
-          </p>
+          <p class="fragment" data-fragment-index="1">Recordemos qué es...</p>
         </section>
 
-        <section id="def">
-          <div class="box2">Elemento de software</div>
-          <p>
-            Cualquier pieza de software que podría ir desde una
-            <span class="fragment highlight-red" data-fragment-index="0"
-              >función</span
-            >,
-            <span class="fragment highlight-red" data-fragment-index="0"
-              >procedimiento</span
-            >,
-            <span class="fragment highlight-red" data-fragment-index="0"
-              >clase</span
-            >,
-            <span class="fragment highlight-red" data-fragment-index="0"
-              >módulo</span
-            >,
-            <span class="fragment highlight-red" data-fragment-index="0"
-              >capa</span
-            >
-            y
-            <span class="fragment highlight-red" data-fragment-index="0"
-              >paquete</span
-            >
-            hasta <span class="fragment highlight-blue data-fragment-index="1"
-            >aplicaciones</span>, <span class="fragment highlight-blue" data-fragment-index="1"
-            >repositorios de datos</span>, <span class="fragment highlight-blue" data-fragment-index="1"
-            >ambientes de ejecución
-            (web servers, contenedores, etc)</span>, <span class="fragment highlight-blue" data-fragment-index="1"
-            >API gateways</span>, <span class="fragment highlight-blue" data-fragment-index="1"
-            >colas de mensajes</span>,
-            entre otros.
-          </p>
-        </section>
         <section id="dns" data-auto-animate>
           <p class="titulo">DNS (Domain Name Service)</p>
           <img src="imgs/dns.png" />
@@ -213,123 +159,251 @@
 
         <section id="dns" data-auto-animate>
           <p class="titulo">DNS (Domain Name Service)</p>
-          <p><b>Latencia</b>: Medida de tiempo desde que sale el request hasta que llega la respuesta.</p>
+          <p>
+            <b>Latencia</b>: Medida de tiempo desde que sale el request hasta
+            que llega la respuesta.
+          </p>
           <p><b>Latencia</b>: DNS resolution + request time.</p>
         </section>
 
         <section id="dns" data-auto-animate>
           <p class="titulo">DNS (Domain Name Service)</p>
-          <p>Cualquier servicio en Internet, lo primero que contacta es a un DNS. Por este motivo la Web necesita que este servicio tenga <u>alta disponibilidad</u> y <u>cercanía geografica</u> para reducir la latencia. Por eso sus entradas estan replicadas en practicamente todo el planeta y esto es la principal causa por la cual actualizar tablas de DNSs lleva tiempo.</p>
+          <p>
+            Cualquier servicio en Internet, lo primero que contacta es a un DNS.
+            Por este motivo la Web necesita que este servicio tenga
+            <u>alta disponibilidad</u> y <u>cercanía geografica</u> para reducir
+            la latencia. Por eso sus entradas estan replicadas en practicamente
+            todo el planeta y esto es la principal causa por la cual actualizar
+            tablas de DNSs lleva tiempo.
+          </p>
         </section>
 
         <section id="dns">
           <p class="titulo">DNS (Domain Name Service)</p>
-          <p class="chicoYalineadoIzq">Cuando apretamos enter luego de escribir una dirección web en un browser, éste inicia la resolución del nombre de la siguiente forma:</p>
+          <p class="chicoYalineadoIzq">
+            Cuando apretamos enter luego de escribir una dirección web en un
+            browser, éste inicia la resolución del nombre de la siguiente forma:
+          </p>
           <ul>
-          <li class="fragment chicoYalineadoIzq">Revisa el cache del Browser</li>
-          <li class="fragment chicoYalineadoIzq">Revisa el cache del sistema operativo</li>
-          <li class="fragment chicoYalineadoIzq">Revisa el cache del router</li>
-          <li class="fragment chicoYalineadoIzq">Revisa el cache del ISP</li>
-          <li class="fragment chicoYalineadoIzq">y finalmente el DNS del ISP inicia la búsqueda</li>
-        </ul>
+            <li class="fragment chicoYalineadoIzq">
+              Revisa el cache del Browser
+            </li>
+            <li class="fragment chicoYalineadoIzq">
+              Revisa el cache del sistema operativo
+            </li>
+            <li class="fragment chicoYalineadoIzq">
+              Revisa el cache del router
+            </li>
+            <li class="fragment chicoYalineadoIzq">Revisa el cache del ISP</li>
+            <li class="fragment chicoYalineadoIzq">
+              y finalmente el DNS del ISP inicia la búsqueda
+            </li>
+          </ul>
         </section>
 
         <section id="dns" data-transition="fade-out">
           <p class="titulo">DNS (Domain Name Service)</p>
-          <p class="chico">¿Qué pasa si el punto de entrada de mi aplicación esta duplicado para tener alta disponibilidad?</p>
+          <p class="chico">
+            ¿Qué pasa si el punto de entrada de mi aplicación esta duplicado
+            para tener alta disponibilidad?
+          </p>
           <img src="imgs/dns-multi-0.png" />
         </section>
 
         <section id="dns" data-transition="fade-in">
           <p class="titulo">DNS (Domain Name Service)</p>
-          <p class="chico">¿Qué pasa si el punto de entrada de mi aplicación esta duplicado para tener alta disponibilidad?</p>
+          <p class="chico">
+            ¿Qué pasa si el punto de entrada de mi aplicación esta duplicado
+            para tener alta disponibilidad?
+          </p>
           <img src="imgs/dns-multi.png" />
         </section>
 
         <section id="dns" data-auto-animate>
           <p class="titulo">DNS (Domain Name Service)</p>
-          <p class="fragment">El DNS puede tener para una entrada de nombre múltiples IPs. Con cada petición devuelve ésta lista en orden diferente (round robin).</p>
-          <p class="fragment">El browser intenta con la primera y si ese servicio esta abajo, sigue con el siguiente de la lista.</p>          
+          <p class="fragment">
+            El DNS puede tener para una entrada de nombre múltiples IPs. Con
+            cada petición devuelve ésta lista en orden diferente (round robin).
+          </p>
+          <p class="fragment">
+            El browser intenta con la primera y si ese servicio esta abajo,
+            sigue con el siguiente de la lista.
+          </p>
         </section>
 
         <section id="lb">
           <p class="titulo">Load Balancers</p>
-          <p class="fragment">Distribuye request hacia servicios deployados en diferentes equipos. Para esto posee una lista de los servicios a los que debe distribuir.</p>
-          <p class="fragment">Hardware Based vs Sofware Based</p>          
-          <p class="fragment">Layer 4 (Transporte, IP:PORT) vs Layer 7 (Request completo)</p>          
-          <p class="fragment">API Gateway es Layer 7</p>          
+          <p class="fragment">
+            Distribuye request hacia servicios deployados en diferentes equipos.
+            Para esto posee una lista de los servicios a los que debe
+            distribuir.
+          </p>
+          <p class="fragment">Hardware Based vs Sofware Based</p>
+          <p class="fragment">
+            Layer 4 (Transporte, IP:PORT) vs Layer 7 (Request completo)
+          </p>
+          <p class="fragment">API Gateway es Layer 7</p>
         </section>
 
         <section id="lb">
           <p class="titulo">Load Balancers</p>
           <p class="fragment">¿Cómo distribuye?</p>
-          <p class="fragment chicoYalineadoIzq"><b>Round-Robin</b>: En orden, cada request nuevo al siguiente.</p>          
-          <p class="fragment chicoYalineadoIzq"><b>Weighted Round-Robin</b>: Algun servicio podría atender más request que otros.</p>          
-          <p class="fragment chicoYalineadoIzq"><b>Least Connections</b>: Envía al servicio que esta ejecutando menos cantidad de request.</p>          
-          <p class="fragment chicoYalineadoIzq"><b>Least Response time</b>: Selecciona segun cantidad de request ejecutándose y el tiempo promedio de respuesta.</p>    
+          <p class="fragment chicoYalineadoIzq">
+            <b>Round-Robin</b>: En orden, cada request nuevo al siguiente.
+          </p>
+          <p class="fragment chicoYalineadoIzq">
+            <b>Weighted Round-Robin</b>: Algun servicio podría atender más
+            request que otros.
+          </p>
+          <p class="fragment chicoYalineadoIzq">
+            <b>Least Connections</b>: Envía al servicio que esta ejecutando
+            menos cantidad de request.
+          </p>
+          <p class="fragment chicoYalineadoIzq">
+            <b>Least Response time</b>: Selecciona segun cantidad de request
+            ejecutándose y el tiempo promedio de respuesta.
+          </p>
+        </section>
+
+        <section id="queues" data-auto-animate="fade-out">
+          <p class="titulo">Message Queues</p>
+          <p class="fragment">
+            Es un servicio que permite comunicar dos o más aplicaciones de forma
+            asíncrona.
+          </p>
+          <img class="fragment" src="imgs/queue.png" />
+          <p class="fragment">
+            Ofrecen varias formas de comunicación (ej: 1 a 1 o 1 a N) y puede
+            ser en memoria o en disco.
+          </p>
+        </section>
+
+        <section id="queues" data-auto-animate="fade-in">
+          <p class="titulo">Message Queues</p>
+          <img class="fragment" src="imgs/queue.png" />
+          <p class="fragment chico">
+            ¿Pará que utilizaríamos una cola de mensajes?
+          </p>
+          <p class="fragment chico">
+            Para <u>reducir la latencia en procesos costosos</u>. Ej: Consumo de
+            un servicio en la Nube, consumo de un servicio externo a mi
+            aplicación (ej: envío de un email), pre-procesamiento o
+            denormalización de ciertos datos para mejorar las lecturas de
+            ciertas funcionalidades, replicar datos, publicar eventos, entre
+            otros.
+          </p>
         </section>
 
         <section id="cache">
           <p class="titulo">Caching</p>
           <p class="fragment">¿Qué es?</p>
-          <p class="fragment">Caching refiere al proceso de almancenar datos en un almancenamiento temporal de rápido acceso principalmente para reducir la latencia de nuestra aplicación.</p>
-          <p class="fragment">El almancenamiento de rápido acceso es más caro y de poca capacidad, por eso es importante entener la mejor estrategia para tener ese cache fresco.</p>
+          <p class="fragment">
+            Caching refiere al proceso de almancenar datos en un almancenamiento
+            temporal de rápido acceso principalmente para reducir la latencia de
+            nuestra aplicación.
+          </p>
+          <p class="fragment">
+            El almancenamiento de rápido acceso es más caro y de poca capacidad,
+            por eso es importante entener la mejor estrategia para tener ese
+            cache fresco.
+          </p>
         </section>
 
         <section id="cache">
           <p class="titulo">Caching</p>
-          <img src="imgs/disk-vs-mem.png"/>
+          <img src="imgs/disk-vs-mem.png" />
         </section>
 
         <section id="cache">
           <p class="titulo">Caching</p>
           <p class="titulochico">Algunos términos importantes</p>
-          <p class="fragment chicoYalineadoIzq"><b>Cache hit</b>: Es cuando se encuentra el dato en el cache y se recupera de allí.</p>
-          <p class="fragment chicoYalineadoIzq"><b>Cache miss</b>: Es cuando no se encuentra el dato en el cache y debe recuperarse del almacenamiento permanente</p>
-          <p class="fragment chicoYalineadoIzq"><b>Cache eviction</b>: Refiere a quitar entradas del cache porque estan desactualizadas, inconsistentes con el almacenamiento permanente.</p>
-          <p class="fragment chicoYalineadoIzq"><b>TTL</b>: Time to live. El tiempo en el que ese dato será borrado del cache.</p>
+          <p class="fragment chicoYalineadoIzq">
+            <b>Cache hit</b>: Es cuando se encuentra el dato en el cache y se
+            recupera de allí.
+          </p>
+          <p class="fragment chicoYalineadoIzq">
+            <b>Cache miss</b>: Es cuando no se encuentra el dato en el cache y
+            debe recuperarse del almacenamiento permanente
+          </p>
+          <p class="fragment chicoYalineadoIzq">
+            <b>Cache eviction</b>: Refiere a quitar entradas del cache porque
+            estan desactualizadas, inconsistentes con el almacenamiento
+            permanente.
+          </p>
+          <p class="fragment chicoYalineadoIzq">
+            <b>TTL</b>: Time to live. El tiempo en el que ese dato será borrado
+            del cache.
+          </p>
         </section>
 
         <section id="cache">
           <p class="titulo">Caching</p>
-          <p class="titulochico">Hoy las bases de datos NoSQL de tipo Clave-valor brillan para ser utilizadas como mecanimos de cache.</p>
-          <p class="fragment"><b>Redis</b>, <b>Memcache</b>, <b>Ehcache</b>, etc. 
+          <p class="titulochico">
+            Hoy las bases de datos NoSQL de tipo Clave-valor brillan para ser
+            utilizadas como mecanimos de cache.
+          </p>
+          <p class="fragment">
+            <b>Redis</b>, <b>Memcache</b>, <b>Ehcache</b>, etc.
+          </p>
         </section>
 
         <section id="cache">
           <p class="titulo">Caching Strategies</p>
           <p class="titulochico">Cache Aside (cache de lado)</p>
-          <img src="imgs/cache-aside.png">  
-          <p class="chico">La aplicación primero busca en cache si no encuentra va al almacenamiento persistente, luego refresca el cache y devuelve el dato. Require de TTL. Cuando hay cache miss la latencia es mayor.</p>
+          <img src="imgs/cache-aside.png" />
+          <p class="chico">
+            La aplicación primero busca en cache si no encuentra va al
+            almacenamiento persistente, luego refresca el cache y devuelve el
+            dato. Require de TTL. Cuando hay cache miss la latencia es mayor.
+          </p>
         </section>
 
         <section id="cache">
           <p class="titulo">Caching Strategies</p>
           <p class="titulochico">Read Through</p>
-          <img src="imgs/read-through.png">  
-          <p class="chico">La aplicación siempre lee del cache. Si la entrada no esta allí es el cache quien busca en el almacenamiento permanente el dato y lo deja en cache para que este disponible. Require TTL. Al igual que la estrategia anterior, tiene latencia adicional si el dato no esta en cache.</p>
+          <img src="imgs/read-through.png" />
+          <p class="chico">
+            La aplicación siempre lee del cache. Si la entrada no esta allí es
+            el cache quien busca en el almacenamiento permanente el dato y lo
+            deja en cache para que este disponible. Require TTL. Al igual que la
+            estrategia anterior, tiene latencia adicional si el dato no esta en
+            cache.
+          </p>
         </section>
 
         <section id="cache">
           <p class="titulo">Caching Strategies</p>
           <p class="titulochico">Write Through</p>
-          <img src="imgs/write-through.png">  
-          <p class="chico">La aplicación siempre lee y escribe en cache (almancenamiento principal). El cache actualiza de forma síncrona, el almacenamiento persistente. No es atómico, tiene siempre latencia adicional en la escritura al ser síncrono, pero las lecturas siempre serán del cache. Podría haber datos en cache que nunca son leídos.</p>
+          <img src="imgs/write-through.png" />
+          <p class="chico">
+            La aplicación siempre lee y escribe en cache (almancenamiento
+            principal). El cache actualiza de forma síncrona, el almacenamiento
+            persistente. No es atómico, tiene siempre latencia adicional en la
+            escritura al ser síncrono, pero las lecturas siempre serán del
+            cache. Podría haber datos en cache que nunca son leídos.
+          </p>
         </section>
 
         <section id="cache">
           <p class="titulo">Caching Strategies</p>
           <p class="titulochico">Write Behind</p>
-          <img src="imgs/write-behind.png">  
-          <p class="chico">La aplicación siempre lee y escribe en cache (almancenamiento principal). El cache actualiza de forma asíncrona, el almacenamiento persistente. Elimino la latencia en las escrituras.</p>
+          <img src="imgs/write-behind.png" />
+          <p class="chico">
+            La aplicación siempre lee y escribe en cache (almancenamiento
+            principal). El cache actualiza de forma asíncrona, el almacenamiento
+            persistente. Elimino la latencia en las escrituras.
+          </p>
         </section>
-
 
         <section id="cache">
           <p class="titulo">Caching Strategies</p>
           <p class="titulochico">Refresh Ahead</p>
-          <img src="imgs/refresh-ahead.png">  
-          <p class="chico">El cache se configura para actualizar aquellos items que estan por expirar. Es específico para la lectura de ciertos items de datos. Las escrituras son sobre el almacenamiento persistente.</p>
+          <img src="imgs/refresh-ahead.png" />
+          <p class="chico">
+            El cache se configura para actualizar aquellos items que estan por
+            expirar. Es específico para la lectura de ciertos items de datos.
+            Las escrituras son sobre el almacenamiento persistente.
+          </p>
         </section>
 
         <section id="cache2">
@@ -339,7 +413,9 @@
 
         <section id="cache2">
           <p class="titulo">Browser Cache</p>
-          <p class="titulochico">Future Expire Headers: Utiliza la del cache, no me preguntes.</p>
+          <p class="titulochico">
+            Future Expire Headers: Utiliza la del cache, no me preguntes.
+          </p>
           <pre
             class="fragment"
           ><code class="small1" lang="java" data-trim data-noescape >ExpiresActive On
@@ -350,50 +426,47 @@ ExpiresByType image/png "access plus 1 year"
 ExpiresByType text/css "access plus 1 year"
 ExpiresByType application/javascript "access plus 1 year"
 </code></pre>
-<p class="fragment chico">¿Cuándo saco una versión nueva de la aplicación como invalido el cache de mis clientes?</p>
-<p class="fragment chico">Agregando un número de versión a todo lo que cache con future expire headers</p>
-</section>
+          <p class="fragment chico">
+            ¿Cuándo saco una versión nueva de la aplicación como invalido el
+            cache de mis clientes?
+          </p>
+          <p class="fragment chico">
+            Agregando un número de versión a todo lo que cache con future expire
+            headers
+          </p>
+        </section>
 
-
-<section id="cache2">
-  <p class="titulo">Browser Cache</p>
-  <p class="titulochico">Agregando versionado al contenido estático</p>
-  <pre
-    class="fragment"
-  ><code class="small1" lang="html" data-trim><link href="/miapp/css/hideColumn.css?v=1666621220" rel="..."/>
+        <section id="cache2">
+          <p class="titulo">Browser Cache</p>
+          <p class="titulochico">Agregando versionado al contenido estático</p>
+          <pre
+            class="fragment"
+          ><code class="small1" lang="html" data-trim><link href="/miapp/css/hideColumn.css?v=1666621220" rel="..."/>
 <link href="/miapp/css/bootstrap.css?v=1665509236" rel="..."/> 
 <script src="/miapp/js/hidecolumns.js?v=1666621220"></script>
 <script src="/miapp/jquery.js?v=1665509236"></script>
 <script src="/miapp/bundle.js?v=1665509236"></script>
 </code></pre>
-<p class="fragment chico">En cada nuevo deploy el número de versión debe cambiar. De esta forma el browser lo vuelve a pedir.</p>
-</section>
-
-    <section id="cache2">
-      <p class="titulo">CDN (Content Delivery Network)</p>
-      <p class="fragment">Deployamos contenido estatico cerca del cliente.</p>
-      <p class="fragment">Imagenes, videos, js, css, etc</p>
-      <p class="fragment">Servicio ofrecido por grandes ISPs para Aplicaciones con potencial acceso mundial.</p>
-      <p class="fragment">Youtube, Netflix, etc, son grandes usuarios de CDN.</p>
-    </section>
-
-
-        <section id="queues" data-auto-animate="fade-out">
-          <p class="titulo">Message Queues</p>
-          <p class="fragment">Es un servicio que permite comunicar dos o más aplicaciones de forma asíncrona.</p> 
-          <img class="fragment" src="imgs/queue.png"/>
-          <p class="fragment">Ofrecen varias formas de comunicación (ej: 1 a 1 o 1 a N) y puede ser en memoria o en disco.</p>
+          <p class="fragment chico">
+            En cada nuevo deploy el número de versión debe cambiar. De esta
+            forma el browser lo vuelve a pedir.
+          </p>
         </section>
 
-        <section id="queues" data-auto-animate="fade-in">
-          <p class="titulo">Message Queues</p>
-          <img class="fragment" src="imgs/queue.png"/>
-          <p class="fragment chico">¿Pará que utilizaríamos una cola de mensajes?</p>
-          <p class="fragment chico">Para <u>reducir la latencia en procesos costosos</u>. Ej: Consumo de un servicio en la Nube, consumo de un servicio externo a mi aplicación (ej: envío de un email), pre-procesamiento o denormalización de ciertos datos para mejorar las lecturas de ciertas funcionalidades, replicar datos, publicar eventos, entre otros.</p>
+        <section id="cache2">
+          <p class="titulo">CDN (Content Delivery Network)</p>
+          <p class="fragment">
+            Deployamos contenido estatico cerca del cliente.
+          </p>
+          <p class="fragment">Imagenes, videos, js, css, etc</p>
+          <p class="fragment">
+            Servicio ofrecido por grandes ISPs para Aplicaciones con potencial
+            acceso mundial.
+          </p>
+          <p class="fragment">
+            Youtube, Netflix, etc, son grandes usuarios de CDN.
+          </p>
         </section>
-
-
-
 
         <!-- 
         <section id="ci" data-auto-animate>
@@ -405,7 +478,6 @@ ExpiresByType application/javascript "access plus 1 year"
           <img src="imgs/teamcity.png" />
           <img src="imgs/circleci.png" />
         </section> -->
-
       </div>
     </div>
 

@@ -170,7 +170,7 @@
           <li><a href="#/maven">Maven</a></li>
           <li><a href="#/nube">En la Nube</a></li>
           <li><a href="#/medallas">Medallas</a></li>
-          <li><a href="#/deploy">Deployment</a></li>
+          <!--           <li><a href="#/deploy">Deployment</a></li> -->
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -514,76 +514,6 @@ public JpaSalesOnline(EntityManager em) {
             <a href="https://github.com/spring-projects/spring-framework"
               >Spring</a
             >. <a href="https://github.com/enriquemolinari/jqueue">JQueue</a>.
-          </p>
-        </section>
-
-        <section id="deploy">
-          <div class="box2">Deployment</div>
-          <p>Con cero downtime!</p>
-        </section>
-
-        <section id="deploy">
-          <p class="titulo">Blue/Green Deployment</p>
-          <p class="fragment">
-            Hay que tener 2 ambientes de producción completos e identicos.
-          </p>
-          <p class="fragment">
-            Uno que esta siendo utilizado por los usuarios.
-          </p>
-          <p class="fragment">
-            Y otro que va a ser utilizado luego del nuevo deployment.
-          </p>
-        </section>
-
-        <section id="deploy">
-          <p class="titulomaschico">Blue/Green Deployment - Shared Database</p>
-          <img src="imgs/bluegreendeploy2.png" />
-        </section>
-
-        <section id="deploy">
-          <p class="titulo">Blue/Green Deployment - Shared Database</p>
-          <p class="chico fragment">
-            Requiere que los cambios de base de datos, scripts de DDL y DML,
-            sean compatibles con la versión actual de la aplicación.
-          </p>
-          <p class="chico fragment">
-            Primero se corren los scripts de base de datos, sin deployar una
-            nueva versión. La compatibilidad garantiza que la versión actual
-            sigue funcionando.
-          </p>
-          <p class="chico fragment">
-            Luego se deploya la nueva versión de la aplicación en el ambiente
-            blue.
-          </p>
-          <p class="chico fragment">
-            Se prueba y si esta Ok, se cambia el proxy reverso para la nueva
-            versión.
-          </p>
-        </section>
-
-        <section id="deploy">
-          <p class="titulomaschico">Blue/Green Deployment</p>
-          <img src="imgs/bluegreendeploy.png" />
-        </section>
-
-        <section id="deploy">
-          <p class="titulo">Blue/Green Deployment</p>
-          <p class="chico fragment">
-            Requiere mantener las bases de datos de los ambientes green y blue
-            sincronizados mediante replicación.
-          </p>
-        </section>
-
-        <section id="deploy">
-          <p class="titulo">Canary Deployment</p>
-          <img src="imgs/canary-deploy.png" />
-        </section>
-
-        <section id="deploy">
-          <p class="titulo">Canary Deployment</p>
-          <p class="chico fragment">
-            Requiere mantener las bases de datos de los ambientes sincronizados
-            mediante replicación.
           </p>
         </section>
       </div>
