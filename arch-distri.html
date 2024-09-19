@@ -135,7 +135,22 @@
           <span>Arquitecturas Distribuídas</span>
         </div>
         <div class="smallbox">Conceptos Fundamentales</div>
-        <p class="autor">ENRIQUE MOLINARI</p>
+<!--         <p class="autor">ENRIQUE MOLINARI</p> -->
+<!-- TODO: 
+ Outbox Pattern
+ Tx distribuidas (2pc): Introduction to two-phase commit (Libro: data intensive applications)
+ Application Level Tx (Sagas) -->
+<!-- Microservices Boundaries
+ https://github.com/TeamTopologies/Independent-Service-Heuristics 
+ 
+Sarah Wells
+One aspect of the ISH checklist that stands out for me, because it’s a place that can
+cause a lot of pain if you get it wrong, is around data.
+
+You really want to keep data that changes together in the same place, owned by the
+same team, to avoid distributed transactions.
+-->
+
         <p id="hoy" class="autor fechahoy"></p>
       </section>
 
@@ -144,7 +159,7 @@
         <p class="fragment">En las arquitecturas distribuidas el sistema es particionado en <u>aplicaciones
             simples</u> donde cada una se deploya en su <u>propio contenedor</u>, el cual corre en su <u>propio
             proceso</u> y se comunican entre ellas enviándose mensajes a través de la <u>red</u>.</p>
-        <p class="fragment">¿Crearon algun sistema distribuído?</p>
+<!--         <p class="fragment">¿Crearon algun sistema distribuído?</p> -->
       </section>
 
       <section id="vs">
@@ -213,9 +228,17 @@
 
       <section id="mic">
         <p class="resaltar">Microservicios</p>
-        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
+        <p class="chico fragment">The microservice architectural style is an approach to developing a single application 
+          as a suite of <u>"small" services</u>, each running in its own process and communicating with 
+          lightweight mechanisms. These services are built around business capabilities and independently deployable by fully automated deployment machinery. There is a bare 
+          minimum of centralized management of these services, which may be written in different programming languages and use different data storage technologies (Fowler, Lewis).</p>
+      </section>
+
+      <section id="mic">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán chico (small) deben ser los servicios?</p>
         <p class="chico fragment">¡Ojo! hay mucha sobreingeniería en este tema. Se creen que "micro" implica muy poco y
-          luego para integrarlos utilizan un conjunto de herramientas que complican todo de gran manera.</p>
+          luego para integrarlos terminan creando lo que se conoce como "distributed monolith" (super chatty services).</p>
         <p class="chico fragment">¿Qué dicen la bibliografía sobre esto?</p>
       </section>
 
@@ -227,17 +250,25 @@
 -->
       <section id="mic">
         <p class="resaltar">Microservicios</p>
-        <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
-        <p class="chico fragment">El término micro-servicio pareciera revelar que cada aplicación debería realizar lo
-          mínimo indispensable. Pero el criterio es por sub-dominio (Bounded Context), y quizás ciertos sub-dominios no
+        <p class="chico fragment">¿Cuán chico (small) deben ser los servicios?</p>
+        <p class="chico fragment">El término <b>micro</b>-servicio pareciera revelar que cada aplicación debería realizar lo
+          mínimo indispensable. Pero el criterio es por sub-dominio, y quizás ciertos sub-dominios no
           son pequeños</p>
+      </section>
+
+      <section id="mic">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán chico (small) deben ser los servicios?</p>
+        <p class="chico fragment">Dos criterios para enteder si dividimos o juntamos:</p>
         <p class="chicoYalineadoIzq fragment"><u>Transacciones</u>: Si tenemos entidades que necesitan trabajar juntas
           de forma atómica, entonces deben estar en el mismo microservicio. Las transacciones distribuidas son
-          complicadas, si es posible evitarlas, mejor.</p>
+          complicadas, si es posible evitarlas, mejor. <b>Sarah Wells</b>: You really want to keep data that changes together in the same place, owned by the
+          same team, to avoid distributed transactions.</p>
         <p class="chicoYalineadoIzq fragment"><u>Comunicación</u>: Si algunos microservicios requieren demasiada
           comunicación entre ellos para ofrecer sus servicios quizás es mejor unificarlos en un único microservicio más
           grande.</p>
       </section>
+
       <!--
       <section id="dist">
         <p class="resaltar">Microservicios</p>
