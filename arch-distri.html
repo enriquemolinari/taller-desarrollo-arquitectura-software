@@ -220,11 +220,41 @@ same team, to avoid distributed transactions.
       </section>
 
       <section id="tx">
+        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <p class="chico fragment">Chau Chau ACID...</p>
+        <p class="chico fragment">¿Cómo realizo cierta tarea de forma atómica en arquitecturas distribuídas?</p>
+<!--         <p class="chico fragment">Consistencia Eventual</p>
+        <img class="fragment" src="imgs/sagas.png"> -->
+      </section>
+
+      <section id="tx">
+        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <p class="chico fragment">Caso 1 (simple, dos servicios controlados por mi)</p>
+        <p class="chico fragment">Requerimiento: Al persistir una nueva venta debo enviarle un mail el comprador con la factura.</p>
+        <p class="chico fragment">Servicio Ventas y Servicio de Notificación/Email.</p>
+        <p class="chico fragment">Requerimiento No Funcional: Si vendo, el mail debe salir no puede fallar.</p>
+<!--         <p class="chico fragment">Por mas que el envio de email este en el mismo servicio que la venta, igual estoy lideando con el servicio de email que no es ACID.</p> -->
+      </section>
+
+      <section id="tx">
+        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <p class="chico fragment">Caso 2 (más complejo, servicio no controlado por mi)</p>
+        <p class="chico fragment">Requerimiento: Al confirmar una nueva venta debo persistirla si y solo si el medio de pago fue exitoso.</p>
+        <p class="chico fragment">Servicio Ventas y Servicio de medio de pago.</p>
+        <p class="chico fragment">Requerimiento No Funcional: Si persisto la venta es solo si el debito sobre el medio de pago fue existoso.</p>
+        <p class="chico fragment">A nadie le paso que la compra no se realizo pero si te debitaron de la tarjeta? Bienvenidos a los sistemas distribuidos!!!</p>
+        <!-- Puede haber fallas parciales... recuerden. Se debito con exito, por ahi no llega la respuesta -->
+        <!-- Reintentos y/o compensaciones: confirmo todo y encolo. Luego envio por mail terminando de confirmarle la compra si el pago es exitoso -->
+        <!-- Los medios de pago debe ofrecer servicios de compensaciones --> 
+      </section>
+
+      <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas</p>
         <p class="chico fragment">Otro inconveniente: No tengo Transacciones!</p>
         <p class="chico fragment">Consistencia Eventual</p>
         <img class="fragment" src="imgs/sagas.png">
       </section>
+
 
       <section id="mic">
         <p class="resaltar">Microservicios</p>
