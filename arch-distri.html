@@ -159,45 +159,48 @@ same team, to avoid distributed transactions.
         <p class="fragment">En las arquitecturas distribuidas el sistema es particionado en <u>aplicaciones
             simples</u> donde cada una se deploya en su <u>propio contenedor</u>, el cual corre en su <u>propio
             proceso</u> y se comunican entre ellas enviándose mensajes a través de la <u>red</u>.</p>
-<!--         <p class="fragment">¿Crearon algun sistema distribuído?</p> -->
       </section>
 
       <section id="vs">
         <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico fragment">Las complicaciones de las arquitecturas distribuídas se dan en todos los casos, pero
-          tenemos que tenerlas presente principalmente cuando distribuímos el backend de una aplicación.</p>
         <img class="fragment" src="imgs/rest-call.png">
+        <!-- Entre la App y la BD tambien hay inter-process pero el 
+                  driver de BD se encarga de manejar esa comunicacion -->
       </section>
-      <!-- width="678" height="518" -->
 
       <section id="vs">
         <p class="resaltar">Arquitecturas Distribuídas</p>
         <p class="chico">¿Porqué distribuir?</p>
         <p class="fragment">Para mejorar la performance, la escalabilidad y la disponibilidad de un servicio.</p>
-        <p class="fragment">La arquitectura de microservicios es la vedette de moda hoy.</p>
-        <p class="fragment">¡ojo! Esto no significa que utilizar microservicios siempre sea nuestra mejor opción.</p>
+        <p class="fragment">En microservicios se suma la posibilidad de escalar equipos de desarrollos grandes.</p>
       </section>
 
+      <section id="vs">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico fragment" data-fragment-index="1">Pero... como toda decisión de diseño, <u>tiene complicaciones</u>.</p>
+        <p class="chico fragment" data-fragment-index="2">Complicación 1: <u>Fallas Parciales</u>.</p>
+        <p class="chico fragment" data-fragment-index="3">Complicación 2: <span class="chico fragment" data-fragment-index="4">Adios</span> <span class="chico fragment" data-fragment-index="5">a</span> <span class="chico fragment" data-fragment-index="6">las</span>  <span class="chico fragment" data-fragment-index="7"><u>Transacciones</u> tal como las conocemos de las BDs relacionales.</span></p>
+      </section>
+
+      
       <section id="fp">
         <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico">Distribuir una aplicación agrega complicaciones, una de ellas se conoce como: <u>Fallas
-            Parciales</p></u></p>
-        <p class="chico fragment">Cuando ejecutamos una aplicación en una única máquina su comportamiento es predecible.
+        <p class="chico"><u>Fallas Parciales</p></u></p>
+        <p class="chico fragment">"Cuando ejecutamos una aplicación en una única máquina su comportamiento es predecible.
           Si el hardware donde corre funciona, la aplicación ante las mismas entradas producirá siempre las mismas
-          salidas. Si el hardware donde corre fallara por algún motivo, la aplicación completa dejaría de funcionar. Es
-          decir, una aplicación en una única máquina funciona o no funciona, pero no existe nada en el medio (quitando
-          de la ecuación posibles bugs que la aplicación podría tener).</p>
+          salidas. Si el hardware donde corre fallara por algún motivo, la aplicación completa dejaría de funcionar (<u>Falla Total</u>). Es
+          decir, una aplicación en una única máquina funciona o no funciona, pero no existe nada en el medio".</p>
       </section>
 
       <section id="fp">
         <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico">Distribuir una aplicación agrega complicaciones, una de ellas se conoce como: <u>Fallas
-            Parciales</p></u></p>
-        <p class="chico fragment">Las aplicaciones distribuidas se conforman de varios elementos que podrían fallar. La
+        <p class="chico"><u>Fallas Parciales</p></u></p> 
+        <p class="chico fragment">"Las aplicaciones distribuidas se conforman de varios elementos que podrían fallar. La
           red, junto a toda su complejidad, más las máquinas donde corra la aplicación son parte del mismo sistema.
           Cualquiera de alguno de estos elementos (equipos, dispositivos de red como routers, switches, etc) que forman
           parte de un sistema distribuido podría fallar mientras que el resto de los elementos podrían seguir
-          funcionando. Esto se conoce como <u>falla parcial</u>.</p>
+          funcionando. Esto se conoce como <u>falla parcial</u>".</p>
+        <p class="chico fragment"><a href="https://www.amazon.com/-/es/Martin-Kleppmann/dp/1449373321/">Designing Data-Intensive Applications (Martin Kleppmann)</a></p>
         <p class="chico fragment">Inconvenientes frecuentemente ignorados: <a
             href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing">Falacias</a> de los sistemas
           distribuidos.</p>
@@ -216,7 +219,7 @@ same team, to avoid distributed transactions.
       <section id="fp">
         <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
         <p class="chico fragment">¿Cómo lideamos con fallas parciales?</p>
-        <p class="chico fragment">Timeouts, Idempotencia, deduplicación</p>
+        <p class="chico fragment">Timeouts e Idempotencia</p>
       </section>
 
       <section id="tx">
@@ -233,8 +236,21 @@ same team, to avoid distributed transactions.
         <p class="chico fragment">Requerimiento: Al persistir una nueva venta debo enviarle un mail el comprador con la factura.</p>
         <p class="chico fragment">Servicio Ventas y Servicio de Notificación/Email.</p>
         <p class="chico fragment">Requerimiento No Funcional: Si vendo, el mail debe salir no puede fallar.</p>
-<!--         <p class="chico fragment">Por mas que el envio de email este en el mismo servicio que la venta, igual estoy lideando con el servicio de email que no es ACID.</p> -->
+<!--    Por mas que el envio de email este en el mismo servicio que la venta, 
+          igual estoy lideando con el servicio de email que no es ACID.</p> -->
       </section>
+
+      <section id="tx">
+        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <p class="chico fragment">Caso 1 (simple, dos servicios controlados por mi)</p>
+        <p class="chico fragment">Esto puede pasar en sistemas monolíticos, porque para enviar un mail necesito comunicarme con un servicio SMTP.</p>
+        <p class="chico fragment">El servicio SMTP no es Transaccional con respecto a la persistencia de la Venta.</p>
+        <p class="chico fragment"><u>Outbox Pattern</u>: Aprovecho la Tx local de persistir la venta para dejar un job en un tabla "queue".</p> 
+        <p class="chico fragment"><u>Eventual Consistency</u> vs Strong Consistency</p>
+<!--    Por mas que el envio de email este en el mismo servicio que la venta, 
+          igual estoy lideando con el servicio de email que no es ACID.</p> -->
+      </section>
+
 
       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
@@ -248,13 +264,19 @@ same team, to avoid distributed transactions.
         <!-- Los medios de pago debe ofrecer servicios de compensaciones --> 
       </section>
 
-      <section id="tx">
+      <section id="tx" data-transition="fade-out">
         <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico fragment">Otro inconveniente: No tengo Transacciones!</p>
+        <p class="chico fragment">SAGAS</p>
         <p class="chico fragment">Consistencia Eventual</p>
         <img class="fragment" src="imgs/sagas.png">
       </section>
 
+      <section id="tx" data-transition="fade-in">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico">SAGAS</p>
+        <p class="chico">Consistencia Eventual</p>
+        <img src="imgs/sagas2.png">
+      </section>
 
       <section id="mic">
         <p class="resaltar">Microservicios</p>
