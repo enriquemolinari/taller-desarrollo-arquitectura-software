@@ -177,7 +177,7 @@ same team, to avoid distributed transactions.
 
       <section id="vs">
         <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico fragment" data-fragment-index="1">Pero... como toda decisión de diseño, <u>tiene complicaciones</u>.</p>
+        <p class="chico fragment" data-fragment-index="1">Pero... como toda decisión de diseño, tiene cosas buenas y también <u>tiene complicaciones</u>.</p>
         <p class="chico fragment" data-fragment-index="2">Complicación 1: <u>Fallas Parciales</u>.</p>
         <p class="chico fragment" data-fragment-index="3">Complicación 2: <span class="chico fragment" data-fragment-index="4">Adios</span> <span class="chico fragment" data-fragment-index="5">a</span> <span class="chico fragment" data-fragment-index="6">las</span>  <span class="chico fragment" data-fragment-index="7"><u>Transacciones</u> tal como las conocemos de las BDs relacionales.</span></p>
       </section>
@@ -219,8 +219,18 @@ same team, to avoid distributed transactions.
       <section id="fp">
         <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
         <p class="chico fragment">¿Cómo lideamos con fallas parciales?</p>
-        <p class="chico fragment">Timeouts e Idempotencia</p>
+        <p class="chico fragment">Siempre usar <u>Timeouts</u></p>
+        <p class="chico fragment">Hacer las operaciones <u>Idempotentes</u>.</p> 
+<!--         Idempotent operations produce the same result even when the operation is repeated many times -->
       </section>
+
+      <section id="fp">
+        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
+        <p class="chico fragment">¿Qué significa hacer las operaciones idempotentes?</p>
+        <p class="chico fragment">Que su ejecución producirá el mismo efecto o resultado si se ejecutara una vez o varias veces.</p>
+        <p class="chico fragment">Cada operacion se identifica con un <u>único identificador</u>, de modo que quien recibe puede verificar si dicha operación ya fue procesada o no.</p> 
+      </section>      
+
 
       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
@@ -229,6 +239,17 @@ same team, to avoid distributed transactions.
 <!--         <p class="chico fragment">Consistencia Eventual</p>
         <img class="fragment" src="imgs/sagas.png"> -->
       </section>
+
+      <!--
+       Distributed Transactions: https://en.dtm.pub/practice/theory.html
+
+       Incluso usando XA 2pc, no tengo Strong Consistency:
+       https://en.dtm.pub/practice/theory.html#unable-to-be-strongly-consistent
+       Igual, 2pcs es lo mas cercano a tenerlo. 
+      
+      JBoss, Atomikos (https://www.atomikos.com/) y https://en.dtm.pub/, son ejemplos de 
+      BPMs, o Distributed Transaction managers, SAGAs implementos. Frameworks para ayudar en esto.
+       -->
 
       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
@@ -247,21 +268,6 @@ same team, to avoid distributed transactions.
         <p class="chico fragment">El servicio SMTP no es Transaccional con respecto a la persistencia de la Venta.</p>
         <p class="chico fragment"><u>Outbox Pattern</u>: Aprovecho la Tx local de persistir la venta para dejar un job en un tabla "queue".</p> 
         <p class="chico fragment"><u>Eventual Consistency</u> vs Strong Consistency</p>
-<!--    Por mas que el envio de email este en el mismo servicio que la venta, 
-          igual estoy lideando con el servicio de email que no es ACID.</p> -->
-      </section>
-
-
-      <section id="tx">
-        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
-        <p class="chico fragment">Caso 2 (más complejo, servicio no controlado por mi)</p>
-        <p class="chico fragment">Requerimiento: Al confirmar una nueva venta debo persistirla si y solo si el medio de pago fue exitoso.</p>
-        <p class="chico fragment">Servicio Ventas y Servicio de medio de pago.</p>
-        <p class="chico fragment">Requerimiento No Funcional: Si persisto la venta es solo si el debito sobre el medio de pago fue existoso.</p>
-        <p class="chico fragment">A nadie le paso que la compra no se realizo pero si te debitaron de la tarjeta? Bienvenidos a los sistemas distribuidos!!!</p>
-        <!-- Puede haber fallas parciales... recuerden. Se debito con exito, por ahi no llega la respuesta -->
-        <!-- Reintentos y/o compensaciones: confirmo todo y encolo. Luego envio por mail terminando de confirmarle la compra si el pago es exitoso -->
-        <!-- Los medios de pago debe ofrecer servicios de compensaciones --> 
       </section>
 
       <section id="tx" data-transition="fade-out">
@@ -291,6 +297,26 @@ same team, to avoid distributed transactions.
         <p class="chico">Consistencia Eventual</p>
         <img src="imgs/sagas2.png">
       </section>
+
+      <section id="tx">
+        <p class="resaltar">Arquitecturas Distribuídas: Pagos Online</p>
+        <p class="chico fragment">El servicio de pago por lo general no es controlado por mi</p>
+        <p class="chico fragment">Requerimiento: Al confirmar una nueva venta debo persistirla si y solo si el medio de pago fue exitoso.</p>
+        <p class="chico fragment">Servicio Ventas y Servicio de medio de pago.</p>
+        <p class="chico fragment">Requerimiento No Funcional: Si persisto la venta es solo si el debito sobre el medio de pago fue existoso.</p>
+        <p class="chico fragment">A nadie le paso que la compra no se realizo pero si te debitaron de la tarjeta? Bienvenidos a los sistemas distribuidos!!!</p>
+        <!-- Puede haber fallas parciales... recuerden. Se debito con exito, por ahi no llega la respuesta -->
+        <!-- Reintentos y/o compensaciones: confirmo todo y encolo. Luego envio por mail terminando de confirmarle la compra si el pago es exitoso -->
+        <!-- Los medios de pago debe ofrecer servicios de compensaciones --> 
+<!--    Para fallas parciales en paypal:
+        https://www.paypal.com/us/cshelp/article/how-do-i-avoid-duplicate-transactions-ts1097
+        
+        Caso epagos: entramos al sitio de ellos con un UUID... se paga ahi y redirige:
+          1. al redirigir marco como pagado, si fall eso
+          2. Ademas un webhook me invoca y me avisa
+          3. Ademas tengo un job que invoca una API de epagos y deja consistente todo.</p> -->
+      </section>
+
 
       <section id="mic">
         <p class="resaltar">Microservicios</p>
