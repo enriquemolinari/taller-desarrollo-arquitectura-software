@@ -231,14 +231,23 @@ same team, to avoid distributed transactions.
         <p class="chico fragment">Cada operacion se identifica con un <u>único identificador</u>, de modo que quien recibe puede verificar si dicha operación ya fue procesada o no.</p> 
       </section>      
 
-
       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
         <p class="chico fragment">Chau Chau ACID...</p>
-        <p class="chico fragment">¿Cómo realizo cierta tarea de forma atómica en arquitecturas distribuídas?</p>
+        <p class="chico fragment"><u>Tx Atómicas</u>: en sistemas centralizados, las Tx permiten realizar una serie de operaciones donde si alguna en el medio falla, todo es rollbackeado por la BD.</p>
+        <p class="chico fragment">Como desarrolladores, ésto nos hace la vida muy simple.</p>
+        <p class="chico fragment">¿Qué sucede en arquitecturas distribuídas?</p>
 <!--         <p class="chico fragment">Consistencia Eventual</p>
         <img class="fragment" src="imgs/sagas.png"> -->
       </section>
+
+      <section id="tx">
+        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <p class="chico fragment">Aparece el concepto de: <b>Transacciones Distribuídas</b></p>
+        <p class="chico fragment">Supongamos los siguientes verticales en una arquitectura de microservices:</p>
+        <img class="fragment" src="imgs/two-services.png">
+      </section>
+
 
       <!--
        Distributed Transactions: https://en.dtm.pub/practice/theory.html
@@ -247,8 +256,9 @@ same team, to avoid distributed transactions.
        https://en.dtm.pub/practice/theory.html#unable-to-be-strongly-consistent
        Igual, 2pcs es lo mas cercano a tenerlo. 
       
-      JBoss, Atomikos (https://www.atomikos.com/) y https://en.dtm.pub/, son ejemplos de 
-      BPMs, o Distributed Transaction managers, SAGAs implementos. Frameworks para ayudar en esto.
+      JBoss, Atomikos (https://www.atomikos.com/) y https://en.dtm.pub/, https://zookeeper.apache.org/, 
+      son ejemplos de BPMs, o Distributed Transaction managers, SAGAs implementos. 
+      Frameworks para ayudar en esto.
        -->
 
       <section id="tx">
@@ -272,7 +282,7 @@ same team, to avoid distributed transactions.
 
       <section id="tx" data-transition="fade-out">
         <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico fragment">SAGAS</p>
+        <p class="chico fragment">SAGAS (Choreographed)</p>
         <p class="chico fragment">Consistencia Eventual</p>
         <img class="fragment" src="imgs/sagas.png">
       </section>

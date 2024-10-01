@@ -13,16 +13,16 @@
   <key attr.name="description" attr.type="string" for="edge" id="d9"/>
   <key for="edge" id="d10" yfiles.type="edgegraphics"/>
   <graph edgedefault="directed" id="G">
-    <data key="d0"/>
+    <data key="d0" xml:space="preserve"/>
     <node id="n0">
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="85.39583333333331" width="151.23958333333337" x="227.29779704942962" y="131.46848605580158"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="132.0" x="9.619791666666686" xml:space="preserve" y="33.19791666666666">&lt;html&gt;
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="129.0" x="11.119791666666686" xml:space="preserve" y="33.19791666666666">&lt;html&gt;
 &lt;center&gt;
-&lt;b&gt;Room Reservation&lt;/b&gt;
+&lt;b&gt;Catálogo / Carrito&lt;/b&gt;
 &lt;/center&gt;
 &lt;/html&gt;<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -35,9 +35,9 @@
           <y:Geometry height="75.39583333333331" width="151.23958333333334" x="227.29779704942962" y="292.07112065304295"/>
           <y:Fill color="#FFFFFFE6" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="93.0" x="29.119791666666686" xml:space="preserve" y="33.25054824561391">&lt;html&gt;
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="129.0" x="11.119791666666686" xml:space="preserve" y="33.25054824561391">&lt;html&gt;
 &lt;center&gt;
-&lt;b&gt;Hotel Rooms&lt;/b&gt;&lt;br&gt;
+&lt;b&gt;Catálogo / Carrito&lt;/b&gt;&lt;br&gt;
 &lt;p style="font-size:7px;"&gt;PostgreSQL&lt;/p&gt;
 &lt;/center&gt;
 &lt;/html&gt;<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.5" nodeRatioX="-1.6653345369377348E-16" nodeRatioY="0.35217637905207755" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -56,9 +56,9 @@
           <y:Geometry height="85.39583333333331" width="151.23958333333337" x="496.9466955741444" y="131.46848605580158"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="133.0" x="9.119791666666629" xml:space="preserve" y="33.19791666666666">&lt;html&gt;
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="54.0" x="48.61979166666663" xml:space="preserve" y="33.19791666666666">&lt;html&gt;
 &lt;center&gt;
-&lt;b&gt;Payment / Finance&lt;/b&gt;
+&lt;b&gt;Ventas&lt;/b&gt;
 &lt;/center&gt;
 &lt;/html&gt;<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -71,9 +71,9 @@
           <y:Geometry height="75.39583333333331" width="151.23958333333334" x="496.9466955741444" y="292.07112065304295"/>
           <y:Fill color="#FFFFFFE6" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="63.0" x="44.11979166666663" xml:space="preserve" y="33.25054824561391">&lt;html&gt;
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="31.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="60.0" x="45.61979166666663" xml:space="preserve" y="33.25054824561391">&lt;html&gt;
 &lt;center&gt;
-&lt;b&gt;Finance&lt;/b&gt;&lt;br&gt;
+&lt;b&gt;Ventas&lt;/b&gt;&lt;br&gt;
 &lt;p style="font-size:7px;"&gt;PostgreSQL&lt;/p&gt;
 &lt;/center&gt;
 &lt;/html&gt;<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.5" nodeRatioX="-1.6653345369377348E-16" nodeRatioY="0.35217637905207755" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -92,10 +92,10 @@
           <y:Geometry height="85.39583333333331" width="151.23958333333337" x="766.5955940988594" y="131.46848605580158"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle color="#C0C0C0" raised="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#999999" verticalTextPosition="bottom" visible="true" width="136.0" x="7.619791666666629" xml:space="preserve" y="25.697916666666657">&lt;html&gt;
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#999999" verticalTextPosition="bottom" visible="true" width="128.0" x="11.619791666666629" xml:space="preserve" y="25.697916666666657">&lt;html&gt;
 &lt;center&gt;
-&lt;b&gt;Email Confirmation&lt;/b&gt;&lt;br/&gt;
-&lt;b&gt;Invoice&lt;/b&gt;
+&lt;b&gt;Notificación Email&lt;/b&gt;&lt;br/&gt;
+&lt;b&gt;Factura&lt;/b&gt;
 &lt;/center&gt;
 &lt;/html&gt;<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -108,7 +108,7 @@
           <y:Geometry height="85.39583333333331" width="151.23958333333337" x="766.5955940988591" y="282.07112065304295"/>
           <y:Fill color="#EFEFEF" transparent="false"/>
           <y:BorderStyle color="#C0C0C0" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#C0C0C0" verticalTextPosition="bottom" visible="true" width="46.92578125" x="52.15690104166663" xml:space="preserve" y="33.71354166666663">Intenet<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#C0C0C0" verticalTextPosition="bottom" visible="true" width="36.537109375" x="57.35123697916663" xml:space="preserve" y="33.71354166666663">SMTP<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -127,7 +127,6 @@
       </data>
     </node>
     <node id="n7">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="20.0" width="151.23958333333337" x="279.1488985247148" y="265.2342430279008"/>
@@ -139,7 +138,6 @@
       </data>
     </node>
     <node id="n8">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="20.0" width="97.23958333333371" x="311.64889852471447" y="381.8610151738054"/>
@@ -244,7 +242,6 @@ Tx 2 OK<y:LabelModel><y:SmartEdgeLabelModel autoRotationEnabled="false" defaultA
       </data>
     </edge>
     <edge id="e7" source="n7" target="n8">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="42.19325875317139" sy="10.008663903847022" tx="36.69325875317156" ty="-9.978334645904596"/>
