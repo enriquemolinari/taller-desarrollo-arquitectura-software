@@ -248,6 +248,99 @@ same team, to avoid distributed transactions.
         <img class="fragment" src="imgs/two-services.png">
       </section>
 
+      <section id="tx">
+        <p class="resaltar">Transacciones Distribuídas</p>
+        <img class="fragment" src="imgs/two-services.png">
+        <p class="chico fragment">Antes de ver como es posible resolver esto...</p>        
+        <p class="chico fragment">¿Sólo se dan las transacciones distribuídas en Arquitecturas de Microservicios? <span class="chico fragment"><b>Claro que no.</b></span></p>
+      </section>
+
+      <section id="tx">
+        <p class="resaltar">Transacciones Distribuídas</p>
+        <p class="chico fragment">Se dan siempre donde quiero realizar en forma atómica dos o más operaciones donde alguna es sobre una BD ACID y otra sobre otro tipo de servicio NO ACID.</p>
+        <p class="chico fragment">Por ejemplo...</p>
+      </section>
+
+      <section id="tx">
+        <p class="resaltar">Transacciones Distribuídas</p>
+        <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
+        <p class="chico fragment">Necesito insertar un registro y además guardar en file system un PDF.</p>
+        <p class="chico fragment">Simple de resolver, que les parece esto?</p>
+<!--       data-line-numbers="1-2|2-6|7-9" -->
+        <pre
+      class="fragment"
+    ><code data-trim data-noescape lang="java">
+public void guardar(String fileName, String fileEnBase64) {
+  //...
+  try {
+   em.beginTransaction();
+   em.persist(new MyFile(fileName, filePath));
+   em.commit();
+   String filePath = PATH + fileName;
+   fileSystem.guardar(filePath);
+  } catch(Exception e) { em.rollback(); throw e;}
+  //...
+}
+</code></pre>
+<p class="chico fragment">siempre es posible hacerlo mal...</p>
+      </section>
+
+
+      <section id="tx">
+        <p class="resaltar">Transacciones Distribuídas</p>
+        <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
+        <p class="chico fragment">¿Ahora mejor?</p>
+<!--       data-line-numbers="1-2|2-6|7-9"  -->
+        <pre
+      class="fragment"
+    ><code data-trim data-noescape lang="java">
+public void guardar(String fileName, String fileEnBase64) {
+  //...
+  try {
+   em.beginTransaction();
+   em.persist(new MyFile(fileName, filePath));
+   String filePath = PATH + fileName;
+   fileSystem.guardar(filePath);
+   em.commit();
+  } catch(Exception e) { em.rollback(); throw e;}
+  //...
+}
+</code></pre>
+<p class="chico fragment">Solo si fileSytem.guardar(...) lanza una exception en caso de error...</p>
+      </section>
+
+      <section id="tx">
+        <p class="resaltar">Transacciones Distribuídas</p>
+        <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
+        <p class="chico fragment">Si no lanza exception...</p>
+<!--       data-line-numbers="1-2|2-6|7-9"  -->
+        <pre
+      class="fragment"
+    ><code data-trim data-noescape lang="java">
+public void guardar(String fileName, String fileEnBase64) {
+  //...
+  try {
+   em.beginTransaction();
+   em.persist(new MyFile(fileName, filePath));
+   String filePath = PATH + fileName;
+   if (fileSystem.guardar(filePath)) 
+     em.commit();
+   else 
+     em.rollback();  
+  } catch(Exception e) { em.rollback(); throw e;}
+  //...
+}
+</code></pre>
+<p class="chico fragment">¿Esto siempre genera atomicidad? <span class="chico fragment">mmmmmmm....</span></p>
+      </section>
+
+      <section id="tx">
+        <p class="resaltar">Transacciones Distribuídas</p>
+        <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
+        <p class="chico fragment">Podrian quedar archivos guardados sin su relacion con la BD...</p>
+        <p class="chico fragment">Podríamos tener un proceso que limpie archivos sin su relacion con la BD.</p>
+        <p class="chico fragment">Aparece un nuevo concepto: <b>Compensación</b>.</p>
+       </section>
 
       <!--
        Distributed Transactions: https://en.dtm.pub/practice/theory.html
