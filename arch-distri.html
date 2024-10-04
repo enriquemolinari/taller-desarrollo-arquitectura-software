@@ -339,7 +339,7 @@ public void guardar(String fileName, String fileEnBase64) {
         <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
         <p class="chico fragment">Podrian quedar archivos guardados sin su relacion con la BD...</p>
         <p class="chico fragment">Podríamos tener un proceso que limpie archivos sin su relacion con la BD.</p>
-        <p class="chico fragment">Aparece un nuevo concepto: <b>Compensación</b>.</p>
+        <p class="chico fragment">Nuevo concepto: <b>Compensate</b> transaction.</p>
        </section>
 
       <!--
@@ -356,58 +356,128 @@ public void guardar(String fileName, String fileEnBase64) {
 
       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
-        <p class="chico fragment">Caso 1 (simple, dos servicios controlados por mi)</p>
-        <p class="chico fragment">Requerimiento: Al persistir una nueva venta debo enviarle un mail el comprador con la factura.</p>
-        <p class="chico fragment">Servicio Ventas y Servicio de Notificación/Email.</p>
-        <p class="chico fragment">Requerimiento No Funcional: Si vendo, el mail debe salir no puede fallar.</p>
-<!--    Por mas que el envio de email este en el mismo servicio que la venta, 
+        <p class="chico fragment">Caso 2: Al persistir una nueva venta debo enviarle un mail el comprador con la factura.</p>
+        <p class="chico fragment">Diferente al caso anterior. No puedo mandar un mail sin estar seguro de vender.</p>
+        <pre
+      class="fragment"
+    ><code data-trim data-noescape lang="java">
+public void vender(Cliente c, float monto) {
+  //...
+  try {
+   em.beginTransaction();
+   em.persist(new Venta(c, monto));
+   smtp.enviarEmail(c.email(), "Venta realizada...");
+   em.commit();
+  } catch(Exception e) { em.rollback(); throw e;}
+  //...
+}
+</code></pre>
+
+
+        <!--    Por mas que el envio de email este en el mismo servicio que la venta, 
           igual estoy lideando con el servicio de email que no es ACID.</p> -->
       </section>
 
       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
-        <p class="chico fragment">Caso 1 (simple, dos servicios controlados por mi)</p>
-        <p class="chico fragment">Esto puede pasar en sistemas monolíticos, porque para enviar un mail necesito comunicarme con un servicio SMTP.</p>
-        <p class="chico fragment">El servicio SMTP no es Transaccional con respecto a la persistencia de la Venta.</p>
+        <p class="chico fragment">Caso 2: Al persistir una nueva venta debo enviarle un mail el comprador con la factura.</p>
+        <p class="chico fragment">1. Los servicios STMP en general son lentos, deberia sacarlo de la Trasacción y enviarlo en forma asynchrona.</p>
+        <p class="chico fragment">2. Y ademas quiero garantizar 100% que se manda y solo si commiteo la venta.</p>
+      </section>
+
+      <section id="tx">
+        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <p class="chico fragment">Caso 2: Al persistir una nueva venta debo enviarle un mail el comprador con la factura.</p>
+        <p class="chico fragment"><u>Outbox Pattern</u>: Aprovecho la Tx local de persistir la venta para dejar un job en un tabla "queue".</p> 
+        <pre
+      class="fragment"
+    ><code data-trim data-noescape lang="java">
+public void vender(Cliente c, float monto) {
+  //...
+  try {
+   em.beginTransaction();
+   em.persist(new Venta(c, monto));
+   em.persist(new Job(JobType.EMAIL, 
+       new Payload(c.email, "Venta realizada...")));
+   em.commit();
+  } catch(Exception e) { em.rollback(); throw e;}
+  //...
+}
+</code></pre>
+      </section>
+
+
+      <section id="tx">
+        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <p class="chico fragment">Caso 2: Al persistir una nueva venta debo enviarle un mail el comprador con la factura.</p>
         <p class="chico fragment"><u>Outbox Pattern</u>: Aprovecho la Tx local de persistir la venta para dejar un job en un tabla "queue".</p> 
         <p class="chico fragment"><u>Eventual Consistency</u> vs Strong Consistency</p>
+        <p class="chico fragment">Nuevo Concepto:<u>Retry</u> Transaction.</p>
+        <p class="chico fragment">Sigue y sigue hasta que el servicio SMTP funciona.</p>
       </section>
+
+      <section id="tx">
+        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <p class="chico fragment">Volvamos a nuestro requerimiento inicial con Microservicios</p>
+        <img class="fragment" src="imgs/two-services.png">
+      </section>
+
 
       <section id="tx" data-transition="fade-out">
         <p class="resaltar">Arquitecturas Distribuídas</p>
         <p class="chico fragment">SAGAS (Choreographed)</p>
-        <p class="chico fragment">Consistencia Eventual</p>
         <img class="fragment" src="imgs/sagas.png">
       </section>
 
       <section id="tx" data-transition="fade-in">
         <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico">SAGAS</p>
-        <p class="chico">Consistencia Eventual</p>
+        <p class="chico">SAGAS (Choreographed)</p>
         <img src="imgs/sagas1.png">
       </section>
 
       <section id="tx" data-transition="fade-in">
         <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico">SAGAS</p>
-        <p class="chico">Consistencia Eventual</p>
+        <p class="chico">SAGAS (Choreographed)</p>
         <img src="imgs/sagas1.2.png">
       </section>
 
       <section id="tx" data-transition="fade-in">
         <p class="resaltar">Arquitecturas Distribuídas</p>
-        <p class="chico">SAGAS</p>
-        <p class="chico">Consistencia Eventual</p>
+        <p class="chico">SAGAS (Choreographed)</p>
         <img src="imgs/sagas2.png">
+      </section>
+
+      <section id="tx" data-transition="fade-in">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico">SAGAS (Choreographed)</p>
+        <p class="chico fragment">Super complejo... intentar evitarlo.</p>
+        <p class="chico fragment">Hasta Amazon lo dice: <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/saga-pattern.html">AWS Sagas</a></p>
+      </section>
+
+      <section id="mic">
+        <p class="resaltar">Microservicios</p>
+        <p class="chico fragment">¿Cuán chico (small) deben ser los servicios?</p>
+        <p class="chico fragment">Dos criterios para enteder si dividimos o juntamos:</p>
+        <p class="chicoYalineadoIzq fragment"><u>Transacciones</u>: Si tenemos entidades que necesitan trabajar juntas
+          de forma atómica, entonces deben estar en el mismo microservicio. Las transacciones distribuidas son
+          complicadas, si es posible evitarlas, mejor. <a href="https://a.co/d/0qr75wI">Sarah Wells</a>: You really want to keep data that changes together in the same place, owned by the
+          same team, to avoid distributed transactions.</p>
+          
+        <p class="chicoYalineadoIzq fragment"><u>Comunicación</u>: Si algunos microservicios requieren demasiada
+          comunicación entre ellos para ofrecer sus servicios quizás es mejor unificarlos en un único microservicio más
+          grande.</p>
       </section>
 
       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Pagos Online</p>
-        <p class="chico fragment">El servicio de pago por lo general no es controlado por mi</p>
-        <p class="chico fragment">Requerimiento: Al confirmar una nueva venta debo persistirla si y solo si el medio de pago fue exitoso.</p>
-        <p class="chico fragment">Servicio Ventas y Servicio de medio de pago.</p>
-        <p class="chico fragment">Requerimiento No Funcional: Si persisto la venta es solo si el debito sobre el medio de pago fue existoso.</p>
-        <p class="chico fragment">A nadie le paso que la compra no se realizo pero si te debitaron de la tarjeta? Bienvenidos a los sistemas distribuidos!!!</p>
+        <p class="chico fragment">Caso 3: Al confirmar una nueva venta debo persistirla si y solo si el pago fue exitoso.</p>
+        <p class="chico fragment">Varias cosas pueden salir mal... el servicio no es controlado por mi (lo cual para estos casos puede ser bueno).</p>
+        <p class="chico fragment"><a href="https://www.paypal.com/us/cshelp/article/how-do-i-avoid-duplicate-transactions-ts1097">Paypal</a> sobre fallas parciales.</p>
+
+
+        <!--         <p class="chico fragment">Servicio Ventas y Servicio de medio de pago.</p>
+ --><!--         <p class="chico fragment">Requerimiento No Funcional: Si persisto la venta es solo si el debito sobre el medio de pago fue existoso.</p> -->
+<!--         <p class="chico fragment">A nadie le paso que la compra no se realizo pero si te debitaron de la tarjeta? Bienvenidos a los sistemas distribuidos!!!</p> -->
         <!-- Puede haber fallas parciales... recuerden. Se debito con exito, por ahi no llega la respuesta -->
         <!-- Reintentos y/o compensaciones: confirmo todo y encolo. Luego envio por mail terminando de confirmarle la compra si el pago es exitoso -->
         <!-- Los medios de pago debe ofrecer servicios de compensaciones --> 
@@ -421,7 +491,7 @@ public void guardar(String fileName, String fileEnBase64) {
       </section>
 
 
-      <section id="mic">
+<!--       <section id="mic">
         <p class="resaltar">Microservicios</p>
         <p class="chico fragment">The microservice architectural style is an approach to developing a single application 
           as a suite of <u>"small" services</u>, each running in its own process and communicating with 
@@ -436,33 +506,21 @@ public void guardar(String fileName, String fileEnBase64) {
           luego para integrarlos terminan creando lo que se conoce como "distributed monolith" (super chatty services).</p>
         <p class="chico fragment">¿Qué dicen la bibliografía sobre esto?</p>
       </section>
-
+ -->
       <!--      <section id="dist">
         <p class="resaltar">Microservicios</p>
         <p class="chico fragment">¿Cuán micro deben ser mis servicios?</p>
         <img class="fragment" src="imgs/soft-arch-fund-book.png" />
       </section>
 -->
-      <section id="mic">
+<!--       <section id="mic">
         <p class="resaltar">Microservicios</p>
         <p class="chico fragment">¿Cuán chico (small) deben ser los servicios?</p>
         <p class="chico fragment">El término <b>micro</b>-servicio pareciera revelar que cada aplicación debería realizar lo
           mínimo indispensable. Pero el criterio es por sub-dominio, y quizás ciertos sub-dominios no
           son pequeños</p>
       </section>
-
-      <section id="mic">
-        <p class="resaltar">Microservicios</p>
-        <p class="chico fragment">¿Cuán chico (small) deben ser los servicios?</p>
-        <p class="chico fragment">Dos criterios para enteder si dividimos o juntamos:</p>
-        <p class="chicoYalineadoIzq fragment"><u>Transacciones</u>: Si tenemos entidades que necesitan trabajar juntas
-          de forma atómica, entonces deben estar en el mismo microservicio. Las transacciones distribuidas son
-          complicadas, si es posible evitarlas, mejor. <b>Sarah Wells</b>: You really want to keep data that changes together in the same place, owned by the
-          same team, to avoid distributed transactions.</p>
-        <p class="chicoYalineadoIzq fragment"><u>Comunicación</u>: Si algunos microservicios requieren demasiada
-          comunicación entre ellos para ofrecer sus servicios quizás es mejor unificarlos en un único microservicio más
-          grande.</p>
-      </section>
+ -->
 
       <!--
       <section id="dist">
