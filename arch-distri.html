@@ -126,6 +126,7 @@
         <li><a href="#/fp">Fallas Praciales</a></li>
         <li><a href="#/tx">Transacciones</a></li>
         <li><a href="#/mic">Microservicios</a></li>
+        <li><a href="#/txd">Transacciones Distribuídas</a></li>
       </ul>
       <div class="placeholder"></div>
     </div>
@@ -422,6 +423,12 @@ public void vender(Cliente c, float monto) {
         <img class="fragment" src="imgs/two-services.png">
       </section>
 
+      <section id="tx" data-transition="fade-out">
+        <p class="resaltar">Arquitecturas Distribuídas</p>
+        <p class="chico fragment">SAGAS</p>
+        <p class="chico fragment">Paper de Hector Garcaa-Molrna & Kenneth Salem de 1987.</p>
+        <a href="https://www.cs.cornell.edu/andru/cs711/2002fa/reading/sagas.pdf">Paper Sagas</a>  
+      </section>
 
       <section id="tx" data-transition="fade-out">
         <p class="resaltar">Arquitecturas Distribuídas</p>
@@ -473,7 +480,16 @@ public void vender(Cliente c, float monto) {
         <p class="chico fragment">Caso 3: Al confirmar una nueva venta debo persistirla si y solo si el pago fue exitoso.</p>
         <p class="chico fragment">Varias cosas pueden salir mal... el servicio no es controlado por mi (lo cual para estos casos puede ser bueno).</p>
         <p class="chico fragment"><a href="https://www.paypal.com/us/cshelp/article/how-do-i-avoid-duplicate-transactions-ts1097">Paypal</a> sobre fallas parciales.</p>
+      </section>
 
+      <section id="txd">
+        <p class="resaltar">Transacciones Distribuídas</p>
+        <p class="chico fragment">Mucho mas para estudiar... ademas de SAGAS.</p>
+        <p class="chico fragment">Two-Phase Commit: soportado originalmente por las DBMS relacionales: <a href="https://dev.mysql.com/doc/refman/8.4/en/xa.html">MySql</a> y <a href="https://www.postgresql.org/docs/current/two-phase.html">Pg</a>.</p>
+        <p class="chico fragment">TCC: Try, Commit, Cancel by Pat Helland (2007).</p>
+        <p class="chico fragment">Frameworks que ayudan: <a href="https://en.dtm.pub/">DTM</a>, Spring-Boot: <a href="https://www.atomikos.com/Main/WebHome">Atomikos</a> o <a href="https://github.com/scalar-labs/btm">Bitronix</a></p>
+        <p class="chico fragment">Opciones para TFCs</p>
+      </section>
 
         <!--         <p class="chico fragment">Servicio Ventas y Servicio de medio de pago.</p>
  --><!--         <p class="chico fragment">Requerimiento No Funcional: Si persisto la venta es solo si el debito sobre el medio de pago fue existoso.</p> -->

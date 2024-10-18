@@ -123,8 +123,8 @@
         <ul class="menu">
           <li><a href="#/def">Definición</a></li>
           <li><a href="#/dis">Disponibilidad</a></li>
-          <li><a href="#/deploy">Deployment</a></li>
           <li><a href="#/esc">Escalabilidad</a></li>
+          <li><a href="#/deploy">Deployment</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -188,6 +188,17 @@
           <p class="fragment">
             No hay forma de saber de antemano cuando los elementos de un sistema
             dejaran de funcionar.
+          </p>
+        </section>
+
+        <section id="dis">
+          <p class="titulo">¿Cómo se define la disponibilidad de un sistema?</p>
+          <p class="fragment"><u>Single Point of Failure</u></p>
+          <p class="fragment">Autos: rueda de auxilio</p>
+          <p class="fragment">Aviones: Doble turbina.</p>
+          <p class="fragment">
+            Por eso una probabilidad, no se cuando va a fallar y por las dudas
+            tengo una alternativa al fallo.
           </p>
         </section>
 
@@ -492,76 +503,6 @@
           </p>
         </section>
 
-        <section id="deploy">
-          <div class="box2">Deployment</div>
-          <p>Con cero downtime!</p>
-        </section>
-
-        <section id="deploy">
-          <p class="titulo">Blue/Green Deployment</p>
-          <p class="fragment">
-            Hay que tener 2 ambientes de producción completos e identicos.
-          </p>
-          <p class="fragment">
-            Uno que esta siendo utilizado por los usuarios.
-          </p>
-          <p class="fragment">
-            Y otro que va a ser utilizado luego del nuevo deployment.
-          </p>
-        </section>
-
-        <section id="deploy">
-          <p class="titulomaschico">Blue/Green Deployment - Shared Database</p>
-          <img src="imgs/bluegreendeploy2.png" />
-        </section>
-
-        <section id="deploy">
-          <p class="titulo">Blue/Green Deployment - Shared Database</p>
-          <p class="chico fragment">
-            Requiere que los cambios de base de datos, scripts de DDL y DML,
-            sean compatibles con la versión actual de la aplicación.
-          </p>
-          <p class="chico fragment">
-            Primero se corren los scripts de base de datos, sin deployar una
-            nueva versión. La compatibilidad garantiza que la versión actual
-            sigue funcionando.
-          </p>
-          <p class="chico fragment">
-            Luego se deploya la nueva versión de la aplicación en el ambiente
-            blue.
-          </p>
-          <p class="chico fragment">
-            Se prueba y si esta Ok, se cambia el proxy reverso para la nueva
-            versión.
-          </p>
-        </section>
-
-        <section id="deploy">
-          <p class="titulomaschico">Blue/Green Deployment</p>
-          <img src="imgs/bluegreendeploy.png" />
-        </section>
-
-        <section id="deploy">
-          <p class="titulo">Blue/Green Deployment</p>
-          <p class="chico fragment">
-            Requiere mantener las bases de datos de los ambientes green y blue
-            sincronizados mediante replicación.
-          </p>
-        </section>
-
-        <section id="deploy">
-          <p class="titulo">Canary Deployment</p>
-          <img src="imgs/canary-deploy.png" />
-        </section>
-
-        <section id="deploy">
-          <p class="titulo">Canary Deployment</p>
-          <p class="chico fragment">
-            Requiere mantener las bases de datos de los ambientes sincronizados
-            mediante replicación.
-          </p>
-        </section>
-
         <section id="esc">
           <div class="box2">Escalabilidad</div>
         </section>
@@ -573,17 +514,14 @@
         <section id="esc">
           <p>¿Cómo escalamos en forma horizontal la siguiente configuración?</p>
           <img class="fragment" src="imgs/radioa-deploy1.png" />
-          <p class="fragment">
-            Comencemos por el servicio de aplicación ¿Donde almacenamos la
-            session de usuario?
-          </p>
+          <p class="fragment">Comencemos por el servicio de aplicación</p>
         </section>
 
-        <section id="esc">
+        <!--         <section id="esc">
           <p>Load balancer con "session affinity"</p>
           <img src="imgs/scaling-sticky-session.png" />
         </section>
-
+ -->
         <section id="esc">
           <img src="imgs/scaling-web.png" />
         </section>
@@ -597,7 +535,13 @@
         </section>
 
         <section id="esc">
+          <p>Escalar Reads</p>
           <img src="imgs/scaling-read-replicas-2.png" />
+        </section>
+
+        <section id="esc">
+          <p>Sharding (Para Escalar Escrituras)</p>
+          <img src="imgs/sharding.png" />
         </section>
 
         <!--        <section id="esc">
@@ -640,6 +584,109 @@
         <section id="ghi1">Slide 2</section>
         <section id="ghi1">Slide 2</section>
         <section id="ghi1">Slide 2</section>-->
+
+        <section id="deploy">
+          <div class="box2">Deployment</div>
+          <p>Con cero downtime! (si no afectamos la disponibilidad)</p>
+        </section>
+
+        <section id="deploy">
+          <p class="titulo">Blue/Green Deployment</p>
+          <p class="fragment">
+            Hay que tener 2 ambientes de producción completos e identicos.
+          </p>
+          <p class="fragment">
+            Uno que esta siendo utilizado por los usuarios (Blue).
+          </p>
+          <p class="fragment">
+            Y otro que va a ser utilizado luego del nuevo deployment (Green).
+          </p>
+        </section>
+
+        <section id="deploy">
+          <p class="titulomaschico">Blue/Green Deployment - Shared Database</p>
+          <img src="imgs/bluegreendeploy2.png" />
+        </section>
+
+        <section id="deploy">
+          <p class="titulo">Blue/Green Deployment - Shared Database</p>
+          <p class="chico fragment">
+            Requiere que los cambios de base de datos, scripts de DDL y DML,
+            sean compatibles con la versión actual de la aplicación.
+          </p>
+          <p class="chico fragment">
+            Primero se corren los scripts de base de datos, sin deployar una
+            nueva versión. La compatibilidad garantiza que la versión actual
+            sigue funcionando.
+          </p>
+          <p class="chico fragment">
+            Luego se deploya la nueva versión de la aplicación en el ambiente
+            green.
+          </p>
+          <p class="chico fragment">
+            Se prueba y si esta Ok, se cambia el proxy reverso para la nueva
+            versión.
+          </p>
+        </section>
+
+        <section id="deploy">
+          <p class="titulo">Blue/Green Deployment - Shared Database</p>
+          <p class="chico fragment">
+            <u>No siempre es posible fácilmente sin sacrificios</u>.
+          </p>
+          <p class="chico fragment">
+            Supongamos algo simple: Aplicación que muestra una lista de personas
+            (nombre, apellido, fecha nacimiento).
+          </p>
+          <p class="chico fragment">
+            Release nuevo: Agregar Domicilio. Agrego columna con script DDL y
+            luego un DML para cargarle datos a esa columna. La versión actual no
+            muestra el dato nuevo. En la versión nueva se empieza a ver.
+          </p>
+        </section>
+
+        <section id="deploy">
+          <p class="titulo">Blue/Green Deployment - Shared Database</p>
+          <p class="chico fragment">
+            Release nuevo: Necesito múltiples domicilios para cada persona.
+          </p>
+          <p class="chico fragment">
+            Agrego DDL con relación uno a muchos (una tabla nueva). Tengo que
+            armar script de DML para migrar la columna domicilio a la relación
+            nueva. Pero si quito la actual columna la versión actual de mi
+            aplicación se rompe (no puedo).
+          </p>
+          <p class="chico fragment">
+            Tengo que dejar la columna y mantenerla (en caso de cambios), hasta
+            que esten todos los usuarios en la nueva version.
+          </p>
+        </section>
+
+        <section id="deploy">
+          <p class="titulomaschico">Blue/Green Deployment</p>
+          <img src="imgs/bluegreendeploy.png" />
+        </section>
+
+        <section id="deploy">
+          <p class="titulo">Blue/Green Deployment</p>
+          <p class="chico fragment">
+            Requiere mantener las bases de datos de los ambientes green y blue
+            sincronizados mediante replicación.
+          </p>
+        </section>
+
+        <section id="deploy">
+          <p class="titulo">Canary Deployment</p>
+          <img src="imgs/canary-deploy.png" />
+        </section>
+
+        <section id="deploy">
+          <p class="titulo">Canary Deployment</p>
+          <p class="chico fragment">
+            Requiere mantener las bases de datos de los ambientes sincronizados
+            mediante replicación.
+          </p>
+        </section>
       </div>
     </div>
 
