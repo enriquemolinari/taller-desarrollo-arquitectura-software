@@ -19,4 +19,3 @@
 3. npm start
 
 Los contenidos de este curso estan desarrollados utilizando el hermoso framework [Reveal.JS](https://revealjs.com/).
-s
