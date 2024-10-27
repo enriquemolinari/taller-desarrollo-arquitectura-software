@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Single Sign On con OAuth 2.0 y JWT</title>
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+
+    <style>
+      div.line { border-bottom: 1px solid; border-color: lightgray; }
+      .box, .box2 { background-color: #4a4e69; color: white; font-weight: bold; }
+      .box { width: 590px; font-size: 50pt; padding: 15px; }
+      .box2 { width: 720px; font-size: 50pt; padding: 15px; }
+      .titulo { font-size: 50pt; }
+      p.chico { font-size: 24pt; }
+
+      /* Footer siempre en la parte inferior */
+      .reveal .footer {
+        position: fixed;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+        color: gray;
+      }
+
+      /* Clase para reducir el tamaño del texto en secciones grandes */
+      .smaller-text {
+        font-size: 18pt;
+        line-height: 1.4;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="footer">Single Sign-On con OAuth 2.0 y JWT</div>
+      <div class="menubar line">
+        <ul class="menu">
+          <li><a href="#/intro">Introducción</a></li>
+          <li><a href="#/context">Contexto</a></li>
+          <li><a href="#/sso">SSO</a></li>
+          <li><a href="#/oauth">OAuth 2.0 y OIDC</a></li>
+          <li><a href="#/jwt">JWT</a></li>
+          <li><a href="#/flow">Flujo OAuth 2.0</a></li>
+          <li><a href="#/roles">Roles y Responsabilidades</a></li>
+          <li><a href="#/example">Ejemplo con Keycloak</a></li>
+        </ul>
+      </div>
+      <div class="slides">
+
+        <!-- Título -->
+        <section id="intro" style="text-align: left" data-transition="fade">
+          <div class="box"><span>Single Sign On con OAuth 2.0 y JWT</span></div>
+          <p>Identity and Access Management para Aplicaciones Modernas</p>
+        </section>
+
+        <!-- Contexto y Desafíos -->
+        <section id="context" data-transition="zoom" class="smaller-text">
+          <div class="box2">Contexto y desafíos de la Seguridad en Aplicaciones Modernas</div>
+          <ul>
+            <li class="fragment">El Desafío de la Seguridad: La expansión de aplicaciones web y móviles hace que la seguridad de los datos sea crítica.</li>
+            <li class="fragment">Problemas Comunes en el Pasado:
+              <ul>
+                <li class="fragment">Implementación Manual de sistemas de seguridad.</li>
+                <li class="fragment">Falta de estandarización: Seguridad inconsistente.</li>
+                <li class="fragment">Mantenimiento complejo y difícil de escalar.</li>
+                <li class="fragment">Dificultades de integración con otros sistemas.</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Necesidad de Soluciones Modernas -->
+        <section data-transition="slide" class="smaller-text">
+          <div class="box2">La Necesidad de Soluciones Modernas</div>
+          <ul>
+            <li class="fragment">Estandarización: Protocolos unificados para seguridad.</li>
+            <li class="fragment">Seguridad Mejorada: Mejores prácticas revisadas por expertos.</li>
+            <li class="fragment">Facilidad de Implementación: Uso de frameworks con soporte comunitario.</li>
+            <li class="fragment">Interoperabilidad: Fácil integración entre servicios.</li>
+            <li class="fragment">Escalabilidad: Adecuado para aplicaciones de cualquier tamaño.</li>
+          </ul>
+        </section>
+
+        <!-- Qué es SSO -->
+        <section id="sso" data-transition="fade-in fade-out" class="smaller-text">
+          <div class="box2">¿Qué es Single Sign-On (SSO)?</div>
+          <ul>
+            <li class="fragment">Autenticación Centralizada: El usuario se autentica una vez y puede acceder a múltiples aplicaciones sin volver a introducir sus credenciales.</li>
+            <li class="fragment">Ventajas del SSO:
+              <ul>
+                <li>Mejora la experiencia del usuario.</li>
+                <li>Reduce la fatiga de contraseñas.</li>
+                <li>Gestión centralizada facilita auditorías y seguridad.</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <!-- OAuth 2.0 y OpenID Connect -->
+        <section id="oauth" data-transition="slide-in slide-out" class="smaller-text">
+          <div class="box2">OAuth 2.0 y OpenID Connect (OIDC)</div>
+          <ul>
+            <li class="fragment">OAuth 2.0: Protocolo de autorización que permite a una aplicación acceder a recursos sin compartir credenciales.</li>
+            <li class="fragment">Ventajas de OAuth 2.0:
+              <ul>
+                <li>Autorización granular y separación de autenticación y autorización.</li>
+                <li>Amplia adopción por plataformas como Google, Facebook, GitHub.</li>
+              </ul>
+            </li>
+            <li class="fragment">OIDC: Capa de identidad sobre OAuth 2.0 que añade autenticación, con componentes como ID Tokens y UserInfo Endpoint.</li>
+            <li class="fragment">Ventajas de OIDC: Federación de identidades y autenticación estándar.</li>
+          </ul>
+        </section>
+
+        <!-- JWT -->
+        <section id="jwt" data-transition="zoom-in zoom-out" class="smaller-text">
+          <div class="box2">JWT (JSON Web Tokens)</div>
+          <ul>
+            <li class="fragment">JWT es un estándar abierto (RFC 7519) que permite la transmisión segura de información entre partes.</li>
+            <li class="fragment">Estructura de un JWT:
+              <ul>
+                <li>Header: Tipo de token y algoritmo de firma.</li>
+                <li>Payload: Claims (información del usuario, permisos).</li>
+                <li>Signature: Garantiza la integridad del token.</li>
+              </ul>
+            </li>
+            <li class="fragment">Ventajas: Stateless, fácil de transmitir y usado en autenticación y autorización.</li>
+          </ul>
+        </section>
+
+        <!-- Flujo de OAuth 2.0 paso a paso -->
+        <section id="flow" data-transition="fade" class="smaller-text">
+          <div class="box2">El flujo de OAuth 2.0 paso a paso</div>
+          <ol>
+            <li class="fragment">El usuario interactúa con la SPA (Cliente de Keycloak) y realiza una acción que requiere autenticación.</li>
+            <li class="fragment">La SPA redirige al usuario a Keycloak para autenticarse.</li>
+            <li class="fragment">La SPA intercambia el código de autorización por un token de acceso (JWT).</li>
+            <li class="fragment">La SPA usa el token para acceder a la API, enviándolo en el encabezado de autorización.</li>
+            <li class="fragment">La API valida el token con Keycloak y permite el acceso a los recursos.</li>
+          </ol>
+        </section>
+
+        <!-- Roles y Responsabilidades -->
+        <section id="roles" data-transition="slide" class="smaller-text">
+          <div class="box2">Roles y Responsabilidades</div>
+          <ul>
+            <li class="fragment"><strong>Resource Owner:</strong> Usuario final que utiliza la SPA.</li>
+            <li class="fragment"><strong>Authorization Server:</strong> Keycloak actúa como el servidor de autorización, autenticando usuarios y gestionando consentimientos.</li>
+            <li class="fragment"><strong>Resource Server:</strong> API REST protegida (Spring Boot), validando tokens y controlando acceso.</li>
+            <li class="fragment"><strong>Client:</strong> La SPA, inicia el flujo de autenticación y gestiona tokens de acceso.</li>
+          </ul>
+        </section>
+
+        <!-- Ejemplo con Keycloak -->
+        <section id="example" data-transition="fade-in fade-out" class="smaller-text">
+          <div class="box2">Ejemplo con Keycloak</div>
+          <ul>
+            <li class="fragment">Keycloak Administration UI (unrn.edu.ar)</li>
+            <li class="fragment">OAuth 2.0 debugger (oauthdebugger.com)</li>
+            <li class="fragment">JSON Web Tokens - jwt.io</li>
+            <li class="fragment">MailHog (unrn.edu.ar)</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/relativenumber/relativenumber.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: "c/t",
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RelativeNumber, Simplemenu, RevealMath.KaTeX],
+      });
+    </script>
+  </body>
+</html>
