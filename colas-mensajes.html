@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Colas de Mensajes - Arquitectura de Software</title>
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+
+    <style>
+      div.line { border-bottom: 1px solid; border-color: lightgray; }
+      .box, .box2 { background-color: #4a4e69; color: white; font-weight: bold; }
+      .box { width: 590px; font-size: 50pt; padding: 15px; }
+      .box2 { width: 720px; font-size: 50pt; padding: 15px; }
+      .titulo { font-size: 50pt; }
+      p.chico { font-size: 24pt; }
+
+      /* Footer siempre en la parte inferior */
+      .reveal .footer {
+        position: fixed;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+        color: gray;
+      }
+
+      /* Clase para reducir el tamaño del texto en secciones grandes */
+      .smaller-text {
+        font-size: 18pt;
+        line-height: 1.4;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="footer">Colas de Mensajes - Arquitectura de Software</div>
+      <div class="menubar line">
+        <ul class="menu">
+          <li><a href="#/def">Definición</a></li>
+          <li><a href="#/carac">Características</a></li>
+          <li><a href="#/comp">Componentes</a></li>
+          <li><a href="#/amqp">AMQP</a></li>
+          <li><a href="#/proto">Otros Protocolos</a></li>
+          <li><a href="#/spring">Implementación</a></li>
+        </ul>
+      </div>
+      <div class="slides">
+        <!-- Introducción a RabbitMQ -->
+        <section id="def" style="text-align: left" data-transition="fade">
+          <div class="box"><span>¿Qué es RabbitMQ?</span></div>
+          <p>RabbitMQ es un sistema de mensajería o Message Broker que facilita la comunicación entre aplicaciones, especialmente en arquitecturas de microservicios, al enviar, recibir y gestionar mensajes de forma eficiente y asíncrona.</p>
+        </section>
+
+        <!-- Características de RabbitMQ -->
+        <section id="carac" data-transition="zoom" class="smaller-text">
+          <div class="box2">Características Clave de RabbitMQ</div>
+          <ul>
+            <li class="fragment fade-in">Fiabilidad: Garantiza la entrega de mensajes.</li>
+            <li class="fragment fade-in">Escalabilidad: Soporta alta concurrencia y múltiples clientes.</li>
+            <li class="fragment fade-in">Soporte de múltiples protocolos: AMQP, MQTT, STOMP, etc.</li>
+            <li class="fragment fade-in">Encolado y enrutamiento avanzado: Filtrado de mensajes mediante "exchange" y "bindings".</li>
+          </ul>
+        </section>
+
+        <!-- Componentes de RabbitMQ -->
+        <section id="comp" data-transition="slide" class="smaller-text">
+          <div class="box2">Componentes Principales</div>
+          <ul>
+            <li class="fragment">Message Queue (Cola de Mensajes)</li>
+            <li class="fragment">Producer (Productor)</li>
+            <li class="fragment">Consumer (Consumidor)</li>
+            <li class="fragment">Exchange (Intercambio):
+              <ul>
+                <li class="fragment">Direct: Los mensajes se enrutan a la cola con una clave exacta.</li>
+                <li class="fragment">Fanout: Los mensajes se envían a todas las colas conectadas al exchange.</li>
+                <li class="fragment">Topic: Permite el enrutamiento mediante patrones.</li>
+              </ul>
+            </li>
+            <li class="fragment">Binding (Enlace)</li>
+            <li class="fragment">Protocolos</li>
+          </ul>
+        </section>
+
+        <!-- Protocolo AMQP -->
+        <section id="amqp" data-transition="fade-in fade-out" class="smaller-text">
+          <div class="box2">Protocolo AMQP</div>
+          <p>El Advanced Message Queuing Protocol (AMQP) es un protocolo de nivel de aplicación, abierto y orientado a la mensajería. Es usado para crear flujos de mensajes confiables entre sistemas distribuidos, asegurando que los mensajes sean encolados, entregados y procesados de manera correcta.</p>
+          <ul>
+            <li class="fragment">Confiabilidad: Los mensajes son confirmados y reenviados en caso de fallo.</li>
+            <li class="fragment">Interoperabilidad: Permite la interacción entre diferentes plataformas y lenguajes.</li>
+            <li class="fragment">Colas de mensajes flexibles: Adecuado para enrutamientos complejos y dinámicos de mensajes.</li>
+          </ul>
+        </section>
+
+        <!-- Otros Protocolos para Mensajería -->
+        <section id="proto" data-transition="slide-in slide-out" class="smaller-text">
+          <div class="box2">Otros Protocolos para Mensajería en Microservicios</div>
+          <ul>
+            <li class="fragment"><strong>JMS (Java Message Service):</strong> API estándar para mensajería asíncrona en aplicaciones Java. Limitado a entornos Java.</li>
+            <li class="fragment"><strong>CoreMQ (ActiveMQ Core):</strong> Protocolo nativo de ActiveMQ para la mensajería de alto rendimiento. Optimizado, pero menos interoperable.</li>
+            <li class="fragment"><strong>MQTT (Message Queuing Telemetry Transport):</strong> Protocolo ligero para IoT, ideal para dispositivos con recursos limitados.</li>
+          </ul>
+        </section>
+
+        <!-- Implementación con Spring Boot -->
+        <section id="spring" data-transition="zoom-in zoom-out" class="smaller-text">
+          <div class="box2">Implementación con Spring Boot</div>
+          <p class="titulo">Implementaciones Posibles:</p>
+          <p class="chico">Spring Boot ofrece integración con RabbitMQ usando los siguientes módulos:</p>
+          <ul>
+            <li class="fragment">spring-boot-starter-amqp: Integración con RabbitMQ usando AMQP, facilita el envío y recepción de mensajes.</li>
+            <li class="fragment">spring-cloud-stream-binder-rabbit: Integra Spring Cloud Stream con RabbitMQ para un acoplamiento bajo.</li>
+          </ul>
+        </section>
+
+        <!-- Detalles de la implementación con Spring Boot -->
+        <section data-transition="fade" class="smaller-text">
+          <p class="titulo">Implementación con spring-boot-starter-amqp</p>
+          <ul>
+            <li class="fragment">RabbitTemplate: Facilita el envío de mensajes a las colas.</li>
+            <li class="fragment">@RabbitListener: Para escuchar y procesar mensajes de una cola.</li>
+            <li class="fragment">Ventajas: Integración directa y sencilla con RabbitMQ, flexibilidad en la configuración de colas y bindings.</li>
+          </ul>
+        </section>
+
+        <section data-transition="slide" class="smaller-text">
+          <p class="titulo">Implementación con Spring Cloud Stream</p>
+          <ul>
+            <li class="fragment">Bindings: Define la conexión de la aplicación con sistemas de mensajería.</li>
+            <li class="fragment">@Input y @Output: Definen los canales de entrada y salida.</li>
+            <li class="fragment">Ventajas: Desacoplamiento completo entre la aplicación y el sistema de mensajería, configuración flexible.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/relativenumber/relativenumber.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: "c/t",
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RelativeNumber, Simplemenu, RevealMath.KaTeX],
+      });
+    </script>
+  </body>
+</html>
