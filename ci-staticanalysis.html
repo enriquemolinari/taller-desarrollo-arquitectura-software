@@ -210,8 +210,8 @@
           <p class="titulo">Integración y Delivery Continuo</p>
           <p class="fragment">¿De qué se trata?</p>
           <p class="fragment">
-            Proceso automático que permite poner en PROD una nueva versión de
-            una aplicación o servicio.
+            <u>Proceso automático</u> que permite poner en PROD una nueva
+            versión de una aplicación o servicio.
           </p>
           <p class="fragment">
             Esto requiere previamente verificar el funcionamiento mediantes
@@ -243,7 +243,7 @@
           <img src="imgs/circleci.png" />
         </section>
 
-        <section id="ci" data-auto-animate>
+        <!--         <section id="ci" data-auto-animate>
           <p>Nosotros vamos a utilizar:</p>
           <img src="imgs/github.jpg" />
           <p class="fragment"><img src="imgs/github-actions.png" /></p>
@@ -287,7 +287,7 @@ jobs:
       ls ${{ github.workspace }}
    # Simplemente ejecuta un echo   
    - run: echo "This job's status is ${{ job.status }}."</code></pre>
-        </section>
+        </section> -->
 
         <section id="ae">
           <div class="box2">Análisis Estático de Código Fuente</div>
@@ -295,6 +295,13 @@ jobs:
 
         <section id="ae">
           <p class="titulo">Análisis Estático de Código Fuente</p>
+          <div class="fragment">
+            ¿Qué significa que sea estático el análisis?<br /><span
+              class="fragment"
+            >
+              Que no se ejecuta</span
+            >
+          </div>
           <p class="fragment">
             Como parte de la <b>Quality Net</b> existen herramientas que nos
             permiten, automáticamente (ideal para un proceso de CI), realizar
@@ -308,11 +315,28 @@ jobs:
             <li class="fragment">Potenciales bugs.</li>
           </ol>
         </section>
-
         <section id="ae">
           <p class="titulo">Verificación de Estilo con:</p>
           <img class="fragment" src="imgs/checkstyle.png" />
+
           <p class="fragment">
+            Muy utilizada es la Guía de Estilos de
+            <a href="https://google.github.io/styleguide/javaguide.html"
+              >Google</a
+            >.
+          </p>
+          <p class="fragment">
+            <a
+              href="https://google.github.io/styleguide/javaguide.html#s3-source-file-structure"
+              >Source File structure</a
+            >,
+            <a
+              href="https://google.github.io/styleguide/javaguide.html#s4.1-braces"
+              >Sobre las llaves</a
+            >, muchos otros...
+          </p>
+
+          <!--           <p class="fragment">
             ¿Usamos espacios o tabs para las tabulaciones? ¿Cuantos niveles?
           </p>
           <p class="fragment">
@@ -323,38 +347,27 @@ jobs:
           </p>
           <p class="fragment">
             ¿Donde y cuando usamos mayúsculas? ¿minúsculas?
-          </p>
-        </section>
-
-        <section id="ae">
-          <p class="titulo">Verificación de Estilo con:</p>
-          <img class="fragment" src="imgs/checkstyle.png" />
-          <p class="fragment">
-            Vamos a utilizar la Guía de Estilos de
-            <a href="https://google.github.io/styleguide/javaguide.html"
-              >Google</a
-            >.
-          </p>
+          </p> -->
         </section>
 
         <section id="ae">
           <img src="imgs/pmd.png" />
           <p>Busca <b>potenciales</b> fallas o bugs. ¿Cuáles?</p>
           <p class="fragment">
-            <a href="https://pmd.github.io/latest/pmd_rules_java.html"
-              >Reglas PMD</a
-            >
-          </p>
-          <p class="fragment">
-            También detecta <b>código duplicado</b>!
-            <a href="https://pmd.github.io/latest/pmd_userdocs_cpd.html"
+            <a
+              href="https://docs.pmd-code.org/latest/pmd_rules_java_design.html#avoiddeeplynestedifstmts"
+              >Ifs anidados</a
+            >,
+            <a
+              href="https://docs.pmd-code.org/latest/pmd_rules_java_errorprone.html#avoidcatchingnpe"
+              >Avoid catch NPE</a
+            >,<a href="https://pmd.github.io/latest/pmd_userdocs_cpd.html"
               >Copy/Paste Detector</a
-            >
-            (CPD).
+            >, muchos otros...
           </p>
         </section>
 
-        <section id="ae">
+        <!--        <section id="ae">
           <img src="imgs/spotbugs.png" />
           <p>Similar a PMD, busca potenciales bugs. ¿Cuáles?</p>
           <p class="fragment">
@@ -366,14 +379,13 @@ jobs:
             href="https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html"
             >Reglas Spotbugs</a
           >
-        </section>
+        </section> -->
 
         <section id="ae">
           <p class="titulo">Falsos positivos</p>
           <p class="fragment">
-            Tanto PMD como Spotbugs pueden reportar falsos positivos. Usando
-            anotaciones puedo quitar la verificación de cierto bloque de código,
-            en PMD sería:
+            PMD puede reportar falsos positivos. Usando anotaciones puedo quitar
+            la verificación de cierto bloque de código:
           </p>
           <pre class="fragment">
           <code class="small1" data-trim data-noescape>@SuppressWarnings("PMD.UnusedLocalVariable")
@@ -384,7 +396,7 @@ public class Bar {
 }</code></pre>
         </section>
 
-        <section id="ae">
+        <!--         <section id="ae">
           <p class="titulo">Falsos positivos</p>
           <p class="fragment">
             En Spotbugs, primero debe crear la anotación y luego usarla. Lo que
@@ -401,7 +413,7 @@ public JpaSalesOnline(EntityManager em) {
  this.em = em;
 }</code></pre>
         </section>
-
+ -->
         <section id="test">
           <p class="titulo">Testing y Cobertura</p>
           <p class="fragment">
@@ -456,9 +468,8 @@ public JpaSalesOnline(EntityManager em) {
           </p>
           <p class="fragment">
             A travez de sus <b>plugins</b> podemos ejecutar Checkstyle, PMD,
-            Spotbugs, Tests y generar documentación de calidad de código y
-            cobertura. Lo podemos correr local y por supuesto también desde
-            Github Actions.
+            Tests y generar documentación de calidad de código y cobertura. Lo
+            podemos correr local y por supuesto también desde Github Actions.
           </p>
           <p class="fragment">
             Repo de ejemplo:
