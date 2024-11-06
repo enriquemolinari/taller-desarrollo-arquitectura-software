@@ -194,8 +194,8 @@
         <div class="slide-number"></div>
         <ul class="menu">
           <li><a href="#/necesidad">¿Por qué necesito verificar?</a></li>
-          <li><a href="#/javam">Java Modules</a></li>
           <li><a href="#/archunit">ArchUnit</a></li>
+          <li><a href="#/javam">Java Modules</a></li>
           <li><a href="#/recursos">Recursos</a></li>
         </ul>
         <div class="placeholder"></div>
@@ -235,41 +235,6 @@
 
         <section id="necesidad" data-transition="fade-in">
           <img src="imgs/invalid-dependencies-4.png" />
-        </section>
-
-        <section id="javam" data-transition="fade-out">
-          <p class="fragment">Java 9+ propone usar <b>Modules</b>.</p>
-          <p class="fragment">¿Cómo declaramos el <b>Módulo</b> Data?</p>
-          <pre class="fragment"><code data-trim data-noescape>module data {
- //exporta las clases públicas del paquete data.api
- exports data.api;
-
- //others requires
- requires jarA;
- requires jarB;
- ...
-}</code></pre>
-          <p class="maschico fragment">
-            Ésta definición va en <em>module-info.java</em>, en la raiz del
-            <em>src/main/java</em> folder.
-          </p>
-        </section>
-        <section id="javam" data-transition="fade-in">
-          <p>¿Cómo declaramos el <b>Módulo</b> Domain?</p>
-          <pre class="fragment"><code data-trim data-noescape>module domain {
- //exporta las clases públicas del paquete domain.api
- exports domain.api;
-
- requires data;
-
- //others requires
- requires jarX;
- ...
-}</code></pre>
-          <p class="maschico fragment">
-            Observen que requiere el módulo <em>data</em> y éste solo exporta su
-            paquete <em>data.api</em>.
-          </p>
         </section>
 
         <section id="archunit">
@@ -312,6 +277,41 @@ public void verifyControllersName() {
   .should().haveSimpleNameEndingWith("Controller")
   .check(jc);           
 }</code></pre>
+        </section>
+
+        <section id="javam" data-transition="fade-out">
+          <p class="fragment">Java 9+ propone usar <b>Modules</b>.</p>
+          <p class="fragment">¿Cómo declaramos el <b>Módulo</b> Data?</p>
+          <pre class="fragment"><code data-trim data-noescape>module data {
+ //exporta las clases públicas del paquete data.api
+ exports data.api;
+
+ //others requires
+ requires jarA;
+ requires jarB;
+ ...
+}</code></pre>
+          <p class="maschico fragment">
+            Ésta definición va en <em>module-info.java</em>, en la raiz del
+            <em>src/main/java</em> folder.
+          </p>
+        </section>
+        <section id="javam" data-transition="fade-in">
+          <p>¿Cómo declaramos el <b>Módulo</b> Domain?</p>
+          <pre class="fragment"><code data-trim data-noescape>module domain {
+ //exporta las clases públicas del paquete domain.api
+ exports domain.api;
+
+ requires data;
+
+ //others requires
+ requires jarX;
+ ...
+}</code></pre>
+          <p class="maschico fragment">
+            Observen que requiere el módulo <em>data</em> y éste solo exporta su
+            paquete <em>data.api</em>.
+          </p>
         </section>
 
         <section id="recursos">
