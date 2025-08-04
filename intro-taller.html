@@ -127,9 +127,9 @@
         <ul class="menu">
           <li><a href="#/obj">Objetivo</a></li>
           <li><a href="#/cont">Contenidos</a></li>
-          <li><a href="#/met">Metodología</a></li>
+          <li><a href="#/tps">Trabajos Prácticos</a></li>
+          <li><a href="#/metodo">Metodología</a></li>
           <li><a href="#/curfin">Cursada y Final</a></li>
-          <li><a href="#/trab">Trabajo Práctico</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
@@ -155,104 +155,130 @@
             <b>aceptadas</b>.
           </p>
           <p class="chico">
-            Buenas prácticas relacionadas con el diseño, la arquitectura y el
-            código que escribimos.
+            Buenas prácticas relacionadas a los métodos y herramientas
+            utilizadas, el diseño, la arquitectura y el código que escribimos.
           </p>
         </section>
 
         <section id="cont">
           <p class="titulo">¿Qué tecnologías vemos?</p>
           <p class="chicoYalineadoIzq fragment">
-            Backends Web en Java con <b>SpringBoot</b>
+            Persistencia OO con <b>Hibernate</b> y servicios Web con
+            <b>SpringBoot</b>.
           </p>
           <p class="chicoYalineadoIzq fragment">
-            Front-ends Web con <b>React</b> (o Angular, Nextjs, etc.)
+            Front-ends Web con <b>React</b>.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            Si alguno prefiere otra tecnología, puede proponerla a la cátedra.
           </p>
         </section>
 
         <section id="cont">
           <p class="titulo">¿Qué contenidos teóricos vemos?</p>
           <p class="chicoYalineadoIzq fragment">
-            Arquitectura de Software: Conceptos, arquitecturas monolíticas vs
-            distribuídas, Arquitectura Lógica vs Física. El modelo C4.
+            Persistencia OO con JPA/Hibernate. Testing de Integración.
           </p>
           <p class="chicoYalineadoIzq fragment">
-            El protocolo HTTP, Conceptos sobre DNSs, Load Balancers, Colas de
-            Mensajes, Server Side Cache y Browser Cache.
-          </p>
-          <p class="chicoYalineadoIzq fragment">Servicios HTTP vs RESTfull</p>
-          <p class="chicoYalineadoIzq fragment tachado">
-            Conceptos de Bases de Datos NoSQL (relacional ya lo conocen)
+            Conceptos de Arquitectura de Software: arquitecturas monolíticas vs
+            distribuídas, partición lógica vs física. El modelo C4.
           </p>
           <p class="chicoYalineadoIzq fragment">
-            Conceptos de Integración Continua
+            El protocolo HTTP, Servicios Web con SpringBoot.
           </p>
           <p class="chicoYalineadoIzq fragment">
-            Análisis Estático de Código: Calidad, Medallas
+            Front-ends Web: Server Side Rendering (SSR) vs Client-side
+            Rendering. Single Page Applications (SPA) con Reactjs.
           </p>
-          <p class="chicoYalineadoIzq fragment">Testing Automatizado</p>
+          <p class="chicoYalineadoIzq fragment">
+            Autenticación y Autorización. Seguridad en aplicaciones Web
+            (Keycloak).
+          </p>
         </section>
 
-        <section id="met">
+        <section id="cont">
+          <p class="titulo">¿Qué contenidos teóricos vemos?</p>
+          <p class="chicoYalineadoIzq fragment">
+            Conceptos de Colas de Mensajes e implementación con RabbitMQ.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            Conceptos de Bases de Datos NoSQL. Base datos de Clave-Valor y
+            Documentos.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            Conceptos de Integración Continua.
+          </p>
+          <p class="chicoYalineadoIzq fragment">Y más sobre tendencias...</p>
+        </section>
+
+        <section id="tps">
+          <p class="titulo">Trabajos Prácticos</p>
+          <p class="chicoYalineadoIzq fragment">
+            Dos Trabajos Prácticos: Uno Individual y otro grupal.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            <u>TP Individual</u>: Mini-Twitter. Implementación full stack con
+            las tecnologías Web vistas en clase. Con una arquitectura simple
+            monolítica.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            <u>TP Grupal</u>: Ventas Online de Películas. Implementación full
+            stack de una aplicación Web con arquitectura distribuída, utilizando
+            las tecnologías y prácticas vistas en clase. Se trabajará en grupos
+            de 2 o 3 alumnos.
+          </p>
+        </section>
+
+        <section id="metodo">
           <p class="titulo">Metodología</p>
           <p class="chicoYalineadoIzq fragment">
-            A lo largo del curso vamos a ir construyendo una aplicación en
-            <u>equipo</u>.
+            Los miércoles habrá clases teóricas. Los viernes consultas de TPs.
           </p>
           <p class="chicoYalineadoIzq fragment">
-            Se irá construyendo en iteraciones de 2 semanas. Aproximadamente
-            tenemos 6 sprints.
+            El <u>TP Grupal</u> se irá construyendo en iteraciones de 2/3
+            semanas. Sincronizado con las clases teóricas.
           </p>
           <p class="chicoYalineadoIzq fragment">
-            Las iteraciones podrán tener tareas de desarrollo, de investigación
-            y pruebas de concepto (Ej: investigar una tecnología en particular
-            que necesitamos aplicar) y de pago de deuda técnica (Ej: Mejorar la
-            cobertura de test).
+            Luego de cada iteración se realizará una <u>demo</u> de lo
+            construído.
           </p>
           <p class="chicoYalineadoIzq fragment">
-            En ciertas etapas del desarrollo se iran impartiendo los diferentes
-            contenidos para aplicar en el desarrollo.
+            <u>Demo</u>: Qué habíamos planeado vs qué construímos. Se muestra el
+            plan (casos de uso, historias de usuario, etc) y se procede a
+            mostrar la funcionalidad construída a partir del plan como si los
+            docentes fueran el cliente.
+          </p>
+          <p class="chicoYalineadoIzq fragment">
+            <u>Demo</u>: Luego, también se discutirán cuestiones técnicas del
+            desarrollo.
           </p>
         </section>
 
-        <section id="met">
-          <p class="titulo">Metodología (Cont.)</p>
+        <section id="metodo">
+          <p class="titulo">Metodología</p>
           <p class="chicoYalineadoIzq fragment">
-            En las clases tendremos: Plannings, Dailies, consultas técnicas o
-            funcionales, clases teóricas.
+            Cada vez va a ser más importante escribir buenas historias de
+            usuario. ¿Tienen idea porque?
           </p>
           <p class="chicoYalineadoIzq fragment">
-            El rol de los docentes (cuando no se imparten clases teóricas) será
-            por momentos de consultor técnico (consejos y propuestas). Y además
-            como product owner.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Pueden utilizar tiempo de la clase para programar. Pero solo con eso
-            no va a alcanzar.
+            <u>Tip</u>: La IA es buena escribiendo historias de usuario. Iteren
+            con ella para armar cada sprint.
           </p>
         </section>
 
         <section id="curfin">
           <p class="titulo">Cursada y Final</p>
           <p class="chicoYalineadoIzq fragment">
-            La evaluación de cursada es a travéz de los entregables de cada
-            sprint. No hay parciales, cumplir con las entregas en cada sprint es
-            con lo que aprueban la materia.
+            <u>Cursada</u>: Se aprueba con la entrega/finalización del
+            <u>TP Individual</u>. Y las demos de cada iteración (mínimo 3).
           </p>
           <p class="chicoYalineadoIzq fragment">
-            Valoramos más: Diseños limpios, Código limpio, buena arquitectura,
-            alta cobertura de test y métricas de análisis estático altas.
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            Por sobre: Usabilidad (UX), Diseño Web (CSS).
-          </p>
-          <p class="chicoYalineadoIzq fragment">
-            El final incluirá una tarea adicional individual sobre la aplicación
-            a construir.
+            <u>Final</u>: Finalizar el TP Grupal, más una tarea adicional
+            (consensuada con la cátedra) <u>individual</u> sobre el TP Grupal.
           </p>
         </section>
 
-        <section id="trab">
+        <!--         <section id="trab">
           <p class="titulo">Trabajo Práctico</p>
           <p class="chicoYalineadoIzq fragment">
             Armar los equipos. Grupos de 2 alumnos o 3.
@@ -271,6 +297,7 @@
             Mellon University).
           </p>
         </section>
+ -->
       </div>
     </div>
 
