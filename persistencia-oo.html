@@ -147,14 +147,10 @@
       <div class="menubar line">
         <div class="slide-number"></div>
         <ul class="menu">
-          <li><a href="#/def">¿Arquitectura de Software?</a></li>
-          <li><a href="#/def2">Nuestra Definición</a></li>
-          <!--         <li><a href="#/arqvsde">Diseño vs Arquitectura</a></li> -->
-          <!--           <li><a href="#/estru">¿Cómo Estructuramos un Sistema?</a></li> -->
-          <!--           <li><a href="#/vis">Visualización</a></li>-->
-          <li><a href="#/estilosdef">Estilos de Arquitectura</a></li>
-          <li><a href="#/estilos1">Estilos de Organización Lógica</a></li>
-          <li><a href="#/estilos2">Estilos de Organización Física</a></li>
+          <li><a href="#/def">Persistencia por Alcance</a></li>
+          <li><a href="#/ciclo">Ciclo de Vida de la Objetos Persistentes</a></li>
+          <li><a href="#/cascade">Cascade Persistence</a></li>
+          <li><a href="#/early">Retrieval: Lazy vs Early</a></li>
           <!--           <li><a href="#/dist">Arq. Distribuídas</a></li> -->
           <!--         <li><a href="#/atri">Atributos de Calidad</a></li> -->
         </ul>
@@ -175,11 +171,11 @@
           <p id="hoy" class="autor fechahoy"></p>
         </section>
 
-        <section>
+        <section id="def">
           <h3>¿Persistencia OO?</h3>
           <h4>¿De qué se trata?</h4>
         </section>
-        <section>
+        <section id="def">
           <h3>Uds ya saben de...</h3>
           <h4>JDBC</h4>
           <pre
@@ -205,7 +201,7 @@ public class Universidad {
           </aside>
         </section>
 
-				<section>
+				<section id="def">
 					<h3>Uds ya saben de...</h3>
 					<h4>JDBC</h4>
 					<pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">public void nuevoConcurso(Concurso concurso, Universidad unrn) {</span>
@@ -222,13 +218,13 @@ public class Universidad {
 						Uno tiende a poner lógica de negocios en los métodos DAO de esta forma y no debería ser así.
 					</aside>
 				</section>
-				<section>
+				<section id="def">
 					<h4 class="fragment">¿No hay una forma mejor?</h4>
 					<h3 class="fragment">Persistencia Orientada a Objetos</h3>
 					<blockquote class="fragment"><u>Transparencia</u>: El desarrollador tendría que preocuparse lo menos posible por la persistencia para centrarse en el modelo de objetos.</blockquote>
 					<blockquote class="fragment"><u>Transparencia</u> == <u>Ortogonalidad</u> de la Persistencia.</blockquote>
 				</section>
-				<section>
+				<section id="def">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<h4>¿Como sería más Transparente?</h4>
 					<p class="fragment">Veamos...</p>
@@ -246,7 +242,7 @@ public class Universidad {
 <span class="fragment">}</span></code></pre>
 					<aside class="notes">Notar que hacer la instancia de Concurso c persistente es totalmente transparente. No es tan transparente el traer de la BD a unrn.<aside>
 				</section>
-				<section>
+				<section id="def">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<p>¿y cómo es posible?</p>
 					<h4 class="fragment"><strong>Persistencia por Alcance</strong></h4>
@@ -255,9 +251,8 @@ public class Universidad {
 						<li class="fragment">Esto nos regala una forma elegante de diseñar, ya que para persistir un objeto solo tenemos que vincularlo a otro ya persistente.</li>
 					</ul>
 				</section>
-				</section>
 
-				<section>
+				<section id="def">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<p>¿Quién implementa la Persistencia por Alcance?</p>
 					<h4 class="fragment"><strong>Contexto de Persistencia</strong></h4>
@@ -268,7 +263,7 @@ public class Universidad {
 					</ul>
 				</section>
 
-				<section>
+				<section id="def">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<p>Entonces... Incorporemos el <u>Contexto de Persistencia</u></p>
 					<pre class="fragment" data-fragment-index="1"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">...
@@ -282,7 +277,7 @@ public class Universidad {
 <span class="fragment" data-fragment-index="8">  <span class="fragment highlight-blue" data-fragment-index="10">contexto.close(); </span></span>
 <span class="fragment" data-fragment-index="9">}</span></code></pre>
 				</section>
-				<section>
+				<section id="def">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<p>¿Y cómo persisto un objeto raiz?</p>
 					<pre class="fragment" data-fragment-index="1"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">...
@@ -296,7 +291,7 @@ public class Universidad {
 <span class="fragment" data-fragment-index="9">}</span></code></pre>
 				</section>
 
-				<section>
+				<section id="def">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<p>¿Y cómo modifico un objeto?</p>
 <!-- 					<p class="fragment" data-fragment-index="0"><u>Persistencia por Alcance</u> también...</p> -->
@@ -317,7 +312,7 @@ public class Universidad {
 <span class="fragment" data-fragment-index="9">}</span></code></pre>
 				</section>
 
-				<section>
+				<section id="def">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<p>Reflexiones hasta aca...</p>
 					<ul>
@@ -326,19 +321,19 @@ public class Universidad {
 					</ul>
 				</section>
 
-				<section data-transition="slide" data-background-transition="zoom">
+				<section id="ciclo" data-transition="slide" data-background-transition="zoom">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<h4>¿Qué más tenemos que saber?</h4>
 					<p class="fragment"><i>Ciclo de Vida de los Objetos Persistentes</i></p>
 				</section>
-				<section>
+				<section id="ciclo">
 					<h3>Ciclo de Vida de los Objetos Persistentes</h3>
 					<p class="fragment">¿Cual es el ciclo de vida de los Objetos? (olvidemos la persistencia por un ratito)</p>
 					<p class="fragment"><strong>new</strong>: Se crea la instancia y se aloja en memoria</p>
 					<p class="fragment"><strong>delete</strong>: El Garbage Colector se encarga</p>
 					<blockquote class="fragment">Al incorporar persistencia se agregan nuevos estados.</blockquote>
 				</section>
-				<section>
+				<section id="ciclo">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<p>Ciclo de Vida de los Objetos Persistentes</p>
 <!-- 					<img src="imgs/entity-states.png" class="plain"> -->
@@ -347,7 +342,7 @@ public class Universidad {
 					<p class="fragment"><strong>detached</strong>: Una instancia persistent se separa del contexto de persistencia (close connection).</p>
 					<p class="fragment"><strong>deleted</strong>: Una instancia persistent se elimina. Luego, el Garbage Colector se encarga</p>
 				</section>
-				<section>
+				<section id="ciclo">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<p>Revisemos los estados de estas instancias...</p>
 					<pre class="fragment" data-fragment-index="1"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">...
@@ -365,7 +360,7 @@ public class Universidad {
 				<p class="fragment">¿Cuando quedan <span class="fragment highlight-blue" data-fragment-index="4">unrn</span> en estado <u>detached</u>?</p>
 				</section>
 
-				<section>
+				<section id="ciclo">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<p>Ciclo de Vida de los Objetos Persistentes</p>
 					<p class="fragment">Repasemos...</p>
@@ -375,13 +370,13 @@ public class Universidad {
 					</ul>
 				</section>
 
-				<section data-transition="slide" data-background-transition="zoom">
+				<section id="cascade" data-transition="slide" data-background-transition="zoom">
 					<h3>Persistencia Orientada a Objetos</h3>
 					<h4>¿Y qué más tenemos que saber?</h4>
 					<p class="fragment"><i>Persistencia en Cascada</i> & Recuperación de instancias en forma <i>Lazy</i> vs <i>Early</i></p>
 				</section>
 
-        				<section>
+        				<section id="cascade">
 					<p>Persistencia en Cascada</p>
 					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">public void nuevoProducto() {
  <span><i>Contexto contexto = BaseDeDatos.conn();</i></span>
@@ -394,7 +389,7 @@ public class Universidad {
 				<p class="fragment" data-fragment-index="5">¿Podría solamente persistir <span class="fragment highlight-blue" data-fragment-index="4">tv</span> y que se persista su categoria <span class="fragment highlight-blue" data-fragment-index="4">elec</span> directamente?</p>
 				<p class="fragment">Sí. Debería configurar los colaboradores de <i>Producto</i> como <i>cascade</i> = true</p>
 				</section>
-				<section>
+				<section id="early">
     			 <h2>Recuperación: Early vs Lazy</h2>
 					 <p class="fragment">Supongamos el siguiente modelo:</p>
 					 <pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">public class Universidad {
@@ -412,7 +407,7 @@ public class Concurso {
  ...
 }</pre></code>
 				</section>
-				<section>
+				<section id="early">
     			 <h2>Early vs Lazy</h2>
 					 <p class="fragment">Segun el modelo anterior, si traemos de la BD la instancia <i>unrn</i>:</p>
 					 <pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">...
@@ -430,7 +425,7 @@ manager.close();
 				</section>
 				<section data-background-image="imgs/bomb.jpg"></section>
 				<section data-background-size="40%" data-background-image="imgs/oome.png"></section> -->
-				<section>
+				<section id="early">
 					<h2>Early vs Lazy</h2>
 					<p class="fragment"><u>Por colaborador</u> se configura si deseo <i>early</i> o <i>lazy</i></p>
 					<p class="fragment"><b>Early</b> (temprano): Al recuperar una instancia, recupero su colaborador también.</p>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>ORM - Conceptos Fundamentales</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+
+    <style>
+      ul.arrow {
+        font-size: 24pt;
+        line-height: 1.5em;
+        margin: 5px 0 15px;
+        padding: 0;
+        color: var(--r-main-color);
+      }
+      ul.arrow li {
+        list-style: none;
+        position: relative;
+        padding: 0 0 0 30px;
+      }
+
+      ul.arrow li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 20px;
+        height: 10px;
+        width: 10px;
+        border: 1px solid #ff6600;
+        border-width: 2px 2px 0 0;
+        transform: rotate(45deg);
+      }
+
+      div.line {
+        border-bottom: 1px solid;
+        border-color: lightgray;
+      }
+
+      .box3 {
+        /*width: 720px;
+        padding: 15px;
+        margin-left: 100px;*/
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box2 {
+        width: 720px;
+        padding: 15px;
+        margin-left: 100px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box {
+        width: 960px;
+        /*border: 15px solid green;*/
+        padding: 15px;
+        margin: 2px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+        /*font-family: 'Times New Roman', Times, serif;*/
+      }
+
+      .portada .subtitulo {
+        color: lightgray;
+      }
+
+      .autor {
+        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+        font-size: 15pt;
+      }
+
+      .fechahoy {
+        color: gray;
+      }
+      .titulo {
+        font-size: 50pt;
+      }
+
+      .resaltar {
+        color: #4a4e69;
+      }
+
+      p.chico {
+        font-size: 24pt;
+      }
+
+      span.itali {
+        font-family: cursive;
+      }
+
+      p.maschico {
+        font-size: 20pt;
+      }
+
+      p.maschicoYalineadoIzq {
+        font-size: 12pt;
+        text-align: left;
+      }
+
+      p.chicoYalineadoIzq {
+        font-size: 24pt;
+        text-align: left;
+      }
+
+      .reveal .slide-number {
+        background-color: white;
+        color: black;
+      }
+
+      .reveal .footer {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+        color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="footer">
+        Object Relational Mapping (ORM) - Conceptos Fundamentales
+      </div>
+      <div class="menubar line">
+        <div class="slide-number"></div>
+        <ul class="menu">
+          <li><a href="#/def">¿Object Relational Mapping?</a></li>
+          <li><a href="#/jpa">Java Persistence API (JPA)</a></li>
+          <li><a href="#/mapeos">JPA: Mapeos</a></li>
+          <li><a href="#/per">JPA: Persistiendo y Recuperando Objetos de la BD</a></li>
+        </ul>
+        <div class="placeholder"></div>
+      </div>
+      <div class="slides">
+
+        <section
+          style="text-align: left"
+          data-transition="fade"
+          data-state="hide-menubar no-title-footer"
+        >
+          <div class="box">
+            <span>Object Relational Mapping (ORM)</span>
+          </div>
+          <div class="smallbox">Persistencia Orientada a Objetos en BDs Relacionales</div>
+          <p id="hoy" class="autor fechahoy"></p>
+        </section>
+
+				<section id="def">
+					<h3>¿Qué es un ORM?</h3>
+          <p class="fragment">El paradigma orientado a objetos es completamente diferente al modelo relacional.</p>
+					<p class="fragment">
+            Esto se denomina <b>Diferencia de Impedancia</b>.
+					</p>
+          <p class="fragment">
+            Término que viene de la Ingeniería Eléctrica. Cuando dos circuitos tienen impedancias diferentes, la energía no se transmite eficientemente —hay pérdida, distorsión o necesidad de adaptadores.
+          </p> 
+				</section>
+				<section  id="def">
+					<h3>Diferencia de Impedancia</h3>
+					<ul>
+						<li class="fragment">En Objetos navegamos a través de colaboradores vs los joins en relacional.</li>
+						<li class="fragment">En Objetos tenemos colecciones con su semántica (ej: Set), en relacional las relaciones y las restricciones.</li>
+						<li class="fragment">En Objetos tenemos Herencia y polimorfismo, en el relacional relaciones.</li>
+					</ul>
+				</section>
+
+
+				<section  id="def">
+					<h3>Diferencia de Impedancia</h3>
+					<blockquote>
+						En base a estas diferencias, el <u>ORM</u> nos ayuda <u>mapeando</u> el mundo de objetos al relacional, de modo de poder <u>disfrutar</u> de la <u>persistencia transparente</u>.
+					</blockquote>
+				</section>
+				<section  id="def">
+					<h3>¿Qué Mapeamos?</h3>
+					<img src="imgs/mapeo.png" alt="mapeo" style="background:none; border:none; box-shadow:none;"/><br/>
+					<ul>
+						<li class="fragment">Clase con Tabla</li>
+						<li class="fragment">Instancia con Tupla</li>
+						<li class="fragment">Atributo con Columna</li>
+					</ul>
+				</section>
+				<section id="jpa" data-transition="slide">
+					<h3>Java Persistence API</h3>
+					<p class="fragment">Estándar creado en 2006 por la Java Community Process (JCP)</p>
+					<p class="fragment">Veamos su API, o sea las interfaces y clases ubicadas en: <i>jakarta.persistence</i> (antes <i>javax.pesrsistence</i>)</p>
+				</section>
+				<section id="jpa">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Estructura de una Transacción</h4>
+					<pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">EntityManagerFactory emf =
+          Persistence.createEntityManagerFactory("jpa-derby");
+EntityManager em = emf.createEntityManager();
+EntityTransaction tx = em.getTransaction();
+try {
+ tx.begin();
+ //hacer algo con em
+ tx.commit();
+} catch (Exception e) {
+ tx.rollback();
+ throw new RuntimeException(e);
+} finally {
+ if (em != null && em.isOpen())
+  em.close();
+ if (emf != null)
+  emf.close();
+}</code></pre>
+					<p class="fragment">¿Cuál es el Contexto de Persistencia?</p>
+				</section>
+				<section id="jpa">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>etc/META-INF/persistence.xml</h4>
+					<pre class="fragment"><code class="java" code-trim contenteditable style="font-size:12px"><?xml version="1.0"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+version="2.0">
+ <persistence-unit name="jpa-derby">
+  <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+   <properties>
+    <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+    <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/bd-name"/>
+    <property name="javax.persistence.jdbc.user" value="user"/>
+    <property name="javax.persistence.jdbc.password" value="pass"/>
+    <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
+    <property name="hibernate.hbm2ddl.auto" value="create"/>
+    <property name="hibernate.show_sql" value="true"/>
+   </properties>
+ </persistence-unit>
+</persistence></code></pre>
+					<span class="fragment">¿hibernate.hbm2ddl.auto = create?</span>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Entidades</u></h4>
+					<span>Los objetos persistentes deben <b>anotarse</b> con <i>javax.persistence.Entity</i></span>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class Persona {
+ <span class="fragment">@Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ private Long id;</span>
+ private String nombre;
+ ...
+ <span class="fragment">//no-arg constructor requerido
+ protected Persona() { }</span>
+ ...
+ <span class="fragment">//get-set privados</span>
+}
+</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Mapeos</u></h4>
+					<span><u>Muchos a Uno</u> (Una <i>Persona</i> una <i>Direccion</i>)</span>
+					<pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class Persona {
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ private Long id;
+ private String nombre;
+ <span class="fragment">@ManyToOne
+ private Address direccion;</span>
+ ...
+}
+</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Mapeos</u></h4>
+					<span><u>Muchos a Uno</u> (Una <i>Persona</i> una <i>Direccion</i>)</span>
+					<pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class Address {
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ private Long id;
+ private String direccion;
+ ...
+}
+</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Muchos a Uno  (Una <i>Persona</i> una <i>Direccion</i>)</h4>
+					<p>Este mapeo genera las siguientes tablas:</p>
+					<pre class="fragment"><code code-trim data-noescape>persona(<u>id</u>, nombre, <u class="dotted">direccion_id</u>);
+
+direccion(<u>id</u>, direccion);</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Mapeos</u></h4>
+					<span><u>Uno a Muchos</u> (Una <i>Persona</i> muchos <i>Telefono</i>s)</span>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class Persona {
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ private Long id;
+ private String nombre;
+
+ <span class="fragment">@OneToMany
+ @JoinColumn(name = "id_persona")
+ private Collection<Telefono> telefonos = new ArrayList<>();</span>
+ ...
+}
+</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Mapeos</u></h4>
+					<span><u>Uno a Muchos</u> (Una <i>Persona</i> muchos <i>Telefono</i>s)</span>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class Telefono {
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ private Long id;
+ private String numero;
+ ...
+}
+</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Uno a Muchos (Una <i>Persona</i> muchos <i>Telefono</i>s)</h4>
+					<p>Este mapeo genera las siguientes tablas:</p>
+					<pre class="fragment"><code code-trim data-noescape>persona(<u>id</u>, nombre);
+
+telefono(<u>id</u>, numero, <u class="dotted">id_persona</u>);</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Mapeos</u></h4>
+					<span><u>Componentes</u> (Una <i>Persona</i> una <i>Direccion</i>)</span>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class Person {
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ private Long id;
+ private String nombre;
+ <span class="fragment">@Embedded
+ private Address address;</span>
+}
+</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Mapeos</u></h4>
+					<span><u>Componentes</u> (Una <i>Persona</i> una <i>Direccion</i>)</span>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px"><span class="fragment">@Embeddable</span>
+public class Address {
+ private String address;
+ ...
+}</code></pre>
+					<span class="fragment">Note que <u>no es una Entidad</u>... y por lo tanto <u>no requiere ID</u></span>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4><u>Componentes</u> (Una <i>Persona</i> una <i>Direccion</i>)</h4>
+					<p>Este mapeo genera la siguiente tabla:</p>
+					<pre class="fragment"><code code-trim data-noescape>persona(<u>id</u>, nombre, direccion);</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Mapeos</u></h4>
+					<span><u>Bidireccional</u> (Una <i>Persona</i> varios <i>Telefono</i>s, un <i>Telefono</i> una <i>Persona</i>)</span>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class Telefono {
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ private Long id;
+
+ <span class="fragment">@ManyToOne
+ @JoinColumn(name = "id_persona")
+ private Persona persona;</span>
+ ...
+}</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Mapeos</u></h4>
+					<span><u>Bidireccional</u> (Una <i>Persona</i> varios <i>Telefono</i>s, un <i>Telefono</i> una <i>Persona</i>)</span>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class Persona {
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+private Long id;
+
+<span class="fragment">@OneToMany(mappedBy = "persona")
+private Collection<Telefono> telefonos = new ArrayList<>();</span>
+...
+}
+					</code></pre>
+					<aside class="notes">By specifying the @JoinColumn on both models you don't have a two way relationship. You have two one way relationships, and a very confusing mapping of it at that. You're telling both models that they "own" the IDAIRLINE column. Really only one of them actually should! The 'normal' thing is to take the @JoinColumn off of the @OneToMany side entirely, and instead add mappedBy to the @OneToMany</aside>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Mapeos</u></h4>
+					<p><u>Bidireccional</u> (Una <i>Persona</i> varios <i>Telefono</i>s, un <i>Telefono</i> una <i>Persona</i>)</p>
+					<p class="fragment">El <i>mappedBy</i> define que la navegabilidad será utilizando la columna definida en <i>Telefono.persona</i></p>
+					<p class="fragment">Le dice al ORM: No generes otra columna... usa la que se mapeó en <i>Telefono.persona</i></p>
+					<p class="fragment">Si no me creen... prueben Ustedes que sucede si no ponen <i>mappedBy</i></p>
+					<aside class="notes">By specifying the @JoinColumn on both models you don't have a two way relationship. You have two one way relationships, and a very confusing mapping of it at that. You're telling both models that they "own" the IDAIRLINE column. Really only one of them actually should! The 'normal' thing is to take the @JoinColumn off of the @OneToMany side entirely, and instead add mappedBy to the @OneToMany</aside>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<p><u>Bidireccional</u> (Una <i>Persona</i> varios <i>Telefono</i>s, un <i>Telefono</i> una <i>Persona</i>)</p>
+					<p>Este mapeo genera las siguientes tablas:</p>
+					<pre class="fragment"><code code-trim data-noescape>persona(<u>id</u>, nombre);
+
+telefono(<u>id</u>, numero, <u class="dotted">id_persona</u>);</code></pre>
+				</section>
+				<section data-transition="slide" id="mapeos">
+					<h3>Java Persistence API</h3>
+					<p>¿Y la Herencia? ¿Cómo se mapea?</p>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Herencia</h4>
+					<p class="fragment">Supongamos que queremos persistir la siguiente jerarquía de herencia:</p>
+					<pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">public abstract class CuentaBancaria {
+ protected float monto;
+ public abstract float extraer(float monto);
+ public void depositar(float anAmount) {
+	 this.monto += anAmount;
+ }
+}</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Herencia</h4>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">public class CajaDeAhorro extends CuentaBancaria {
+ ...
+ public float extraer(float monto) {
+  @Override
+  public float extraer(float unMonto) {
+   if (this.monto >= unMonto) {
+    this.monto -= unMonto;
+    return this.monto;
+   }
+   throw new RuntimeException("No hay suficiente dinero para... ");
+  }
+ }
+ ...
+}</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Herencia</h4>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">public class CuentaCorriente extends CuentaBancaria {
+ private float descubierto;
+ ...
+ @Override
+ public float extraer(float unMonto) {
+  if (unMonto <= (this.monto + descubierto)) {
+   this.monto -= unMonto;
+   return this.monto;
+  }
+  throw new RuntimeException("No hay suficiente dinero para... ");
+ }
+ ...
+}</code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Herencia: Tres Formas de Mapearla</h4>
+					<ul>
+						<li>Single Table (default)</li>
+						<li>Joined</li>
+						<li>Table per Concrete Class</li>
+					</ul>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Single Table</h4>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px"><span class="fragment" data-fragment-index="2">@Entity
+@Inheritance
+@DiscriminatorColumn(name = "tipo_cuenta")</span>
+<span class="fragment" data-fragment-index="1">public abstract class CuentaBancaria {
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ private Long id;
+ ...
+}</span>
+<span class="fragment" data-fragment-index="3">@Entity
+@DiscriminatorValue("CC")
+public class CuentaCorriente extends CuentaBancaria { ... }</span>
+<span class="fragment" data-fragment-index="4">@Entity
+@DiscriminatorValue("CA")
+public class CajaDeAhorro extends CuentaBancaria { ... }</span></code></pre>
+				</section>
+				<section id="mapeos">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Single Table</h4>
+						<p>Genera una <u>única tabla</u> con una columna que indica de que <u>clase es la instancia persistida</u>:</p>
+						<pre class="fragment"><code code-trim data-noescape>cuentabancaria(tipo_cuenta, <u>id</u>, monto, descubierto);</code></pre>
+						<p class="fragment">Si persistimos estas instancias: </p>
+						<pre class="fragment"><code code-trim data-noescape>new CajaDeAhorro(10.000);new CuentaCorriente(5000, 600);</code></pre>
+						<p class="fragment">Nos quedan las tuplas: </p>
+						<pre class="fragment"><code code-trim data-noescape>cuentabancaria("CA", 1L, 10.000, null);
+cuentabancaria("CC", 2L, 5000, 600);</code></pre>
+				</section>
+        
+
+			<section data-transition="slide" id="per">
+					<h3>Java Persistence API</h3>
+					<p>y... ¿cómo persistimos y recuperamos objetos de la BD?</p>
+				</section>
+				<section id="per">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Guardar</u></h4>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">EntityManager em = emf.createEntityManager();
+EntityTransaction tx = em.getTransaction();
+try {
+ tx.begin();
+ <span class="fragment">Persona p = new Persona("Ignacio");</span>
+ <span class="fragment">em.persist(p);</span>
+ tx.commit();
+} catch (Exception e) {
+ tx.rollback();
+ throw new RuntimeException(e);
+} finally {
+ if (em != null && em.isOpen())
+  em.close();
+}</code></pre>
+					<aside class="notes">By specifying the @JoinColumn on both models you don't have a two way relationship. You have two one way relationships, and a very confusing mapping of it at that. You're telling both models that they "own" the IDAIRLINE column. Really only one of them actually should! The 'normal' thing is to take the @JoinColumn off of the @OneToMany side entirely, and instead add mappedBy to the @OneToMany</aside>
+				</section>
+				<section id="per">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Guardar</u></h4>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">EntityManager em = emf.createEntityManager();
+EntityTransaction tx = em.getTransaction();
+try {
+ tx.begin();
+ <span class="fragment">Persona p = new Persona("Ignacio", new Address("San Martin 346"));</span>
+ <span class="fragment">em.persist(p);</span>
+ tx.commit();
+} catch (Exception e) {
+ tx.rollback();
+ throw new RuntimeException(e);
+} finally {
+ if (em != null && em.isOpen())
+  em.close();
+}</code></pre>
+					<span class="fragment">¿Persiste la instancia de <i>Address</i> también?</span>
+					<span class="fragment"><u>Solo si la mapeo con cascade</u>.</span>
+				</section>
+				<section id="per">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Cascade</u></h4>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class Persona {
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ private Long id;
+ <span class="fragment" data-fragment-index="1">@ManyToOne</span><span class="fragment" data-fragment-index="2">(cascade = CascadeType.PERSIST)</span>
+ <span class="fragment" data-fragment-index="1">private Address direccion;</span>
+ ...
+}
+</code></pre>
+					<span class="fragment">De esta forma, cuando persisto una <i>persona</i>, persiste su <i>direccion</i> también</span>
+				</section>
+				<section id="per">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Recuperar</u></h4>
+					<span><i>find</i>() vs <i>getReference</i>()</span>
+					<pre><code class="java" code-trim data-noescape contenteditable style="font-size:18px">...
+try {
+ tx.begin();
+ <span class="fragment">Persona p = em.getReference(Persona.class, 1L);</span>
+ <span class="fragment">Persona p = em.find(Persona.class, 1L);</span>
+ <span class="fragment">System.out.println(p.nombre());</span>
+ tx.commit();
+...
+}</code></pre>
+					<span class="fragment">La diferencia esta en cuándo se ejecuta la query para traer la <i>persona</i> <b>1L</b> de la BD a memoria.</span>
+				</section>
+				<section id="per">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Recuperar</u> / <u>Guardar</u></h4>
+					<span class="fragment"><i>getReference</i>(): </span><span class="fragment">¿Para que se usa?</span>
+					<pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">...
+try {
+ tx.begin();
+ <span class="fragment">Persona p = em.getReference(Persona.class, 2L);</span>
+ <span class="fragment">p.direccion(new Address("San Martin 356"))</span>
+ tx.commit();
+...
+}</code></pre>
+					<span class="fragment">Si lo hiciera con <i>find</i>(), además del <i>insert</i> de <i>address</i> y el <i>update</i> en <i>persona</i>, se haría un <i>select</i>.</span>
+				</section> 
+
+				<section id="per">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Early</u> vs <u>Lazy</u></h4>
+					<p class="fragment">Las relaciones <u>ManyToOne</u> son <u>Early</u> por defecto</p>
+					<pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">...
+try {
+ tx.begin();
+ <span class="fragment">Persona p = em.find(Persona.class, 2L);</span>
+ ...
+ tx.commit();
+...
+}</code></pre>
+					<p class="fragment">Entonces, ¿si traigo la <i>persona</i> <b>2L</b>, trae su <i>dirección</i>? Sabiendo que estan mapeados con ManyToOne.</p>
+				</section>
+				<section id="per">
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Early</u> vs <u>Lazy</u></h4>
+					<span class="fragment">Si quiero hacer <b>Lazy</b> una relación ManyToOne, debo especificarlo:</span>
+					<pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class Persona {
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ private Long id;
+ @ManyToOne<span class="fragment">(fetch = FetchType.LAZY)</span>
+ private Address direccion;
+ ...
+}
+</code></pre>
+				</section>
+				<section>
+					<h3>Java Persistence API (JPA)</h3>
+					<h4>Objetos Persistentes: <u>Early</u> vs <u>Lazy</u></h4>
+					<p class="fragment">Las relaciones <u>OneToMany</u> son <u>Lazy</u> por defecto</p>
+					<p class="fragment">O sea que si traigo una <i>persona</i>, <u>no</u> traigo sus <i>telefonos</i> a menos que los pida.</p>
+					<p class="fragment">Existe además <b>extra-lazy</b>, ¿qué es?</p>
+				</section> 
+
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/relativenumber/relativenumber.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      window.onload = function () {
+        let today = new Date().toLocaleDateString();
+        let obj = document.getElementById("hoy");
+        document.getElementById("hoy").innerText = today;
+      };
+
+      Reveal.addEventListener("slidechanged", function (event) {
+        if (event.indexh > 0) {
+          document.querySelector(".reveal .footer").style.display = "block";
+        } else {
+          document.querySelector(".reveal .footer").style.display = "none";
+        }
+      });
+
+      Reveal.addEventListener("ready", function (event) {
+        if (event.indexh === 0)
+          document.querySelector(".reveal .footer").style.display = "none";
+      });
+
+      Reveal.initialize({
+        hash: true,
+        slideNumber: "c/t",
+        /*         width: 1920,
+              height: 1080, */
+        //slideNumber: true,
+        // Learn about plugins: https://revealjs.com/plugins/
+        /*dependencies: [
+        {
+          src: "plugin/title-footer/title-footer.js",
+          async: true,
+          callback: function () {
+            console.log(document.title);
+            title_footer.initialize(document.title);
+          },
+        },
+      ],*/
+
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealNotes,
+          RelativeNumber,
+          Simplemenu,
+          RevealMath.KaTeX,
+        ],
+      });
+    </script>
+  </body>
+</html>
