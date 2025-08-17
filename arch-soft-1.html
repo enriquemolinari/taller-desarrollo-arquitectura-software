@@ -148,14 +148,15 @@
       <div class="menubar line">
         <div class="slide-number"></div>
         <ul class="menu">
-          <li><a href="#/def">¿Arquitectura de Software?</a></li>
-          <li><a href="#/def2">Nuestra Definición</a></li>
+<!--           <li><a href="#/def">¿Arquitectura de Software?</a></li> -->
+          <li><a href="#/def2">¿Arquitectura de Software?</a></li>
           <!--         <li><a href="#/arqvsde">Diseño vs Arquitectura</a></li> -->
 <!--           <li><a href="#/estru">¿Cómo Estructuramos un Sistema?</a></li> -->
 <!--           <li><a href="#/vis">Visualización</a></li>-->
           <li><a href="#/estilosdef">Estilos de Arquitectura</a></li> 
           <li><a href="#/estilos1">Estilos de Organización Lógica</a></li>
           <li><a href="#/estilos2">Estilos de Organización Física</a></li>
+          <li><a href="#/microservicios">Microservicios</a></li>
           <!--           <li><a href="#/dist">Arq. Distribuídas</a></li> -->
           <!--         <li><a href="#/atri">Atributos de Calidad</a></li> -->
         </ul>
@@ -174,25 +175,18 @@
           <p class="autor">ENRIQUE MOLINARI</p>
           <p id="hoy" class="autor fechahoy"></p>
         </section>
-        <section id="def">
+ <!--        <section id="def">
           <h2><img src="/imgs/the-matrix-the-architect.jpg" /></h2>
           "I'm the Architect, I created The Matrix"
-        </section>
-        <section id="def">
+        </section> -->
+        <section id="def2">
           <p class="titulo">
             ¿Qué entendemos por <br />
             <span class="titulo resaltar">Arquitectura de Sofware</span>?
           </p>
-
-          <p class="fragment">Veamos algunas definiciones...</p>
         </section>
 
-        <!--         <html>
-          <p style="text-align:center; font-size:0.9em;color: #A9A9A9">&#60;&#60;Interface&#62;&#62;</p>
-          <p>UserService</p>
-          </html> -->
-
-        <section id="def" data-auto-animate>
+<!--         <section id="def" data-auto-animate>
           <p class="chico fragment">
             Technical Report: <span class="resaltar">An Introduction to Software Architecture (Shaw y
             Garlan, 1994)</span>
@@ -378,7 +372,7 @@
           <img class="fragment" src="imgs/patterns-arch-fowler.png" width="229" height="322" />
         </section>
 
-<!--        <section id="def" data-auto-animate>
+       <section id="def" data-auto-animate>
           <p class="chico resaltar">Martin Fowler (2002)</p>
 
           <p class="chico fragment">
@@ -400,7 +394,7 @@
           </p>
           <img src="imgs/patterns-arch-fowler.png" width="229" height="322" />
         </section>
--->
+
         <section id="def" data-auto-animate>
           <p class="chico fragment resaltar">
             Software Architecture Fundamentals (2020)
@@ -479,34 +473,34 @@
           <p class="fragment">
             ¿Quizás representa muchas cosas y por eso cuesta encontrar una única definición?
           </p>
-        </section>
-
+        </section> 
+-->
         <section id="def2" data-auto-animate>
           <p class="titulo resaltar">
-            ¿Qué decimos que es en esta materia?
+            ¿Qué entendemos por Arquitectura de Software?
           </p>
           <ul class="arrow">
             <li class="fragment">Tiene que ver con cómo <b>estructuramos</b> u <b>organizamos</b> el sistema a nivel <u>lógico</u> y a nivel <u>físico</u>.</li>
-            <li class="fragment"><b>Estructuramos</b> u <b>organizamos</b> un sistema identificando sus <b>elementos</b> y especificando como se <b>relacionan</b> entre ellos.</li>
+            <li class="fragment"><b>Estructuramos</b> u <b>organizamos</b> un sistema identificando sus <b>elementos</b> y especificando como se <b>relacionan</b> o <b>comunican</b> entre ellos.</li>
+            <li class="fragment">Los <b>Elementos</b> y la forma en que éstos se relacionan o comunican difieren según hablemos de organización lógica u organización física.</li>
           </ul>
           </p>
         </section>
 
         <section id="def2" data-auto-animate>
           <p class="titulo resaltar">
-            ¿Qué decimos que es en esta materia?
+            ¿Qué entendemos por Arquitectura de Software?
           </p>
           <ul class="arrow">
-            <li class="fragment">A nivel <u>lógico</u> (Arquitectura Lógica) tenemos elementos de software como las funciones, métodos, clases, los paquetes, lo módulos, las capas (layers). Se comunican de la forma in-process.</li>
+            <li class="fragment">A nivel <u>lógico</u> (Arquitectura Lógica) tenemos elementos de software como las funciones, métodos, clases, los paquetes, lo módulos, las capas (layers). Se relacionan vía sus dependencias (una módulo requiere de otro módulo). Se comunican de la forma in-process.</li>
             <li class="fragment">A nivel <u>físico</u> (Arquitectura Física) tenemos elementos en runtime (procesos), y la forma en que los deployamos en HW. Sé comunican de la forma inter-process. </li>
           </ul>
           </p>
         </section>
 
-
         <section id="def2" data-auto-animate>
           <p class="titulo resaltar">
-            ¿Qué decimos que es en esta materia?
+            ¿Qué entendemos por Arquitectura de Software?
           </p>
           <ul class="arrow">
             <li class="fragment"><b>Estructuramos</b> u <b>organizamos</b> un sistema de cierta forma con el objetivos de cumplir con <b>Atributos de Calidad</b> específicos (modificabilidad, escalabilidad, disponibilidad, seguridad, etc).</li>
@@ -592,15 +586,17 @@
           <div class="box2">Estilos de Arquitectura</div>
           <p>"Just as good programmers recognized useful data structures in the late 1960s, good
             software system designers now recognize useful system organizations". - David Garlan and Mary Shaw (1994) </p>
+          <p class="fragment highlight-red">Buenas formas de organizar un sistema, tanto lógica como física. </p>
         </section>
 
         <section id="estilosdef">
           <p class="titulo resaltar">¿Qué tienen en común los estilos de arquitectura?</p>
-          <p class="fragment">Definen un conjunto de <span class="fragment highlight-red">decisiones de arquitectura</span>
+          <p class="fragment">Definen elementos y sus relaciones. Que atributos de calidad enaltecen.</p>
+          <p class="fragment">También un conjunto de <span class="fragment highlight-red">decisiones de arquitectura</span>
             que como equipo de desarrollo debemos respetar, <span class="fragment highlight-red"><u>sin
                 excepciones</u></span>.</p>
-        </section>
-  
+          <p class="fragment">Ejemplos de Estilos: Client-server. Capas. <u>Microservicios</u>.</p>
+        </section>  
 
         <section id="estilos1">
           <div class="box2">Organización Lógica</div>
@@ -734,10 +730,13 @@
           <ul class="arrow">
             <li class="fragment">Partición Horizontal: Segun cuestiones técnicas</li>
             <li class="fragment">Partición Vertical: Segun funcionalidad.</li>
-            <li class="fragment">Partición Vertical: No confundir... No es una entidad y su CRUD. </li>
+<!--             <li class="fragment">Partición Vertical: No confundir... No es una entidad y su CRUD. </li>
             <li class="fragment">Partición Vertical: Comprende un grupo de funcionalides relacionadas/cohesivas.</li>
-            <li class="fragment">Por ejemplo: Login, authentication y authorization, Catálogo de Productos, Compras/Ventas, Ranking, Notificaciones, etc.</li>
+            <li class="fragment">Por ejemplo: Login, authentication y authorization, Catálogo de Productos, Compras/Ventas, Ranking, Notificaciones, etc.</li> -->
           </ul>
+          <p class="fragment">Ejemplos:</p>
+          <p class="fragment">PetClinic: <a href="https://github.com/spring-projects/spring-petclinic/tree/f7498c79df1ce585d4025f3f64d34d205143c868/src/main/java/org/springframework/samples/petclinic">Package by Layers (con modelo compartido).</a></p>
+          <p class="fragment">PetClinic: <a href="https://github.com/spring-projects/spring-petclinic/tree/main/src/main/java/org/springframework/samples/petclinic">Package by feature.</a></p>
         </section>
 
 <!--        <section id="estilos1">
@@ -843,68 +842,74 @@
           <img src="imgs/by-feature-physical3-1.png" />
         </section>
 
-        <section id="estilos2" data-transition="fade-out">
+        <section id="microservicios">
+          <div class="box2">Microservicios</div>
+          <p>
+            Organización física de package by feature.
+          </p>
+        </section>
+
+        <section id="microservicios" data-transition="fade-out">
           <p class="titulochico">Microservicios</p>
           <ul class="arrow">
             <li class="fragment">Servicios auto-contenidos (o lo más posible) con partición funcional (o vertical) física de todo el stack, incluído los datos.</li>
             <li class="fragment">Desarrollado y deployado de forma independiente.</li>
             <li class="fragment">Auto-contenidos: Evitar que se hablen mucho entre ellos (chatty anti-pattern).</li>
             <li class="fragment">Event-based: idealmente utilizan comunicación asíncrona.</li>
-            <li class="fragment"><b>Decisioes de Arquitectura</b> de éste estilo: No pueden acceder a la BD de otro Microservicio. Auto-contenidos, deployados en forma independiente.</li>
+            <li class="fragment"><b>Decisiones de Arquitectura</b> de éste estilo: No pueden acceder a la BD de otro Microservicio. Deployados en forma independiente.</li>
           </ul>
         </section>
 
-        <section id="estilos2" data-transition="fade-out">
+        <section id="microservicios" data-transition="fade-out">
           <p class="titulochico">Microservicios: Ejemplo</p>
           <ul class="arrow">
             <li class="fragment">Supongamos los requerimientos de catálogo de películas y carrito de compras.</li>
             <li class="fragment">Supongamos ahora que implementamos cada uno como un microservicio.</li>
-            <li class="fragment">Productos: Debe mostrar una lista paginada de peliculas: nombre, precio, actores, directores, etc.</li>
-            <li class="fragment">Carrito: Debe mostrar las peliculas agregadas. Nombre Pelicula, Precio, Cantidad, Fecha.</li>
+            <li class="fragment"><b>Catálogo de Peliculas</b>: Debe mostrar una lista paginada de peliculas: nombre, precio, actores, directores, etc.</li>
+            <li class="fragment"><b>Carrito de compras</b>: Debe mostrar las peliculas agregadas. Nombre Pelicula, Precio, Cantidad, Fecha.</li>
             <li class="fragment">¿Cómo lo resolvemos?</li>
           </ul>
         </section>
 
-        <section id="estilos2" data-transition="fade-out">
+        <section id="microservicios" data-transition="fade-out">
           <img src="imgs/data-duplication-microservices0.png" />
         </section>
 
-        <section id="estilos2" data-transition="fade-in">
+        <section id="microservicios" data-transition="fade-in">
           <img src="imgs/data-duplication-microservices1.png" />
         </section>
 
-        <section id="estilos2" data-transition="fade-in">
+        <section id="microservicios" data-transition="fade-in">
           <img src="imgs/data-duplication-microservices2.png" />
         </section>
 
-        <section id="estilos2" data-transition="fade-in">
+        <section id="microservicios" data-transition="fade-in">
           <img src="imgs/data-duplication-microservices3.png" />
         </section>
 
-        <section id="estilos2" data-transition="fade-in">
+        <section id="microservicios" data-transition="fade-in">
           <img src="imgs/data-duplication-microservices4.png" />
         </section>
 
-        <section id="estilos2" data-transition="fade-in">
+        <section id="microservicios" data-transition="fade-in">
           <img src="imgs/data-duplication-microservices5.png" />
         </section>
 
-        <section id="estilos2" data-transition="fade-in">
+        <section id="microservicios" data-transition="fade-in">
           <img src="imgs/data-duplication-microservices6.png" />
         </section>
         
-        <section id="estilos2" data-transition="fade-in">
+        <section id="microservicios" data-transition="fade-in">
           <img src="imgs/data-duplication-microservices.png" />
         </section>
 
-        <section id="estilos2" data-transition="fade-out">
+        <section id="microservicios" data-transition="fade-out">
           <p class="titulochico">Microservicios: Ejemplo</p>
           <ul class="arrow">
             <li class="fragment">Usando comunicación sincrónica es simple. Pero el carrito ya no seria auto-contenido. Tengo una penalidad en la performance (el join en una aplicación + request de red adicional).</li>
-            <li class="fragment">Usando comunicación asincrónica el carrito es auto-contenido y performa mejor. Pero tengo mas complejidad, tengo que mantener más infra. Consistencia eventual vs Consistencia fuerte (nombre vs precio).</li>
+            <li class="fragment">Usando comunicación asincrónica el carrito es auto-contenido y performa mejor. Pero tengo mas complejidad, tengo que mantener más infra. Replicar datos acopla también. ¿Qué pasaría si tengo que mantener en diferentes idiomas el nombre de las películas?.</li>
           </ul>
         </section>
-
 
         <!--
         <section id="estilos2">
