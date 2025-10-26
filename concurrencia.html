@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Conceptos sobre Concurrencia</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" />
+    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+
+    <style>
+      ul.arrow {
+        font-size: 24pt;
+        line-height: 1.5em;
+        margin: 5px 0 15px;
+        padding: 0;
+        color: var(--r-main-color);
+      }
+      ul.arrow li {
+        list-style: none;
+        position: relative;
+        padding: 0 0 0 30px;
+      }
+
+      ul.arrow li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 20px;
+        height: 10px;
+        width: 10px;
+        border: 1px solid #ff6600;
+        border-width: 2px 2px 0 0;
+        transform: rotate(45deg);
+      }
+
+      div.line {
+        border-bottom: 1px solid;
+        border-color: lightgray;
+      }
+
+      .box3 {
+        /*width: 720px;
+        padding: 15px;
+        margin-left: 100px;*/
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box2 {
+        width: 720px;
+        padding: 15px;
+        margin-left: 100px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+
+      .box {
+        width: 800px;
+        /*border: 15px solid green;*/
+        padding: 15px;
+        margin: 2px;
+        background-color: #4a4e69;
+        color: white;
+        font-size: 50pt;
+        font-weight: bold;
+        /*font-family: 'Times New Roman', Times, serif;*/
+      }
+
+	  .smallbox {
+		width: 860px;
+	  }
+
+
+
+      .portada .subtitulo {
+        color: lightgray;
+      }
+
+      .autor {
+        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+        font-size: 15pt;
+      }
+
+      .fechahoy {
+        color: gray;
+      }
+      .titulo {
+        font-size: 50pt;
+      }
+
+      .resaltar {
+        color: #4a4e69;
+      }
+
+      p.chico {
+        font-size: 24pt;
+      }
+
+      span.itali {
+        font-family: cursive;
+      }
+
+      p.maschico {
+        font-size: 20pt;
+      }
+
+      p.maschicoYalineadoIzq {
+        font-size: 12pt;
+        text-align: left;
+      }
+
+      p.chicoYalineadoIzq {
+        font-size: 24pt;
+        text-align: left;
+      }
+
+      .reveal .slide-number {
+        background-color: white;
+        color: black;
+      }
+
+      .reveal .footer {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+        color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="footer">
+        Gestión de la Concurrencia
+      </div>
+      <div class="menubar line">
+        <div class="slide-number"></div>
+        <ul class="menu">
+          <li><a href="#/def">Concurrencia</a></li>
+          <li><a href="#/niveles">Niveles de Aislamiento de las BDs</a></li>
+          <li><a href="#/pys">Tx: Problemas y Soluciones</a></li>
+          <li><a href="#/app">Application Level Tx</a></li>
+          <li><a href="#/referencias">Referencias</a></li>
+        </ul>
+        <div class="placeholder"></div>
+      </div>
+      <div class="slides">
+
+        <section
+          style="text-align: left"
+          data-transition="fade"
+          data-state="hide-menubar no-title-footer"
+        >
+          <div class="box">
+            <span>Gestión de la Concurrencia</span>
+          </div>
+            <div class="smallbox">Aprendamos a manejar <u>sistemas multi-usuario</u> de forma
+            <u>correcta</u>!</div>
+          <p id="hoy" class="autor fechahoy"></p>
+        </section>
+
+				<section id="def">
+          <h3>Concurrencia</h3>
+          <p class="fragment">
+            ¿Quien se encarga de garantizar que la concurencia no afecte la
+            correctitud de mi applicación?
+          </p>
+          <p class="fragment">
+            Es decir, quien garantiza que la aplicación se comporta de la <u>misma
+            forma</u> si es utilizada de forma mono-usuario vs multi-usuario?
+          </p>
+				</section>
+				<section  id="def">
+          <h3>Concurrencia</h3>
+          <p class="fragment">¿La Base de Datos? o ¿la Aplicación?</p>
+          <p class="fragment">
+            ¿Puedo como desarrollador desentenderme completamente total la BD se
+            encarga de todo? ¿Tengo que escribir código de cierta forma para
+            garantizar correctitud o simplemente delego en la BD y me desentiendo?
+          </p>
+				</section>
+
+
+				<section  id="def">
+          <h3>Concurrencia</h3>
+          <p class="fragment"><b>Nunca</b> puedo desentenderme!</p>
+          <p class="fragment">
+            Es una combinación entre la BD y la Aplicación que puede variar
+            segun el caso de uso que quiero implementar.
+          </p>
+				</section>
+				<section  id="def">
+          <h3>Concurrencia</h3>
+          <p class="fragment">
+            Las <b>base de datos</b> gestionan la concurrencia dentro del
+            contexto de una <b>Transacción</b>.
+          </p>
+          <p class="fragment">
+            ¿Cuál o cuales de las propiedades <strong>ACID</strong> estan
+            relacionadas con la concurrencia?
+          </p>
+          <p class="fragment">
+            I: Isolation.
+            <span class="fragment"
+              ><u>Aislamiento</u> de las transacciones.</span
+            >
+            <span class="fragment"
+              >Supone que cada Tx se ejecuta en serie.</span
+            >
+          </p>
+          <p class="fragment">
+            Niveles de Aislamiento: <b>Trade-off</b> entre correctitud de los
+            datos vs alta concurrencia.
+          </p>
+				</section>
+				<section id="niveles">
+          <h3>Concurrencia</h3>
+          <h4>Niveles de Aislamiento (ANSI SQL)</h4>
+          <ol>
+            <li class="fragment" data-fragment-index="1">Read Uncommited</li>
+            <li class="fragment" data-fragment-index="1">Read Commited</li>
+            <li class="fragment" data-fragment-index="1">Repeatable Read</li>
+            <li class="fragment" data-fragment-index="1">Serializable</li>
+          </ol>
+          <p class="fragment" data-fragment-index="2">
+            ¿Que Base de Datos estan usando? ¿Saben en que nivel de aislamiento
+            esta ejecutándose?
+          </p>
+				</section>
+				<section id="niveles">
+          <h3>Concurrencia</h3>
+          <h4>Isolation Levels (ANSI SQL)</h4>
+          <p class="fragment" data-fragment-index="3">
+            PostgreSQL, Oracle y MS SQL Server por defecto usan Read Committed.
+            MySQL y MariaDB en Repeatable Read.
+          </p>
+          <p class="fragment">
+            Por defecto, las BDs relacionales estan configuradas
+            <u>relajando</u> el aislamiento completo.
+          </p>
+          <p class="fragment maschico">
+            El aislamiento completo no permite ejecutar transacciones en forma
+            concurrente. <b>Ojo: </b> Hablamos de MySQL con InnoDB, MyISAM no
+            soporta Transacciones.
+          </p>
+				</section>
+			
+				<section id="pys">
+          <h3>Concurrencia</h3>
+          <p class="fragment">
+            ¿Cuáles son los problemas que podemos encontrarnos al no configurar
+            la BD con aislamiento completo?
+          </p>
+				</section>
+				<section id="pys">
+          <h3>Concurrencia</h3>
+          <p>
+            <u>Dirty</u> <u>Read</u>: Sucede si una transacción lee datos
+            modificados por otra transacción que aún no comiteo.
+          </p>
+          <p class="fragment"><img src="imgs/dirty-read.png" /></p>
+          <p class="fragment chico">
+            <b>2. Read Committed</b> no permite esto. Bloqueando (o Snapshot Isolation)
+            lectura/escritura sobre datos modificados.
+          </p>
+				</section>
+				<section id="pys">
+          <h3>Concurrencia</h3>
+          <p>
+            <u>Unrepeatable</u> <u>Read</u>: Sucede si una transacción lee un
+            dato dos veces y la segunda vez es diferente a la primera.
+          </p>
+          <p class="fragment"><img src="imgs/unrepeatable-read.png" /></p>
+          <p class="fragment"><b>3. Repetable Read</b> no permite esto.</p>
+
+				</section>
+				<section id="pys">
+          <h3>Concurrencia</h3>
+          <p>
+            <u>Lost Updates</u> o <u>Last</u> <u>Commit</u> <u>Wins</u>: Dos
+            transacciones leen el mismo dato, la primera lo modifica y comitea y
+            la segunda hace lo mismo después.
+          </p>
+          <p class="fragment"><img src="imgs/last-commit-wins.png" /></p>
+          <p class="fragment"><b>3. Repeatable read</b> no permite esto.</p>
+				</section>
+				<section id="pys">
+          <h3>Concurrencia</h3>
+          <p>
+            <u>Phanton</u> <u>Read</u>: Ocurre cuando una transacción ejecuta
+            una query dos veces, y la segunda vez obtiene mas datos (o menos si
+            se borraron) que la primera.
+          </p>
+          <p class="fragment"><img src="imgs/phanton-read.png" /></p>
+          <p class="fragment"><b>4. Serialiable</b> no permite esto.</p>
+
+				</section>
+				<section id="pys">
+          <h3>Concurrencia</h3>
+          <h4>Problema 1</h4>
+          <p class="fragment" data-fragment-index="1">
+            Ejemplo: Generar un <b>número único</b> para numerar por ejemplo una
+            Factura o Expediente que se resetea cada nuevo año.
+          </p>
+          <pre
+            class="fragment"
+            data-fragment-index="2"
+          ><code class="java" code-trim data-noescape contenteditable style="font-size:18px">Tx begin
+  n = select numero_actual from nextnumber where año = AAAA;
+  n = n + 1;
+  -- n para el nuevo expediente
+  update nextnumber set numero_actual = n where año = AAAA;
+Tx commit</code></pre>
+				</section>
+				<section id="pys">
+          <h3>Concurrencia</h3>
+          <p>Probemos esto en Java contra una base de datos PostgreSQL</p>
+				</section>
+				<section id="pys">
+          <h3>Concurrencia</h3>
+          <p class="fragment">
+            Para controlar la concurrencia existen dos estratégias, tanto a
+            nivel aplicación como a nivel BD:
+          </p>
+          <ul>
+            <li class="fragment">
+              <u>Pesimista</u>: Prevenir que pueda darse, principalmente utilizando
+              <b>locks</b>, tanto en forma explícita desde la aplicación o implícita cuando lo hace la Base de Datos segun el nivel de aislamiento.
+            </li>
+            <li class="fragment">
+				<u>Optimista</u>: No lo prevenimos, pero lo detectamos luego y rollbackeamos. De forma explícita desde la aplicación versionando los objetos o en forma implícita la BD utilizando MVCC (snapshot isolation). 
+            </li>
+          </ul>
+				</section>
+				<section id="pys">
+			<h3>Concurrencia</h3>
+			<p class="fragment">
+				Supongamos el <b>problema</b> de NextNumber si estamos en una BD en READ COMMITED. ¿Cómo lo manejo en Objetos con JPA?
+			</p>
+				</section>
+				<section id="pys">
+	<h3>Java Persistence API (JPA)</h3>
+	<pre
+	  class="fragment"
+	><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class NextNumber {
+ @Id
+ private long id;
+ private int anio;
+ private int numberActual;
+ ...
+ public int recuperarSiguiente() { 
+  this.actual += 1;
+  return this.actual;
+ }  
+}</code></pre>
+				</section>
+				<section id="pys">
+	<h3>Concurrencia</h3>
+	<h4>Estrategia Pesimista en JPA (select for update)</h4>
+		<pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">...
+tx.begin();
+ TypedQuery<NextNumber> query = em.createQuery(
+   "from NextNumber where anio = :anioActual", NextNumber.class);
+ query.setParameter("anioActual", anioActual);
+ query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+ NextNumber number = query.getSingleResult(); // select for update
+ int siguiente = number.recuperarSiguiente();
+ //hacer algo con siguiten;
+tx.commit();
+...</code></pre><p class="fragment maschico">select <b>for update</b> (locking explícito para escribir). <u>Ver documentación</u> de la BD, lockea la tabla entera? lockea solo las filas leidas? solo para escritura? o las lecturas también?</u></p>
+				</section>
+
+				<section id="pys">
+          <h3>Java Persistence API (JPA)</h3>
+          <h4>Estrategia Optimista en JPA</h4>
+          <pre
+            class="fragment"
+          ><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
+public class NextNumber {
+ @Id
+ private long id;
+ private int anio;
+ private int numberActual;
+ @Version
+ private Long version;
+ ...
+ public int recuperarSiguiente() { 
+  this.actual += 1;
+  return this.actual;
+ }  
+}</code></pre>
+          <p class="fragment maschico">
+            Definir la versión y luego manejar la excepción
+            <i>jakarta.persistence.OptimisticLockException</i>
+          </p>
+				</section>
+				<section id="app">
+			<h3>Concurrencia</h3>
+			<h4>Application Level Transaction</h4>
+			<p class="fragment">Se da cuando un caso de uso se realiza utilizando 2 o mas transacciones de base de datos</p>
+			<p class="fragment">También conocido como read-modify-write pattern. Ejemplos de un CMS:</p>
+			<ul>
+				<li class="fragment">Tx 1: Leo un blogpost de la BD, lo llevo a la UI. </li>
+				<li class="fragment">Think Time: El usuario lee, revisa, modifica, y finalmente presiona la acción para Guardar. </li>
+				<li class="fragment">Tx 2: Submitea post, update en BD.</li>
+			</ul>				
+				</section>
+
+				<section data-transition="slide" id="app">
+			<h3>Concurrencia</h3>
+			<h4>Application Level Transaction</h4>
+			<p class="fragment">Tengo que garantizar que ese caso de uso se ejecute sin que ocurra un <u>last update wins</u>.</p>
+			<p class="fragment">¿Algun nivel de Aislamiento lo previene?</p>
+			<p class="fragment"><u>Ninguno</u>! Application-Level Tx require de control de concurrencia a nivel aplicación.</p>
+      <p class="fragment">Para la base de datos, son transacciones separadas, no concurrentes!</p>
+
+				</section>
+				<section id="app">
+			<h3>Concurrencia</h3>
+			<h4>Application Level Transaction</h4>
+			<p class="fragment">¿Cómo lo resuelvo?</p>
+			<p class="fragment">No alcanza el Repeatable Read.</p>
+			<p class="fragment">Implemento lockeo Optimista o Pesismista a nivel Aplicación</p>
+				</section>
+
+				<section id="app">
+			<h3>Concurrencia</h3>
+			<h4>Application Level Transaction</h4>
+			<p class="fragment">Read-modify-write pattern: Ejemplo Optimista</p>
+			<ul>
+				<li class="fragment">Tx 1: Leo un blogpost de la BD, junto con su <u>versión</u>. Llevo el post para edición a la UI, incluyendo la <u>versión</u>.  </li>
+				<li class="fragment">Think Time: El usuario lee, revisa, modifica, y finalmente presiona la acción para Guardar. </li>
+				<li class="fragment">Tx 2: Submitea post modifica (junto con la <u>versión</u>), comparo versiones y si son iguales ejecuto el update, sino exception.</li>
+			</ul>				
+				</section>
+				<section id="app">
+          <h3>Concurrencia</h3>
+          <p class="fragment">
+            <b>Problema Compra Pasajes</b>:
+          </p>
+          <p class="fragment">
+            Se presentan los asientos del colectivo disponibles para un viaje 2 y el cliente elije el asiento 10.
+          </p>
+          <p  class="fragment">Debo proceder de la misma forma que el ejemplo anterior.</p>
+<!--           <pre
+            class="fragment"
+          ><code class="java" code-trim data-noescape contenteditable style="font-size:18px">Tx begin
+  ocupado = select 1 from asientos
+			where id_asiendo = 10 and ocupado = 1 and viaje = 2
+  if (ocupado)
+    throw new Exception("Lo siento, el asiento fue vendido");
+  update asientos set ocupado = 1
+		  where id_asiendo = 10 and ocupado = 0 and viaje = 2
+  insert into asiento_vendido (10 (asiento), 2 (viaje),  comprador_x)
+Tx commit</code></pre> -->
+
+				</section>
+				<section id="referencias">
+          <h3>Referencias</h3>
+          <p><img src="imgs/hpjp-book.png" bord /></p>
+          <p>
+            High Performance Java Persistence (<a
+              href="https://vladmihalcea.com/books/high-performance-java-persistence/"
+              >Vlad Mihalcea</a
+            >)
+          </p>
+
+				</section> 
+
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/relativenumber/relativenumber.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      window.onload = function () {
+        let today = new Date().toLocaleDateString();
+        let obj = document.getElementById("hoy");
+        document.getElementById("hoy").innerText = today;
+      };
+
+      Reveal.addEventListener("slidechanged", function (event) {
+        if (event.indexh > 0) {
+          document.querySelector(".reveal .footer").style.display = "block";
+        } else {
+          document.querySelector(".reveal .footer").style.display = "none";
+        }
+      });
+
+      Reveal.addEventListener("ready", function (event) {
+        if (event.indexh === 0)
+          document.querySelector(".reveal .footer").style.display = "none";
+      });
+
+      Reveal.initialize({
+        hash: true,
+        slideNumber: "c/t",
+        /*         width: 1920,
+              height: 1080, */
+        //slideNumber: true,
+        // Learn about plugins: https://revealjs.com/plugins/
+        /*dependencies: [
+        {
+          src: "plugin/title-footer/title-footer.js",
+          async: true,
+          callback: function () {
+            console.log(document.title);
+            title_footer.initialize(document.title);
+          },
+        },
+      ],*/
+
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealNotes,
+          RelativeNumber,
+          Simplemenu,
+          RevealMath.KaTeX,
+        ],
+      });
+    </script>
+  </body>
+</html>
