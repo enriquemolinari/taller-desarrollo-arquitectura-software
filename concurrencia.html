@@ -82,11 +82,9 @@
         /*font-family: 'Times New Roman', Times, serif;*/
       }
 
-	  .smallbox {
-		width: 860px;
-	  }
-
-
+      .smallbox {
+        width: 860px;
+      }
 
       .portada .subtitulo {
         color: lightgray;
@@ -106,6 +104,18 @@
 
       .resaltar {
         color: #4a4e69;
+      }
+
+      .packagejava {
+        font-family: "Roboto Mono", "Fira Code", "DejaVu Sans Mono", monospace;
+        font-size: 20pt;
+        color: #666262;
+        background: transparent;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        display: inline;
+        box-shadow: none;
       }
 
       p.chico {
@@ -147,22 +157,23 @@
 
   <body>
     <div class="reveal">
-      <div class="footer">
-        Gestión de la Concurrencia
-      </div>
+      <div class="footer">Gestión de la Concurrencia</div>
       <div class="menubar line">
         <div class="slide-number"></div>
         <ul class="menu">
           <li><a href="#/def">Concurrencia</a></li>
           <li><a href="#/niveles">Niveles de Aislamiento de las BDs</a></li>
-          <li><a href="#/pys">Tx: Problemas y Soluciones</a></li>
-          <li><a href="#/app">Application Level Tx</a></li>
+          <!--           <li>
+            <a href="#/pys"
+              >Problemas de Concurrencia y Niveles de Aislamiento</a
+            >
+          </li> -->
+          <li><a href="#/pvso">Gestión Pesimista vs Optimista</a></li>
           <li><a href="#/referencias">Referencias</a></li>
         </ul>
         <div class="placeholder"></div>
       </div>
       <div class="slides">
-
         <section
           style="text-align: left"
           data-transition="fade"
@@ -171,66 +182,112 @@
           <div class="box">
             <span>Gestión de la Concurrencia</span>
           </div>
-            <div class="smallbox">Aprendamos a manejar <u>sistemas multi-usuario</u> de forma
-            <u>correcta</u>!</div>
+          <div class="smallbox">
+            Aprendamos a manejar <u>sistemas multi-usuario</u> de forma
+            <u>correcta</u>!
+          </div>
+          <p class="maschico">
+            Repo:
+            <a href="https://github.com/enriquemolinari/taller-jpahibernate"
+              >https://github.com/enriquemolinari/taller-jpahibernate</a
+            >
+          </p>
           <p id="hoy" class="autor fechahoy"></p>
         </section>
 
-				<section id="def">
+        <section id="def">
           <h3>Concurrencia</h3>
           <p class="fragment">
             ¿Quien se encarga de garantizar que la concurencia no afecte la
             correctitud de mi applicación?
           </p>
           <p class="fragment">
-            Es decir, quien garantiza que la aplicación se comporta de la <u>misma
-            forma</u> si es utilizada de forma mono-usuario vs multi-usuario?
+            Es decir, quien garantiza que la aplicación se comporta de la
+            <u>misma forma</u> si es utilizada de forma mono-usuario vs
+            multi-usuario?
           </p>
-				</section>
-				<section  id="def">
+        </section>
+        <section id="def">
           <h3>Concurrencia</h3>
           <p class="fragment">¿La Base de Datos? o ¿la Aplicación?</p>
           <p class="fragment">
             ¿Puedo como desarrollador desentenderme completamente total la BD se
             encarga de todo? ¿Tengo que escribir código de cierta forma para
-            garantizar correctitud o simplemente delego en la BD y me desentiendo?
+            garantizar correctitud o simplemente delego en la BD y me
+            desentiendo?
           </p>
-				</section>
+        </section>
 
-
-				<section  id="def">
+        <section id="def">
           <h3>Concurrencia</h3>
           <p class="fragment"><b>Nunca</b> puedo desentenderme!</p>
           <p class="fragment">
             Es una combinación entre la BD y la Aplicación que puede variar
             segun el caso de uso que quiero implementar.
           </p>
-				</section>
-				<section  id="def">
+        </section>
+
+        <section id="def">
+          <h3>Concurrencia</h3>
+          <p class="fragment chico">
+            La concurrencia puede darse de dos formas:
+          </p>
+
+          <p class="fragment chico">
+            1) Dos transacciones concurrentes, ambas leen el mismo dato,
+            modifican y comitean en diferentes momentos. La clave es que ambas
+            leen el mismo dato antes de que alguna Tx comitee.
+            <img class="fragment" src="imgs/tx-interleaving.png" />
+          </p>
+        </section>
+
+        <section id="def">
+          <h3>Concurrencia</h3>
+          <p class="fragment chico">
+            La concurrencia puede darse de dos formas:
+          </p>
+          <p class="fragment chico">
+            2) Dos transacciones leen y terminan. Luego modifica primero una y
+            luego la otra. La clave es que la lectura y la modificacion se
+            realiza en transacciones separadas.
+          </p>
+          <img class="fragment" src="imgs/app-level-tx.png" />
+        </section>
+
+        <section id="def">
           <h3>Concurrencia</h3>
           <p class="fragment">
-            Las <b>base de datos</b> gestionan la concurrencia dentro del
-            contexto de una <b>Transacción</b>.
+            Las <b>base de datos</b> gestionan la concurrencia
+            <u>dentro del contexto</u> de una <b>Transacción</b>.
+            <b>Problemas del Tipo 1</b>. Aunque tambien podemos hacernos cargo a
+            nivel aplicación.
           </p>
           <p class="fragment">
-            ¿Cuál o cuales de las propiedades <strong>ACID</strong> estan
-            relacionadas con la concurrencia?
+            Para los <b>problemas del Tipo 2</b> debemos hacernos cargo a nivel
+            aplicación.
+          </p>
+
+          <!--
+          Para el DOCENTE: Muestro el tipo 2 primero butaca.ocupar(), tiene comentado el if de control.
+                           Luego, agregado el IF, muestro como se da el problema del tipo 1.          
+          -->
+        </section>
+
+        <section id="def">
+          <h3>Problema clásico de Concurrencia</h3>
+          <p class="fragment" data-fragment-index="1">
+            Ejemplo: Venta de pasaje/butacas de viajes en colectivo.
           </p>
           <p class="fragment">
-            I: Isolation.
-            <span class="fragment"
-              ><u>Aislamiento</u> de las transacciones.</span
-            >
-            <span class="fragment"
-              >Supone que cada Tx se ejecuta en serie.</span
-            >
+            Veamos como generar estos dos tipos de problemas en Java con
+            PostgreSQL.
           </p>
           <p class="fragment">
-            Niveles de Aislamiento: <b>Trade-off</b> entre correctitud de los
-            datos vs alta concurrencia.
+            package: <span class="packagejava">orm/locking/viaje</span>
           </p>
-				</section>
-				<section id="niveles">
+        </section>
+
+        <section id="niveles">
           <h3>Concurrencia</h3>
           <h4>Niveles de Aislamiento (ANSI SQL)</h4>
           <ol>
@@ -243,8 +300,8 @@
             ¿Que Base de Datos estan usando? ¿Saben en que nivel de aislamiento
             esta ejecutándose?
           </p>
-				</section>
-				<section id="niveles">
+        </section>
+        <section id="niveles">
           <h3>Concurrencia</h3>
           <h4>Isolation Levels (ANSI SQL)</h4>
           <p class="fragment" data-fragment-index="3">
@@ -260,16 +317,16 @@
             concurrente. <b>Ojo: </b> Hablamos de MySQL con InnoDB, MyISAM no
             soporta Transacciones.
           </p>
-				</section>
-			
-				<section id="pys">
+        </section>
+
+        <section id="niveles">
           <h3>Concurrencia</h3>
           <p class="fragment">
             ¿Cuáles son los problemas que podemos encontrarnos al no configurar
             la BD con aislamiento completo?
           </p>
-				</section>
-				<section id="pys">
+        </section>
+        <section id="niveles">
           <h3>Concurrencia</h3>
           <p>
             <u>Dirty</u> <u>Read</u>: Sucede si una transacción lee datos
@@ -277,11 +334,11 @@
           </p>
           <p class="fragment"><img src="imgs/dirty-read.png" /></p>
           <p class="fragment chico">
-            <b>2. Read Committed</b> no permite esto. Bloqueando (o Snapshot Isolation)
-            lectura/escritura sobre datos modificados.
+            <b>2. Read Committed</b> no permite esto. Bloqueando (o Snapshot
+            Isolation) lectura/escritura sobre datos modificados.
           </p>
-				</section>
-				<section id="pys">
+        </section>
+        <section id="niveles">
           <h3>Concurrencia</h3>
           <p>
             <u>Unrepeatable</u> <u>Read</u>: Sucede si una transacción lee un
@@ -289,9 +346,8 @@
           </p>
           <p class="fragment"><img src="imgs/unrepeatable-read.png" /></p>
           <p class="fragment"><b>3. Repetable Read</b> no permite esto.</p>
-
-				</section>
-				<section id="pys">
+        </section>
+        <section id="niveles">
           <h3>Concurrencia</h3>
           <p>
             <u>Lost Updates</u> o <u>Last</u> <u>Commit</u> <u>Wins</u>: Dos
@@ -300,8 +356,8 @@
           </p>
           <p class="fragment"><img src="imgs/last-commit-wins.png" /></p>
           <p class="fragment"><b>3. Repeatable read</b> no permite esto.</p>
-				</section>
-				<section id="pys">
+        </section>
+        <section id="niveles">
           <h3>Concurrencia</h3>
           <p>
             <u>Phanton</u> <u>Read</u>: Ocurre cuando una transacción ejecuta
@@ -310,170 +366,128 @@
           </p>
           <p class="fragment"><img src="imgs/phanton-read.png" /></p>
           <p class="fragment"><b>4. Serialiable</b> no permite esto.</p>
+        </section>
 
-				</section>
-				<section id="pys">
-          <h3>Concurrencia</h3>
-          <h4>Problema 1</h4>
-          <p class="fragment" data-fragment-index="1">
-            Ejemplo: Generar un <b>número único</b> para numerar por ejemplo una
-            Factura o Expediente que se resetea cada nuevo año.
-          </p>
-          <pre
-            class="fragment"
-            data-fragment-index="2"
-          ><code class="java" code-trim data-noescape contenteditable style="font-size:18px">Tx begin
-  n = select numero_actual from nextnumber where año = AAAA;
-  n = n + 1;
-  -- n para el nuevo expediente
-  update nextnumber set numero_actual = n where año = AAAA;
-Tx commit</code></pre>
-				</section>
-				<section id="pys">
-          <h3>Concurrencia</h3>
-          <p>Probemos esto en Java contra una base de datos PostgreSQL</p>
-				</section>
-				<section id="pys">
+        <section data-transition="slide" id="niveles">
           <h3>Concurrencia</h3>
           <p class="fragment">
-            Para controlar la concurrencia existen dos estratégias, tanto a
-            nivel aplicación como a nivel BD:
+            Probemos ahora el mismo problema de <b>Tipo 1</b> cambiando el nivel
+            de aislamiento de la BD a <b>REPEATABLE READ</b>.
+          </p>
+          <p class="fragment">
+            package: <span class="packagejava">orm/locking/viaje</span>
+          </p>
+        </section>
+
+        <section id="pvso">
+          <h3>Concurrencia</h3>
+          <p class="fragment">
+            Para controlar la concurrencia existen dos estratégias:
           </p>
           <ul>
             <li class="fragment">
-              <u>Pesimista</u>: Prevenir que pueda darse, principalmente utilizando
-              <b>locks</b>, tanto en forma explícita desde la aplicación o implícita cuando lo hace la Base de Datos segun el nivel de aislamiento.
+              <u>Pesimista</u>: Prevenir que pueda darse, principalmente
+              utilizando <b>locks</b>, tanto en forma explícita desde la
+              aplicación o implícita cuando lo hace la Base de Datos segun el
+              nivel de aislamiento.
             </li>
             <li class="fragment">
-				<u>Optimista</u>: No lo prevenimos, pero lo detectamos luego y rollbackeamos. De forma explícita desde la aplicación versionando los objetos o en forma implícita la BD utilizando MVCC (snapshot isolation). 
+              <u>Optimista</u>: No lo prevenimos, pero lo detectamos luego y
+              rollbackeamos. De forma explícita desde la aplicación versionando
+              los objetos o en forma implícita la BD utilizando MVCC (snapshot
+              isolation).
             </li>
           </ul>
-				</section>
-				<section id="pys">
-			<h3>Concurrencia</h3>
-			<p class="fragment">
-				Supongamos el <b>problema</b> de NextNumber si estamos en una BD en READ COMMITED. ¿Cómo lo manejo en Objetos con JPA?
-			</p>
-				</section>
-				<section id="pys">
-	<h3>Java Persistence API (JPA)</h3>
-	<pre
-	  class="fragment"
-	><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
-public class NextNumber {
- @Id
- private long id;
- private int anio;
- private int numberActual;
- ...
- public int recuperarSiguiente() { 
-  this.actual += 1;
-  return this.actual;
- }  
-}</code></pre>
-				</section>
-				<section id="pys">
-	<h3>Concurrencia</h3>
-	<h4>Estrategia Pesimista en JPA (select for update)</h4>
-		<pre class="fragment"><code class="java" code-trim data-noescape contenteditable style="font-size:18px">...
-tx.begin();
- TypedQuery<NextNumber> query = em.createQuery(
-   "from NextNumber where anio = :anioActual", NextNumber.class);
- query.setParameter("anioActual", anioActual);
- query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
- NextNumber number = query.getSingleResult(); // select for update
- int siguiente = number.recuperarSiguiente();
- //hacer algo con siguiten;
-tx.commit();
-...</code></pre><p class="fragment maschico">select <b>for update</b> (locking explícito para escribir). <u>Ver documentación</u> de la BD, lockea la tabla entera? lockea solo las filas leidas? solo para escritura? o las lecturas también?</u></p>
-				</section>
+        </section>
 
-				<section id="pys">
-          <h3>Java Persistence API (JPA)</h3>
-          <h4>Estrategia Optimista en JPA</h4>
-          <pre
-            class="fragment"
-          ><code class="java" code-trim data-noescape contenteditable style="font-size:18px">@Entity
-public class NextNumber {
- @Id
- private long id;
- private int anio;
- private int numberActual;
- @Version
- private Long version;
- ...
- public int recuperarSiguiente() { 
-  this.actual += 1;
-  return this.actual;
- }  
-}</code></pre>
-          <p class="fragment maschico">
-            Definir la versión y luego manejar la excepción
-            <i>jakarta.persistence.OptimisticLockException</i>
-          </p>
-				</section>
-				<section id="app">
-			<h3>Concurrencia</h3>
-			<h4>Application Level Transaction</h4>
-			<p class="fragment">Se da cuando un caso de uso se realiza utilizando 2 o mas transacciones de base de datos</p>
-			<p class="fragment">También conocido como read-modify-write pattern. Ejemplos de un CMS:</p>
-			<ul>
-				<li class="fragment">Tx 1: Leo un blogpost de la BD, lo llevo a la UI. </li>
-				<li class="fragment">Think Time: El usuario lee, revisa, modifica, y finalmente presiona la acción para Guardar. </li>
-				<li class="fragment">Tx 2: Submitea post, update en BD.</li>
-			</ul>				
-				</section>
-
-				<section data-transition="slide" id="app">
-			<h3>Concurrencia</h3>
-			<h4>Application Level Transaction</h4>
-			<p class="fragment">Tengo que garantizar que ese caso de uso se ejecute sin que ocurra un <u>last update wins</u>.</p>
-			<p class="fragment">¿Algun nivel de Aislamiento lo previene?</p>
-			<p class="fragment"><u>Ninguno</u>! Application-Level Tx require de control de concurrencia a nivel aplicación.</p>
-      <p class="fragment">Para la base de datos, son transacciones separadas, no concurrentes!</p>
-
-				</section>
-				<section id="app">
-			<h3>Concurrencia</h3>
-			<h4>Application Level Transaction</h4>
-			<p class="fragment">¿Cómo lo resuelvo?</p>
-			<p class="fragment">No alcanza el Repeatable Read.</p>
-			<p class="fragment">Implemento lockeo Optimista o Pesismista a nivel Aplicación</p>
-				</section>
-
-				<section id="app">
-			<h3>Concurrencia</h3>
-			<h4>Application Level Transaction</h4>
-			<p class="fragment">Read-modify-write pattern: Ejemplo Optimista</p>
-			<ul>
-				<li class="fragment">Tx 1: Leo un blogpost de la BD, junto con su <u>versión</u>. Llevo el post para edición a la UI, incluyendo la <u>versión</u>.  </li>
-				<li class="fragment">Think Time: El usuario lee, revisa, modifica, y finalmente presiona la acción para Guardar. </li>
-				<li class="fragment">Tx 2: Submitea post modifica (junto con la <u>versión</u>), comparo versiones y si son iguales ejecuto el update, sino exception.</li>
-			</ul>				
-				</section>
-				<section id="app">
+        <section id="pvso">
           <h3>Concurrencia</h3>
           <p class="fragment">
-            <b>Problema Compra Pasajes</b>:
+            ¿Cómo resolvemos el <b>problema</b> de la compra de pasajes en una
+            BD en READ COMMITED?
           </p>
           <p class="fragment">
-            Se presentan los asientos del colectivo disponibles para un viaje 2 y el cliente elije el asiento 10.
+            En forma <b>pesimista</b> utilizando <u>locks</u>.
+            <span
+              >package:
+              <span class="packagejava">orm/locking/viaje/pesimista</span></span
+            >.<br />
+            En forma <b>optimista</b> utilizando <u>versionado</u>.
+            <span
+              >package:
+              <span class="packagejava">orm/locking/viaje/optimista</span></span
+            >.
           </p>
-          <p  class="fragment">Debo proceder de la misma forma que el ejemplo anterior.</p>
-<!--           <pre
-            class="fragment"
-          ><code class="java" code-trim data-noescape contenteditable style="font-size:18px">Tx begin
-  ocupado = select 1 from asientos
-			where id_asiendo = 10 and ocupado = 1 and viaje = 2
-  if (ocupado)
-    throw new Exception("Lo siento, el asiento fue vendido");
-  update asientos set ocupado = 1
-		  where id_asiendo = 10 and ocupado = 0 and viaje = 2
-  insert into asiento_vendido (10 (asiento), 2 (viaje),  comprador_x)
-Tx commit</code></pre> -->
+        </section>
 
-				</section>
-				<section id="referencias">
+        <!--             <ol>2) .</ol> -->
+
+        <!--           <p class="fragment">
+            Se da cuando un caso de uso se realiza utilizando 2 o mas
+            transacciones de base de datos
+          </p>
+          <p class="fragment">
+            También conocido como read-modify-write pattern. Ejemplos de un CMS:
+          </p>
+          <ul>
+            <li class="fragment">
+              Tx 1: Leo un blogpost de la BD, lo llevo a la UI.
+            </li>
+            <li class="fragment">
+              Think Time: El usuario lee, revisa, modifica, y finalmente
+              presiona la acción para Guardar.
+            </li>
+            <li class="fragment">Tx 2: Submitea post, update en BD.</li>
+          </ul> -->
+
+        <!--         <section data-transition="slide" id="app">
+          <h3>Concurrencia</h3>
+          <h4>Application Level Transaction</h4>
+          <p class="fragment">
+            Tengo que garantizar que ese caso de uso se ejecute sin que ocurra
+            un <u>last update wins</u>.
+          </p>
+          <p class="fragment">¿Algun nivel de Aislamiento lo previene?</p>
+          <p class="fragment">
+            <u>Ninguno</u>! Application-Level Tx require de control de
+            concurrencia a nivel aplicación.
+          </p>
+          <p class="fragment">
+            Para la base de datos, son transacciones separadas, no concurrentes!
+          </p>
+        </section>
+        <section id="app">
+          <h3>Concurrencia</h3>
+          <h4>Application Level Transaction</h4>
+          <p class="fragment">¿Cómo lo resuelvo?</p>
+          <p class="fragment">No alcanza el Repeatable Read.</p>
+          <p class="fragment">
+            Implemento lockeo Optimista o Pesismista a nivel Aplicación
+          </p>
+        </section>
+
+        <section id="app">
+          <h3>Concurrencia</h3>
+          <h4>Application Level Transaction</h4>
+          <p class="fragment">Read-modify-write pattern: Ejemplo Optimista</p>
+          <ul>
+            <li class="fragment">
+              Tx 1: Leo un blogpost de la BD, junto con su <u>versión</u>. Llevo
+              el post para edición a la UI, incluyendo la <u>versión</u>.
+            </li>
+            <li class="fragment">
+              Think Time: El usuario lee, revisa, modifica, y finalmente
+              presiona la acción para Guardar.
+            </li>
+            <li class="fragment">
+              Tx 2: Submitea post modifica (junto con la <u>versión</u>),
+              comparo versiones y si son iguales ejecuto el update, sino
+              exception.
+            </li>
+          </ul>
+        </section> -->
+
+        <section id="referencias">
           <h3>Referencias</h3>
           <p><img src="imgs/hpjp-book.png" bord /></p>
           <p>
@@ -482,10 +496,7 @@ Tx commit</code></pre> -->
               >Vlad Mihalcea</a
             >)
           </p>
-
-				</section> 
-
-
+        </section>
       </div>
     </div>
 
