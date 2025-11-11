@@ -135,7 +135,7 @@
         <div class="box">
           <span>Arquitecturas Distribuídas</span>
         </div>
-        <div class="smallbox">Conceptos Fundamentales</div>
+        <div class="smallbox">Algunas cuestiones importantes</div>
 <!--         <p class="autor">ENRIQUE MOLINARI</p> -->
 <!-- TODO: 
  Outbox Pattern
@@ -218,52 +218,51 @@ same team, to avoid distributed transactions.
       </section>
 
       <section id="fp">
-        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
-        <p class="chico fragment">¿Cómo lideamos con fallas parciales?</p>
-        <p class="chico fragment">Siempre usar <u>Timeouts</u></p>
-        <p class="chico fragment">Hacer las operaciones <u>Idempotentes</u>.</p> 
-<!--         Idempotent operations produce the same result even when the operation is repeated many times -->
+        <p class="resaltar">Arquitecturas Distribuídas: Pago Online.</p>
+        <img class="fragment" src="imgs/paypal-1.png">
       </section>
 
       <section id="fp">
+        <p class="resaltar">Arquitecturas Distribuídas: Pago Online.</p>
+        <p class="fragment">El pago efectivamente <u>se realizó</u>.</p>
+        <p class="fragment">Pero Ventas <u>no lo sabe</u>, ya que hubo error de timeout.</p>
+        <p class="fragment">La unica opción es <u>volver a intentar el pago.</u></p>
+        <p class="fragment">¿Cómo se hace sin <u>duplicar el pago</u>?</p>
+        <p class="fragment">Acordando entre los servicios un <u>identificador único</u> para cada pago.</p>
+      </section>
+
+      <section id="fp">
+        <p class="resaltar">Arquitecturas Distribuídas: Pago Online.</p>
+        <img class="fragment" src="imgs/paypal-2.png">
+      </section>
+
+      <section id="fp">
+        <p class="resaltar">Arquitecturas Distribuídas: Paypal y Mercado Pago</p>
+        <p class="chico fragment">Ver la documentación del gateway de pagos que contratemos.</p>
+        <p class="chico fragment"><a href="https://www.paypal.com/us/cshelp/article/how-do-i-avoid-duplicate-transactions-ts1097">Paypal</a> sobre fallas parciales.</p>
+        <p class="chico fragment"><a href="https://www.mercadopago.com.ar/developers/en/news/2023/01/04/Idempotency-key-usage-will-be-mandatory">Mercado Pago</a> sobre fallas parciales.</p>
+      </section>
+
+
+      <section id="fp">
         <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
-        <p class="chico fragment">¿Qué significa hacer las operaciones idempotentes?</p>
-        <p class="chico fragment">Que su ejecución producirá el mismo efecto o resultado si se ejecutara una vez o varias veces.</p>
+        <p class="chico fragment">Entonces... ¿Cómo lideamos con fallas parciales?</p>
+        <p class="chico fragment">Siempre usar <u>Timeouts</u></p>
+        <p class="chico fragment">Hacer las operaciones <u>Idempotentes</u>: su ejecución producirá el mismo efecto o resultado si se ejecutara una vez o varias veces.</p>
         <p class="chico fragment">Cada operacion se identifica con un <u>único identificador</u>, de modo que quien recibe puede verificar si dicha operación ya fue procesada o no.</p> 
-      </section>      
-
-      <section id="tx">
-        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
-        <p class="chico fragment">Chau Chau ACID...</p>
-        <p class="chico fragment"><u>Tx Atómicas</u>: en sistemas centralizados, las Tx permiten realizar una serie de operaciones donde si alguna en el medio falla, todo es rollbackeado por la BD.</p>
-        <p class="chico fragment">Como desarrolladores, ésto nos hace la vida muy simple.</p>
-        <p class="chico fragment">¿Qué sucede en arquitecturas distribuídas?</p>
-<!--         <p class="chico fragment">Consistencia Eventual</p>
-        <img class="fragment" src="imgs/sagas.png"> -->
       </section>
 
       <section id="tx">
-        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
-        <p class="chico fragment">Aparece el concepto de: <b>Transacciones Distribuídas</b></p>
-        <p class="chico fragment">Supongamos los siguientes verticales en una arquitectura de microservices:</p>
-        <img class="fragment" src="imgs/two-services.png">
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
+        <p class="chico fragment"><b>ACID: </b><b> Isolation</b> para concurrencia, ahora vamos a hablar sobre <b>Atomicidad y Consistencia</b></p>
+        <p class="chico fragment">En sistemas centralizados, las Tx ACID permiten realizar una serie de operaciones donde si alguna en el medio falla, todo es rollbackeado por la BD. Garantizando <u>Atomicidad</u> y <u>Consistencia</u>.</p>
+        <p class="chico fragment">¿Qué sucede en <u>sistemas heterogéneos</u>?</p>
+        <p class="chico fragment">¿Qué sucede en <u>arquitecturas distribuidas</u>?</p>
+        <p class="chico fragment">O sea, cuando necesito atomicidad pero el trabajo a realizar esta localidado en dos o más procesos que no son <u>transaccionalmente compatibles</u>.</p>
       </section>
 
       <section id="tx">
-        <p class="resaltar">Transacciones Distribuídas</p>
-        <img class="fragment" src="imgs/two-services.png">
-        <p class="chico fragment">Antes de ver como es posible resolver esto...</p>        
-        <p class="chico fragment">¿Sólo se dan las transacciones distribuídas en Arquitecturas de Microservicios? <span class="chico fragment"><b>Claro que no.</b></span></p>
-      </section>
-
-      <section id="tx">
-        <p class="resaltar">Transacciones Distribuídas</p>
-        <p class="chico fragment">Se dan siempre donde quiero realizar en forma atómica dos o más operaciones donde alguna es sobre una BD ACID y otra sobre otro tipo de servicio NO ACID.</p>
-        <p class="chico fragment">Por ejemplo...</p>
-      </section>
-
-      <section id="tx">
-        <p class="resaltar">Transacciones Distribuídas</p>
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
         <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
         <p class="chico fragment">Necesito insertar un registro y además guardar en file system un PDF.</p>
         <p class="chico fragment">Simple de resolver, que les parece esto?</p>
@@ -274,11 +273,11 @@ same team, to avoid distributed transactions.
 public void guardar(String fileName, String fileEnBase64) {
   //...
   try {
+   String filePath = PATH + fileName;
    em.beginTransaction();
    em.persist(new MyFile(fileName, filePath));
    em.commit();
-   String filePath = PATH + fileName;
-   fileSystem.guardar(filePath);
+   fileSystem.guardar(filePath, fileEnBase64);
   } catch(Exception e) { em.rollback(); throw e;}
   //...
 }
@@ -288,7 +287,7 @@ public void guardar(String fileName, String fileEnBase64) {
 
 
       <section id="tx">
-        <p class="resaltar">Transacciones Distribuídas</p>
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
         <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
         <p class="chico fragment">¿Ahora mejor?</p>
 <!--       data-line-numbers="1-2|2-6|7-9"  -->
@@ -299,9 +298,9 @@ public void guardar(String fileName, String fileEnBase64) {
   //...
   try {
    em.beginTransaction();
-   em.persist(new MyFile(fileName, filePath));
    String filePath = PATH + fileName;
-   fileSystem.guardar(filePath);
+   em.persist(new MyFile(fileName, filePath));
+   fileSystem.guardar(filePath, fileEnBase64);
    em.commit();
   } catch(Exception e) { em.rollback(); throw e;}
   //...
@@ -311,20 +310,19 @@ public void guardar(String fileName, String fileEnBase64) {
       </section>
 
       <section id="tx">
-        <p class="resaltar">Transacciones Distribuídas</p>
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
         <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
         <p class="chico fragment">Si no lanza exception...</p>
-<!--       data-line-numbers="1-2|2-6|7-9"  -->
         <pre
       class="fragment"
     ><code data-trim data-noescape lang="java">
 public void guardar(String fileName, String fileEnBase64) {
   //...
   try {
+   String filePath = PATH + fileName;
    em.beginTransaction();
    em.persist(new MyFile(fileName, filePath));
-   String filePath = PATH + fileName;
-   if (fileSystem.guardar(filePath)) 
+   if (fileSystem.guardar(filePath, fileEnBase64)) 
      em.commit();
    else 
      em.rollback();  
@@ -332,16 +330,23 @@ public void guardar(String fileName, String fileEnBase64) {
   //...
 }
 </code></pre>
-<p class="chico fragment">¿Esto siempre genera atomicidad? <span class="chico fragment">mmmmmmm....</span></p>
+<p class="chico fragment">¿Esto siempre genera atomicidad/consistencia? <span class="chico fragment">mmmmmmm....</span></p>
       </section>
 
       <section id="tx">
-        <p class="resaltar">Transacciones Distribuídas</p>
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
         <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
         <p class="chico fragment">Podrian quedar archivos guardados sin su relacion con la BD...</p>
         <p class="chico fragment">Podríamos tener un proceso que limpie archivos sin su relacion con la BD.</p>
         <p class="chico fragment">Nuevo concepto: <b>Compensate</b> transaction.</p>
        </section>
+
+      <section id="tx">
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
+        <p class="chico fragment">Caso 2: ...</p>
+        <p class="chico fragment">¿En el trabajo grupal, en que caso necesitamos atomicidad entre componentes que no son transaccionalmente compatibles?</p>
+      </section> 
+
 
       <!--
        Distributed Transactions: https://en.dtm.pub/practice/theory.html
@@ -356,7 +361,7 @@ public void guardar(String fileName, String fileEnBase64) {
        -->
 
       <section id="tx">
-        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
         <p class="chico fragment">Caso 2: Al persistir una nueva venta debo enviarle un mail el comprador con la factura.</p>
         <p class="chico fragment">Diferente al caso anterior. No puedo mandar un mail sin estar seguro de vender.</p>
         <pre
@@ -374,9 +379,6 @@ public void vender(Cliente c, float monto) {
 }
 </code></pre>
 
-
-        <!--    Por mas que el envio de email este en el mismo servicio que la venta, 
-          igual estoy lideando con el servicio de email que no es ACID.</p> -->
       </section>
 
       <section id="tx">
@@ -415,6 +417,24 @@ public void vender(Cliente c, float monto) {
         <p class="chico fragment"><u>Eventual Consistency</u> vs Strong Consistency</p>
         <p class="chico fragment">Nuevo Concepto:<u>Retry</u> Transaction.</p>
         <p class="chico fragment">Sigue y sigue hasta que el servicio SMTP funciona.</p>
+      </section>
+
+
+
+
+
+      <section id="tx">
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
+        <p class="chico fragment">Aparece el concepto de: <b>Transacciones Distribuídas</b></p>
+        <p class="chico fragment">Supongamos los siguientes verticales en una arquitectura de microservices:</p>
+        <img class="fragment" src="imgs/two-services.png">
+      </section>
+
+      <section id="tx">
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
+        <img class="fragment" src="imgs/two-services.png">
+        <p class="chico fragment">Antes de ver como es posible resolver esto...</p>        
+        <p class="chico fragment">¿Sólo se dan las transacciones distribuídas en Arquitecturas de Microservicios? <span class="chico fragment"><b>Claro que no.</b></span></p>
       </section>
 
       <section id="tx">
@@ -475,12 +495,6 @@ public void vender(Cliente c, float monto) {
           grande.</p>
       </section>
 
-      <section id="tx">
-        <p class="resaltar">Arquitecturas Distribuídas: Pagos Online</p>
-        <p class="chico fragment">Caso 3: Al confirmar una nueva venta debo persistirla si y solo si el pago fue exitoso.</p>
-        <p class="chico fragment">Varias cosas pueden salir mal... el servicio no es controlado por mi (lo cual para estos casos puede ser bueno).</p>
-        <p class="chico fragment"><a href="https://www.paypal.com/us/cshelp/article/how-do-i-avoid-duplicate-transactions-ts1097">Paypal</a> sobre fallas parciales.</p>
-      </section>
 
       <section id="txd">
         <p class="resaltar">Transacciones Distribuídas</p>
