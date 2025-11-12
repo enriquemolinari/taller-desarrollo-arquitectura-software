@@ -330,23 +330,63 @@ public void guardar(String fileName, String fileEnBase64) {
   //...
 }
 </code></pre>
-<p class="chico fragment">¿Esto siempre genera atomicidad/consistencia? <span class="chico fragment">mmmmmmm....</span></p>
+<p class="chico fragment">¿Esto siempre genera atomicidad/consistencia? <span class="chico fragment">puede quedar el archivo huérfano...</span></p>
       </section>
+
+      <section id="tx">
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
+        <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
+        <p class="chico fragment">mas fácil...</p>
+        <pre
+      class="fragment"
+    ><code data-trim data-noescape lang="java">
+public void guardar(String fileName, String fileEnBase64) {
+  //...
+   String filePath = PATH + fileName;
+   if (!fileSystem.guardar(filePath, fileEnBase64))
+      throw new Exception("No se pudo guardar el archivo");
+   try {
+     em.beginTransaction();
+     em.persist(new MyFile(fileName, filePath));
+     em.commit();
+   } catch(Exception e) { em.rollback(); throw e;}
+} 
+</code></pre>
+<p class="chico fragment">¿Esto siempre genera atomicidad/consistencia? <span class="chico fragment">puede quedar el archivo huérfano...</span></p>
+      </section>
+
 
       <section id="tx">
         <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
         <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
         <p class="chico fragment">Podrian quedar archivos guardados sin su relacion con la BD...</p>
         <p class="chico fragment">Podríamos tener un proceso que limpie archivos sin su relacion con la BD.</p>
-        <p class="chico fragment">Nuevo concepto: <b>Compensate</b> transaction.</p>
+        <p class="chico fragment"><u>Nuevo concepto</u>: <b>Compensate</b> transaction.</p>
+        <p class="chico fragment"><u>Compensar</u>: para dejar el sistema <b>consistente</b>.</p>
        </section>
 
       <section id="tx">
         <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
-        <p class="chico fragment">Caso 2: ...</p>
-        <p class="chico fragment">¿En el trabajo grupal, en que caso necesitamos atomicidad entre componentes que no son transaccionalmente compatibles?</p>
+        <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
+        <p class="chico fragment">Esta inconsistencia <u>no molesta</u>, a lo sumo solo quedan en disco algunos archivos huérfanos.</p>
+        <p class="chico fragment">En la aplicación siempre listamos a partir de lo almacenado en la BD, con lo cual nunca encontraríamos una referencia rota.</p>
       </section> 
 
+      <section id="tx">
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
+        <p class="chico fragment">Caso 2: ¿En el trabajo grupal, en que caso necesitamos atomicidad entre componentes que no son transaccionalmente compatibles?</p>
+        <p class="chico fragment">Y aca <u>no podemos</u> darnos el gusto de que haya <u>inconsistencia</u></p>
+        <p class="chico fragment">Insert/Update en BD (Insertar una nueva Película) y push de mensaje en RabbitMQ (Evento de NuevaPelicula).</p>
+        <p class="chico fragment">La BD y RabbitMQ <u>no son transaccionalmente compatibles</u>.</p>
+      </section> 
+
+      <section id="tx">
+        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
+        <p class="chico fragment">Caso 2: BD y RabbitMQ</p>
+        <p class="chico fragment"><b>Problema</b>: Necesitamos tener atomicidad/consistencia entre dos servicios que no son transaccionalmente compatibles.</p>
+        <p class="chico fragment"><b>Solución</b>:</p>
+        <p class="chico fragment">Hablar solo con uno y que ese seleccionado hable con el otro.</p>
+      </section> 
 
       <!--
        Distributed Transactions: https://en.dtm.pub/practice/theory.html
@@ -360,7 +400,7 @@ public void guardar(String fileName, String fileEnBase64) {
       Frameworks para ayudar en esto.
        -->
 
-      <section id="tx">
+<!--       <section id="tx">
         <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
         <p class="chico fragment">Caso 2: Al persistir una nueva venta debo enviarle un mail el comprador con la factura.</p>
         <p class="chico fragment">Diferente al caso anterior. No puedo mandar un mail sin estar seguro de vender.</p>
@@ -388,20 +428,29 @@ public void vender(Cliente c, float monto) {
         <p class="chico fragment">2. Y ademas quiero garantizar 100% que se manda y solo si commiteo la venta.</p>
       </section>
 
+ -->
+
       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
-        <p class="chico fragment">Caso 2: Al persistir una nueva venta debo enviarle un mail el comprador con la factura.</p>
-        <p class="chico fragment"><u>Outbox Pattern</u>: Aprovecho la Tx local de persistir la venta para dejar un job en un tabla "queue".</p> 
+        <p class="chico fragment">Caso 2: BD y RabbitMQ</p>
+        <p class="chico fragment">Si elijo RabbitMQ: No inserto en BD. Publico un mensaje y creo N consumers (la BD es uno).</p>
+        <p class="chico fragment">Si elijo la BD: aprovecho la Tx de persistir en BD para dejar un "job" en un tabla "queue".</p> 
+        <p class="chico fragment">Luego habrá otro proceso (cron job) que lea esa tabla y publique el evento en RabbitMQ.</p> 
+      </section>
+
+      <section id="tx">
+        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <p class="chico fragment">Outbox Pattern</p>
         <pre
       class="fragment"
     ><code data-trim data-noescape lang="java">
-public void vender(Cliente c, float monto) {
+public void nuevaPelicula(Long id, String nombre) {
   //...
   try {
    em.beginTransaction();
-   em.persist(new Venta(c, monto));
-   em.persist(new Job(JobType.EMAIL, 
-       new Payload(c.email, "Venta realizada...")));
+   em.persist(new Pelicula(id, nombre));
+   em.persist(new Job(JobType.NUEVA_PELI, 
+       new Payload(id, nombre)));
    em.commit();
   } catch(Exception e) { em.rollback(); throw e;}
   //...
@@ -409,39 +458,26 @@ public void vender(Cliente c, float monto) {
 </code></pre>
       </section>
 
-
       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
-        <p class="chico fragment">Caso 2: Al persistir una nueva venta debo enviarle un mail el comprador con la factura.</p>
         <p class="chico fragment"><u>Outbox Pattern</u>: Aprovecho la Tx local de persistir la venta para dejar un job en un tabla "queue".</p> 
         <p class="chico fragment"><u>Eventual Consistency</u> vs Strong Consistency</p>
         <p class="chico fragment">Nuevo Concepto:<u>Retry</u> Transaction.</p>
-        <p class="chico fragment">Sigue y sigue hasta que el servicio SMTP funciona.</p>
+        <p class="chico fragment">Sigue y sigue hasta que logro publicar el evento en RabbitMQ.</p>
       </section>
-
-
-
-
 
       <section id="tx">
         <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
-        <p class="chico fragment">Aparece el concepto de: <b>Transacciones Distribuídas</b></p>
+        <p class="chico fragment"><b>Transacciones Distribuídas</b> en Microservicios</p>
         <p class="chico fragment">Supongamos los siguientes verticales en una arquitectura de microservices:</p>
         <img class="fragment" src="imgs/two-services.png">
       </section>
 
-      <section id="tx">
-        <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
-        <img class="fragment" src="imgs/two-services.png">
-        <p class="chico fragment">Antes de ver como es posible resolver esto...</p>        
-        <p class="chico fragment">¿Sólo se dan las transacciones distribuídas en Arquitecturas de Microservicios? <span class="chico fragment"><b>Claro que no.</b></span></p>
-      </section>
-
-      <section id="tx">
+<!--       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
         <p class="chico fragment">Volvamos a nuestro requerimiento inicial con Microservicios</p>
         <img class="fragment" src="imgs/two-services.png">
-      </section>
+      </section> -->
 
       <section id="tx" data-transition="fade-out">
         <p class="resaltar">Arquitecturas Distribuídas</p>
@@ -502,6 +538,7 @@ public void vender(Cliente c, float monto) {
         <p class="chico fragment">Two-Phase Commit: soportado originalmente por las DBMS relacionales: <a href="https://dev.mysql.com/doc/refman/8.4/en/xa.html">MySql</a> y <a href="https://www.postgresql.org/docs/current/two-phase.html">Pg</a>.</p>
         <p class="chico fragment">TCC: Try, Commit, Cancel by Pat Helland (2007).</p>
         <p class="chico fragment">Frameworks que ayudan: <a href="https://en.dtm.pub/">DTM</a>, Spring-Boot: <a href="https://www.atomikos.com/Main/WebHome">Atomikos</a> o <a href="https://github.com/scalar-labs/btm">Bitronix</a></p>
+        <p class="chico fragment"><a href="https://www.atomikos.com/Blog/SagaVsTransactionalCallWhichOneShouldYouReallyUse">Sagas vs Atomikos</a>. XA Transactions.</p>
         <p class="chico fragment">Opciones para TFCs</p>
       </section>
 
