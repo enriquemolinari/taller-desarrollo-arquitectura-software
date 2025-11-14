@@ -169,12 +169,12 @@ same team, to avoid distributed transactions.
                   driver de BD se encarga de manejar esa comunicacion -->
       </section>
 
-      <section id="vs">
+<!--       <section id="vs">
         <p class="resaltar">Arquitecturas Distribuídas</p>
         <p class="chico">¿Porqué distribuir?</p>
         <p class="fragment">Para mejorar la performance, la escalabilidad y la disponibilidad de un servicio.</p>
         <p class="fragment">En microservicios se suma la posibilidad de escalar equipos de desarrollos grandes.</p>
-      </section>
+      </section> -->
 
       <section id="vs">
         <p class="resaltar">Arquitecturas Distribuídas</p>
@@ -237,19 +237,19 @@ same team, to avoid distributed transactions.
       </section>
 
       <section id="fp">
-        <p class="resaltar">Arquitecturas Distribuídas: Paypal y Mercado Pago</p>
-        <p class="chico fragment">Ver la documentación del gateway de pagos que contratemos.</p>
-        <p class="chico fragment"><a href="https://www.paypal.com/us/cshelp/article/how-do-i-avoid-duplicate-transactions-ts1097">Paypal</a> sobre fallas parciales.</p>
-        <p class="chico fragment"><a href="https://www.mercadopago.com.ar/developers/en/news/2023/01/04/Idempotency-key-usage-will-be-mandatory">Mercado Pago</a> sobre fallas parciales.</p>
-      </section>
-
-
-      <section id="fp">
         <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
         <p class="chico fragment">Entonces... ¿Cómo lideamos con fallas parciales?</p>
         <p class="chico fragment">Siempre usar <u>Timeouts</u></p>
         <p class="chico fragment">Hacer las operaciones <u>Idempotentes</u>: su ejecución producirá el mismo efecto o resultado si se ejecutara una vez o varias veces.</p>
         <p class="chico fragment">Cada operacion se identifica con un <u>único identificador</u>, de modo que quien recibe puede verificar si dicha operación ya fue procesada o no.</p> 
+      </section>
+
+
+      <section id="fp">
+        <p class="resaltar">Arquitecturas Distribuídas: Paypal y Mercado Pago</p>
+        <p class="chico fragment">Ver la documentación del gateway de pagos que contratemos.</p>
+        <p class="chico fragment"><a href="https://www.paypal.com/us/cshelp/article/how-do-i-avoid-duplicate-transactions-ts1097">Paypal</a> sobre fallas parciales.</p>
+        <p class="chico fragment"><a href="https://www.mercadopago.com.ar/developers/en/news/2023/01/04/Idempotency-key-usage-will-be-mandatory">Mercado Pago</a> sobre fallas parciales.</p>
       </section>
 
       <section id="tx">
@@ -374,7 +374,7 @@ public void guardar(String fileName, String fileEnBase64) {
 
       <section id="tx">
         <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
-        <p class="chico fragment">Caso 2: ¿En el trabajo grupal, en que caso necesitamos atomicidad entre componentes que no son transaccionalmente compatibles?</p>
+        <p class="chico fragment">Caso 2: ¿En el trabajo grupal, en que caso necesitamos atomicidad entre componentes que <u>no</u> son transaccionalmente compatibles?</p>
         <p class="chico fragment">Y aca <u>no podemos</u> darnos el gusto de que haya <u>inconsistencia</u></p>
         <p class="chico fragment">Insert/Update en BD (Insertar una nueva Película) y push de mensaje en RabbitMQ (Evento de NuevaPelicula).</p>
         <p class="chico fragment">La BD y RabbitMQ <u>no son transaccionalmente compatibles</u>.</p>
