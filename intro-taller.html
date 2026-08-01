@@ -123,18 +123,19 @@
     <div class="menubar line">
       <div class="slide-number"></div>
       <ul class="menu">
-        <li><a href="#/obj">Objetivo</a></li>
+        <li><a href="#/obj">Objetivos</a></li>
         <li><a href="#/cont">Contenidos</a></li>
         <li><a href="#/tps">Trabajos Prácticos</a></li>
         <li><a href="#/metodo">Metodología</a></li>
         <li><a href="#/curfin">Cursada y Final</a></li>
+        <li><a href="#/ia">Sobre la IA</a></li>
       </ul>
       <div class="placeholder"></div>
     </div>
     <div class="slides">
       <section style="text-align: left" data-transition="fade" data-state="hide-menubar no-title-footer">
         <div class="box">
-          <span>Taller de Tecnología y Producción de Software</span>
+          <span>Taller de Tecnologías y Producción de Software</span>
         </div>
         <p class="autor">Horacio Muñoz</p>
         <p class="autor">Enrique Molinari</p>
@@ -142,8 +143,19 @@
       </section>
 
       <section id="obj">
-        <p class="titulo">Objetivo</p>
-        <p class="chico">
+        <p class="titulo">Objetivos</p>
+        <ol>
+          <li class="chicoYalineadoIzq fragment">
+            <strong>Arquitectura de Software</strong>: estudiar conceptos, diferentes estilos y aplicarlos.
+          </li>
+          <li class="chicoYalineadoIzq fragment">
+            <strong>Tecnologías Web</strong>: estudiarlas y aplicarlas.
+          </li>
+          <li class="chicoYalineadoIzq fragment">
+            <strong>Prácticas actuales</strong> de desarrollo de software.
+          </li>
+        </ol>
+        <!--         <p class="chico">
           Introducir a los estudiantes en un esquema de desarrollo de software
           similar a los utilizados en la industria, utilizando
           <u>buenas prácticas</u> y <u>tecnologías</u> acordes a las prácticas
@@ -152,13 +164,13 @@
         <p class="chico">
           Buenas prácticas relacionadas a los métodos y herramientas
           utilizadas, el diseño, la arquitectura y el código que escribimos.
-        </p>
+        </p> -->
       </section>
 
       <section id="cont">
         <p class="titulo">¿Qué tecnologías vemos?</p>
         <p class="chicoYalineadoIzq fragment">
-          Persistencia OO con <b>Hibernate</b> y servicios Web con
+          Persistencia con <b>Hibernate</b> y Servicios Web con
           <b>SpringBoot</b>.
         </p>
         <p class="chicoYalineadoIzq fragment">
@@ -172,11 +184,11 @@
       <section id="cont">
         <p class="titulo">¿Qué contenidos teóricos vemos?</p>
         <p class="chicoYalineadoIzq fragment">
-          Persistencia OO con JPA/Hibernate. Testing de Integración.
-        </p>
-        <p class="chicoYalineadoIzq fragment">
           Conceptos de Arquitectura de Software: arquitecturas monolíticas vs
           distribuídas, partición lógica vs física. El modelo C4.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          Persistencia OO con JPA/Hibernate. Testing de Integración.
         </p>
         <p class="chicoYalineadoIzq fragment">
           El protocolo HTTP, Servicios Web con SpringBoot.
@@ -203,7 +215,6 @@
         <p class="chicoYalineadoIzq fragment">
           Conceptos de Integración Continua.
         </p>
-        <p class="chicoYalineadoIzq fragment">Y más sobre tendencias...</p>
       </section>
 
       <section id="tps">
@@ -231,6 +242,19 @@
           consultas de TPs (virtual).
         </p>
         <p class="chicoYalineadoIzq fragment">
+          Luego de cada clase se entrega materia (generalmente repos de código). Úsenlo, el README.md es la guía.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
+          El <u>TP Individual</u> se puede comenzar hoy mismo. Construyendo el modelo de objetos y testeandolo.
+        </p>
+
+      </section>
+      <section id="metodo">
+        <p class="titulo">Metodología</p>
+        <p class="chicoYalineadoIzq fragment">
+          El <u>TP Grupal</u> se comienza luego de la primer clase sobre Arquitectura de Software.
+        </p>
+        <p class="chicoYalineadoIzq fragment">
           El <u>TP Grupal</u> se irá construyendo en iteraciones de 2/3
           semanas. Sincronizado con las clases teóricas.
         </p>
@@ -239,14 +263,8 @@
           construído.
         </p>
         <p class="chicoYalineadoIzq fragment">
-          <u>Demo</u>: Qué habíamos planeado vs qué construímos. Se muestra el
-          plan (casos de uso, historias de usuario, etc) y se procede a
-          mostrar la funcionalidad construída a partir del plan como si los
-          docentes fueran el cliente.
-        </p>
-        <p class="chicoYalineadoIzq fragment">
-          <u>Demo</u>: Luego, también se discutirán cuestiones técnicas del
-          desarrollo.
+          <u>Demo</u>: Se presenta a los docentes como si fueran los clientes. Que estaba planeado vs que construyeron.
+          Cuál es el plan del siguiente sprint.
         </p>
       </section>
 
@@ -274,17 +292,15 @@
         </p>
       </section>
 
-      <section id="curfin">
+      <section id="ia">
         <p class="titulo">Sobre el uso de IA</p>
         <p class="chicoYalineadoIzq fragment">
-          <u>Uso de IA</u>: Se permite el uso de herramientas de IA para generar código, tests, documentación, historias
+          Se permite el uso de herramientas de IA para generar código, tests, documentación, historias
           de usuario.
         </p>
         <p class="chicoYalineadoIzq fragment">
-          <u>Uso responsable</u>: Estamos aprendiendo. La IA puede generar código, pero Uds deben entenderlo y poder
-          explicarlo. En esta materia evaluamos la comprensión de conceptos y su implementación en código. <u>Cada línea
-            de
-            código debe poder ser explicada.</u>
+          <u>Uso responsable</u>: Estamos aprendiendo. La IA puede generar código, pero Uds deben entender lo que genera
+          y qué efecto tiene en el sistema.</u>
         </p>
       </section>
 
