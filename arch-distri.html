@@ -108,6 +108,536 @@
       color: black;
     }
 
+    /* ===== Animaciones de soporte: Fallas Parciales ===== */
+    .fp-anim .fp-title {
+      width: 940px;
+      margin: 6px auto 4px;
+      text-align: left;
+      font-size: 20px;
+      font-weight: bold;
+      color: #4a4e69;
+    }
+
+    .fp-anim .fp-panel {
+      position: relative;
+      width: 940px;
+      margin: 0 auto;
+    }
+
+    .fp-anim .fp-mono {
+      height: 130px;
+      margin-top: 10px;
+    }
+
+    .fp-anim .fp-distri {
+      height: 300px;
+    }
+
+    .fp-anim .node,
+    .fp-anim .comp {
+      position: absolute;
+      width: 130px;
+      height: 64px;
+      box-sizing: border-box;
+      border: 3px solid #2a9d8f;
+      border-radius: 10px;
+      background: #e9f5f3;
+      color: #264653;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .6s;
+      z-index: 2;
+    }
+
+    .fp-anim .node.db {
+      width: 110px;
+    }
+
+    .fp-anim .node.n-router {
+      width: 100px;
+      border-radius: 32px;
+      border-color: #4a4e69;
+      background: #eef0f7;
+      font-size: 16px;
+    }
+
+    .fp-anim .comp {
+      top: 45px;
+      height: 56px;
+    }
+
+    .fp-anim .machine {
+      position: absolute;
+      left: 240px;
+      top: 0;
+      width: 700px;
+      height: 125px;
+      box-sizing: border-box;
+      border: 3px dashed #4a4e69;
+      border-radius: 14px;
+      transition: all .6s;
+    }
+
+    .fp-anim .machine-label {
+      position: absolute;
+      left: 10px;
+      top: 6px;
+      font-size: 14px;
+      color: #4a4e69;
+    }
+
+    /* agrupa app + BD de un mismo vertical */
+    .fp-anim .vbox {
+      position: absolute;
+      left: 600px;
+      width: 336px;
+      height: 104px;
+      box-sizing: border-box;
+      border: 2px dashed #9aa;
+      border-radius: 12px;
+      transition: all .6s;
+    }
+
+    .fp-anim .vbox span {
+      position: absolute;
+      left: 8px;
+      top: 1px;
+      font-size: 13px;
+      color: #778;
+    }
+
+    .fp-anim .link {
+      position: absolute;
+      height: 3px;
+      background: #aaa;
+      transform-origin: 0 50%;
+      z-index: 1;
+      transition: background .6s;
+    }
+
+    .fp-anim .pkt {
+      position: absolute;
+      top: -5px;
+      left: 0;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #2a9d8f;
+      animation: fp-go 1.8s linear infinite;
+    }
+
+    /* respuesta: viaja en sentido contrario */
+    .fp-anim .pkt.back {
+      background: #e9c46a;
+      animation-name: fp-back;
+      animation-delay: -0.9s;
+    }
+
+    @keyframes fp-go {
+      from {
+        left: 0;
+      }
+
+      to {
+        left: calc(100% - 13px);
+      }
+    }
+
+    @keyframes fp-back {
+      from {
+        left: calc(100% - 13px);
+      }
+
+      to {
+        left: 0;
+      }
+    }
+
+    /* el pedido sale... llega al otro extremo y nadie lo atiende */
+    @keyframes fp-lost-end {
+      0% {
+        left: 0;
+        opacity: 1;
+      }
+
+      80% {
+        left: calc(100% - 13px);
+        opacity: 1;
+      }
+
+      90% {
+        left: calc(100% - 13px);
+        opacity: 0;
+      }
+
+      100% {
+        left: calc(100% - 13px);
+        opacity: 0;
+      }
+    }
+
+    .fp-anim .badge-total {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 4px 18px;
+      border: 3px solid #c0392b;
+      border-radius: 10px;
+      background: rgba(253, 236, 234, .95);
+      white-space: nowrap;
+      font-size: 34px;
+      font-weight: bold;
+      color: #c0392b;
+      z-index: 3;
+    }
+
+    .fp-anim .badge {
+      position: absolute;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: bold;
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .fp-anim .badge-ventas {
+      left: 170px;
+      top: 74px;
+      background: #fff3cd;
+      color: #8a6d00;
+      border: 2px solid #e9c46a;
+    }
+
+    .fp-anim .badge-router {
+      left: 370px;
+      top: 196px;
+      background: #fdecea;
+      color: #c0392b;
+      border: 2px solid #e76f51;
+    }
+
+    .fp-anim .badge-down {
+      left: 615px;
+      top: 134px;
+      background: #fdecea;
+      color: #c0392b;
+      border: 2px solid #e76f51;
+    }
+
+    .fp-anim .badge-ok {
+      left: 600px;
+      top: 134px;
+      background: #e9f5f3;
+      color: #1d6f65;
+      border: 2px solid #2a9d8f;
+      font-size: 14px;
+    }
+
+    .fp-anim .fp-caption {
+      font-size: 22px;
+      margin-top: 8px;
+    }
+
+    /* Una única máquina: Falla Total */
+    .fp-anim:has(.fp-total.visible) .machine {
+      border-color: #c0392b;
+      background: #fdecea;
+    }
+
+    .fp-anim:has(.fp-total.visible) .comp {
+      border-color: #bbb;
+      background: #eee;
+      color: #aaa;
+    }
+
+    .fp-anim:has(.fp-total.visible) .l-int .pkt,
+    .fp-anim:has(.fp-total.visible) .l-user .pkt.back {
+      animation: none;
+      opacity: 0;
+    }
+
+    .fp-anim:has(.fp-total.visible) .l-user .pkt {
+      background: #e76f51;
+      animation-name: fp-lost-end;
+    }
+
+    /* Falla Parcial 1: se cae el router/switch, las apps siguen vivas */
+    .fp-anim:has(.fp-router.visible) .n-router {
+      border-color: #c0392b;
+      border-style: dashed;
+      background: #fdecea;
+      color: #c0392b;
+    }
+
+    .fp-anim:has(.fp-router.visible) .l-rp,
+    .fp-anim:has(.fp-router.visible) .l-rs {
+      background: repeating-linear-gradient(90deg, #e76f51 0 8px, transparent 8px 14px);
+    }
+
+    .fp-anim:has(.fp-router.visible) .l-rp .pkt,
+    .fp-anim:has(.fp-router.visible) .l-rs .pkt,
+    .fp-anim:has(.fp-router.visible) .l-vr .pkt.back {
+      animation: none;
+      opacity: 0;
+    }
+
+    .fp-anim:has(.fp-router.visible) .l-vr .pkt {
+      background: #e76f51;
+      animation-name: fp-lost-end;
+    }
+
+    /* Falla Parcial 2: se cae la vertical Pagos completa (app + BD) */
+    .fp-anim:has(.fp-vert.visible) .v-pagos {
+      border-color: #c0392b;
+      background: #fdecea;
+    }
+
+    .fp-anim:has(.fp-vert.visible) .n-pagos {
+      border-color: #bbb;
+      background: #eee;
+      color: #aaa;
+    }
+
+    .fp-anim:has(.fp-vert.visible) .l-pdb .pkt,
+    .fp-anim:has(.fp-vert.visible) .l-rp .pkt.back {
+      animation: none;
+      opacity: 0;
+    }
+
+    .fp-anim:has(.fp-vert.visible) .l-rp .pkt {
+      background: #e76f51;
+      animation-name: fp-lost-end;
+    }
+
+    /* quien llama queda esperando */
+    .fp-anim:has(.fp-router.visible) .n-ventas,
+    .fp-anim:has(.fp-vert.visible) .n-ventas {
+      border-color: #e9c46a;
+      background: #fff8e1;
+    }
+
+    /* ===== Diagramas de secuencia animados (red no confiable / pago online) ===== */
+    .reveal .fp-caption {
+      font-size: 22px;
+      margin-top: 8px;
+    }
+
+    .fp-seq {
+      position: relative;
+      width: 940px;
+      margin: 0 auto;
+      font-size: 16px;
+      color: #264653;
+    }
+
+    .fp-seq .actor {
+      position: absolute;
+      top: 0;
+      width: 180px;
+      height: 50px;
+      box-sizing: border-box;
+      border: 3px solid #2a9d8f;
+      border-radius: 10px;
+      background: #e9f5f3;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .fp-seq .actor.net {
+      border-color: #4a4e69;
+      border-style: dashed;
+      border-radius: 25px;
+      background: #eef0f7;
+    }
+
+    /* líneas de vida */
+    .fp-seq .life {
+      position: absolute;
+      top: 50px;
+      bottom: 22px;
+      width: 0;
+      border-left: 2px solid #999;
+    }
+
+    .fp-seq .life.net {
+      border-left-style: dashed;
+    }
+
+    .fp-seq .tlabel {
+      position: absolute;
+      bottom: 0;
+      width: 120px;
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+    }
+
+    /* mensajes: la flecha se "dibuja" desde el emisor al aparecer el fragment */
+    .fp-seq .msg {
+      position: absolute;
+      height: 2px;
+      z-index: 1;
+    }
+
+    .fp-seq .msg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #333;
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+
+    .fp-seq .msg.l::before {
+      transform-origin: right center;
+    }
+
+    .fp-seq .msg::after {
+      content: "";
+      position: absolute;
+      top: -6px;
+      right: -2px;
+      border-left: 12px solid #333;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      opacity: 0;
+    }
+
+    .fp-seq .msg.l::after {
+      right: auto;
+      left: -2px;
+      border-left: 0;
+      border-right: 12px solid #333;
+    }
+
+    /* mensaje perdido: termina en una ✖ roja */
+    .fp-seq .msg.lost::before {
+      background: #c0392b;
+    }
+
+    .fp-seq .msg.lost::after {
+      content: "✖";
+      border: 0;
+      top: -17px;
+      left: -12px;
+      font-size: 26px;
+      line-height: 1;
+      color: #c0392b;
+    }
+
+    .fp-seq .msg.visible::before {
+      animation: fp-draw .6s ease-out forwards;
+    }
+
+    .fp-seq .msg.visible::after {
+      animation: fp-appear .2s .55s forwards;
+    }
+
+    .fp-seq .msg .lbl {
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      white-space: nowrap;
+      font-size: 15px;
+    }
+
+    /* procesamiento en el servicio destino (barra sobre la línea de vida) */
+    .fp-seq .proc {
+      position: absolute;
+      left: 754px;
+      width: 12px;
+      background: #777;
+      border: 1px solid #444;
+      transform: scaleY(0);
+      transform-origin: top center;
+      z-index: 2;
+    }
+
+    .fp-seq .proc.visible {
+      animation: fp-grow .8s ease-out forwards;
+    }
+
+    .fp-seq .proc.slow.visible {
+      animation-duration: 2.5s;
+    }
+
+    .fp-seq .note {
+      position: absolute;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: bold;
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .fp-seq .note.small {
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .fp-seq .note.ok {
+      background: #e9f5f3;
+      color: #1d6f65;
+      border: 2px solid #2a9d8f;
+    }
+
+    .fp-seq .note.warn {
+      background: #fff3cd;
+      color: #8a6d00;
+      border: 2px solid #e9c46a;
+    }
+
+    .fp-seq .note.bad {
+      background: #fdecea;
+      color: #c0392b;
+      border: 2px solid #e76f51;
+    }
+
+    @keyframes fp-draw {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    @keyframes fp-grow {
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    @keyframes fp-appear {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fp-anim .pkt {
+        animation: none !important;
+      }
+
+      .fp-seq .msg::before,
+      .fp-seq .proc {
+        transform: none;
+      }
+
+      .fp-seq .msg::after {
+        opacity: 1;
+      }
+    }
+
     .reveal .footer {
       position: absolute;
       bottom: 1em;
@@ -192,15 +722,39 @@ same team, to avoid distributed transactions.
       </section>
 
 
-      <section id="fp">
+      <section id="fp" class="fp-anim">
         <p class="resaltar">Arquitecturas Distribuídas</p>
         <p class="chico"><u>Fallas Parciales</p></u></p>
-        <p class="chico fragment">"Cuando ejecutamos una aplicación en una única máquina su comportamiento es
-          predecible.
+        <p class="chico fragment" data-fragment-index="1">"Cuando ejecutamos una aplicación en una única máquina su
+          comportamiento es predecible.
           Si el hardware donde corre funciona, la aplicación ante las mismas entradas producirá siempre las mismas
           salidas. Si el hardware donde corre fallara por algún motivo, la aplicación completa dejaría de funcionar
           (<u>Falla Total</u>). Es
           decir, una aplicación en una única máquina funciona o no funciona, pero no existe nada en el medio".</p>
+
+        <!-- Animación de soporte: una única máquina -> Falla Total -->
+        <div class="fragment" data-fragment-index="2">
+          <div class="fp-panel fp-mono" role="img"
+            aria-label="Usuario enviando pedidos a una aplicación que corre completa en una única máquina">
+            <div class="node" style="left:0; top:41px;">🧑 Usuario</div>
+            <div class="link l-user" style="left:130px; top:72px; width:110px;">
+              <span class="pkt"></span><span class="pkt back"></span>
+            </div>
+            <div class="machine">
+              <span class="machine-label">🖥️ una única máquina / un proceso</span>
+              <div class="comp" style="left:40px;">UI</div>
+              <div class="link l-int" style="left:170px; top:73px; width:115px;">
+                <span class="pkt"></span><span class="pkt back"></span>
+              </div>
+              <div class="comp" style="left:285px;">Lógica</div>
+              <div class="link l-int" style="left:415px; top:73px; width:115px;">
+                <span class="pkt"></span><span class="pkt back"></span>
+              </div>
+              <div class="comp" style="left:530px;">Datos</div>
+              <div class="fragment fp-total badge-total" data-fragment-index="3">💥 Falla Total</div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="fp">
@@ -218,19 +772,187 @@ same team, to avoid distributed transactions.
           distribuidos.</p>
       </section>
 
-      <section id="fp">
-        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
-        <img class="fragment" src="imgs/distrib-systems1.png">
+      <!-- Animación de soporte 1: falla un componente de red -->
+      <section id="fp" class="fp-anim">
+        <p class="resaltar">Arquitecturas Distribuídas: <u>Fallas Parciales</u></p>
+        <div class="fp-title">Falla un componente de red (router / switch)</div>
+        <div class="fp-panel fp-distri" role="img"
+          aria-label="Cliente llama a Ventas, que llega a Pagos y Stock a través de un router. Falla el router y Pagos y Stock siguen funcionando pero quedan inalcanzables">
+          <div class="vbox" style="top:10px;"><span>vertical Pagos</span></div>
+          <div class="vbox" style="top:186px;"><span>vertical Stock</span></div>
+          <div class="node" style="left:0; top:118px;">🧑 Cliente</div>
+          <div class="link" style="left:130px; top:149px; width:70px;">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="node n-ventas" style="left:200px; top:118px;">🖥️ Ventas</div>
+          <div class="link l-vr" style="left:330px; top:149px; width:90px;">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="node n-router" style="left:420px; top:118px;">🔀 Router</div>
+          <div class="link l-rp" style="left:520px; top:149px; width:133px; transform:rotate(-41.3deg);">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="link l-rs" style="left:520px; top:149px; width:133px; transform:rotate(41.3deg);">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="node" style="left:620px; top:30px;">🖥️ Pagos</div>
+          <div class="link" style="left:750px; top:61px; width:60px;">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="node db" style="left:810px; top:30px;">🛢️ BD</div>
+          <div class="node" style="left:620px; top:206px;">🖥️ Stock</div>
+          <div class="link" style="left:750px; top:237px; width:60px;">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="node db" style="left:810px; top:206px;">🛢️ BD</div>
+
+          <div class="fragment fp-router badge badge-ventas" data-fragment-index="1">⏳ timeout... ¿qué pasó?</div>
+          <div class="fragment badge badge-router" data-fragment-index="1">💥 router / switch caído</div>
+          <div class="fragment badge badge-ok" data-fragment-index="1">✔ Pagos y Stock siguen funcionando...
+            pero nadie les llega</div>
+        </div>
+        <p class="fragment fp-caption" data-fragment-index="2">
+          No solo fallan las aplicaciones: también fallan los <u>componentes de red</u>
+          (routers, switches, cables, placas de red...).
+        </p>
+      </section>
+
+      <!-- Animación de soporte 2: falla una aplicación completa (vertical) -->
+      <section id="fp" class="fp-anim">
+        <p class="resaltar">Arquitecturas Distribuídas: <u>Fallas Parciales</u></p>
+        <div class="fp-title">Falla una aplicación completa (vertical)</div>
+        <div class="fp-panel fp-distri" role="img"
+          aria-label="Cliente llama a Ventas, que llega a Pagos y Stock a través de un router. Falla la vertical Pagos completa y el resto sigue funcionando">
+          <div class="vbox v-pagos" style="top:10px;"><span>vertical Pagos</span></div>
+          <div class="vbox" style="top:186px;"><span>vertical Stock</span></div>
+          <div class="node" style="left:0; top:118px;">🧑 Cliente</div>
+          <div class="link" style="left:130px; top:149px; width:70px;">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="node n-ventas" style="left:200px; top:118px;">🖥️ Ventas</div>
+          <div class="link" style="left:330px; top:149px; width:90px;">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="node n-router" style="left:420px; top:118px;">🔀 Router</div>
+          <div class="link l-rp" style="left:520px; top:149px; width:133px; transform:rotate(-41.3deg);">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="link" style="left:520px; top:149px; width:133px; transform:rotate(41.3deg);">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="node n-pagos" style="left:620px; top:30px;">🖥️ Pagos</div>
+          <div class="link l-pdb" style="left:750px; top:61px; width:60px;">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="node db n-pagos" style="left:810px; top:30px;">🛢️ BD</div>
+          <div class="node" style="left:620px; top:206px;">🖥️ Stock</div>
+          <div class="link" style="left:750px; top:237px; width:60px;">
+            <span class="pkt"></span><span class="pkt back"></span>
+          </div>
+          <div class="node db" style="left:810px; top:206px;">🛢️ BD</div>
+
+          <div class="fragment fp-vert badge badge-ventas" data-fragment-index="1">⏳ timeout... ¿se pagó o no?</div>
+          <div class="fragment badge badge-down" data-fragment-index="1">💥 se cae la vertical Pagos (app + BD)</div>
+        </div>
+        <p class="fragment fp-caption" data-fragment-index="2">
+          Una parte del sistema falla y el resto <u>sigue funcionando</u>... y Ventas <u>no puede saber</u>
+          si Pagos se cayó, está lento o se perdió el mensaje.
+        </p>
       </section>
 
       <section id="fp">
         <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
-        <img class="fragment" src="imgs/distrib-systems2.png">
+        <!-- Animación (antes imgs/distrib-systems1.png): se pierde la respuesta -->
+        <div class="fp-seq" style="height:400px;" role="img"
+          aria-label="Diagrama de secuencia: Servicio A envía un mensaje a Servicio B a través de la red, B lo procesa, la respuesta se pierde en la red y A hace timeout">
+          <div class="actor" style="left:30px;">Servicio A</div>
+          <div class="actor net" style="left:350px;">☁️ Red</div>
+          <div class="actor" style="left:670px;">Servicio B</div>
+          <div class="life" style="left:120px;"></div>
+          <div class="life net" style="left:440px;"></div>
+          <div class="life" style="left:760px;"></div>
+          <div class="tlabel" style="left:60px;">tiempo ↓</div>
+          <div class="tlabel" style="left:700px;">tiempo ↓</div>
+
+          <div class="msg r fragment" data-fragment-index="1" style="top:100px; left:120px; width:320px;">
+            <span class="lbl">mensaje</span>
+          </div>
+          <div class="msg r fragment" data-fragment-index="2" style="top:140px; left:440px; width:320px;">
+            <span class="lbl">mensaje</span>
+          </div>
+          <div class="proc fragment" data-fragment-index="3" style="top:150px; height:100px;"></div>
+          <div class="note ok fragment" data-fragment-index="3" style="top:175px; left:775px;">⚙️ procesado</div>
+          <div class="msg l lost fragment" data-fragment-index="4" style="top:250px; left:450px; width:310px;">
+            <span class="lbl">respuesta</span>
+          </div>
+          <div class="note bad fragment" data-fragment-index="5" style="top:300px; left:130px;">⏰ ✖ Timeout en t</div>
+        </div>
+        <p class="fragment fp-caption">A no sabe si el mensaje llegó, si B lo procesó o si se perdió la respuesta.</p>
+      </section>
+
+      <section id="fp">
+        <p class="resaltar">Arquitecturas Distribuídas: La red no es confiable!</p>
+        <!-- Animación (antes imgs/distrib-systems2.png): la respuesta llega tarde -->
+        <div class="fp-seq" style="height:430px;" role="img"
+          aria-label="Diagrama de secuencia: Servicio A envía un mensaje a Servicio B, B tarda en procesarlo, A hace timeout y luego la respuesta llega tarde">
+          <div class="actor" style="left:30px;">Servicio A</div>
+          <div class="actor net" style="left:350px;">☁️ Red</div>
+          <div class="actor" style="left:670px;">Servicio B</div>
+          <div class="life" style="left:120px;"></div>
+          <div class="life net" style="left:440px;"></div>
+          <div class="life" style="left:760px;"></div>
+          <div class="tlabel" style="left:60px;">tiempo ↓</div>
+          <div class="tlabel" style="left:700px;">tiempo ↓</div>
+
+          <div class="msg r fragment" data-fragment-index="1" style="top:100px; left:120px; width:320px;">
+            <span class="lbl">mensaje</span>
+          </div>
+          <div class="msg r fragment" data-fragment-index="2" style="top:140px; left:440px; width:320px;">
+            <span class="lbl">mensaje</span>
+          </div>
+          <div class="proc slow fragment" data-fragment-index="3" style="top:150px; height:175px;"></div>
+          <div class="note warn fragment" data-fragment-index="3" style="top:175px; left:775px;">🐢 procesando...</div>
+          <div class="note bad fragment" data-fragment-index="4" style="top:215px; left:130px;">⏰ ✖ Timeout en t</div>
+          <div class="msg l fragment" data-fragment-index="5" style="top:325px; left:440px; width:320px;">
+            <span class="lbl">respuesta</span>
+          </div>
+          <div class="msg l fragment" data-fragment-index="6" style="top:355px; left:120px; width:320px;">
+            <span class="lbl">respuesta</span>
+          </div>
+          <div class="note warn fragment" data-fragment-index="6" style="top:368px; left:130px;">llega tarde: A ya se
+            dio por vencido</div>
+        </div>
+        <p class="fragment fp-caption">Desde A, una respuesta lenta y una respuesta perdida <u>se ven igual</u>.</p>
       </section>
 
       <section id="fp">
         <p class="resaltar">Arquitecturas Distribuídas: Pago Online.</p>
-        <img class="fragment" src="imgs/paypal-1.png">
+        <!-- Animación (antes imgs/paypal-1.png): se cobra, pero el "Pago OK" se pierde -->
+        <div class="fp-seq" style="height:400px;" role="img"
+          aria-label="Diagrama de secuencia: Ventas pide pagar al Gateway de Pago, el gateway cobra, la respuesta Pago OK se pierde en la red y Ventas hace timeout">
+          <div class="actor" style="left:30px;">Ventas</div>
+          <div class="actor net" style="left:350px;">☁️ Red</div>
+          <div class="actor" style="left:670px;">Gateway de Pago</div>
+          <div class="life" style="left:120px;"></div>
+          <div class="life net" style="left:440px;"></div>
+          <div class="life" style="left:760px;"></div>
+          <div class="tlabel" style="left:60px;">tiempo ↓</div>
+          <div class="tlabel" style="left:700px;">tiempo ↓</div>
+
+          <div class="msg r fragment" data-fragment-index="1" style="top:100px; left:120px; width:320px;">
+            <span class="lbl">pagar(nroTarjeta)</span>
+          </div>
+          <div class="msg r fragment" data-fragment-index="2" style="top:140px; left:440px; width:320px;">
+            <span class="lbl">pagar(nroTarjeta)</span>
+          </div>
+          <div class="proc fragment" data-fragment-index="3" style="top:150px; height:100px;"></div>
+          <div class="note ok fragment" data-fragment-index="3" style="top:175px; left:775px;">💳 cobrado ✔</div>
+          <div class="msg l lost fragment" data-fragment-index="4" style="top:250px; left:450px; width:310px;">
+            <span class="lbl">Pago OK</span>
+          </div>
+          <div class="note bad fragment" data-fragment-index="5" style="top:300px; left:130px;">⏰ ✖ Timeout en t</div>
+          <div class="note warn fragment" data-fragment-index="6" style="top:340px; left:130px;">¿se pagó o no?</div>
+        </div>
       </section>
 
       <section id="fp">
@@ -244,7 +966,55 @@ same team, to avoid distributed transactions.
 
       <section id="fp">
         <p class="resaltar">Arquitecturas Distribuídas: Pago Online.</p>
-        <img class="fragment" src="imgs/paypal-2.png">
+        <!-- Animación (antes imgs/paypal-2.png): reintento con idempotency key (id_carrito) -->
+        <div class="fp-seq" style="height:470px;" role="img"
+          aria-label="Diagrama de secuencia: Ventas paga con id_carrito 123, el gateway cobra, la respuesta se pierde, Ventas reintenta con el mismo id_carrito, el gateway detecta que ya fue procesado, no cobra de nuevo y responde Pagado">
+          <div class="actor" style="left:30px;">Ventas</div>
+          <div class="actor net" style="left:350px;">☁️ Red</div>
+          <div class="actor" style="left:670px;">Gateway de Pago</div>
+          <div class="life" style="left:120px;"></div>
+          <div class="life net" style="left:440px;"></div>
+          <div class="life" style="left:760px;"></div>
+          <div class="tlabel" style="left:700px;">tiempo ↓</div>
+
+          <!-- primer intento -->
+          <div class="msg r fragment" data-fragment-index="1" style="top:85px; left:120px; width:320px;">
+            <span class="lbl">pagar(<b>id_carrito=123</b>, nroTarjeta)</span>
+          </div>
+          <div class="msg r fragment" data-fragment-index="2" style="top:117px; left:440px; width:320px;">
+            <span class="lbl">pagar(<b>123</b>, nroTarjeta)</span>
+          </div>
+          <div class="proc fragment" data-fragment-index="3" style="top:122px; height:50px;"></div>
+          <div class="note ok small fragment" data-fragment-index="3" style="top:118px; left:775px;">¿123 procesado?
+            No<br>→ 💳 cobro y guardo 123</div>
+          <div class="msg l lost fragment" data-fragment-index="4" style="top:180px; left:450px; width:310px;">
+            <span class="lbl">Pago OK</span>
+          </div>
+          <div class="note bad fragment" data-fragment-index="5" style="top:200px; left:130px;">⏰ ✖ Timeout → reintento
+            con el <u>mismo</u> id</div>
+
+          <!-- reintento -->
+          <div class="msg r fragment" data-fragment-index="6" style="top:262px; left:120px; width:320px;">
+            <span class="lbl">pagar(<b>id_carrito=123</b>, nroTarjeta)</span>
+          </div>
+          <div class="msg r fragment" data-fragment-index="7" style="top:294px; left:440px; width:320px;">
+            <span class="lbl">pagar(<b>123</b>, nroTarjeta)</span>
+          </div>
+          <div class="proc fragment" data-fragment-index="8" style="top:299px; height:40px;"></div>
+          <div class="note warn small fragment" data-fragment-index="8" style="top:295px; left:775px;">¿123 procesado?
+            <b>Sí</b><br>→ no cobro de nuevo
+          </div>
+          <div class="msg l fragment" data-fragment-index="9" style="top:350px; left:440px; width:320px;">
+            <span class="lbl">Pagado</span>
+          </div>
+          <div class="msg l fragment" data-fragment-index="10" style="top:382px; left:120px; width:320px;">
+            <span class="lbl">Pagado</span>
+          </div>
+          <div class="note ok fragment" data-fragment-index="10" style="top:397px; left:130px;">✔ Registrar Pago
+            (cobrado una sola vez)</div>
+        </div>
+        <p class="fragment fp-caption" data-fragment-index="11">id_carrito es la <u>idempotency key</u>: reintentar es
+          seguro, el pago <u>no se duplica</u>.</p>
       </section>
 
       <section id="fp">
