@@ -421,6 +421,56 @@
       background: #fff8e1;
     }
 
+    /* ===== Dos verticales comunicándose: HTTP (sincrónico) y cola de mensajes (asincrónico) ===== */
+    .fp-anim .fp-verts {
+      height: 330px;
+      margin-top: 10px;
+    }
+
+    .fp-anim .ch-label {
+      position: absolute;
+      text-align: center;
+      white-space: nowrap;
+      font-size: 17px;
+      font-weight: bold;
+      color: #264653;
+    }
+
+    .fp-anim .ch-label small {
+      display: block;
+      font-size: 14px;
+      font-weight: normal;
+      color: #555;
+    }
+
+    .fp-anim .queue {
+      position: absolute;
+      box-sizing: border-box;
+      border: 3px solid #6d597a;
+      border-radius: 12px;
+      background: #f3eef6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .fp-anim .queue i {
+      width: 16px;
+      height: 24px;
+      border-radius: 3px;
+      background: #6d597a;
+      opacity: .8;
+    }
+
+    /* mensaje asincrónico: viaja en un solo sentido, sin respuesta */
+    .fp-anim .pkt.msg {
+      border-radius: 3px;
+      background: #6d597a;
+      animation-duration: 2.2s;
+    }
+
     /* ===== Diagramas de secuencia animados (red no confiable / pago online) ===== */
     .reveal .fp-caption {
       font-size: 22px;
@@ -696,9 +746,59 @@ same team, to avoid distributed transactions.
             proceso</u> y se comunican entre ellas enviándose mensajes a través de la <u>red</u>.</p>
       </section>
 
-      <section id="vs">
+      <section id="vs" class="fp-anim">
         <p class="resaltar">Arquitecturas Distribuídas</p>
-        <img class="fragment" src="imgs/rest-call.png">
+        <!-- Animación de soporte: dos verticales (app + BD) comunicándose por la red -->
+        <div class="fragment" data-fragment-index="1">
+          <div class="fp-panel fp-verts" role="img"
+            aria-label="Dos verticales, cada una con su aplicación y su base de datos, que se comunican por la red: de forma sincrónica con llamadas HTTP y de forma asincrónica a través de una cola de mensajes">
+            <!-- vertical A -->
+            <div class="vbox" style="left:0; top:0; width:200px; height:330px;"><span>vertical A</span></div>
+            <div class="node" style="left:35px; top:30px; height:150px;">🖥️ App A</div>
+            <div class="link" style="left:100px; top:180px; width:70px; transform:rotate(90deg);">
+              <span class="pkt"></span><span class="pkt back"></span>
+            </div>
+            <div class="node db" style="left:45px; top:250px;">🛢️ BD A</div>
+
+            <!-- vertical B -->
+            <div class="vbox" style="left:740px; top:0; width:200px; height:330px;"><span>vertical B</span></div>
+            <div class="node" style="left:775px; top:30px; height:150px;">🖥️ App B</div>
+            <div class="link" style="left:840px; top:180px; width:70px; transform:rotate(90deg);">
+              <span class="pkt"></span><span class="pkt back"></span>
+            </div>
+            <div class="node db" style="left:785px; top:250px;">🛢️ BD B</div>
+
+            <!-- comunicación sincrónica: request / response HTTP -->
+            <div class="fragment" data-fragment-index="2">
+              <div class="ch-label" style="left:165px; top:12px; width:610px;">🌐 HTTP / REST · sincrónico
+                <small>A envía el request y queda esperando ⏳ la respuesta de B</small>
+              </div>
+              <div class="link" style="left:165px; top:64px; width:610px;">
+                <span class="pkt"></span><span class="pkt back"></span>
+              </div>
+            </div>
+
+            <!-- comunicación asincrónica: cola de mensajes -->
+            <div class="fragment" data-fragment-index="3">
+              <div class="link" style="left:165px; top:144px; width:225px;">
+                <span class="pkt msg"></span>
+              </div>
+              <div class="queue" style="left:390px; top:120px; width:160px; height:50px;">
+                <i></i><i></i><i></i><i></i>
+              </div>
+              <div class="link" style="left:550px; top:144px; width:225px;">
+                <span class="pkt msg" style="animation-duration:3s;"></span>
+              </div>
+              <div class="ch-label" style="left:165px; top:178px; width:610px;">📨 Cola de mensajes · asincrónico
+                <small>A publica el mensaje y sigue; B lo consume cuando puede</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="fragment fp-caption" data-fragment-index="4">
+          Cada vertical corre en su <u>propio proceso</u> con su <u>propia BD</u>,
+          y se comunican enviándose mensajes por la <u>red</u>.
+        </p>
         <!-- Entre la App y la BD tambien hay inter-process pero el 
                   driver de BD se encarga de manejar esa comunicacion -->
       </section>
@@ -1079,7 +1179,7 @@ public void guardar(String fileName, String fileEnBase64) {
 
       <section id="tx">
         <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
-        <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
+        <!--         <p class="chico fragment">Caso 1: Cambios en BD y en File System</p> -->
         <p class="chico fragment">¿Ahora mejor?</p>
         <!--       data-line-numbers="1-2|2-6|7-9"  -->
         <pre class="fragment"><code data-trim data-noescape lang="java">
@@ -1095,12 +1195,14 @@ public void guardar(String fileName, String fileEnBase64) {
   //...
 }
 </code></pre>
-        <p class="chico fragment">Solo si fileSytem.guardar(...) lanza una exception en caso de error...</p>
+        <p class="chico fragment">Asumiendo que fileSytem.guardar(...) lanza una exception en caso de error...
+        </p>
+        <p class="chico fragment"><u>Mal</u>: Dentro de una Tx no debe exister otra acción que no sea la de DML.</p>
       </section>
 
-      <section id="tx">
+      <!--       <section id="tx">
         <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
-        <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
+
         <p class="chico fragment">Si no lanza exception...</p>
         <pre class="fragment"><code data-trim data-noescape lang="java">
 public void guardar(String fileName, String fileEnBase64) {
@@ -1120,10 +1222,11 @@ public void guardar(String fileName, String fileEnBase64) {
         <p class="chico fragment">¿Esto siempre genera atomicidad/consistencia? <span class="chico fragment">puede
             quedar el archivo huérfano...</span></p>
       </section>
-
+ -->
       <section id="tx">
         <p class="resaltar">Transacciones en Arquitecturas Distribuídas</p>
-        <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
+        <!--         <p class="chico fragment">Caso 1: Cambios en BD y en File System</p>
+ -->
         <p class="chico fragment">mas fácil...</p>
         <pre class="fragment"><code data-trim data-noescape lang="java">
 public void guardar(String fileName, String fileEnBase64) {
