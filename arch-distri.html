@@ -471,6 +471,134 @@
       animation-duration: 2.2s;
     }
 
+    /* ===== Caso 2 BD + RabbitMQ: opción RabbitMQ (N consumers) y opción BD (Outbox Pattern) ===== */
+    .fp-anim .fp-opt {
+      height: 340px;
+      margin-top: 6px;
+    }
+
+    .fp-anim .fp-outbox {
+      height: 360px;
+      margin-top: 6px;
+    }
+
+    /* mensaje que viaja de derecha a izquierda */
+    .fp-anim .pkt.msg.rev {
+      animation-name: fp-back;
+    }
+
+    /* broker: título + mensajes encolados */
+    .fp-anim .queue.broker {
+      flex-direction: column;
+      gap: 8px;
+      font-size: 17px;
+      color: #4b3a57;
+    }
+
+    .fp-anim .broker .qrow {
+      display: flex;
+      gap: 6px;
+    }
+
+    .fp-anim .broker small {
+      font-size: 13px;
+      color: #6d597a;
+    }
+
+    .fp-anim .badge-no {
+      background: #fdecea;
+      color: #c0392b;
+      border: 2px solid #e76f51;
+      font-size: 13px;
+    }
+
+    /* BD relacional con sus tablas */
+    .fp-anim .dbbox {
+      position: absolute;
+      box-sizing: border-box;
+      border: 3px solid #2a9d8f;
+      border-radius: 10px;
+      background: #e9f5f3;
+      /* z-index 0: los fragments (que crean su propio stacking context) se pintan por encima */
+      z-index: 0;
+    }
+
+    .fp-anim .dbbox>span {
+      position: absolute;
+      left: 10px;
+      top: 4px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #264653;
+    }
+
+    /* límite de la Tx local */
+    .fp-anim .txbox {
+      position: absolute;
+      box-sizing: border-box;
+      border: 2px dashed #e76f51;
+      border-radius: 8px;
+      background: rgba(255, 243, 205, .55);
+      z-index: 2;
+    }
+
+    .fp-anim .txbox>span {
+      position: absolute;
+      left: 8px;
+      top: 1px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #b5532f;
+    }
+
+    .fp-anim .tbl {
+      position: absolute;
+      z-index: 3;
+      color: #264653;
+    }
+
+    .fp-anim .tbl .tname {
+      font-size: 13px;
+      font-weight: bold;
+      text-align: left;
+      margin-bottom: 2px;
+    }
+
+    .reveal .fp-anim .tbl table {
+      margin: 0;
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    .reveal .fp-anim .tbl th,
+    .reveal .fp-anim .tbl td {
+      padding: 2px 5px;
+      border: 1px solid #9bb;
+      font-size: 12px;
+      line-height: 1.3;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .reveal .fp-anim .tbl th {
+      background: #d6ece8;
+    }
+
+    .reveal .fp-anim .tbl tr.nuevo td {
+      background: #fff3cd;
+    }
+
+    /* columna "enviado" de la outbox: pasa a ✔ cuando el relay logra publicar */
+    .fp-anim .ob-st::after {
+      content: "⏳ no";
+    }
+
+    .fp-anim:has(.ob-sent.visible) .ob-st::after {
+      content: "✔ sí";
+      color: #1d6f65;
+    }
+
     /* ===== Diagramas de secuencia animados (red no confiable / pago online) ===== */
     .reveal .fp-caption {
       font-size: 22px;
@@ -709,7 +837,7 @@
         <li><a href="#/vs">vs Monolíticas</a></li>
         <li><a href="#/fp">Fallas Praciales</a></li>
         <li><a href="#/tx">Transacciones</a></li>
-        <li><a href="#/mic">Microservicios</a></li>
+        <!--         <li><a href="#/mic">Microservicios</a></li> -->
         <li><a href="#/txd">Transacciones Distribuídas</a></li>
       </ul>
       <div class="placeholder"></div>
@@ -1336,7 +1464,177 @@ public void vender(Cliente c, float monto) {
           RabbitMQ.</p>
       </section>
 
-      <section id="tx">
+      <!-- Animación de soporte: Opción 1, elijo RabbitMQ (la BD es un consumer más) -->
+      <section id="tx" class="fp-anim">
+        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <div class="fp-title">Opción 1: elijo RabbitMQ → publico y la BD es un consumer más</div>
+        <div class="fragment" data-fragment-index="1">
+          <div class="fp-panel fp-opt" role="img"
+            aria-label="La App Películas no inserta en la BD: publica el evento NuevaPelicula en RabbitMQ. Un consumer de la propia vertical Películas consume el mensaje e inserta en la BD Películas, y otra vertical B también se suscribe y consume el mismo mensaje">
+            <!-- vertical Películas -->
+            <div class="vbox" style="left:0; top:0; width:260px; height:340px;"><span>vertical Películas</span></div>
+            <div class="node" style="left:25px; top:30px; width:210px;">🖥️ App Películas</div>
+            <div class="badge badge-no" style="left:42px; top:110px;">✖ no inserta en la BD</div>
+            <div class="node db" style="left:75px; top:262px;">🛢️ BD</div>
+
+            <!-- broker -->
+            <div class="queue broker" style="left:400px; top:20px; width:150px; height:200px;">
+              <b>🐇 RabbitMQ</b>
+              <span class="qrow"><i></i><i></i><i></i></span>
+              <small>NuevaPelicula</small>
+            </div>
+
+            <!-- ① publish -->
+            <div class="ch-label" style="left:235px; top:34px; width:165px;">① publish</div>
+            <div class="link" style="left:235px; top:61px; width:165px;">
+              <span class="pkt msg"></span>
+            </div>
+
+            <!-- ② el mismo vertical se suscribe y ③ inserta en su BD -->
+            <div class="fragment" data-fragment-index="2">
+              <div class="node" style="left:25px; top:150px; width:210px;">👂 Consumer Películas</div>
+              <div class="link" style="left:235px; top:181px; width:165px;">
+                <span class="pkt msg rev"></span>
+              </div>
+              <div class="ch-label" style="left:235px; top:190px; width:165px;">② consume</div>
+              <div class="link" style="left:130px; top:214px; width:48px; transform:rotate(90deg);">
+                <span class="pkt msg"></span>
+              </div>
+              <div class="ch-label" style="left:142px; top:226px; text-align:left;">③ INSERT</div>
+            </div>
+
+            <!-- ② otra vertical interesada en el mismo evento -->
+            <div class="fragment" data-fragment-index="3">
+              <div class="vbox" style="left:680px; top:0; width:260px; height:340px;"><span>vertical B (le interesa
+                  NuevaPelicula)</span></div>
+              <div class="node" style="left:705px; top:150px; width:210px;">👂 Consumer App B</div>
+              <div class="link" style="left:550px; top:181px; width:155px;">
+                <span class="pkt msg" style="animation-duration:3s;"></span>
+              </div>
+              <div class="ch-label" style="left:550px; top:190px; width:155px;">② consume</div>
+              <div class="link" style="left:810px; top:214px; width:48px; transform:rotate(90deg);">
+                <span class="pkt msg"></span>
+              </div>
+              <div class="node db" style="left:755px; top:262px;">🛢️ BD B</div>
+              <div class="ch-label" style="left:822px; top:226px; text-align:left;">③ procesa</div>
+            </div>
+          </div>
+        </div>
+        <p class="fragment fp-caption" data-fragment-index="4">
+          La App hace <u>una sola</u> escritura: el publish. La BD pasa a ser <u>un consumer más</u>
+          entre N (consistencia eventual).
+        </p>
+      </section>
+
+      <!-- Animación de soporte: Opción 2, elijo la BD (Outbox Pattern) -->
+      <section id="tx" class="fp-anim">
+        <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
+        <div class="fp-title">Opción 2: elijo la BD → Outbox Pattern</div>
+        <div class="fragment" data-fragment-index="1">
+          <div class="fp-panel fp-outbox" role="img"
+            aria-label="La App Películas, en una única transacción local, inserta la película en la tabla peliculas y un registro en la tabla relacional outbox de la misma BD. Un job relay, por fuera de la App, lee los registros pendientes de la outbox y los publica en RabbitMQ, reintentando hasta lograrlo. Un consumer de la vertical B está suscripto a RabbitMQ">
+            <!-- vertical Películas -->
+            <div class="vbox" style="left:0; top:0; width:640px; height:360px;"><span>vertical Películas</span></div>
+            <div class="node" style="left:20px; top:40px; width:170px;">🖥️ App Películas</div>
+
+            <!-- BD relacional con dos tablas -->
+            <div class="dbbox" style="left:20px; top:150px; width:400px; height:160px;">
+              <span>🛢️ BD Películas (relacional)</span>
+            </div>
+            <div class="tbl" style="left:40px; top:205px; width:130px;">
+              <div class="tname">📋 tabla peliculas</div>
+              <table>
+                <tr>
+                  <th>id</th>
+                  <th>nombre</th>
+                </tr>
+                <tr>
+                  <td>41</td>
+                  <td>Alien</td>
+                </tr>
+                <tr class="nuevo fragment" data-fragment-index="2">
+                  <td>42</td>
+                  <td>Matrix</td>
+                </tr>
+              </table>
+            </div>
+            <div class="tbl" style="left:185px; top:205px; width:222px;">
+              <div class="tname">📋 tabla outbox</div>
+              <table>
+                <tr>
+                  <th>id</th>
+                  <th>tipo</th>
+                  <th>payload</th>
+                  <th>enviado</th>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>NUEVA_PELI</td>
+                  <td>{id:41,...}</td>
+                  <td>✔ sí</td>
+                </tr>
+                <tr class="nuevo fragment" data-fragment-index="2">
+                  <td>7</td>
+                  <td>NUEVA_PELI</td>
+                  <td>{id:42,...}</td>
+                  <td class="ob-st"></td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- vertical B suscripta a RabbitMQ -->
+            <div class="vbox" style="left:680px; top:0; width:260px; height:150px;"><span>vertical B (suscripta)</span>
+            </div>
+            <div class="node" style="left:705px; top:50px; width:210px;">👂 Consumer App B</div>
+            <div class="queue broker" style="left:720px; top:205px; width:180px; height:80px;">
+              <b>🐇 RabbitMQ</b>
+              <span class="qrow"><i></i><i></i><i></i></span>
+            </div>
+
+            <!-- ① una sola Tx local: INSERT pelicula + INSERT outbox -->
+            <div class="fragment" data-fragment-index="2">
+              <div class="txbox" style="left:30px; top:180px; width:385px; height:110px;">
+                <span>🔒 1 Tx local: BEGIN … COMMIT</span>
+              </div>
+              <div class="link" style="left:105px; top:104px; width:46px; transform:rotate(90deg);">
+                <span class="pkt msg"></span>
+              </div>
+              <div class="ch-label" style="left:122px; top:104px; text-align:left;">① INSERT pelicula + INSERT outbox
+                <small>en la <u>misma</u> transacción</small>
+              </div>
+            </div>
+
+            <!-- ② job por fuera de la App que lee la outbox -->
+            <div class="fragment" data-fragment-index="3">
+              <div class="node" style="left:480px; top:212px; width:140px; font-size:16px;">⏱️ Relay (job)</div>
+              <div class="link" style="left:420px; top:243px; width:60px;">
+                <span class="pkt msg"></span>
+              </div>
+              <div class="ch-label" style="left:445px; top:282px; width:190px;">② lee pendientes
+                <small>cron · reintenta hasta publicar</small>
+              </div>
+            </div>
+
+            <!-- ③ publish y ④ consume -->
+            <div class="fragment ob-sent" data-fragment-index="4">
+              <div class="link" style="left:620px; top:243px; width:100px;">
+                <span class="pkt msg"></span>
+              </div>
+              <div class="ch-label" style="left:620px; top:216px; width:100px;">③ publish</div>
+              <div class="link" style="left:810px; top:205px; width:91px; transform:rotate(-90deg);">
+                <span class="pkt msg"></span>
+              </div>
+              <div class="ch-label" style="left:820px; top:150px; text-align:left;">④ consume</div>
+            </div>
+          </div>
+        </div>
+        <p class="fragment fp-caption" data-fragment-index="5">
+          La <u>outbox</u> es una <u>tabla relacional</u> más de la BD: se escribe en la <u>misma Tx</u> que la
+          película. El relay la lee y publica en RabbitMQ.
+        </p>
+      </section>
+
+      <!--       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
         <p class="chico fragment">Outbox Pattern</p>
         <pre class="fragment"><code data-trim data-noescape lang="java">
@@ -1353,7 +1651,7 @@ public void nuevaPelicula(Long id, String nombre) {
 }
 </code></pre>
       </section>
-
+ -->
       <section id="tx">
         <p class="resaltar">Arquitecturas Distribuídas: Transacciones</p>
         <p class="chico fragment"><u>Outbox Pattern</u>: Aprovecho la Tx local de persistir la venta para dejar un job
@@ -1416,7 +1714,7 @@ public void nuevaPelicula(Long id, String nombre) {
             Sagas</a></p>
       </section>
 
-      <section id="mic">
+      <!--       <section id="mic">
         <p class="resaltar">Microservicios</p>
         <p class="chico fragment">¿Cuán chico (small) deben ser los servicios?</p>
         <p class="chico fragment">Dos criterios para enteder si dividimos o juntamos:</p>
@@ -1429,7 +1727,7 @@ public void nuevaPelicula(Long id, String nombre) {
         <p class="chicoYalineadoIzq fragment"><u>Comunicación</u>: Si algunos microservicios requieren demasiada
           comunicación entre ellos para ofrecer sus servicios quizás es mejor unificarlos en un único microservicio más
           grande.</p>
-      </section>
+      </section> -->
 
 
       <section id="txd">
