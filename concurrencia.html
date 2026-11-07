@@ -199,6 +199,90 @@
       line-height: 1.2;
     }
 
+    /* ===== banda de BD con 2 filas: comiteado / sin commit (niveles de aislamiento) ===== */
+    .cc-band.split::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 26px;
+      border-top: 1px dashed #9bb;
+    }
+
+    .cc-rowlbl {
+      position: absolute;
+      left: 0;
+      width: 136px;
+      padding-right: 6px;
+      box-sizing: border-box;
+      text-align: right;
+      font-size: 12px;
+      color: #777;
+    }
+
+    .cc-seg.r1 {
+      top: 162px;
+      height: 26px;
+      font-size: 15px;
+    }
+
+    .cc-seg.r2 {
+      top: 189px;
+      height: 25px;
+      font-size: 13px;
+    }
+
+    .cc-seg.v0 {
+      background: #e3f4ef;
+      color: #1d6f65;
+    }
+
+    .cc-seg.va {
+      background: #dceaf7;
+      color: #1d4e89;
+      border-left: 3px solid #1f6a8e;
+    }
+
+    .cc-seg.vb {
+      background: #fbe6cf;
+      color: #8a4b08;
+      border-left: 3px solid #b35f12;
+    }
+
+    .cc-seg.vbad {
+      background: #fdecea;
+      color: #c0392b;
+      border-left: 3px solid #b35f12;
+    }
+
+    /* valor escrito y todavía sin commit (rayado, color de la Tx que lo escribió) */
+    .cc-seg.pend {
+      background: repeating-linear-gradient(45deg, #fff 0 5px, #fbe6cf 5px 10px);
+      color: #8a4b08;
+      border-left: 2px dashed #b35f12;
+    }
+
+    .cc-seg.pend.pa {
+      background: repeating-linear-gradient(45deg, #fff 0 5px, #dceaf7 5px 10px);
+      color: #1d4e89;
+      border-left-color: #1f6a8e;
+    }
+
+    .cc-sim .cc-red {
+      color: #c0392b;
+    }
+
+    .cc-chip.bad {
+      border-color: #e76f51;
+      background: #fdecea;
+      color: #c0392b;
+    }
+
+    .cc-note.cc-mini {
+      padding: 0 6px;
+      font-size: 12px;
+    }
+
     .reveal .cc-caption {
       font-size: 21px;
       margin-top: 4px;
@@ -1032,7 +1116,7 @@
           la BD con aislamiento completo?
         </p>
       </section>
-      <section id="niveles">
+      <!--       <section id="niveles">
         <h3>Concurrencia</h3>
         <p>
           <u>Dirty</u> <u>Read</u>: Sucede si una transacción lee datos
@@ -1043,8 +1127,80 @@
           <b>2. Read Committed</b> no permite esto. Bloqueando (o Snapshot
           Isolation) lectura/escritura sobre datos modificados.
         </p>
-      </section>
+      </section> -->
+
+      <!-- ===== PROPUESTA (nueva): versión animada de dirty-read.png ===== -->
       <section id="niveles">
+        <h3>Concurrencia</h3>
+        <div class="cc-title">Dirty Read: A lee un dato que B todavía no comiteó</div>
+        <div class="cc-sim" data-steps="142,330,490,720,840,930" role="img"
+          aria-label="Línea de tiempo con Tx A, la fila D1 de la BD (valor comiteado y valor sin commit) y Tx B. D1 vale 10. A hace BEGIN; B hace BEGIN y UPDATE D1 = 20 sin comitear; A lee D1 y obtiene 20, el valor sin commit; B hace ROLLBACK y el 20 se descarta; A comitea habiendo usado un 20 que nunca existió. Comiteado, D1 siempre fue 10">
+          <div class="cc-lname" style="top: 64px">Tx A</div>
+          <div class="cc-lname" style="top: 118px">
+            🛢️ BD<small>fila D1</small>
+          </div>
+          <div class="cc-rowlbl" style="top: 166px">comiteado</div>
+          <div class="cc-rowlbl" style="top: 192px">sin commit</div>
+          <div class="cc-lname" style="top: 289px">Tx B</div>
+          <div class="cc-track" style="top: 74px"></div>
+          <div class="cc-track" style="top: 299px"></div>
+          <div class="cc-band split"></div>
+          <div class="cc-axis" style="top: 386px"><span>tiempo</span></div>
+
+          <!-- valores de D1 -->
+          <div class="cc-seg r1 v0" data-from="142"><span>D1 = 10</span></div>
+          <div class="cc-seg r2 pend" data-from="300" data-to="700"><span>D1 = 20</span></div>
+
+          <!-- duración de cada Tx -->
+          <div class="cc-bar cc-a" data-from="200" data-to="820" style="top: 75px"></div>
+          <div class="cc-bar cc-b" data-from="300" data-to="700" style="top: 300px"></div>
+
+          <div class="cc-a" data-at="200">
+            <div class="cc-dot" style="left: 200px; top: 75px"></div>
+            <div class="cc-lbl" style="left: 200px; top: 32px">BEGIN</div>
+          </div>
+          <div class="cc-b" data-at="300">
+            <div class="cc-dot" style="left: 300px; top: 300px"></div>
+            <div class="cc-lbl" style="left: 300px; top: 316px">BEGIN + UPDATE D1 = 20</div>
+            <div class="cc-arr up dash" style="left: 300px; top: 222px; height: 72px"></div>
+          </div>
+          <div class="cc-a" data-at="460">
+            <div class="cc-lbl" style="left: 460px; top: 32px">SELECT D1</div>
+            <div class="cc-arr up" style="left: 460px; top: 82px; height: 116px"></div>
+            <div class="cc-chip warn" style="left: 470px; top: 100px">
+              lee D1 = 20 ⚠ sin commit<span class="cc-stale" data-at="700">lee D1 = 20 ✖ ¡nunca se comiteó!</span>
+            </div>
+          </div>
+          <div class="cc-b" data-at="700">
+            <div class="cc-dot end cc-red" style="left: 700px; top: 300px"></div>
+            <div class="cc-lbl cc-red" style="left: 700px; top: 316px">ROLLBACK</div>
+            <div class="cc-note bad cc-mini" style="left: 708px; top: 190px">✖ descartado</div>
+          </div>
+          <div class="cc-a" data-at="820">
+            <div class="cc-dot end" style="left: 820px; top: 75px"></div>
+            <div class="cc-lbl" style="left: 820px; top: 32px">COMMIT</div>
+          </div>
+
+          <div class="cc-note bad" data-at="900" style="left: 140px; top: -6px">
+            ✖ Dirty read: A trabajó con un 20 que nunca existió. Comiteado, D1 siempre fue 10.
+          </div>
+          <div class="cc-now"></div>
+        </div>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <p class="fragment cc-caption">
+          <b>2. Read Committed</b> no permite esto: una Tx sólo lee datos comiteados.
+        </p>
+        <aside class="notes">
+          Avanzar con las flechas. La fila de abajo de la BD muestra lo que B escribió y todavía no comiteó. Dato:
+          PostgreSQL nunca permite dirty reads (READ UNCOMMITTED se comporta como READ COMMITTED).
+        </aside>
+      </section>
+
+      <!--       <section id="niveles">
         <h3>Concurrencia</h3>
         <p>
           <u>Unrepeatable</u> <u>Read</u>: Sucede si una transacción lee un
@@ -1052,8 +1208,81 @@
         </p>
         <p class="fragment"><img src="imgs/unrepeatable-read.png" /></p>
         <p class="fragment"><b>3. Repetable Read</b> no permite esto.</p>
-      </section>
+      </section> -->
+
+      <!-- ===== PROPUESTA (nueva): versión animada de unrepeatable-read.png ===== -->
       <section id="niveles">
+        <h3>Concurrencia</h3>
+        <div class="cc-title">Unrepeatable Read: A lee el mismo dato dos veces y obtiene valores distintos</div>
+        <div class="cc-sim" data-steps="142,250,430,590,730,840,930" role="img"
+          aria-label="Línea de tiempo con Tx A, la fila D1 de la BD (valor comiteado y valor sin commit) y Tx B. D1 vale 10. A hace BEGIN y SELECT y lee 10; B hace BEGIN y UPDATE D1 = 20 y luego COMMIT, y D1 pasa a valer 20; A vuelve a leer D1 dentro de la misma Tx y obtiene 20">
+          <div class="cc-lname" style="top: 64px">Tx A</div>
+          <div class="cc-lname" style="top: 118px">
+            🛢️ BD<small>fila D1</small>
+          </div>
+          <div class="cc-rowlbl" style="top: 166px">comiteado</div>
+          <div class="cc-rowlbl" style="top: 192px">sin commit</div>
+          <div class="cc-lname" style="top: 289px">Tx B</div>
+          <div class="cc-track" style="top: 74px"></div>
+          <div class="cc-track" style="top: 299px"></div>
+          <div class="cc-band split"></div>
+          <div class="cc-axis" style="top: 386px"><span>tiempo</span></div>
+
+          <!-- valores de D1 -->
+          <div class="cc-seg r1 v0" data-from="142" data-to="560"><span>D1 = 10</span></div>
+          <div class="cc-seg r1 vb" data-from="560"><span>D1 = 20</span></div>
+          <div class="cc-seg r2 pend" data-from="400" data-to="560"><span>D1 = 20</span></div>
+
+          <!-- duración de cada Tx -->
+          <div class="cc-bar cc-a" data-from="220" data-to="820" style="top: 75px"></div>
+          <div class="cc-bar cc-b" data-from="400" data-to="560" style="top: 300px"></div>
+
+          <div class="cc-a" data-at="220">
+            <div class="cc-dot" style="left: 220px; top: 75px"></div>
+            <div class="cc-lbl" style="left: 220px; top: 32px">BEGIN + SELECT D1</div>
+            <div class="cc-arr up" style="left: 220px; top: 82px; height: 76px"></div>
+            <div class="cc-chip" style="left: 230px; top: 100px">1ª lectura: D1 = 10</div>
+          </div>
+          <div class="cc-b" data-at="400">
+            <div class="cc-dot" style="left: 400px; top: 300px"></div>
+            <div class="cc-lbl" style="left: 400px; top: 316px">BEGIN + UPDATE D1 = 20</div>
+            <div class="cc-arr up dash" style="left: 400px; top: 222px; height: 72px"></div>
+          </div>
+          <div class="cc-b" data-at="560">
+            <div class="cc-dot end" style="left: 560px; top: 300px"></div>
+            <div class="cc-lbl" style="left: 560px; top: 316px">COMMIT</div>
+          </div>
+          <div class="cc-a" data-at="700">
+            <div class="cc-lbl" style="left: 700px; top: 32px">SELECT D1 (otra vez)</div>
+            <div class="cc-arr up" style="left: 700px; top: 82px; height: 76px"></div>
+            <div class="cc-chip bad" style="left: 710px; top: 100px">2ª lectura: D1 = 20 ⚠</div>
+          </div>
+          <div class="cc-a" data-at="820">
+            <div class="cc-dot end" style="left: 820px; top: 75px"></div>
+            <div class="cc-lbl" style="left: 820px; top: 32px">COMMIT</div>
+          </div>
+
+          <div class="cc-note bad" data-at="900" style="left: 140px; top: -6px">
+            ✖ Unrepeatable read: en la misma Tx, A leyó D1 dos veces y obtuvo 10 y después 20.
+          </div>
+          <div class="cc-now"></div>
+        </div>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <p class="fragment cc-caption">
+          <b>3. Repeatable Read</b> no permite esto: A sigue leyendo D1 = 10 hasta que termina.
+        </p>
+        <aside class="notes">
+          Avanzar con las flechas. Lo importante es que las dos lecturas son de la MISMA Tx A, y entre ambas B comiteó
+          un cambio.
+        </aside>
+      </section>
+
+      <!--       <section id="niveles">
         <h3>Concurrencia</h3>
         <p>
           <u>Lost Updates</u> o <u>Last</u> <u>Commit</u> <u>Wins</u>: Dos
@@ -1062,8 +1291,91 @@
         </p>
         <p class="fragment"><img src="imgs/last-commit-wins.png" /></p>
         <p class="fragment"><b>3. Repeatable read</b> no permite esto.</p>
-      </section>
+      </section> -->
+
+      <!-- ===== PROPUESTA (nueva): versión animada de last-commit-wins.png ===== -->
       <section id="niveles">
+        <h3>Concurrencia</h3>
+        <div class="cc-title">Lost Update (Last Commit Wins): la segunda Tx pisa lo que comiteó la primera</div>
+        <div class="cc-sim" data-steps="142,250,360,470,580,710,830,930" role="img"
+          aria-label="Línea de tiempo con Tx A, la fila D1 de la BD (valor comiteado y valor sin commit) y Tx B. D1 vale 10. A lee 10 y quiere sumarle 5; B lee 10 y quiere sumarle 3; A hace UPDATE D1 = 15 y COMMIT; la lectura de B queda desactualizada; B hace UPDATE D1 = 13 y COMMIT. D1 queda en 13 en lugar de 18: se perdió la suma de A">
+          <div class="cc-lname" style="top: 64px">Tx A</div>
+          <div class="cc-lname" style="top: 118px">
+            🛢️ BD<small>fila D1</small>
+          </div>
+          <div class="cc-rowlbl" style="top: 166px">comiteado</div>
+          <div class="cc-rowlbl" style="top: 192px">sin commit</div>
+          <div class="cc-lname" style="top: 289px">Tx B</div>
+          <div class="cc-track" style="top: 74px"></div>
+          <div class="cc-track" style="top: 299px"></div>
+          <div class="cc-band split"></div>
+          <div class="cc-axis" style="top: 386px"><span>tiempo</span></div>
+
+          <!-- valores de D1 -->
+          <div class="cc-seg r1 v0" data-from="142" data-to="550"><span>D1 = 10</span></div>
+          <div class="cc-seg r1 va" data-from="550" data-to="800"><span>D1 = 15</span></div>
+          <div class="cc-seg r1 vbad" data-from="800"><span>D1 = 13 ✖</span></div>
+          <div class="cc-seg r2 pend pa" data-from="440" data-to="550"><span>D1 = 15</span></div>
+          <div class="cc-seg r2 pend" data-from="680" data-to="800"><span>D1 = 13</span></div>
+
+          <!-- duración de cada Tx -->
+          <div class="cc-bar cc-a" data-from="220" data-to="550" style="top: 75px"></div>
+          <div class="cc-bar cc-b" data-from="330" data-to="800" style="top: 300px"></div>
+
+          <div class="cc-a" data-at="220">
+            <div class="cc-dot" style="left: 220px; top: 75px"></div>
+            <div class="cc-lbl" style="left: 220px; top: 32px">BEGIN + SELECT D1</div>
+            <div class="cc-arr up" style="left: 220px; top: 82px; height: 76px"></div>
+            <div class="cc-chip" style="left: 230px; top: 100px">lee 10 → le suma 5</div>
+          </div>
+          <div class="cc-b" data-at="330">
+            <div class="cc-dot" style="left: 330px; top: 300px"></div>
+            <div class="cc-lbl" style="left: 330px; top: 316px">BEGIN + SELECT D1</div>
+            <div class="cc-arr down" style="left: 330px; top: 218px; height: 74px"></div>
+            <div class="cc-chip" style="left: 340px; top: 240px">
+              lee 10 → le suma 3<span class="cc-stale" data-at="550">lee 10 ⚠ ¡ya vale 15!</span>
+            </div>
+          </div>
+          <div class="cc-a" data-at="440">
+            <div class="cc-lbl" style="left: 440px; top: 32px">UPDATE D1 = 15</div>
+            <div class="cc-arr down dash" style="left: 440px; top: 82px; height: 104px"></div>
+          </div>
+          <div class="cc-a" data-at="550">
+            <div class="cc-dot end" style="left: 550px; top: 75px"></div>
+            <div class="cc-lbl" style="left: 550px; top: 32px">COMMIT</div>
+          </div>
+          <div class="cc-b" data-at="680">
+            <div class="cc-lbl" style="left: 680px; top: 316px">UPDATE D1 = 13</div>
+            <div class="cc-arr up dash" style="left: 680px; top: 222px; height: 72px"></div>
+          </div>
+          <div class="cc-b" data-at="800">
+            <div class="cc-dot end" style="left: 800px; top: 300px"></div>
+            <div class="cc-lbl" style="left: 800px; top: 316px">COMMIT</div>
+          </div>
+
+          <div class="cc-note bad" data-at="900" style="left: 140px; top: -6px">
+            ✖ Lost update: se perdió el +5 de A. D1 debería valer 18 y quedó en 13.
+          </div>
+          <div class="cc-now"></div>
+        </div>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <p class="fragment cc-caption">
+          <b>3. Repeatable Read</b> no permite esto.
+        </p>
+        <aside class="notes">
+          Avanzar con las flechas. B calcula su UPDATE con un valor (10) que, cuando A comitea, deja de ser cierto. Ojo:
+          en PostgreSQL con REPEATABLE READ el UPDATE de B falla (could not serialize access due to concurrent update).
+          En MySQL/InnoDB, REPEATABLE READ NO evita el lost update.
+        </aside>
+      </section>
+
+      <!--       <section id="niveles">
         <h3>Concurrencia</h3>
         <p>
           <u>Phanton</u> <u>Read</u>: Ocurre cuando una transacción ejecuta
@@ -1072,6 +1384,79 @@
         </p>
         <p class="fragment"><img src="imgs/phanton-read.png" /></p>
         <p class="fragment"><b>4. Serialiable</b> no permite esto.</p>
+      </section> -->
+
+      <!-- ===== PROPUESTA (nueva): versión animada de phanton-read.png ===== -->
+      <section id="niveles">
+        <h3>Concurrencia</h3>
+        <div class="cc-title">Phantom Read: la misma consulta devuelve filas nuevas</div>
+        <div class="cc-sim" data-steps="142,250,430,590,730,840,930" role="img"
+          aria-label="Línea de tiempo con Tx A, las filas de la BD que cumplen la condición c (comiteadas y sin commit) y Tx B. Al principio sólo D1 cumple c. A hace BEGIN y SELECT WHERE c y obtiene 1 fila; B hace BEGIN e INSERT de D2, que cumple c, y luego COMMIT; A repite el mismo SELECT dentro de la misma Tx y obtiene 2 filas: apareció D2, una fila fantasma">
+          <div class="cc-lname" style="top: 64px">Tx A</div>
+          <div class="cc-lname" style="top: 118px">
+            🛢️ BD<small>filas que cumplen c</small>
+          </div>
+          <div class="cc-rowlbl" style="top: 166px">comiteado</div>
+          <div class="cc-rowlbl" style="top: 192px">sin commit</div>
+          <div class="cc-lname" style="top: 289px">Tx B</div>
+          <div class="cc-track" style="top: 74px"></div>
+          <div class="cc-track" style="top: 299px"></div>
+          <div class="cc-band split"></div>
+          <div class="cc-axis" style="top: 386px"><span>tiempo</span></div>
+
+          <!-- filas que cumplen la condición c -->
+          <div class="cc-seg r1 v0" data-from="142" data-to="560"><span>D1</span></div>
+          <div class="cc-seg r1 vb" data-from="560"><span>D1 · D2</span></div>
+          <div class="cc-seg r2 pend" data-from="400" data-to="560"><span>+ D2</span></div>
+
+          <!-- duración de cada Tx -->
+          <div class="cc-bar cc-a" data-from="220" data-to="820" style="top: 75px"></div>
+          <div class="cc-bar cc-b" data-from="400" data-to="560" style="top: 300px"></div>
+
+          <div class="cc-a" data-at="220">
+            <div class="cc-dot" style="left: 220px; top: 75px"></div>
+            <div class="cc-lbl" style="left: 220px; top: 32px">BEGIN + SELECT … WHERE c</div>
+            <div class="cc-arr up" style="left: 220px; top: 82px; height: 76px"></div>
+            <div class="cc-chip" style="left: 230px; top: 100px">1ª: 1 fila (D1)</div>
+          </div>
+          <div class="cc-b" data-at="400">
+            <div class="cc-dot" style="left: 400px; top: 300px"></div>
+            <div class="cc-lbl" style="left: 400px; top: 316px">BEGIN + INSERT D2 (cumple c)</div>
+            <div class="cc-arr up dash" style="left: 400px; top: 222px; height: 72px"></div>
+          </div>
+          <div class="cc-b" data-at="560">
+            <div class="cc-dot end" style="left: 560px; top: 300px"></div>
+            <div class="cc-lbl" style="left: 560px; top: 316px">COMMIT</div>
+          </div>
+          <div class="cc-a" data-at="700">
+            <div class="cc-lbl" style="left: 700px; top: 32px">SELECT … WHERE c</div>
+            <div class="cc-arr up" style="left: 700px; top: 82px; height: 76px"></div>
+            <div class="cc-chip bad" style="left: 710px; top: 100px">2ª: 2 filas (D1, D2) ⚠</div>
+          </div>
+          <div class="cc-a" data-at="820">
+            <div class="cc-dot end" style="left: 820px; top: 75px"></div>
+            <div class="cc-lbl" style="left: 820px; top: 32px">COMMIT</div>
+          </div>
+
+          <div class="cc-note bad" data-at="900" style="left: 140px; top: -6px">
+            ✖ Phantom read: la misma consulta devolvió 1 fila y después 2. Apareció D2, una fila «fantasma».
+          </div>
+          <div class="cc-now"></div>
+        </div>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <p class="fragment cc-caption">
+          <b>4. Serializable</b> no permite esto: la misma consulta devuelve siempre las mismas filas.
+        </p>
+        <aside class="notes">
+          Avanzar con las flechas. A diferencia del unrepeatable read, acá ninguna fila cambió: apareció una fila nueva
+          que cumple la condición. Dato: en PostgreSQL, REPEATABLE READ ya evita los phantom reads (por snapshot); el
+          estándar ANSI sólo lo exige en SERIALIZABLE.
+        </aside>
       </section>
 
       <section data-transition="slide" id="niveles">
