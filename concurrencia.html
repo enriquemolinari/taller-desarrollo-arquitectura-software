@@ -1,247 +1,840 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
 
-    <title>Conceptos sobre Concurrencia</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <link rel="stylesheet" href="dist/reset.css" />
-    <link rel="stylesheet" href="dist/reveal.css" />
-    <link rel="stylesheet" href="dist/theme/white.css" />
-    <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
-    <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
-    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+  <title>Conceptos sobre Concurrencia</title>
 
-    <style>
-      ul.arrow {
-        font-size: 24pt;
-        line-height: 1.5em;
-        margin: 5px 0 15px;
-        padding: 0;
-        color: var(--r-main-color);
-      }
-      ul.arrow li {
-        list-style: none;
-        position: relative;
-        padding: 0 0 0 30px;
-      }
+  <link rel="stylesheet" href="dist/reset.css" />
+  <link rel="stylesheet" href="dist/reveal.css" />
+  <link rel="stylesheet" href="dist/theme/white.css" />
+  <link rel="stylesheet" href="plugin/simplemenu/simplemenu.css" />
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
 
-      ul.arrow li::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 20px;
-        height: 10px;
-        width: 10px;
-        border: 1px solid #ff6600;
-        border-width: 2px 2px 0 0;
-        transform: rotate(45deg);
-      }
+  <style>
+    ul.arrow {
+      font-size: 24pt;
+      line-height: 1.5em;
+      margin: 5px 0 15px;
+      padding: 0;
+      color: var(--r-main-color);
+    }
 
-      div.line {
-        border-bottom: 1px solid;
-        border-color: lightgray;
-      }
+    ul.arrow li {
+      list-style: none;
+      position: relative;
+      padding: 0 0 0 30px;
+    }
 
-      .box3 {
-        /*width: 720px;
+    ul.arrow li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      height: 10px;
+      width: 10px;
+      border: 1px solid #ff6600;
+      border-width: 2px 2px 0 0;
+      transform: rotate(45deg);
+    }
+
+    div.line {
+      border-bottom: 1px solid;
+      border-color: lightgray;
+    }
+
+    .box3 {
+      /*width: 720px;
         padding: 15px;
         margin-left: 100px;*/
-        padding-left: 5px;
-        padding-right: 5px;
-        background-color: #4a4e69;
-        color: white;
-        font-size: 50pt;
-        font-weight: bold;
-      }
+      padding-left: 5px;
+      padding-right: 5px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+    }
 
-      .box2 {
-        width: 720px;
-        padding: 15px;
-        margin-left: 100px;
-        background-color: #4a4e69;
-        color: white;
-        font-size: 50pt;
-        font-weight: bold;
-      }
+    .box2 {
+      width: 720px;
+      padding: 15px;
+      margin-left: 100px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+    }
 
-      .box {
-        width: 800px;
-        /*border: 15px solid green;*/
-        padding: 15px;
-        margin: 2px;
-        background-color: #4a4e69;
-        color: white;
-        font-size: 50pt;
-        font-weight: bold;
-        /*font-family: 'Times New Roman', Times, serif;*/
-      }
+    .box {
+      width: 800px;
+      /*border: 15px solid green;*/
+      padding: 15px;
+      margin: 2px;
+      background-color: #4a4e69;
+      color: white;
+      font-size: 50pt;
+      font-weight: bold;
+      /*font-family: 'Times New Roman', Times, serif;*/
+    }
 
-      .smallbox {
-        width: 860px;
-      }
+    .smallbox {
+      width: 860px;
+    }
 
-      .portada .subtitulo {
-        color: lightgray;
-      }
+    .portada .subtitulo {
+      color: lightgray;
+    }
 
-      .autor {
-        /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
-        font-size: 15pt;
-      }
+    .autor {
+      /*font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;*/
+      font-size: 15pt;
+    }
 
-      .fechahoy {
-        color: gray;
-      }
-      .titulo {
-        font-size: 50pt;
-      }
+    .fechahoy {
+      color: gray;
+    }
 
-      .resaltar {
-        color: #4a4e69;
-      }
+    .titulo {
+      font-size: 50pt;
+    }
 
-      .packagejava {
-        font-family: "Roboto Mono", "Fira Code", "DejaVu Sans Mono", monospace;
-        font-size: 20pt;
-        color: #666262;
-        background: transparent;
-        padding: 0;
-        border: none;
-        border-radius: 0;
-        display: inline;
-        box-shadow: none;
-      }
+    .resaltar {
+      color: #4a4e69;
+    }
 
-      p.chico {
-        font-size: 24pt;
-      }
+    .packagejava {
+      font-family: "Roboto Mono", "Fira Code", "DejaVu Sans Mono", monospace;
+      font-size: 20pt;
+      color: #666262;
+      background: transparent;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      display: inline;
+      box-shadow: none;
+    }
 
-      span.itali {
-        font-family: cursive;
-      }
+    p.chico {
+      font-size: 24pt;
+    }
 
-      p.maschico {
-        font-size: 20pt;
-      }
+    span.itali {
+      font-family: cursive;
+    }
 
-      p.maschicoYalineadoIzq {
-        font-size: 12pt;
-        text-align: left;
-      }
+    p.maschico {
+      font-size: 20pt;
+    }
 
-      p.chicoYalineadoIzq {
-        font-size: 24pt;
-        text-align: left;
-      }
+    p.maschicoYalineadoIzq {
+      font-size: 12pt;
+      text-align: left;
+    }
 
-      .reveal .slide-number {
-        background-color: white;
-        color: black;
-      }
+    p.chicoYalineadoIzq {
+      font-size: 24pt;
+      text-align: left;
+    }
 
-      .reveal .footer {
-        position: absolute;
-        bottom: 1em;
-        left: 1em;
-        font-size: 0.5em;
-        color: gray;
-      }
-    </style>
-  </head>
+    .reveal .slide-number {
+      background-color: white;
+      color: black;
+    }
 
-  <body>
-    <div class="reveal">
-      <div class="footer">Gestión de la Concurrencia</div>
-      <div class="menubar line">
-        <div class="slide-number"></div>
-        <ul class="menu">
-          <li><a href="#/def">Concurrencia</a></li>
-          <li><a href="#/niveles">Niveles de Aislamiento de las BDs</a></li>
-          <!--           <li>
+    .reveal .footer {
+      position: absolute;
+      bottom: 1em;
+      left: 1em;
+      font-size: 0.5em;
+      color: gray;
+    }
+  </style>
+
+  <!-- ===== PROPUESTA: estilos de las slides animadas Tipo 1 / Tipo 2 (prefijo cc-) ===== -->
+  <style>
+    .reveal .cc-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #4a4e69;
+    }
+
+    .cc-sub {
+      margin-top: 2px;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .cc-diff {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 2px 12px;
+      border-left: 5px solid #e9c46a;
+      border-radius: 4px;
+      background: #fff3cd;
+      font-size: 19px;
+      font-weight: bold;
+      color: #6b5300;
+    }
+
+    .reveal .cc-sim small.cc-no {
+      color: #c0392b;
+      font-weight: bold;
+    }
+
+    .cc-seg.dup {
+      background: #fdecea;
+      color: #c0392b;
+      border-left: 3px solid #b35f12;
+    }
+
+    .cc-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .reveal .cc-caption {
+      font-size: 21px;
+      margin-top: 4px;
+    }
+
+    .cc-sim {
+      position: relative;
+      width: 940px;
+      height: 400px;
+      margin: 6px auto 0;
+      font-size: 14px;
+      line-height: 1.25;
+      color: #264653;
+      text-align: left;
+    }
+
+    .cc-a {
+      color: #1f6a8e;
+    }
+
+    .cc-b {
+      color: #b35f12;
+    }
+
+    /* ventana en la que ambas Tx están abiertas (tipo 1) */
+    .cc-win {
+      position: absolute;
+      top: 24px;
+      height: 350px;
+      box-sizing: border-box;
+      border-left: 2px dashed #e9c46a;
+      background: rgba(233, 196, 106, 0.16);
+    }
+
+    /* carriles */
+    .cc-lname {
+      position: absolute;
+      left: 0;
+      width: 130px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .reveal .cc-sim small {
+      display: block;
+      font-size: 12px;
+      font-weight: normal;
+      line-height: 1.25;
+      color: #777;
+    }
+
+    .cc-track {
+      position: absolute;
+      left: 140px;
+      width: 790px;
+      border-top: 2px dotted #ccc;
+    }
+
+    .cc-band {
+      position: absolute;
+      left: 140px;
+      top: 160px;
+      width: 790px;
+      height: 56px;
+      box-sizing: border-box;
+      border: 2px solid #9bb;
+      border-radius: 6px;
+      background: #f7f7f7;
+    }
+
+    .cc-axis {
+      position: absolute;
+      left: 140px;
+      width: 780px;
+      border-top: 2px solid #888;
+    }
+
+    .cc-axis::after {
+      content: "";
+      position: absolute;
+      right: -10px;
+      top: -7px;
+      border-left: 12px solid #888;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+    }
+
+    .cc-axis span {
+      position: absolute;
+      right: 0;
+      top: -19px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    /* cursor "ahora" */
+    .cc-now {
+      position: absolute;
+      top: 24px;
+      height: 362px;
+      width: 0;
+      border-left: 2px dashed rgba(192, 57, 43, 0.6);
+      pointer-events: none;
+    }
+
+    .cc-now::after {
+      content: "ahora";
+      position: absolute;
+      top: calc(100% + 4px);
+      left: -16px;
+      font-size: 11px;
+      color: #c0392b;
+    }
+
+    /* elementos que aparecen cuando el cursor llega (data-at) */
+    .cc-sim [data-at] {
+      opacity: 0;
+      transition: opacity 0.35s ease var(--d, 0s);
+    }
+
+    .cc-sim [data-at].on {
+      opacity: 1;
+    }
+
+    /* elementos que crecen con el cursor (data-from / data-to) */
+    .cc-sim [data-from]:not(.on) {
+      visibility: hidden;
+    }
+
+    /* valor comiteado en la BD */
+    .cc-seg {
+      position: absolute;
+      top: 162px;
+      height: 52px;
+      box-sizing: border-box;
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .cc-seg>span {
+      padding-left: 10px;
+    }
+
+    .cc-seg.libre {
+      background: #e3f4ef;
+      color: #1d6f65;
+    }
+
+    .cc-seg.ana {
+      background: #dceaf7;
+      color: #1d4e89;
+      border-left: 3px solid #1f6a8e;
+    }
+
+    /* duración de una Tx (tipo 1) */
+    .cc-bar {
+      position: absolute;
+      height: 6px;
+      margin-top: -3px;
+      border-radius: 3px;
+      background: currentColor;
+      z-index: 1;
+    }
+
+    .cc-dot {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      margin: -8px 0 0 -7px;
+      box-sizing: border-box;
+      border: 3px solid currentColor;
+      border-radius: 50%;
+      background: #fff;
+      z-index: 3;
+    }
+
+    .cc-dot.end {
+      background: currentColor;
+    }
+
+    /* Tx cortas y tiempo pensando (tipo 2) */
+    .cc-tx {
+      position: absolute;
+      height: 28px;
+      margin-top: -15px;
+      box-sizing: border-box;
+      border: 2px solid currentColor;
+      border-radius: 6px;
+      background: #fff;
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: bold;
+      z-index: 2;
+      transition: box-shadow 0.4s;
+    }
+
+    .cc-tx.cc-a {
+      background: #dceaf7;
+    }
+
+    .cc-tx.cc-b {
+      background: #fbe6cf;
+    }
+
+    .cc-sim:has(.cc-fin.on) .cc-tx {
+      box-shadow: 0 0 0 4px rgba(233, 196, 106, 0.85);
+    }
+
+    .cc-think {
+      position: absolute;
+      height: 4px;
+      margin-top: -3px;
+      background: repeating-linear-gradient(90deg,
+          #999 0 6px,
+          transparent 6px 12px);
+      animation: cc-march 0.8s linear infinite;
+    }
+
+    .cc-bob {
+      display: inline-block;
+      animation: cc-bob 1.6s ease-in-out infinite;
+    }
+
+    .cc-thinklbl {
+      font-weight: normal;
+      color: #777;
+    }
+
+    @keyframes cc-march {
+      to {
+        background-position: 12px 0;
+      }
+    }
+
+    @keyframes cc-bob {
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    /* Application Level Tx (corchetes) */
+    .cc-app {
+      position: absolute;
+      height: 10px;
+      box-sizing: border-box;
+      border: 2px solid currentColor;
+    }
+
+    .cc-app.top {
+      border-bottom: none;
+    }
+
+    .cc-app.bot {
+      border-top: none;
+    }
+
+    .cc-app span {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0 6px;
+      background: #fff;
+      font-size: 13px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .cc-app.top span {
+      top: -10px;
+    }
+
+    .cc-app.bot span {
+      bottom: -10px;
+    }
+
+    /* textos */
+    .cc-lbl {
+      position: absolute;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .cc-tiny {
+      font-size: 12px;
+      font-weight: normal;
+      color: #9a7b1c;
+    }
+
+    .cc-chip {
+      position: absolute;
+      padding: 1px 7px;
+      border: 2px solid #2a9d8f;
+      border-radius: 6px;
+      background: #e9f5f3;
+      color: #1d6f65;
+      font-size: 13px;
+      font-weight: bold;
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .cc-chip.gray {
+      border-color: #bbb;
+      background: #f3f3f3;
+      color: #666;
+      font-weight: normal;
+    }
+
+    .cc-chip.warn {
+      border-color: #e9c46a;
+      background: #fff3cd;
+      color: #8a6d00;
+    }
+
+    .cc-stale {
+      position: absolute;
+      left: -2px;
+      top: -2px;
+      bottom: -2px;
+      min-width: 100%;
+      padding: 1px 7px;
+      border: 2px solid #e76f51;
+      border-radius: 6px;
+      background: #fdecea;
+      color: #c0392b;
+      white-space: nowrap;
+    }
+
+    .cc-note {
+      position: absolute;
+      padding: 3px 9px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: bold;
+      white-space: nowrap;
+      z-index: 4;
+    }
+
+    .cc-note.wrap {
+      width: 270px;
+      box-sizing: border-box;
+      white-space: normal;
+    }
+
+    .cc-note.bad {
+      background: #fdecea;
+      color: #c0392b;
+      border: 2px solid #e76f51;
+    }
+
+    /* flechas verticales que se "dibujan" (lecturas y escrituras) */
+    .cc-arr {
+      position: absolute;
+      width: 0;
+      margin-left: -1.5px;
+      border-left: 3px solid currentColor;
+      transform: scaleY(0);
+      transition: transform 0.45s ease-out var(--d, 0s);
+      z-index: 2;
+    }
+
+    .cc-arr.dash {
+      border-left-style: dashed;
+    }
+
+    .cc-arr.up {
+      transform-origin: 50% 100%;
+    }
+
+    .cc-arr.down {
+      transform-origin: 50% 0;
+    }
+
+    .cc-arr::after {
+      content: "";
+      position: absolute;
+      left: -8.5px;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+    }
+
+    .cc-arr.up::after {
+      top: -3px;
+      border-bottom: 11px solid currentColor;
+    }
+
+    .cc-arr.down::after {
+      bottom: -3px;
+      border-top: 11px solid currentColor;
+    }
+
+    .on .cc-arr {
+      transform: scaleY(1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .cc-think,
+      .cc-bob {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="footer">Gestión de la Concurrencia</div>
+    <div class="menubar line">
+      <div class="slide-number"></div>
+      <ul class="menu">
+        <li><a href="#/def">Concurrencia</a></li>
+        <li><a href="#/niveles">Niveles de Aislamiento de las BDs</a></li>
+        <!--           <li>
             <a href="#/pys"
               >Problemas de Concurrencia y Niveles de Aislamiento</a
             >
           </li> -->
-          <li><a href="#/pvso">Gestión Pesimista vs Optimista</a></li>
-          <li><a href="#/referencias">Referencias</a></li>
-        </ul>
-        <div class="placeholder"></div>
-      </div>
-      <div class="slides">
-        <section
-          style="text-align: left"
-          data-transition="fade"
-          data-state="hide-menubar no-title-footer"
-        >
-          <div class="box">
-            <span>Gestión de la Concurrencia</span>
-          </div>
-          <div class="smallbox">
-            Aprendamos a manejar <u>sistemas multi-usuario</u> de forma
-            <u>correcta</u>!
-          </div>
-          <p class="maschico">
-            Repo:
-            <a href="https://github.com/enriquemolinari/taller-jpahibernate"
-              >https://github.com/enriquemolinari/taller-jpahibernate</a
-            >
-          </p>
-          <p id="hoy" class="autor fechahoy"></p>
-        </section>
+        <li><a href="#/pvso">Gestión Pesimista vs Optimista</a></li>
+        <li><a href="#/referencias">Referencias</a></li>
+      </ul>
+      <div class="placeholder"></div>
+    </div>
+    <div class="slides">
+      <section style="text-align: left" data-transition="fade" data-state="hide-menubar no-title-footer">
+        <div class="box">
+          <span>Gestión de la Concurrencia</span>
+        </div>
+        <div class="smallbox">
+          Aprendamos a manejar <u>sistemas multi-usuario</u> de forma
+          <u>correcta</u>!
+        </div>
+        <p class="maschico">
+          Repo:
+          <a
+            href="https://github.com/enriquemolinari/taller-jpahibernate">https://github.com/enriquemolinari/taller-jpahibernate</a>
+        </p>
+        <p id="hoy" class="autor fechahoy"></p>
+      </section>
 
-        <section id="def">
-          <h3>Concurrencia</h3>
-          <p class="fragment">
-            ¿Quien se encarga de garantizar que la concurencia no afecte la
-            correctitud de mi applicación?
-          </p>
-          <p class="fragment">
-            Es decir, quien garantiza que la aplicación se comporta de la
-            <u>misma forma</u> si es utilizada de forma mono-usuario vs
-            multi-usuario?
-          </p>
-        </section>
-        <section id="def">
-          <h3>Concurrencia</h3>
-          <p class="fragment">¿La Base de Datos? o ¿la Aplicación?</p>
-          <p class="fragment">
-            ¿Puedo como desarrollador desentenderme completamente total la BD se
-            encarga de todo? ¿Tengo que escribir código de cierta forma para
-            garantizar correctitud o simplemente delego en la BD y me
-            desentiendo?
-          </p>
-        </section>
+      <section id="def">
+        <h3>Concurrencia</h3>
+        <p class="fragment">
+          ¿Quien se encarga de garantizar que la concurencia no afecte la
+          correctitud de mi applicación?
+        </p>
+        <p class="fragment">
+          Es decir, quien garantiza que la aplicación se comporta de la
+          <u>misma forma</u> si es utilizada de forma mono-usuario vs
+          multi-usuario?
+        </p>
+      </section>
+      <section id="def">
+        <h3>Concurrencia</h3>
+        <p class="fragment">¿La Base de Datos? o ¿la Aplicación?</p>
+        <p class="fragment">
+          ¿Puedo como desarrollador desentenderme completamente total la BD se
+          encarga de todo? ¿Tengo que escribir código de cierta forma para
+          garantizar correctitud o simplemente delego en la BD y me
+          desentiendo?
+        </p>
+      </section>
 
-        <section id="def">
-          <h3>Concurrencia</h3>
-          <p class="fragment"><b>Nunca</b> puedo desentenderme!</p>
-          <p class="fragment">
-            Es una combinación entre la BD y la Aplicación que puede variar
-            segun el caso de uso que quiero implementar.
-          </p>
-        </section>
+      <section id="def">
+        <h3>Concurrencia</h3>
+        <p class="fragment"><b>Nunca</b> puedo desentenderme!</p>
+        <p class="fragment">
+          Es una combinación entre la BD y la Aplicación que puede variar
+          segun el caso de uso que quiero implementar.
+        </p>
+        <p class="fragment">
+          <b>Tipo 1</b>: Dos Transacciones de lectura/escritura ingresan a la vez (Database-level Tx).<br />
+          <b>Tipo 2</b>: Transacciones separadas de lectura/escritura (Application-level Tx).
+        </p>
+      </section>
 
-        <section id="def">
-          <h3>Concurrencia</h3>
-          <p class="fragment chico">
-            La concurrencia puede darse de dos formas:
-          </p>
+      <section id="def">
+        <h3>Problema clásico de Concurrencia</h3>
+        <p class="fragment" data-fragment-index="1">
+          Ejemplo: Venta de pasaje/butacas de viajes en colectivo.
+        </p>
+        <p class="fragment">
+          Veamos como generar estos dos tipos de problemas en Java con
+          PostgreSQL.
+        </p>
+        <p class="fragment">
+          package: <span class="packagejava">orm/locking/viaje</span>
+        </p>
+      </section>
 
-          <p class="fragment chico">
+      <!-- 
+      <section id="def">
+        <h3>Concurrencia</h3>
+        <p class="fragment chico">
+          La concurrencia puede darse de dos formas:
+        </p>
+
+                  <p class="fragment chico">
             1) Dos transacciones concurrentes, ambas leen el mismo dato,
             modifican y comitean en diferentes momentos. La clave es que ambas
             leen el mismo dato antes de que alguna Tx comitee.
             <img class="fragment" src="imgs/tx-interleaving.png" />
           </p>
-        </section>
+        </section> -->
 
-        <section id="def">
+      <!-- ===== PROPUESTA (nueva): versión animada/interactiva de tx-interleaving.png ===== -->
+      <section id="def">
+        <h3>Concurrencia</h3>
+        <div class="cc-title">
+          Tipo 1: dos Tx concurrentes leen el mismo dato antes de que alguna
+          comitee
+        </div>
+        <div class="cc-sub">
+          🎫 Ana y Beto ven el mapa de butacas (libres y ocupadas) y
+          <b>ambos eligen la butaca 1</b>
+        </div>
+        <div class="cc-diff">
+          Caso 1: las Tx de compra de Ana y de Beto <u>entran a la vez</u>
+        </div>
+        <div class="cc-sim" data-steps="142,260,380,500,610,740,850,930" role="img"
+          aria-label="Línea de tiempo con tres carriles: Tx A de compra de Ana, la tabla pasaje de la BD, y Tx B de compra de Beto. Ambos vieron el mapa de butacas y eligieron la butaca 1, y sus Tx de compra entran a la vez. A hace BEGIN y SELECT y lee la butaca 1 libre; B hace BEGIN y SELECT y también la lee libre; A hace INSERT de su pasaje y COMMIT; la lectura de B queda desactualizada; B hace INSERT de su pasaje y COMMIT. La butaca 1 queda vendida dos veces, a Ana y a Beto">
+          <div class="cc-lname" style="top: 60px">
+            Tx A<small>compra de Ana</small>
+          </div>
+          <div class="cc-lname" style="top: 164px">
+            🛢️ BD<small>tabla pasaje (sin constraint)</small>
+          </div>
+          <div class="cc-lname" style="top: 285px">
+            Tx B<small>compra de Beto</small>
+          </div>
+          <div class="cc-track" style="top: 74px"></div>
+          <div class="cc-track" style="top: 299px"></div>
+          <div class="cc-band"></div>
+          <div class="cc-axis" style="top: 386px"><span>tiempo</span></div>
+
+          <!-- ventana en la que ambas Tx están abiertas -->
+          <div class="cc-win" data-from="340" data-to="580"></div>
+          <div class="cc-lbl cc-tiny" data-at="580" style="left: 460px; top: 354px">
+            ↔ las dos compras a la vez
+          </div>
+
+          <!-- filas comiteadas en la tabla pasaje (se acumulan: no hay constraint) -->
+          <div class="cc-seg libre" data-from="142" data-to="580">
+            <span>butaca 1 libre (0 pasajes)</span>
+          </div>
+          <div class="cc-seg ana" data-from="580" data-to="820">
+            <span class="cc-rows"><span>butaca 1 · Ana</span></span>
+          </div>
+          <div class="cc-seg dup" data-from="820">
+            <span class="cc-rows"><span>butaca 1 · Ana</span><span>butaca 1 · Beto</span></span>
+          </div>
+
+          <!-- duración de cada Tx -->
+          <div class="cc-bar cc-a" data-from="220" data-to="580" style="top: 75px"></div>
+          <div class="cc-bar cc-b" data-from="340" data-to="820" style="top: 300px"></div>
+
+          <!-- Tx A -->
+          <div class="cc-a" data-at="220">
+            <div class="cc-dot" style="left: 220px; top: 75px"></div>
+            <div class="cc-lbl" style="left: 220px; top: 32px">BEGIN + SELECT</div>
+            <div class="cc-arr up" style="left: 220px; top: 82px; height: 76px"></div>
+            <div class="cc-chip" style="left: 230px; top: 106px">lee butaca 1: libre → la vende</div>
+          </div>
+          <div class="cc-a" data-at="460">
+            <div class="cc-lbl" style="left: 460px; top: 32px">INSERT pasaje Ana</div>
+            <div class="cc-arr down dash" style="left: 460px; top: 82px; height: 76px"></div>
+            <div class="cc-chip gray" style="left: 470px; top: 106px">sin commit</div>
+          </div>
+          <div class="cc-a" data-at="580">
+            <div class="cc-dot end" style="left: 580px; top: 75px"></div>
+            <div class="cc-lbl" style="left: 580px; top: 32px">COMMIT</div>
+            <div class="cc-arr down" style="left: 580px; top: 82px; height: 76px"></div>
+          </div>
+
+          <!-- Tx B -->
+          <div class="cc-b" data-at="340">
+            <div class="cc-dot" style="left: 340px; top: 300px"></div>
+            <div class="cc-lbl" style="left: 340px; top: 316px">BEGIN + SELECT</div>
+            <div class="cc-arr down" style="left: 340px; top: 218px; height: 74px"></div>
+            <div class="cc-chip" style="left: 350px; top: 240px">
+              lee butaca 1: libre → la vende<span class="cc-stale" data-at="580">lee butaca 1: libre ⚠ ¡ya la compró
+                Ana!</span>
+            </div>
+          </div>
+          <div class="cc-b" data-at="700">
+            <div class="cc-lbl" style="left: 700px; top: 316px">INSERT pasaje Beto</div>
+            <div class="cc-arr up dash" style="left: 700px; top: 222px; height: 72px"></div>
+            <div class="cc-chip warn" style="left: 712px; top: 240px">dato viejo</div>
+          </div>
+          <div class="cc-b" data-at="820">
+            <div class="cc-dot end" style="left: 820px; top: 300px"></div>
+            <div class="cc-lbl" style="left: 820px; top: 316px">COMMIT</div>
+            <div class="cc-arr up" style="left: 820px; top: 222px; height: 72px"></div>
+          </div>
+
+          <!-- desenlace -->
+          <div class="cc-note bad wrap" data-at="900" style="left: 640px; top: 0">
+            ✖ Butaca 1 vendida dos veces: la tabla pasaje tiene el de Ana y el
+            de Beto.
+          </div>
+
+          <div class="cc-now"></div>
+        </div>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <p class="fragment cc-caption">
+          La clave: ambas Tx <u>leen</u> el mismo dato <u>antes</u> de que
+          alguna comitee.
+        </p>
+        <aside class="notes">
+          Avanzar con las flechas: cada paso mueve el cursor "ahora". Ana y
+          Beto ya vieron el mapa de butacas y eligieron la 1; acá se muestran
+          sólo sus Tx de compra, que entran a la vez. Cada compra verifica que
+          la butaca esté libre (SELECT) y hace un INSERT en la tabla pasaje,
+          que no tiene constraint.
+          Remarcar que B decide vender con un dato que, cuando A comitea, deja
+          de ser cierto: por eso la butaca 1 queda vendida dos veces.
+        </aside>
+      </section>
+
+      <!--         <section id="def">
           <h3>Concurrencia</h3>
           <p class="fragment chico">
             La concurrencia puede darse de dos formas:
@@ -253,176 +846,285 @@
           </p>
           <img class="fragment" src="imgs/app-level-tx.png" />
         </section>
+ -->
+      <!-- ===== PROPUESTA (nueva): versión animada/interactiva de app-level-tx.png ===== -->
+      <section id="def">
+        <h3>Concurrencia</h3>
+        <div class="cc-title">
+          Tipo 2: leer y modificar en Tx separadas (Application Level Tx)
+        </div>
+        <div class="cc-sub">
+          🎫 Ana y Beto ven el mapa de butacas (libres y ocupadas) y
+          <b>ambos eligen la butaca 1</b>
+        </div>
+        <div class="cc-diff">
+          Caso 2: <u>primero</u> compra Ana y <u>después</u> Beto, en Tx
+          diferentes (nunca a la vez)
+        </div>
+        <div class="cc-sim" data-steps="142,275,375,515,595,775,930" role="img"
+          aria-label="Línea de tiempo con tres carriles: Ana, la tabla pasaje de la BD, y Beto. Ana hace una Tx corta con SELECT del mapa de butacas y ve la butaca 1 libre; Beto hace otra Tx corta y también la ve libre; ambos eligen la butaca 1 en un tiempo pensando sin Tx abierta; primero Ana compra con una Tx de INSERT y COMMIT sin volver a leer la butaca y se agrega su pasaje; la pantalla de Beto queda desactualizada; después Beto compra en otra Tx con INSERT y COMMIT, también sin volver a leer, y se agrega su pasaje. La butaca 1 queda vendida dos veces aunque las cuatro Tx de BD nunca se solapan">
+          <div class="cc-lname" style="top: 60px">
+            Ana<small>compra la butaca 1</small>
+          </div>
+          <div class="cc-lname" style="top: 164px">
+            🛢️ BD<small>tabla pasaje (sin constraint)</small>
+          </div>
+          <div class="cc-lname" style="top: 285px">
+            Beto<small>compra la butaca 1</small>
+          </div>
+          <div class="cc-track" style="top: 74px"></div>
+          <div class="cc-track" style="top: 299px"></div>
+          <div class="cc-band"></div>
+          <div class="cc-axis" style="top: 386px"><span>tiempo</span></div>
 
-        <section id="def">
-          <h3>Concurrencia</h3>
-          <p class="fragment">
-            Las <b>base de datos</b> gestionan la concurrencia
-            <u>dentro del contexto</u> de una <b>Transacción</b>.
-            <b>Problemas del Tipo 1</b>. Aunque tambien podemos hacernos cargo a
-            nivel aplicación.
-          </p>
-          <p class="fragment">
-            Para los <b>problemas del Tipo 2</b> debemos hacernos cargo a nivel
-            aplicación.
-          </p>
+          <!-- filas comiteadas en la tabla pasaje (se acumulan: no hay constraint) -->
+          <div class="cc-seg libre" data-from="142" data-to="580">
+            <span>butaca 1 libre (0 pasajes)</span>
+          </div>
+          <div class="cc-seg ana" data-from="580" data-to="760">
+            <span class="cc-rows"><span>🎫 butaca 1 · Ana</span></span>
+          </div>
+          <div class="cc-seg dup" data-from="760">
+            <span class="cc-rows"><span>🎫 butaca 1 · Ana</span><span>🎫 butaca 1 · Beto</span></span>
+          </div>
 
-          <!--
+          <!-- Tx cortas de BD y tiempo pensando (sin Tx abierta) -->
+          <div class="cc-tx cc-a" data-from="200" data-to="260" style="top: 75px">Tx A</div>
+          <div class="cc-think" data-from="260" data-to="520" style="top: 75px"></div>
+          <div class="cc-tx cc-a" data-from="520" data-to="580" style="top: 75px">Tx A'</div>
+          <div class="cc-tx cc-b" data-from="300" data-to="360" style="top: 300px">Tx B</div>
+          <div class="cc-think" data-from="360" data-to="700" style="top: 300px"></div>
+          <div class="cc-tx cc-b" data-from="700" data-to="760" style="top: 300px">Tx B'</div>
+
+          <!-- Ana -->
+          <div class="cc-a" data-at="200">
+            <div class="cc-lbl" style="left: 230px; top: 34px">SELECT mapa</div>
+            <div class="cc-arr up" style="left: 230px; top: 92px; height: 66px"></div>
+            <div class="cc-chip" style="left: 240px; top: 112px">
+              🖥️ butaca 1: libre → la elige
+            </div>
+          </div>
+          <div class="cc-lbl cc-thinklbl" data-at="262" style="left: 385px; top: 36px">
+            <span class="cc-bob">💭</span> tiempo pensando
+          </div>
+          <div class="cc-a" data-at="520">
+            <div class="cc-lbl" style="left: 550px; top: 20px">
+              INSERT pasaje + COMMIT<small class="cc-no">✖ no vuelve a leer la butaca</small>
+            </div>
+            <div class="cc-arr down" style="left: 550px; top: 92px; height: 66px"></div>
+          </div>
+
+          <!-- Beto -->
+          <div class="cc-b" data-at="300">
+            <div class="cc-lbl" style="left: 330px; top: 320px">SELECT mapa</div>
+            <div class="cc-arr down" style="left: 330px; top: 218px; height: 66px"></div>
+            <div class="cc-chip" style="left: 340px; top: 236px">
+              🖥️ butaca 1: libre → la elige<span class="cc-stale" data-at="580">🖥️ butaca 1: libre ⚠ ¡ya la compró
+                Ana!</span>
+            </div>
+          </div>
+          <div class="cc-lbl cc-thinklbl" data-at="362" style="left: 530px; top: 322px">
+            <span class="cc-bob">💭</span> tiempo pensando
+          </div>
+          <div class="cc-b" data-at="700">
+            <div class="cc-lbl" style="left: 730px; top: 316px">
+              INSERT pasaje + COMMIT<small class="cc-no">✖ no vuelve a leer la butaca</small>
+            </div>
+            <div class="cc-arr up" style="left: 730px; top: 220px; height: 64px"></div>
+            <div class="cc-chip warn" style="left: 742px; top: 236px">⚠ no ve el pasaje de Ana</div>
+          </div>
+
+          <!-- desenlace: lo que se solapa son las Application Level Tx -->
+          <div class="cc-fin" data-at="900">
+            <div class="cc-app top cc-a" style="left: 200px; top: 6px; width: 380px">
+              <span>Application Level Tx · Ana</span>
+            </div>
+            <div class="cc-app bot cc-b" style="left: 300px; top: 354px; width: 460px">
+              <span>Application Level Tx · Beto</span>
+            </div>
+            <div class="cc-note bad wrap" style="left: 660px; top: 0; width: 270px">
+              ✖ Butaca 1 vendida dos veces. Para la BD fueron 4 Tx cortas que
+              <u>no se solapan</u>: no hay concurrencia que pueda detectar.
+            </div>
+          </div>
+
+          <div class="cc-now"></div>
+        </div>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <span class="fragment cc-step"></span>
+        <p class="fragment cc-caption">
+          La clave: la compra <u>no vuelve a leer</u> la butaca, confía en el
+          mapa que vio antes.
+        </p>
+        <aside class="notes">
+          Avanzar con las flechas. Ana y Beto ven el mapa de butacas (Tx A y
+          Tx B) y eligen la 1. A diferencia del caso 1, las compras NO entran a
+          la vez: primero compra Ana (Tx A') y después Beto (Tx B'). Cada
+          compra es un INSERT en la tabla pasaje, que no tiene constraint: por
+          eso la butaca 1 queda vendida a Ana y a Beto. La clave está en el INSERT + COMMIT: ninguna de las dos
+          Tx vuelve a leer cómo está la butaca, confían en el SELECT de antes
+          del tiempo pensando. Al final se resaltan las 4 Tx de BD: ninguna es
+          concurrente con otra. Lo que se solapa son las Application Level Tx
+          de Ana y de Beto, que la BD no conoce.
+        </aside>
+      </section>
+
+      <section id="def">
+        <h3>Concurrencia</h3>
+        <p class="fragment">
+          Las <b>base de datos</b> gestionan la concurrencia
+          <u>dentro del contexto</u> de una <b>Transacción</b>.
+          <b>Problemas del Tipo 1</b>. Aunque tambien podemos hacernos cargo a
+          nivel aplicación.
+        </p>
+        <p class="fragment">
+          Para los <b>problemas del Tipo 2</b> debemos hacernos cargo a nivel
+          aplicación.
+        </p>
+
+        <!--
           Para el DOCENTE: Muestro el tipo 2 primero butaca.ocupar(), tiene comentado el if de control.
                            Luego, agregado el IF, muestro como se da el problema del tipo 1.          
           -->
-        </section>
+      </section>
 
-        <section id="def">
-          <h3>Problema clásico de Concurrencia</h3>
-          <p class="fragment" data-fragment-index="1">
-            Ejemplo: Venta de pasaje/butacas de viajes en colectivo.
-          </p>
-          <p class="fragment">
-            Veamos como generar estos dos tipos de problemas en Java con
-            PostgreSQL.
-          </p>
-          <p class="fragment">
-            package: <span class="packagejava">orm/locking/viaje</span>
-          </p>
-        </section>
 
-        <section id="niveles">
-          <h3>Concurrencia</h3>
-          <h4>Niveles de Aislamiento (ANSI SQL)</h4>
-          <ol>
-            <li class="fragment" data-fragment-index="1">Read Uncommited</li>
-            <li class="fragment" data-fragment-index="1">Read Commited</li>
-            <li class="fragment" data-fragment-index="1">Repeatable Read</li>
-            <li class="fragment" data-fragment-index="1">Serializable</li>
-          </ol>
-          <p class="fragment" data-fragment-index="2">
-            ¿Que Base de Datos estan usando? ¿Saben en que nivel de aislamiento
-            esta ejecutándose?
-          </p>
-        </section>
-        <section id="niveles">
-          <h3>Concurrencia</h3>
-          <h4>Isolation Levels (ANSI SQL)</h4>
-          <p class="fragment" data-fragment-index="3">
-            PostgreSQL, Oracle y MS SQL Server por defecto usan Read Committed.
-            MySQL y MariaDB en Repeatable Read.
-          </p>
-          <p class="fragment">
-            Por defecto, las BDs relacionales estan configuradas
-            <u>relajando</u> el aislamiento completo.
-          </p>
-          <p class="fragment maschico">
-            El aislamiento completo no permite ejecutar transacciones en forma
-            concurrente. <b>Ojo: </b> Hablamos de MySQL con InnoDB, MyISAM no
-            soporta Transacciones.
-          </p>
-        </section>
+      <section id="niveles">
+        <h3>Concurrencia</h3>
+        <h4>Niveles de Aislamiento (ANSI SQL)</h4>
+        <ol>
+          <li class="fragment" data-fragment-index="1">Read Uncommited</li>
+          <li class="fragment" data-fragment-index="1">Read Commited</li>
+          <li class="fragment" data-fragment-index="1">Repeatable Read</li>
+          <li class="fragment" data-fragment-index="1">Serializable</li>
+        </ol>
+        <p class="fragment" data-fragment-index="2">
+          ¿Que Base de Datos estan usando? ¿Saben en que nivel de aislamiento
+          esta ejecutándose?
+        </p>
+      </section>
+      <section id="niveles">
+        <h3>Concurrencia</h3>
+        <h4>Isolation Levels (ANSI SQL)</h4>
+        <p class="fragment" data-fragment-index="3">
+          PostgreSQL, Oracle y MS SQL Server por defecto usan Read Committed.
+          MySQL y MariaDB en Repeatable Read.
+        </p>
+        <p class="fragment">
+          Por defecto, las BDs relacionales estan configuradas
+          <u>relajando</u> el aislamiento completo.
+        </p>
+        <p class="fragment maschico">
+          El aislamiento completo no permite ejecutar transacciones en forma
+          concurrente. <b>Ojo: </b> Hablamos de MySQL con InnoDB, MyISAM no
+          soporta Transacciones.
+        </p>
+      </section>
 
-        <section id="niveles">
-          <h3>Concurrencia</h3>
-          <p class="fragment">
-            ¿Cuáles son los problemas que podemos encontrarnos al no configurar
-            la BD con aislamiento completo?
-          </p>
-        </section>
-        <section id="niveles">
-          <h3>Concurrencia</h3>
-          <p>
-            <u>Dirty</u> <u>Read</u>: Sucede si una transacción lee datos
-            modificados por otra transacción que aún no comiteo.
-          </p>
-          <p class="fragment"><img src="imgs/dirty-read.png" /></p>
-          <p class="fragment chico">
-            <b>2. Read Committed</b> no permite esto. Bloqueando (o Snapshot
-            Isolation) lectura/escritura sobre datos modificados.
-          </p>
-        </section>
-        <section id="niveles">
-          <h3>Concurrencia</h3>
-          <p>
-            <u>Unrepeatable</u> <u>Read</u>: Sucede si una transacción lee un
-            dato dos veces y la segunda vez es diferente a la primera.
-          </p>
-          <p class="fragment"><img src="imgs/unrepeatable-read.png" /></p>
-          <p class="fragment"><b>3. Repetable Read</b> no permite esto.</p>
-        </section>
-        <section id="niveles">
-          <h3>Concurrencia</h3>
-          <p>
-            <u>Lost Updates</u> o <u>Last</u> <u>Commit</u> <u>Wins</u>: Dos
-            transacciones leen el mismo dato, la primera lo modifica y comitea y
-            la segunda hace lo mismo después.
-          </p>
-          <p class="fragment"><img src="imgs/last-commit-wins.png" /></p>
-          <p class="fragment"><b>3. Repeatable read</b> no permite esto.</p>
-        </section>
-        <section id="niveles">
-          <h3>Concurrencia</h3>
-          <p>
-            <u>Phanton</u> <u>Read</u>: Ocurre cuando una transacción ejecuta
-            una query dos veces, y la segunda vez obtiene mas datos (o menos si
-            se borraron) que la primera.
-          </p>
-          <p class="fragment"><img src="imgs/phanton-read.png" /></p>
-          <p class="fragment"><b>4. Serialiable</b> no permite esto.</p>
-        </section>
+      <section id="niveles">
+        <h3>Concurrencia</h3>
+        <p class="fragment">
+          ¿Cuáles son los problemas que podemos encontrarnos al no configurar
+          la BD con aislamiento completo?
+        </p>
+      </section>
+      <section id="niveles">
+        <h3>Concurrencia</h3>
+        <p>
+          <u>Dirty</u> <u>Read</u>: Sucede si una transacción lee datos
+          modificados por otra transacción que aún no comiteo.
+        </p>
+        <p class="fragment"><img src="imgs/dirty-read.png" /></p>
+        <p class="fragment chico">
+          <b>2. Read Committed</b> no permite esto. Bloqueando (o Snapshot
+          Isolation) lectura/escritura sobre datos modificados.
+        </p>
+      </section>
+      <section id="niveles">
+        <h3>Concurrencia</h3>
+        <p>
+          <u>Unrepeatable</u> <u>Read</u>: Sucede si una transacción lee un
+          dato dos veces y la segunda vez es diferente a la primera.
+        </p>
+        <p class="fragment"><img src="imgs/unrepeatable-read.png" /></p>
+        <p class="fragment"><b>3. Repetable Read</b> no permite esto.</p>
+      </section>
+      <section id="niveles">
+        <h3>Concurrencia</h3>
+        <p>
+          <u>Lost Updates</u> o <u>Last</u> <u>Commit</u> <u>Wins</u>: Dos
+          transacciones leen el mismo dato, la primera lo modifica y comitea y
+          la segunda hace lo mismo después.
+        </p>
+        <p class="fragment"><img src="imgs/last-commit-wins.png" /></p>
+        <p class="fragment"><b>3. Repeatable read</b> no permite esto.</p>
+      </section>
+      <section id="niveles">
+        <h3>Concurrencia</h3>
+        <p>
+          <u>Phanton</u> <u>Read</u>: Ocurre cuando una transacción ejecuta
+          una query dos veces, y la segunda vez obtiene mas datos (o menos si
+          se borraron) que la primera.
+        </p>
+        <p class="fragment"><img src="imgs/phanton-read.png" /></p>
+        <p class="fragment"><b>4. Serialiable</b> no permite esto.</p>
+      </section>
 
-        <section data-transition="slide" id="niveles">
-          <h3>Concurrencia</h3>
-          <p class="fragment">
-            Probemos ahora el mismo problema de <b>Tipo 1</b> cambiando el nivel
-            de aislamiento de la BD a <b>REPEATABLE READ</b>.
-          </p>
-          <p class="fragment">
-            package: <span class="packagejava">orm/locking/viaje</span>
-          </p>
-        </section>
+      <section data-transition="slide" id="niveles">
+        <h3>Concurrencia</h3>
+        <p class="fragment">
+          Probemos ahora el mismo problema de <b>Tipo 1</b> cambiando el nivel
+          de aislamiento de la BD a <b>REPEATABLE READ</b>.
+        </p>
+        <p class="fragment">
+          package: <span class="packagejava">orm/locking/viaje</span>
+        </p>
+      </section>
 
-        <section id="pvso">
-          <h3>Concurrencia</h3>
-          <p class="fragment">
-            Para controlar la concurrencia existen dos estratégias:
-          </p>
-          <ul>
-            <li class="fragment">
-              <u>Pesimista</u>: Prevenir que pueda darse, principalmente
-              utilizando <b>locks</b>, tanto en forma explícita desde la
-              aplicación o implícita cuando lo hace la Base de Datos segun el
-              nivel de aislamiento.
-            </li>
-            <li class="fragment">
-              <u>Optimista</u>: No lo prevenimos, pero lo detectamos luego y
-              rollbackeamos. De forma explícita desde la aplicación versionando
-              los objetos o en forma implícita la BD utilizando MVCC (snapshot
-              isolation).
-            </li>
-          </ul>
-        </section>
+      <section id="pvso">
+        <h3>Concurrencia</h3>
+        <p class="fragment">
+          Para controlar la concurrencia existen dos estratégias:
+        </p>
+        <ul>
+          <li class="fragment">
+            <u>Pesimista</u>: Prevenir que pueda darse, principalmente
+            utilizando <b>locks</b>, tanto en forma explícita desde la
+            aplicación o implícita cuando lo hace la Base de Datos segun el
+            nivel de aislamiento.
+          </li>
+          <li class="fragment">
+            <u>Optimista</u>: No lo prevenimos, pero lo detectamos luego y
+            rollbackeamos. De forma explícita desde la aplicación versionando
+            los objetos o en forma implícita la BD utilizando MVCC (snapshot
+            isolation).
+          </li>
+        </ul>
+      </section>
 
-        <section id="pvso">
-          <h3>Concurrencia</h3>
-          <p class="fragment">
-            ¿Cómo resolvemos el <b>problema</b> de la compra de pasajes en una
-            BD en READ COMMITED?
-          </p>
-          <p class="fragment">
-            En forma <b>pesimista</b> utilizando <u>locks</u>.
-            <span
-              >package:
-              <span class="packagejava">orm/locking/viaje/pesimista</span></span
-            >.<br />
-            En forma <b>optimista</b> utilizando <u>versionado</u>.
-            <span
-              >package:
-              <span class="packagejava">orm/locking/viaje/optimista</span></span
-            >.
-          </p>
-        </section>
+      <section id="pvso">
+        <h3>Concurrencia</h3>
+        <p class="fragment">
+          ¿Cómo resolvemos el <b>problema</b> de la compra de pasajes en una
+          BD en READ COMMITED?
+        </p>
+        <p class="fragment">
+          En forma <b>pesimista</b> utilizando <u>locks</u>.
+          <span>package:
+            <span class="packagejava">orm/locking/viaje/pesimista</span></span>.<br />
+          En forma <b>optimista</b> utilizando <u>versionado</u>.
+          <span>package:
+            <span class="packagejava">orm/locking/viaje/optimista</span></span>.
+        </p>
+      </section>
 
-        <!--             <ol>2) .</ol> -->
+      <!--             <ol>2) .</ol> -->
 
-        <!--           <p class="fragment">
+      <!--           <p class="fragment">
             Se da cuando un caso de uso se realiza utilizando 2 o mas
             transacciones de base de datos
           </p>
@@ -440,7 +1142,7 @@
             <li class="fragment">Tx 2: Submitea post, update en BD.</li>
           </ul> -->
 
-        <!--         <section data-transition="slide" id="app">
+      <!--         <section data-transition="slide" id="app">
           <h3>Concurrencia</h3>
           <h4>Application Level Transaction</h4>
           <p class="fragment">
@@ -487,73 +1189,146 @@
           </ul>
         </section> -->
 
-        <section id="referencias">
-          <h3>Referencias</h3>
-          <p><img src="imgs/hpjp-book.png" bord /></p>
-          <p>
-            High Performance Java Persistence (<a
-              href="https://vladmihalcea.com/books/high-performance-java-persistence/"
-              >Vlad Mihalcea</a
-            >)
-          </p>
-        </section>
-      </div>
+      <section id="referencias">
+        <h3>Referencias</h3>
+        <p><img src="imgs/hpjp-book.png" bord /></p>
+        <p>
+          High Performance Java Persistence (<a
+            href="https://vladmihalcea.com/books/high-performance-java-persistence/">Vlad Mihalcea</a>)
+        </p>
+      </section>
     </div>
+  </div>
 
-    <script src="dist/reveal.js"></script>
-    <script src="plugin/notes/notes.js"></script>
-    <script src="plugin/markdown/markdown.js"></script>
-    <script src="plugin/highlight/highlight.js"></script>
-    <script src="plugin/simplemenu/simplemenu.js"></script>
-    <script src="plugin/relativenumber/relativenumber.js"></script>
-    <script src="plugin/math/math.js"></script>
-    <script>
-      window.onload = function () {
-        let today = new Date().toLocaleDateString();
-        let obj = document.getElementById("hoy");
-        document.getElementById("hoy").innerText = today;
-      };
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script src="plugin/simplemenu/simplemenu.js"></script>
+  <script src="plugin/relativenumber/relativenumber.js"></script>
+  <script src="plugin/math/math.js"></script>
+  <script>
+    window.onload = function () {
+      let today = new Date().toLocaleDateString();
+      let obj = document.getElementById("hoy");
+      document.getElementById("hoy").innerText = today;
+    };
 
-      Reveal.addEventListener("slidechanged", function (event) {
-        if (event.indexh > 0) {
-          document.querySelector(".reveal .footer").style.display = "block";
-        } else {
-          document.querySelector(".reveal .footer").style.display = "none";
-        }
-      });
+    Reveal.addEventListener("slidechanged", function (event) {
+      if (event.indexh > 0) {
+        document.querySelector(".reveal .footer").style.display = "block";
+      } else {
+        document.querySelector(".reveal .footer").style.display = "none";
+      }
+    });
 
-      Reveal.addEventListener("ready", function (event) {
-        if (event.indexh === 0)
-          document.querySelector(".reveal .footer").style.display = "none";
-      });
+    Reveal.addEventListener("ready", function (event) {
+      if (event.indexh === 0)
+        document.querySelector(".reveal .footer").style.display = "none";
+    });
 
-      Reveal.initialize({
-        hash: true,
-        slideNumber: "c/t",
-        /*         width: 1920,
-              height: 1080, */
-        //slideNumber: true,
-        // Learn about plugins: https://revealjs.com/plugins/
-        /*dependencies: [
-        {
-          src: "plugin/title-footer/title-footer.js",
-          async: true,
-          callback: function () {
-            console.log(document.title);
-            title_footer.initialize(document.title);
-          },
+    Reveal.initialize({
+      hash: true,
+      slideNumber: "c/t",
+      /*         width: 1920,
+            height: 1080, */
+      //slideNumber: true,
+      // Learn about plugins: https://revealjs.com/plugins/
+      /*dependencies: [
+      {
+        src: "plugin/title-footer/title-footer.js",
+        async: true,
+        callback: function () {
+          console.log(document.title);
+          title_footer.initialize(document.title);
         },
-      ],*/
+      },
+    ],*/
 
-        plugins: [
-          RevealMarkdown,
-          RevealHighlight,
-          RevealNotes,
-          RelativeNumber,
-          Simplemenu,
-          RevealMath.KaTeX,
-        ],
+      plugins: [
+        RevealMarkdown,
+        RevealHighlight,
+        RevealNotes,
+        RelativeNumber,
+        Simplemenu,
+        RevealMath.KaTeX,
+      ],
+    });
+  </script>
+
+  <!-- ===== PROPUESTA: motor de las slides animadas Tipo 1 / Tipo 2 (prefijo cc-) =====
+         Cada paso es un fragment invisible (.cc-step). data-steps del .cc-sim indica en qué
+         x está el cursor "ahora" en cada paso. Los elementos con data-at aparecen cuando el
+         cursor llega a esa x; los que tienen data-from/data-to crecen junto con el cursor. -->
+  <script>
+    (function () {
+      var DUR = 0.9; // segundos que tarda el cursor entre un paso y el siguiente
+
+      function render(sim, animate) {
+        var slide = sim.closest("section");
+        var steps = sim.dataset.steps.split(",").map(Number);
+        var n = slide.querySelectorAll(".cc-step.visible").length;
+        var now = steps[Math.min(n, steps.length - 1)];
+        var prev = sim._now === undefined ? now : sim._now;
+        var fwd = animate && now > prev;
+        sim._now = now;
+        // demora para que cada elemento aparezca justo cuando el cursor pasa por su x
+        function delay(x) {
+          if (!fwd) return 0;
+          return Math.max(0, Math.min(1, (x - prev) / (now - prev))) * DUR;
+        }
+
+        var cur = sim.querySelector(".cc-now");
+        cur.style.transition = animate ? "left " + DUR + "s linear" : "none";
+        cur.style.left = now + "px";
+
+        sim.querySelectorAll("[data-at]").forEach(function (el) {
+          var at = +el.dataset.at;
+          var on = now >= at;
+          if (on !== el.classList.contains("on"))
+            el.style.setProperty("--d", (on ? delay(at) : 0).toFixed(2) + "s");
+          el.classList.toggle("on", on);
+        });
+
+        sim.querySelectorAll("[data-from]").forEach(function (el) {
+          var from = +el.dataset.from;
+          var to = el.dataset.to ? +el.dataset.to : 928;
+          var d = delay(from);
+          el.style.left = from + "px";
+          el.style.transition = animate
+            ? "width " + (DUR - d).toFixed(2) + "s linear " + d.toFixed(2) + "s, " +
+            "visibility 0s linear " + d.toFixed(2) + "s"
+            : "none";
+          el.style.width = Math.max(0, Math.min(now, to) - from) + "px";
+          el.classList.toggle("on", now > from);
+        });
+      }
+
+      function renderSlide(slide, animate) {
+        if (!slide) return;
+        slide.querySelectorAll(".cc-sim").forEach(function (sim) {
+          render(sim, animate);
+        });
+      }
+
+      function renderAll() {
+        document.querySelectorAll(".cc-sim").forEach(function (sim) {
+          render(sim, false);
+        });
+      }
+      if (Reveal.isReady()) renderAll();
+      else Reveal.on("ready", renderAll);
+      Reveal.on("slidechanged", function (e) {
+        renderSlide(e.currentSlide, false);
       });
-    </script>
-  </body>
+      Reveal.on("fragmentshown", function () {
+        renderSlide(Reveal.getCurrentSlide(), true);
+      });
+      Reveal.on("fragmenthidden", function () {
+        renderSlide(Reveal.getCurrentSlide(), true);
+      });
+    })();
+  </script>
+</body>
+
 </html>
